@@ -49,11 +49,13 @@ export function HamNavMenu() {
             <MenuIcon className="h-[1.2rem] w-[1.2rem]" />
           </Button>
         </SheetTrigger>
-        <SheetContent side={"left"} className="w-full">
+        <SheetContent side={"left"} className="w-full" key={"sheetcontent"}>
           <SheetHeader>
             {/* <div className="mt-6 mb-3">{<SearchBox />}</div> */}
             {menu_items.map((item) => (
-              <a href={item.href}>{item.title}</a>
+              <a href={item.href} key={item.href}>
+                {item.title}
+              </a>
             ))}
           </SheetHeader>
         </SheetContent>
