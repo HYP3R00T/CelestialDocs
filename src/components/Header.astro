@@ -1,31 +1,50 @@
 ---
-import { buttonVariants } from "@/components/ui/button";
-import ThemeToggle from "@/components/ThemeToggle.astro";
+import { NavMenu, SearchBox, HamNavMenu } from "@/components/Navbar";
+import { ModeToggle } from "@/components/ModeToggle";
+import { SITE } from "@/config";
 ---
 
-<header
-  class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
->
+<header class="sticky top-0 z-50 w-full">
   <div
-    class="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0"
+    class="container flex h-20 space-x-4 justify-between items-center md:justify-center md:items-center md:space-x-0 md:gap-52"
   >
-    <div class="flex gap-6 md:gap-10">
-      <a href="/" class="flex items-center space-x-2">
-        <span class="inline-block font-bold">Home</span>
-      </a>
+    <div class="">
+      <a href={SITE.website}><h3>{SITE.title}</h3></a>
     </div>
-    <div class="flex flex-1 items-center justify-end space-x-4">
-      <nav class="flex items-center space-x-1">
-        <a
-          href="https://github.com/HYP3R00T"
-          target="_blank"
-          rel="noreferrer"
-          class={buttonVariants({ variant: "ghost" })}
-        >
-          GitHub
-        </a>
-        <ThemeToggle />
-      </nav>
+    <div class="hidden md:block">
+      <NavMenu client:idle />
+    </div>
+    <div class="md:hidden flex flex-row-reverse gap-4">
+      <HamNavMenu client:idle />
+      <ModeToggle client:load />
+    </div>
+    <div class="flex-row gap-4 justify-end hidden md:flex">
+      <!-- <SearchBox client:idle /> -->
+      <ModeToggle client:load />
     </div>
   </div>
 </header>
+
+<script is:inline>
+  const getThemePreference = () => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+  const isDark = getThemePreference() === "dark";
+  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+  if (typeof localStorage !== "undefined") {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  }
+</script>

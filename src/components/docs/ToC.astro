@@ -1,0 +1,111 @@
+---
+import { getCollection } from "astro:content";
+
+const docs = await getCollection("docs");
+
+const docFolders = docs.map((doc: { id: string }) => {
+  if (doc.id.split("/").length > 1) {
+    return doc.id.split("/")[0];
+  }
+});
+
+// Iterate through the documents and determine the folders based on the amount of slashes in each id.
+// More than one slash means that the first part of the path is a folder name.
+// So, we return the first part of each path that has multiples slashes to get all of our folder names to use as categories.
+// This will only work one level deep, but that's fine for now.
+const uniqueFolders = [...new Set(docFolders)] as string[];
+
+// Remove any duplicates from the array.
+const transformedFolders = uniqueFolders.map((folder) =>
+  transformSnakeCase(folder)
+);
+
+// Transform the folder names to be more readable (e.g. "getting-started" => "Getting Started")
+function transformSnakeCase(str: string) {
+  if (!str)
+    return {
+      original: "",
+      transformed: "",
+    };
+  return {
+    original: str,
+    transformed: str
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" "),
+  };
+}
+
+// Create an object with the original folder name and the transformed folder name.
+// We kept the original so we can compare it to the links in the sidebar (to determine if one of it's children is active.)
+const coreDocs = docs.filter(
+  (doc: { id: string }) =>
+    doc.id.split("/")[0].includes(".md") ||
+    doc.id.split("/")[0].includes(".mdx")
+);
+
+// Filter out the core docs from the sidebar.
+// Basically, if it's in the root folder and it's a markdown file (not a folder), it must be a core doc.
+const currentPage = Astro.url.pathname;
+
+// Get the current page so we can determine if it's active in the sidebar.
+function removeTrailingSlash(path: string) {
+  return path.replace(/\/$/, "");
+}
+
+function inPathWithoutHome(path: string, href: string) {
+  return removeTrailingSlash(path).startsWith(href) && href !== "/";
+}
+
+const isActive = (href: string) => {
+  return inPathWithoutHome(currentPage, href) ? "active" : "";
+};
+---
+
+<h3 class="text-3xl font-bold">Table of Contents</h3>
+<ul>
+  <li>
+    <a
+      class={(isActive("/docs") && currentPage === "/docs") ||
+      (isActive("/docs") && currentPage === "/docs/")
+        ? "active"
+        : ""}
+      href="/docs">Home</a
+    >
+  </li>
+  {
+    coreDocs.map((doc) => (
+      <li>
+        <a
+          class={isActive(`/docs/${doc.slug}`) ? "active" : ""}
+          href={`/docs/${doc.slug}`}
+        >
+          {doc.data.title}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+{
+  transformedFolders.map(({ original, transformed }) => (
+    <div>
+      <h4 class="text-2xl font-bold">{transformed}</h4>
+      <ul>
+        {docs.map((doc) => {
+          if (doc.id.split("/")[0] === original) {
+            return (
+              <li>
+                <a
+                  class={isActive(`/docs/${doc.slug}`)}
+                  href={`/docs/${doc.slug}`}
+                >
+                  {doc.data.title}
+                </a>
+              </li>
+            );
+          }
+        })}
+      </ul>
+    </div>
+  ))
+}
