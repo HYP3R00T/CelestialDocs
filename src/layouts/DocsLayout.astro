@@ -2,9 +2,10 @@
 import HeadSEO from "@/components/HeadSEO.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import { LOCALE } from "@/config";
-import ToC from "@/components/docs/SideNav.astro";
 import Breadcrumbs from "@/components/docs/Breadcrumbs.astro";
+import SideNav from "@/components/docs/SideNav.astro";
+import SideNavMenu from "@/components/docs/SideNavMenu";
+import { LOCALE } from "@/config";
 
 interface Props {
   title?: string | undefined;
@@ -21,14 +22,21 @@ const { title, description, ogImage } = Astro.props;
     <HeadSEO title={title} description={description} ogImage={ogImage} />
   </head>
   <body class="min-h-screen bg-background font-sans antialiased">
-    <div class="relative flex min-h-screen flex-col">
-      <Header />
-      <main class="flex-auto mx-auto w-full max-w-5xl px-4 pb-4 pt-2">
-        <ToC />
-        <Breadcrumbs />
-        <slot />
-      </main>
-      <Footer />
+    <div class="flex flex-col min-h-screen">
+      <Header class="bg-white shadow-md" />
+      <div class="flex flex-1 overflow-x-auto">
+        <SideNav />
+        <main class="flex-1 flex">
+          <div class="flex-1 p-6">
+            <Breadcrumbs />
+            <slot />
+          </div>
+          <div class="w-64 p-6 bg-gray-50 border-l border-gray-200">
+            <p>This is a placeholder for ToC</p>
+          </div>
+        </main>
+      </div>
+      <Footer class="bg-white border-t border-gray-200" />
     </div>
   </body>
 </html>
