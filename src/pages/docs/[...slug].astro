@@ -1,6 +1,6 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import DocLayout from "@/layouts/DocLayout.astro";
+import DocsLayout from "@/layouts/DocsLayout.astro";
 
 export async function getStaticPaths() {
   const docs = await getCollection("docs");
@@ -17,6 +17,6 @@ const idAndData = { id, ...data };
 const { Content } = await doc.render();
 ---
 
-<DocLayout {...idAndData}>
+<DocsLayout {...idAndData}>
   <Content />
-</DocLayout>
+</DocsLayout>

@@ -1,0 +1,54 @@
+---
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
+// Get the current document's slug from route params
+const slug = Astro.url.pathname;
+
+// Function to build breadcrumb structure
+const buildBreadcrumbs = (slug: string): { title: string; link: string }[] => {
+  const parts = slug.split("/");
+  const breadcrumbs: { title: string; link: string }[] = [];
+  let currentPath = "";
+
+  parts.forEach((part, index) => {
+    if (part) {
+      currentPath += `/${part}`;
+      breadcrumbs.push({
+        title: part,
+        link: `${currentPath}`,
+      });
+    }
+  });
+
+  return breadcrumbs;
+};
+
+// Build the breadcrumb trail
+const breadcrumbs = buildBreadcrumbs(slug || "");
+---
+
+<Breadcrumb>
+  <BreadcrumbList>
+    {
+      breadcrumbs.map((breadcrumb, index) => (
+        <BreadcrumbItem>
+          {index < breadcrumbs.length - 1 ? (
+            <BreadcrumbLink href={breadcrumb.link}>
+              {breadcrumb.title}
+            </BreadcrumbLink>
+          ) : (
+            <span>{breadcrumb.title}</span>
+          )}
+          {index < breadcrumbs.length - 1 && <span> / </span>}
+        </BreadcrumbItem>
+      ))
+    }
+  </BreadcrumbList>
+</Breadcrumb>
