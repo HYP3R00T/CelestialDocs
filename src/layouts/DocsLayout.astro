@@ -3,6 +3,7 @@ import HeadSEO from "@/components/HeadSEO.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { LOCALE } from "@/config";
+import ToC from "@/components/docs/SideNav.astro";
 
 interface Props {
   title?: string | undefined;
@@ -22,9 +23,10 @@ const { title, description, ogImage } = Astro.props;
     <div class="relative flex min-h-screen flex-col">
       <Header />
       <main class="flex-auto mx-auto w-full max-w-5xl px-4 pb-4 pt-2">
+        <ToC />
         <slot />
+        <Footer />
       </main>
-      <Footer />
     </div>
   </body>
 </html>
