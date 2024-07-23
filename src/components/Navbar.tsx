@@ -32,8 +32,10 @@ export function NavMenu() {
   return (
     <div className="flex gap-4">
       {menu_items.map((item) => (
-        <a href={item.href}>
-          <Button variant="ghost">{item.title}</Button>
+        <a href={item.href} key={item.href}>
+          <Button variant="ghost" key={item.href}>
+            {item.title}
+          </Button>
         </a>
       ))}
     </div>
@@ -44,13 +46,14 @@ export function HamNavMenu() {
   return (
     <div className="hamburger-menu">
       <Sheet>
-        <SheetTrigger>
+        <SheetTrigger asChild>
           <Button variant={"outline"} size="icon">
             <MenuIcon className="h-[1.2rem] w-[1.2rem]" />
           </Button>
         </SheetTrigger>
         <SheetContent side={"left"} className="w-full" key={"sheetcontent"}>
           <SheetHeader>
+            <SheetTitle hidden={true}></SheetTitle>
             {/* <div className="mt-6 mb-3">{<SearchBox />}</div> */}
             {menu_items.map((item) => (
               <a href={item.href} key={item.href}>

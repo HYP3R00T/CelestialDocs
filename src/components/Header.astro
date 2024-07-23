@@ -12,15 +12,15 @@ import { SITE } from "@/config";
       <a href={SITE.website}><h3>{SITE.title}</h3></a>
     </div>
     <div class="hidden md:block">
-      <NavMenu client:idle />
+      <NavMenu client:only />
     </div>
     <div class="md:hidden flex flex-row-reverse gap-4">
-      <HamNavMenu client:idle />
-      <ModeToggle client:load />
+      <HamNavMenu client:only />
+      <ModeToggle client:load transition:persist />
     </div>
     <div class="flex-row gap-4 justify-end hidden md:flex">
       <!-- <SearchBox client:idle /> -->
-      <ModeToggle client:load />
+      <ModeToggle client:load transition:persist />
     </div>
   </div>
 </header>
