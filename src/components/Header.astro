@@ -2,9 +2,13 @@
 import { NavMenu, SearchBox, HamNavMenu } from "@/components/Navbar";
 import { ModeToggle } from "@/components/ModeToggle";
 import { SITE } from "@/config";
+
+const { class: className } = Astro.props;
 ---
 
-<header class="sticky top-0 z-50 w-full border-b bg-background">
+<header
+  class:list={["sticky top-0 z-50 w-full border-b bg-background", className]}
+>
   <div
     class="container flex h-20 space-x-4 justify-between items-center md:justify-center md:items-center md:space-x-0 md:gap-52"
   >
@@ -12,10 +16,10 @@ import { SITE } from "@/config";
       <a href={SITE.website}><h3>{SITE.title}</h3></a>
     </div>
     <div class="hidden md:block">
-      <NavMenu client:only />
+      <NavMenu client:only="react" />
     </div>
     <div class="md:hidden flex flex-row-reverse gap-4">
-      <HamNavMenu client:only />
+      <HamNavMenu client:only="react" />
       <ModeToggle client:load transition:persist />
     </div>
     <div class="flex-row gap-4 justify-end hidden md:flex">

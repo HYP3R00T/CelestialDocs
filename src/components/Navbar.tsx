@@ -1,14 +1,6 @@
 import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -16,6 +8,8 @@ import {
 import { Input } from "./ui/input";
 import { Search, MenuIcon } from "lucide-react";
 import { Button } from "./ui/button";
+import { menu, SideNavMenu } from "./docs/SideNavMenu";
+import { Separator } from "@/components/ui/separator";
 
 const menu_items: { title: string; href: string }[] = [
   {
@@ -60,6 +54,8 @@ export function HamNavMenu() {
                 {item.title}
               </a>
             ))}
+            <Separator />
+            <SideNavMenu items={menu} />
           </SheetHeader>
         </SheetContent>
       </Sheet>

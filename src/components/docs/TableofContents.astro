@@ -1,0 +1,39 @@
+---
+const { class: className } = Astro.props;
+---
+
+<div class:list={["right-TOC", className]}></div>
+
+<script type="module">
+  document.addEventListener("astro:page-load", () => {
+    function findHeadings() {
+      const headings = document.querySelectorAll("h2, h3");
+      const headingArray = [];
+      headings.forEach((heading) => {
+        headingArray.push(heading);
+      });
+      return headingArray;
+    }
+
+    const headingArray = findHeadings();
+
+    const ToC = headingArray.map((heading) => {
+      if (!heading.id) return; // Skip if there is no id
+      const headingId = heading.id;
+      const headingText = heading.innerText;
+      const isH3 = heading.tagName === "H3";
+      const indentClass = isH3 ? "ml-4" : "";
+      return `<li class="${indentClass} muted hover:text-secondary-foreground"><a href="#${headingId}">${headingText}</a></li>`;
+    });
+
+    const TOCContainer = document.querySelectorAll(".right-TOC");
+    TOCContainer.forEach((container) => {
+      if (!ToC.length) return;
+      container.innerHTML =
+        `<h2 class="text-2xl font-bold">On This Page</h2> 
+      <ul class="flex flex-col list-none ">` +
+        ToC.join("") +
+        "</ul>";
+    });
+  });
+</script>

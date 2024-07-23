@@ -12,4 +12,14 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
   ],
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: "catppuccin-latte",
+        dark: "catppuccin-macchiato",
+      },
+      // defaultColor: false,
+      // wrap: true,
+    },
+  },
 });
