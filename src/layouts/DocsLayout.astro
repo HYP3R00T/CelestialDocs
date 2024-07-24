@@ -17,29 +17,29 @@ const { title, description, ogImage } = Astro.props as Props;
 ---
 
 <!doctype html>
-<html lang=`${LOCALE.lang ?? "en"}` class="scroll-smooth">
+<html lang=`${LOCALE.lang ?? "en"}`>
   <head>
     <HeadSEO title={title} description={description} ogImage={ogImage} />
   </head>
-  <body
-    class="min-h-screen bg-background font-sans antialiased overflow-x-hidden"
-  >
+  <body class="min-h-screen bg-background font-sans antialiased">
     <div class="flex flex-col min-h-screen">
       <Header class="" />
-      <div class="md:flex md:flex-1">
-        <div class="md:w-64 border-r px-6 py-3 hidden md:block">
+      <main class="flex flex-1 flex-col md:flex-row">
+        <div class="hidden md:block md:p-4 md:w-1/4 border-r">
           <SideNavMenu items={menu} />
         </div>
-        <main class="flex-1 flex flex-col-reverse md:flex-row">
-          <div class="flex-1 p-6">
-            <Breadcrumbs class="" />
-            <slot class="prose" />
+        <div class="flex-1 p-4">
+          <Breadcrumbs class="" />
+          <div class="prose">
+            <slot />
           </div>
-          <div class="md:w-64 p-6 border-l border-border hidden md:block">
-            <TableOfContents class="flex flex-col md:sticky md:top-28" />
-          </div>
-        </main>
-      </div>
+        </div>
+        <div class="p-4 md:w-1/4 border-l">
+          <TableOfContents
+            class="hidden md:flex md:flex-col md:sticky md:top-28"
+          />
+        </div>
+      </main>
       <Footer class="border-t border-border" />
     </div>
   </body>

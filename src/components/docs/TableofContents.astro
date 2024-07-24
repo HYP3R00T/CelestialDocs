@@ -4,11 +4,12 @@ const { class: className } = Astro.props;
 
 <div class:list={["right-TOC", className]}></div>
 
-<script type="module">
+<!-- <script type="module"> -->
+<script>
   document.addEventListener("astro:page-load", () => {
     function findHeadings() {
       const headings = document.querySelectorAll("h2, h3");
-      const headingArray = [];
+      const headingArray: Element[] = [];
       headings.forEach((heading) => {
         headingArray.push(heading);
       });
