@@ -6,10 +6,16 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 import { getCollection } from "astro:content";
-import type { DocEntry } from "@/types"; // Adjust the path according to your project structure
+import type { DocEntry } from "@/lib/types"; // Adjust the path according to your project structure
 
 // Fetch the collection with type
 const docs: DocEntry[] = await getCollection("docs");
+
+// Helper function to capitalize the first letter of a string
+export const capitalizeFirstLetter = (str: string) => {
+  if (!str) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
 
 // Function to build nested menu structure
 const buildMenu = (
@@ -29,7 +35,8 @@ const buildMenu = (
 
       if (!existingItem) {
         existingItem = {
-          title: index === parts.length - 1 ? item.data.title : part, // Use title from item.data if it's the last part
+          // Use title from item.data if it's the last part
+          title: index === parts.length - 1 ? capitalizeFirstLetter(item.data.title || "") : capitalizeFirstLetter(part),
           slug: parts.slice(0, index + 1).join("/"),
           children: [],
         };
@@ -37,7 +44,7 @@ const buildMenu = (
       } else {
         // Update title if necessary
         if (index === parts.length - 1) {
-          existingItem.title = item.data.title;
+          existingItem.title = capitalizeFirstLetter(item.data.title || "");
         }
       }
 

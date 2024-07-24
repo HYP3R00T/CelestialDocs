@@ -1,28 +1,17 @@
 ---
 import { Button } from "@/components/ui/button";
+import {capitalizeFirstLetter} from "@/lib/utils"
+import type { SideNavMenuProps } from "@/lib/types";
 
-// Define the type for menu items
-interface MenuItem {
-  title?: string;
-  slug: string;
-  children: MenuItem[];
-}
-
-// Define the props for the SideNavMenu component
-interface SideNavMenuProps {
-  items: MenuItem[];
-  level: number;
-}
 
 const { items, level } = Astro.props as SideNavMenuProps;
-
 const pathname = new URL(Astro.request.url).pathname;
 ---
 
 <ul class={`list-none m-0`}>
   {
     items.map((item) => {
-      const label = item.title ? item.title : item.slug.split("/").pop();
+      const label = item.title ? capitalizeFirstLetter(item.title) : capitalizeFirstLetter(item.slug.split("/").pop() || "");
       const className = `
         ${level === 0 ? "font-bold" : ""}
         ${pathname === "" ? "bg-red-500" : ""}
@@ -39,7 +28,7 @@ const pathname = new URL(Astro.request.url).pathname;
                 className=`${className} muted`
                 client:load
                 >
-                    {label}
+                    {(label)}
                 </Button>
             </a>
             {item.children.length > 0 && (
@@ -50,8 +39,3 @@ const pathname = new URL(Astro.request.url).pathname;
     })
   }
 </ul>
-
-<!-- className={pathname === item.slug ? "bg-secondary" : ""} -->
-<!-- className={
-  `${level === 0 ? "font-bold" : ""} ${pathname === item.slug ? "bg-secondary" : ""}`
-} -->

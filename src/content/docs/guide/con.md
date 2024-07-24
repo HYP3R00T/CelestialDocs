@@ -1,8 +1,147 @@
 ---
-title: Something
+title: main
 ---
 
-## Hey
+Hey there, fellow developers! If you're like me, you probably spend a lot of time in Visual Studio Code (VSCode), and over time, your `settings.json` file might have become a bit of a mess. With so many extensions and configurations, it can be tough to keep things neat and tidy. So, I decided to tackle this problem head-on by creating a custom VSCode extension to organize my settings.
 
-This is sample
-This in con
+```typescript
+function categorizeSettings(settings: any) {
+    const sortedSettings: { [key: string]: any } = {};
+    const categoriesOrder = [
+        "window",
+        "workbench",
+        "security",
+        "explorer",
+        "terminal",
+        "editor",
+        "git",
+        "extensions",
+        "remote",
+    ];
+
+    // Sort settings based on categories
+    categoriesOrder.forEach(category => {
+        for (const key in settings) {
+            if (key.startsWith(category)) {
+                sortedSettings[key] = settings[key];
+            }
+        }
+    });
+
+    // Add language-specific settings
+    const languageSettings: { [key: string]: any } = {};
+    for (const key in settings) {
+        if (key.startsWith("[") && key.endsWith("]")) {
+            languageSettings[key] = settings[key];
+        }
+    }
+
+    // Sort language-specific settings alphabetically
+    const sortedLanguageSettingsKeys = Object.keys(languageSettings).sort();
+    sortedLanguageSettingsKeys.forEach(key => {
+        sortedSettings[key] = languageSettings[key];
+    });
+
+    // Add any miscellaneous settings that don't fit into categories
+    for (const key in settings) {
+        if (
+            !categoriesOrder.some(category => key.startsWith(category)) &&
+            !(key.startsWith("[") && key.endsWith("]"))
+        ) {
+            sortedSettings[key] = settings[key];
+        }
+    }
+
+    return sortedSettings;
+}
+```
+
+Extension: [Settings Organizer](https://marketplace.visualstudio.com/items?itemName=hyperoot.settings-organizer)
+
+GitHub: [HYP3R00T/settings-organizer](https://github.com/HYP3R00T/settings-organizer)
+
+## Project Overview
+
+The idea behind this project is pretty simple: create an extension that categorizes and sorts your `settings.json` file. I wanted to make sure that settings related to different parts of the editor, like the window, workbench, explorer, editor, terminal, git, extensions, and anything else, are grouped together. This way, everything is easy to find, and the file looks much cleaner.
+
+### Why This Project?
+
+I found myself wasting too much time scrolling through a chaotic list of settings. Organizing these settings not only makes them more manageable but also helps in quickly locating specific configurations when needed. Plus, this was a great way to dive into VSCode extension development!
+
+## The Magic of Categorization
+
+The core of this extension is a function that reads your `settings.json`, categorizes the settings, and then writes them back in an organized manner. Here’s a sneak peek into how it works:
+
+1. **Read the `settings.json` file**.
+2. **Categorize settings** based on predefined categories (like window, workbench, etc.).
+3. **Sort and write them back** to `settings.json`.
+
+### Implementing the Core Logic
+
+Here’s a snippet of the actual code that handles the categorization and sorting:
+
+```typescript
+function categorizeSettings(settings: any) {
+    const sortedSettings: { [key: string]: any } = {};
+    const categoriesOrder = [
+        "window",
+        "workbench",
+        "security",
+        "explorer",
+        "terminal",
+        "editor",
+        "git",
+        "extensions",
+        "remote",
+    ];
+
+    // Sort settings based on categories
+    categoriesOrder.forEach(category => {
+        for (const key in settings) {
+            if (key.startsWith(category)) {
+                sortedSettings[key] = settings[key];
+            }
+        }
+    });
+
+    // Add language-specific settings
+    const languageSettings: { [key: string]: any } = {};
+    for (const key in settings) {
+        if (key.startsWith("[") && key.endsWith("]")) {
+            languageSettings[key] = settings[key];
+        }
+    }
+
+    // Sort language-specific settings alphabetically
+    const sortedLanguageSettingsKeys = Object.keys(languageSettings).sort();
+    sortedLanguageSettingsKeys.forEach(key => {
+        sortedSettings[key] = languageSettings[key];
+    });
+
+    // Add any miscellaneous settings that don't fit into categories
+    for (const key in settings) {
+        if (
+            !categoriesOrder.some(category => key.startsWith(category)) &&
+            !(key.startsWith("[") && key.endsWith("]"))
+        ) {
+            sortedSettings[key] = settings[key];
+        }
+    }
+
+    return sortedSettings;
+}
+```
+
+### Wrapping It Up
+
+Once you’ve got everything set up, you can run your extension in VSCode to see the magic happen. It’ll tidy up your settings file, making it much easier to navigate.
+
+## Conclusion
+
+Building this extension was not only about cleaning up my own workspace but also about learning and contributing to the developer community. It’s a small tool, but it makes a big difference in maintaining a clean and efficient development environment.
+
+### Future Plans
+
+I’m thinking of adding more features like a GUI for configuration options, supporting more categories, and maybe even automatic updates. If you have any ideas or feedback, feel free to share!
+
+Happy coding, and may your `settings.json` always be neat and tidy!

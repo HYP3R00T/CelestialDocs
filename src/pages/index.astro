@@ -1,15 +1,11 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
-const tags = Array.from({ length: 50 }).map(
-  (_, i, a) => `v1.2.0-beta.${a.length - i}`
-);
 ---
 
 <BaseLayout
-  title="Astro Shadcn UI Template"
-  description="This template helps you build apps with Astro, Tailwind CSS, and Shadcn UI."
+  title="Astro Shadcn UI Documentation Template"
+  description="This template helps you build Documentation with Astro, Tailwind CSS, and Shadcn UI."
 >
   <h1>Astro</h1>
   <ScrollArea className="h-[200px] w-[350px] rounded-md border p-4" client:load>
