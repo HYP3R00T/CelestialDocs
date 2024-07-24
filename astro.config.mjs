@@ -1,25 +1,29 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
-
 import tailwind from "@astrojs/tailwind";
+import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  prefetch: true,
+  markdown: {
+    smartypants: true,
+    syntaxHighlight: "shiki",
+    shikiConfig: {
+      theme: "github-dark",
+      // themes: {
+      //   dark: "catppuccin-macchiato",
+      //   light: "catppuccin-macchiato",
+      // },
+    },
+    prefetch: true,
+  },
   integrations: [
     react(),
     tailwind({
       applyBaseStyles: false,
     }),
+    mdx({
+      gfm: false,
+    }),
   ],
-  markdown: {
-    shikiConfig: {
-      themes: {
-        light: "catppuccin-latte",
-        dark: "catppuccin-macchiato",
-      },
-      // defaultColor: false,
-      // wrap: true,
-    },
-  },
 });

@@ -73,7 +73,7 @@ h1 {
 }
 
 h2 {
-  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+  @apply scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0;
 }
 
 h3 {
@@ -96,10 +96,6 @@ ul {
   @apply my-6 ml-6 list-disc [&>li]:mt-2;
 }
 
-code {
-  @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
-}
-
 .lead {
   @apply text-xl text-muted-foreground;
 }
@@ -114,4 +110,36 @@ code {
 
 .muted {
   @apply text-sm text-muted-foreground;
+}
+
+/* ===== markdown ===== */
+
+.prose > * {
+  @apply m-0 p-0 space-y-2;
+}
+
+/* ===== scrollbar ===== */
+
+/* width */
+::-webkit-scrollbar {
+  @apply w-2 h-2 rounded-[radius];
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-accent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-secondary-foreground;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-card-foreground;
+}
+
+.astro-code {
+  @apply p-4;
 }
