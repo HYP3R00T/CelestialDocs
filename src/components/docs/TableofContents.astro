@@ -24,7 +24,7 @@ const { class: className } = Astro.props;
       const headingText = heading.innerText;
       const isH3 = heading.tagName === "H3";
       const indentClass = isH3 ? "ml-4" : "";
-      return `<li class="${indentClass} muted hover:text-secondary-foreground"><a href="#${headingId}">${headingText}</a></li>`;
+      return `<li class="${indentClass} muted hover:text-foreground"><a href="#${headingId}">${headingText}</a></li>`;
     });
 
     const TOCContainer = document.querySelectorAll(".right-TOC");
