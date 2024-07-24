@@ -3,7 +3,6 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { SITE } from "@/config";
 import { Button } from "@/components/ui/button";
 import NavMenu from "@/components/NavMenu.astro";
-import SearchBox from "@/components/SearchBox.astro";
 import { HamNavMenu } from "@/components/HamNavMenu";
 
 const { class: className } = Astro.props;
@@ -32,7 +31,6 @@ const { class: className } = Astro.props;
     </div>
 
     <div class="flex-row gap-4 justify-end hidden md:flex">
-      <!-- <SearchBox client:idle /> -->
       <ModeToggle client:load transition:persist />
     </div>
   </div>

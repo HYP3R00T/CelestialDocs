@@ -63,7 +63,7 @@ export function SideNavMenu({ items, level = 0 }: SideNavMenuProps) {
           <li key={item.slug}>
             <a
               href={`/docs/${item.slug}`}
-              className={`text-foreground hover:text-accent-foreground ${
+              className={`text-foreground hover:text-accent-foreground text-sm leading-none ${
                 level === 0 ? "font-bold" : ""
               }`}
             >
