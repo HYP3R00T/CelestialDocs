@@ -2,22 +2,25 @@
 const { class: className } = Astro.props;
 ---
 
-<footer class:list={["border-t py-6 md:px-8 md:py-0", className]}>
+<footer class:list={["py-4 px-6 w-full bg-background", className]}>
   <div
-    class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row"
+    class="container flex flex-col items-center justify-between gap-4 md:flex-row"
   >
     <p
       class="text-center text-sm leading-loose text-muted-foreground md:text-left"
     >
-      Built by{" "}
-      <a
+      Built by <a
         href="https://github.com/HYP3R00T"
         target="_blank"
         rel="noreferrer"
-        class="font-medium underline underline-offset-4"
-      >
-        HYP3R00T
-      </a>
+        class="font-medium underline underline-offset-4">HYP3R00T</a
+      >. The source code is available on
+      <a
+        href="https://github.com/HYP3R00T/CelestialDocs"
+        target="_blank"
+        rel="noreferrer"
+        class="font-medium underline underline-offset-4">GitHub</a
+      >.
     </p>
   </div>
 </footer>

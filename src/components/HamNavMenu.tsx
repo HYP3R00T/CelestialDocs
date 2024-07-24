@@ -5,50 +5,26 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Input } from "./ui/input";
-import { Search, MenuIcon } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { menu, SideNavMenu } from "./docs/SideNavMenu";
 import { Separator } from "@/components/ui/separator";
-
-const menu_items: { title: string; href: string }[] = [
-  {
-    title: "Home",
-    href: "/",
-  },
-  {
-    title: "Documentation",
-    href: "/docs/",
-  },
-];
-
-export function NavMenu() {
-  return (
-    <div className="flex gap-4">
-      {menu_items.map((item) => (
-        <a href={item.href} key={item.href}>
-          <Button variant="ghost" key={item.href}>
-            {item.title}
-          </Button>
-        </a>
-      ))}
-    </div>
-  );
-}
+import { menu_items } from "@/config";
+import SearchBox from "@/components/SearchBox.astro";
 
 export function HamNavMenu() {
   return (
     <div className="hamburger-menu">
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant={"outline"} size="icon">
+          <Button variant={"ghost"} size="icon">
             <MenuIcon className="h-[1.2rem] w-[1.2rem]" />
           </Button>
         </SheetTrigger>
         <SheetContent side={"left"} className="w-full" key={"sheetcontent"}>
           <SheetHeader>
             <SheetTitle hidden={true}></SheetTitle>
-            {/* <div className="mt-6 mb-3">{<SearchBox />}</div> */}
+            <div className="mt-6 mb-3">{<SearchBox />}</div>
             {menu_items.map((item) => (
               <a href={item.href} key={item.href}>
                 {item.title}
@@ -59,15 +35,6 @@ export function HamNavMenu() {
           </SheetHeader>
         </SheetContent>
       </Sheet>
-    </div>
-  );
-}
-
-export function SearchBox() {
-  return (
-    <div className="relative min-w-[3rem]">
-      <Search className="absolute left-2.5 top-2.5 h-4 w-4" />
-      <Input type="search" placeholder="Search..." className="pl-8 w-full" />
     </div>
   );
 }

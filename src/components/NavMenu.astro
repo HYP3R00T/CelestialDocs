@@ -1,0 +1,23 @@
+---
+import { Button } from "@/components/ui/button";
+import { menu_items } from "@/config";
+
+const pathname = new URL(Astro.request.url).pathname;
+---
+
+<div class="flex gap-4">
+  {
+    menu_items.map((item) => (
+      <a href={item.href}>
+        <Button
+          variant="ghost"
+          key={item.href}
+          className={pathname === item.href ? "bg-secondary" : ""}
+          client:load
+        >
+          {item.title}
+        </Button>
+      </a>
+    ))
+  }
+</div>
