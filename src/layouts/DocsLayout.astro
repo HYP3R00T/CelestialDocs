@@ -3,9 +3,10 @@ import HeadSEO from "@/components/HeadSEO.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Breadcrumbs from "@/components/docs/Breadcrumbs.astro";
-import { menu, SideNavMenu } from "@/components/docs/SideNavMenu";
+import { menu } from "@/lib/utils";
 import { LOCALE } from "@/config";
 import TableOfContents from "@/components/docs/TableofContents.astro";
+import SideNavMenu from "@/components/docs/SideNavMenu.astro";
 
 interface Props {
   title?: string | undefined;
@@ -26,7 +27,7 @@ const { title, description, ogImage } = Astro.props as Props;
       <Header class="" />
       <main class="flex flex-1 flex-col md:flex-row">
         <div class="hidden md:block md:p-4 md:w-1/4 border-r">
-          <SideNavMenu items={menu} />
+          <SideNavMenu items={menu} level={0} />
         </div>
         <div class="flex-1 p-4 md:w-1/2">
           <Breadcrumbs class="" />

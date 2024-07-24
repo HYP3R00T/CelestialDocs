@@ -7,7 +7,8 @@ import {
 } from "@/components/ui/sheet";
 import { MenuIcon } from "lucide-react";
 import { Button } from "./ui/button";
-import { menu, SideNavMenu } from "./docs/SideNavMenu";
+import { menu } from "@/lib/utils";
+import SideNavMenu from "@/components/docs/SideNavMenu.astro";
 import { Separator } from "@/components/ui/separator";
 import { menu_items } from "@/config";
 
@@ -31,7 +32,7 @@ export function HamNavMenu() {
               ))}
             </div>
             <Separator />
-            <SideNavMenu items={menu} />
+            {/* <SideNavMenu items={menu} level={0} /> */}
           </SheetHeader>
         </SheetContent>
       </Sheet>

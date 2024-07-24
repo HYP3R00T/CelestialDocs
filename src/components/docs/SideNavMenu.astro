@@ -1,0 +1,57 @@
+---
+import { Button } from "@/components/ui/button";
+
+// Define the type for menu items
+interface MenuItem {
+  title?: string;
+  slug: string;
+  children: MenuItem[];
+}
+
+// Define the props for the SideNavMenu component
+interface SideNavMenuProps {
+  items: MenuItem[];
+  level: number;
+}
+
+const { items, level } = Astro.props as SideNavMenuProps;
+
+const pathname = new URL(Astro.request.url).pathname;
+---
+
+<ul class={`list-none m-0`}>
+  {
+    items.map((item) => {
+      const label = item.title ? item.title : item.slug.split("/").pop();
+      const className = `
+        ${level === 0 ? "font-bold" : ""}
+        ${pathname === "" ? "bg-red-500" : ""}
+        `.trim();
+      return (
+        <li>
+            <a
+                href={`/docs/${item.slug}`}
+                class={`text-foreground  text-sm leading-none  `}
+            >
+                <Button
+                variant="link"
+                key={item.slug}
+                className=`${className} muted`
+                client:load
+                >
+                    {label}
+                </Button>
+            </a>
+            {item.children.length > 0 && (
+                <Astro.self items={item.children} level={level + 1} />
+            )}
+        </li>
+      );
+    })
+  }
+</ul>
+
+<!-- className={pathname === item.slug ? "bg-secondary" : ""} -->
+<!-- className={
+  `${level === 0 ? "font-bold" : ""} ${pathname === item.slug ? "bg-secondary" : ""}`
+} -->
