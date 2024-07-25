@@ -70,6 +70,7 @@ module.exports = {
       },
       maxHeight: {
         static_sidemenu: "calc(100vh - 69px)",
+        static_hamnavmenu: "calc(100dvh - 148px)",
       },
     },
     fontFamily: {

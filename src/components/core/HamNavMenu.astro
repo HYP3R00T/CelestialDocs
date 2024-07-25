@@ -1,8 +1,16 @@
 ---
+import SideNavMenu from "@/components/docs/SideNavMenu.astro";
+
 import { Button } from "@/components/ui/button";
-import { menu_items } from "config";
+import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { MenuIcon, X } from "lucide-react";
+
+import { menu } from "@/lib/utils";
+import { menu_items, docconfig } from "config";
+
+const pathname = new URL(Astro.request.url).pathname;
 ---
 
 <style>
@@ -29,15 +37,29 @@ import { MenuIcon, X } from "lucide-react";
       <X className="h-[1.2rem] w-[1.2rem]" />
     </Button>
   </div>
-  <div class="mt-6 flex flex-col items-start">
+  <div class="mt-6 flex flex-col items-start px-6">
     {
       menu_items.map((item) => (
         <a href={item.href}>
-          <Button variant="ghost" key={item.href}>
+          <Button
+            variant="link"
+            className={pathname === item.href ? "underline" : ""}
+            key={item.href}
+          >
             {item.title}
           </Button>
         </a>
       ))
+    }
+    {
+      !docconfig.hide_side_navinations && (
+        <div class="py-4 w-full max-h-static_hamnavmenu h-v">
+          <Separator />
+          <ScrollArea className="h-full w-full" client:only="react">
+            <SideNavMenu items={menu} level={0} class="px-4 " />
+          </ScrollArea>
+        </div>
+      )
     }
   </div>
 </div>
