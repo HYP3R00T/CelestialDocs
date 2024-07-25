@@ -11,12 +11,12 @@ const { class: className } = Astro.props;
 
 <header
   class:list={[
-    "py-4 px-6 md:px-48 w-full sticky top-0 bg-background z-50",
+    "py-4 px-6 md:px-16 lg:px-48 w-full sticky top-0 bg-background z-50",
     className,
   ]}
 >
   <div
-    class="flex space-x-4 justify-between items-center md:justify-between md:items-center md:space-x-0 md:max-w-8xl"
+    class="flex space-x-4 justify-between items-center md:items-center md:space-x-0 md:max-w-8xl"
   >
     <div class="font-bold flex flex-row items-center">
       <a href={SITE.website} class="px-4">
