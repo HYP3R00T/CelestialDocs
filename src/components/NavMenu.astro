@@ -10,9 +10,8 @@ const pathname = new URL(Astro.request.url).pathname;
     menu_items.map((item) => (
       <a href={item.href}>
         <Button
-          variant="ghost"
+          variant={pathname === item.href ? "secondary" : "ghost"}
           key={item.href}
-          className={pathname === item.href ? "bg-secondary" : ""}
           client:load
         >
           {item.title}

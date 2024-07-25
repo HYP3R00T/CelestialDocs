@@ -5,14 +5,18 @@ import { Button } from "@/components/ui/button";
 import NavMenu from "@/components/NavMenu.astro";
 import { HamNavMenu } from "@/components/HamNavMenu";
 
+// To pass the tailwindcss classes to the astro component
 const { class: className } = Astro.props;
 ---
 
 <header
-  class:list={["py-4 px-6 w-full sticky top-0 bg-background z-50", className]}
+  class:list={[
+    "py-4 px-6 md:px-48 w-full sticky top-0 bg-background z-50",
+    className,
+  ]}
 >
   <div
-    class="container flex space-x-4 justify-between items-center md:justify-between md:items-center md:space-x-0 md:max-w-8xl"
+    class="flex space-x-4 justify-between items-center md:justify-between md:items-center md:space-x-0 md:max-w-8xl"
   >
     <div class="font-bold flex flex-row items-center">
       <a href={SITE.website} class="px-4">
@@ -30,7 +34,7 @@ const { class: className } = Astro.props;
       <ModeToggle client:load transition:persist />
     </div>
 
-    <div class="flex-row gap-4 justify-end hidden md:flex">
+    <div class="flex-row gap-4 hidden md:flex">
       <ModeToggle client:load transition:persist />
     </div>
   </div>

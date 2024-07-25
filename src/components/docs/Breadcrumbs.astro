@@ -5,32 +5,15 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
 } from "@/components/ui/breadcrumb";
+import { buildBreadcrumbs } from "@/lib/utils";
 
 // Get the current document's slug from route params
 const slug = Astro.url.pathname;
 
-// Function to build breadcrumb structure
-const buildBreadcrumbs = (slug: string): { title: string; link: string }[] => {
-  const parts = slug.split("/");
-  const breadcrumbs: { title: string; link: string }[] = [];
-  let currentPath = "";
-
-  parts.forEach((part, index) => {
-    if (part) {
-      currentPath += `/${part}`;
-      breadcrumbs.push({
-        title: part,
-        link: `${currentPath}`,
-      });
-    }
-  });
-
-  return breadcrumbs;
-};
-
 // Build the breadcrumb trail
 const breadcrumbs = buildBreadcrumbs(slug || "");
 
+// To pass the tailwindcss classes to the astro component
 const { class: className } = Astro.props;
 ---
 

@@ -1,12 +1,12 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { getCollection } from "astro:content";
+import type { DocEntry } from "@/lib/types";
 
+// for shadcn components
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
-import { getCollection } from "astro:content";
-import type { DocEntry } from "@/lib/types"; // Adjust the path according to your project structure
 
 // Fetch the collection with type
 const docs: DocEntry[] = await getCollection("docs");
@@ -18,9 +18,9 @@ export const capitalizeFirstLetter = (str: string) => {
 };
 
 // Function to build nested menu structure
-const buildMenu = (
+function buildMenu(
   items: DocEntry[]
-): { title?: string; slug: string; children: any[] }[] => {
+): { title?: string; slug: string; children: any[] }[] {
   const menu: { title?: string; slug: string; children: any[] }[] = [];
 
   items.forEach((item) => {
@@ -36,7 +36,10 @@ const buildMenu = (
       if (!existingItem) {
         existingItem = {
           // Use title from item.data if it's the last part
-          title: index === parts.length - 1 ? capitalizeFirstLetter(item.data.title || "") : capitalizeFirstLetter(part),
+          title:
+            index === parts.length - 1
+              ? capitalizeFirstLetter(item.data.title || "")
+              : capitalizeFirstLetter(part),
           slug: parts.slice(0, index + 1).join("/"),
           children: [],
         };
@@ -53,6 +56,50 @@ const buildMenu = (
   });
 
   return menu;
-};
+}
+
+// Function to flatten nested menu structure into a linear array
+function flattenMenu(
+  menu: { title?: string; slug: string; children: any[] }[]
+) {
+  const flatMenu: { title?: string; slug: string }[] = [];
+
+  const traverse = (
+    items: { title?: string; slug: string; children: any[] }[]
+  ) => {
+    items.forEach((item) => {
+      flatMenu.push({ title: item.title, slug: item.slug });
+      if (item.children.length > 0) {
+        traverse(item.children);
+      }
+    });
+  };
+
+  traverse(menu);
+
+  return flatMenu;
+}
 
 export const menu = buildMenu(docs);
+export const flatMenu = flattenMenu(menu);
+
+// Function to build breadcrumb structure
+export function buildBreadcrumbs(
+  slug: string
+): { title: string; link: string }[] {
+  const parts = slug.split("/");
+  const breadcrumbs: { title: string; link: string }[] = [];
+  let currentPath = "";
+
+  parts.forEach((part, index) => {
+    if (part) {
+      currentPath += `/${part}`;
+      breadcrumbs.push({
+        title: part,
+        link: `${currentPath}`,
+      });
+    }
+  });
+
+  return breadcrumbs;
+}

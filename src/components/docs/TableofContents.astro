@@ -1,10 +1,10 @@
 ---
+// To pass the tailwindcss classes to the astro component
 const { class: className } = Astro.props;
 ---
 
 <div class:list={["right-TOC", className]}></div>
 
-<!-- <script type="module"> -->
 <script>
   document.addEventListener("astro:page-load", () => {
     function findHeadings() {

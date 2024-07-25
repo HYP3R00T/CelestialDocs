@@ -3,11 +3,9 @@ import { Button } from "@/components/ui/button";
 import {capitalizeFirstLetter} from "@/lib/utils"
 import type { SideNavMenuProps } from "@/lib/types";
 
-
 const { items, level } = Astro.props as SideNavMenuProps;
 const pathname = new URL(Astro.request.url).pathname;
 ---
-
 <ul class={`list-none m-0`}>
   {
     items.map((item) => {

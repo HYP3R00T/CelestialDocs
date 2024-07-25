@@ -7,10 +7,11 @@ import {
 } from "@/components/ui/sheet";
 import { MenuIcon } from "lucide-react";
 import { Button } from "./ui/button";
-import { menu } from "@/lib/utils";
+import { menu, flatMenu } from "@/lib/utils";
 import SideNavMenu from "@/components/docs/SideNavMenu.astro";
 import { Separator } from "@/components/ui/separator";
 import { menu_items } from "@/config";
+import Sample from "./Sample.astro";
 
 export function HamNavMenu() {
   return (
@@ -24,7 +25,7 @@ export function HamNavMenu() {
         <SheetContent side={"left"} className="w-full" key={"sheetcontent"}>
           <SheetHeader>
             <SheetTitle hidden={true}></SheetTitle>
-            <div className="mt-6 flex flex-col">
+            <div className="mt-6 flex flex-col items-start">
               {menu_items.map((item) => (
                 <Button variant="ghost" key={item.href}>
                   {item.title}
