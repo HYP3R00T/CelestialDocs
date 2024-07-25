@@ -8,7 +8,7 @@
       "@/*": [
         "./src/*"
       ],
-      "@/config": [
+      "config": [
         "./config.ts"
       ]
     }

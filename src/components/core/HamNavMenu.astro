@@ -1,0 +1,57 @@
+---
+import { Button } from "@/components/ui/button";
+import { menu_items } from "config";
+
+import { MenuIcon, X } from "lucide-react";
+---
+
+<style>
+  .menu-overlay {
+    display: none;
+  }
+
+  .menu-overlay.active {
+    display: block;
+  }
+</style>
+
+<div onclick="toggleMenu()">
+  <Button variant={"ghost"} size="icon" client:load>
+    <MenuIcon className="h-[1.2rem] w-[1.2rem]" />
+  </Button>
+</div>
+
+<div
+  class="menu-overlay z-[100] w-screen h-screen absolute top-0 left-0 px-6 py-4 bg-background flex flex-col"
+>
+  <div onclick="closeMenu()" class="flex justify-end">
+    <Button variant={"ghost"} size="icon" client:load>
+      <X className="h-[1.2rem] w-[1.2rem]" />
+    </Button>
+  </div>
+  <div class="mt-6 flex flex-col items-start">
+    {
+      menu_items.map((item) => (
+        <Button variant="ghost" key={item.href}>
+          {item.title}
+        </Button>
+      ))
+    }
+  </div>
+</div>
+
+<script is:inline>
+  function toggleMenu() {
+    const menuOverlay = document.querySelector(".menu-overlay");
+    if (menuOverlay) {
+      menuOverlay.classList.toggle("active");
+    }
+  }
+
+  function closeMenu() {
+    const menuOverlay = document.querySelector(".menu-overlay");
+    if (menuOverlay) {
+      menuOverlay.classList.remove("active");
+    }
+  }
+</script>

@@ -29,7 +29,7 @@ function buildMenu(
     let currentLevel = menu;
 
     // Traverse the menu structure based on folder depth
-    parts.forEach((part, index) => {
+    parts.forEach((part: string, index: number) => {
       let existingItem = currentLevel.find(
         (i) => i.slug === parts.slice(0, index + 1).join("/")
       );

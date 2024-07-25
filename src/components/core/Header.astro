@@ -1,11 +1,11 @@
 ---
 import { ModeToggle } from "@/components/core/ModeToggle";
-import { HamNavMenu } from "@/components/core/HamNavMenu";
+import HamNavMenu from "@/components/core/HamNavMenu.astro";
 import NavMenu from "@/components/core/NavMenu.astro";
 
 import { Button } from "@/components/ui/button";
 
-import { SITE } from "@/config";
+import { SITE } from "config";
 
 // To pass the tailwindcss classes to the astro component
 const { class: className } = Astro.props;
@@ -32,7 +32,7 @@ const { class: className } = Astro.props;
     </div>
 
     <div class="md:hidden flex flex-row-reverse gap-4">
-      <HamNavMenu client:only="react" />
+      <HamNavMenu />
       <ModeToggle client:load transition:persist />
     </div>
 

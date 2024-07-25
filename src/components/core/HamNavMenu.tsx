@@ -10,11 +10,11 @@ import { Button } from "@/components/ui/button";
 
 import { MenuIcon } from "lucide-react";
 
-import { menu_items } from "@/config";
+import { menu_items } from "config";
 
 export function HamNavMenu() {
   return (
-    <div className="hamburger-menu ">
+    <div>
       <Sheet>
         <SheetTrigger asChild>
           <Button variant={"ghost"} size="icon">
