@@ -32,9 +32,11 @@ import { MenuIcon, X } from "lucide-react";
   <div class="mt-6 flex flex-col items-start">
     {
       menu_items.map((item) => (
-        <Button variant="ghost" key={item.href}>
-          {item.title}
-        </Button>
+        <a href={item.href}>
+          <Button variant="ghost" key={item.href}>
+            {item.title}
+          </Button>
+        </a>
       ))
     }
   </div>
