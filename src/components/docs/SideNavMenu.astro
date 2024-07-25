@@ -4,9 +4,12 @@ import type { SideNavMenuProps } from "@/lib/types";
 
 const { items, level } = Astro.props as SideNavMenuProps;
 const pathname = new URL(Astro.request.url).pathname;
+
+// To pass the tailwindcss classes to the astro component
+const { class: className } = Astro.props;
 ---
 
-<ul class={`list-none m-0`}>
+<ul class:list={["list-none m-0", className]}>
   {
     items.map((item) => {
       const label = item.title
