@@ -69,7 +69,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       height: {
-        "screen-minus-130": "calc(100vh - 130px)",
+        static_sidemenu: "calc(100vh - 69px)",
       },
     },
     fontFamily: {

@@ -32,21 +32,24 @@ const { title, description, ogImage } = Astro.props as Props;
       <Header class="border-b" />
       <main class="flex flex-1 flex-col md:flex-row container">
         <div
-          class="p-4 hidden md:flex md:w-1/5 bg-red-100 h-screen-minus-130 sticky top-[69px]"
+          class="px-6 py-4 hidden md:flex md:w-1/5 h-static_sidemenu sticky top-[69px]"
         >
-          <ScrollArea className="h-full" client:only="react">
+          <ScrollArea className="h-full w-full" client:only="react">
             <SideNavMenu items={menu} level={0} />
           </ScrollArea>
         </div>
-        <div class="p-4 w-full md:w-3/5 bg-blue-100">
+        <div class="px-6 py-4 w-full md:w-3/5">
           <Breadcrumbs class="" />
           <div class="prose">
             <slot />
           </div>
         </div>
-        <div class="p-4 hidden md:flex md:w-1/5 bg-green-100"></div>
+        <div
+          class="px-6 py-4 hidden md:flex md:w-1/5 h-static_sidemenu bg-green-100 sticky top-[69px]"
+        >
+        </div>
       </main>
-      <Footer class="border-t border-border" />
+      <Footer class="border-t border-border sticky top-[69px]" />
     </div>
   </body>
 </html>

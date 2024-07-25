@@ -1,37 +1,33 @@
 ---
-import { Button } from "@/components/ui/button";
-import {capitalizeFirstLetter} from "@/lib/utils"
+import { capitalizeFirstLetter } from "@/lib/utils";
 import type { SideNavMenuProps } from "@/lib/types";
 
 const { items, level } = Astro.props as SideNavMenuProps;
 const pathname = new URL(Astro.request.url).pathname;
 ---
+
 <ul class={`list-none m-0`}>
   {
     items.map((item) => {
-      const label = item.title ? capitalizeFirstLetter(item.title) : capitalizeFirstLetter(item.slug.split("/").pop() || "");
+      const label = item.title
+        ? capitalizeFirstLetter(item.title)
+        : capitalizeFirstLetter(item.slug.split("/").pop() || "");
+      var isTrueSet = pathname == item.slug;
       const className = `
-        ${level === 0 ? "font-bold" : ""}
-        ${pathname === "" ? "bg-red-500" : ""}
+        ${level === 0 ? "font-semibold" : "muted"}
+        ${pathname === "/docs/" + item.slug ? "underline" : ""}
         `.trim();
       return (
         <li>
-            <a
-                href={`/docs/${item.slug}`}
-                class={`text-foreground  text-sm leading-none  `}
-            >
-                <Button
-                variant="link"
-                key={item.slug}
-                className=`${className} muted`
-                client:load
-                >
-                    {(label)}
-                </Button>
-            </a>
-            {item.children.length > 0 && (
-                <Astro.self items={item.children} level={level + 1} />
-            )}
+          <a
+            href={`/docs/${item.slug}`}
+            class={`${className} text-foreground text-sm leading-none w-full`}
+          >
+            {label}
+          </a>
+          {item.children.length > 0 && (
+            <Astro.self items={item.children} level={level + 1} />
+          )}
         </li>
       );
     })
