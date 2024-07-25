@@ -16,7 +16,7 @@ interface Props {
   title?: string | undefined;
   description?: string | undefined;
   ogImage?: URL | undefined;
-  headings: {
+  headings?: {
     depth: number;
     text: string;
     slug: string;
@@ -37,10 +37,10 @@ const { title, description, ogImage, headings } = Astro.props as Props;
   </head>
   <body class="bg-background text-foreground font-sans">
     <div class="flex flex-col min-h-screen">
-      <Header class="border-b" />
+      <Header class="border-b bg-background" />
       <main class="flex flex-1 flex-col md:flex-row container">
         <div
-          class="px-6 py-4 hidden md:flex md:w-1/5 h-static_sidemenu sticky top-[69px]"
+          class="px-6 py-4 hidden md:flex md:w-1/5 max-h-static_sidemenu sticky top-[69px]"
         >
           <ScrollArea className="h-full w-full" client:only="react">
             <SideNavMenu items={menu} level={0} />
@@ -53,37 +53,14 @@ const { title, description, ogImage, headings } = Astro.props as Props;
           </div>
         </div>
         <div
-          class="px-6 py-4 hidden lg:flex md:w-1/5 h-static_sidemenu sticky top-[69px]"
+          class="px-6 py-4 hidden lg:flex md:w-1/5 max-h-static_sidemenu sticky top-[69px]"
         >
           <ScrollArea className="h-full w-full" client:only="react">
             <TableofContent {headings} />
           </ScrollArea>
         </div>
       </main>
-      <Footer class="border-t border-border sticky top-[69px]" />
+      <Footer class="border-t border-border bg-background" />
     </div>
   </body>
 </html>
-
-<!-- <body class="min-h-screen bg-background font-sans">
-  <div class="flex flex-col min-h-screen">
-    <Header class="" />
-    <main class="flex flex-1 flex-col md:flex-row">
-      <div class="hidden md:flex md:p-4 md:w-1/4 border-r bg-red-100">
-        <ScrollArea className="h-full" client:only="react">
-          <SideNavMenu items={menu} level={0} />
-        </ScrollArea>
-      </div>
-      <div class="flex-1 p-4 md:w-1/2">
-        <Breadcrumbs class="" />
-        <div class="prose">
-          <slot />
-        </div>
-      </div>
-      <div class="p-4 md:w-1/4 bg-red-100">
-        <TableOfContents class="hidden md:flex md:flex-col md:sticky" />
-      </div>
-    </main>
-    <Footer class="border-t border-border" />
-  </div>
-</body> -->

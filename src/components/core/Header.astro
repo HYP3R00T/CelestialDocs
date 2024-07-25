@@ -1,9 +1,11 @@
 ---
 import { ModeToggle } from "@/components/core/ModeToggle";
-import { SITE } from "@/config";
-import { Button } from "@/components/ui/button";
-import NavMenu from "@/components/core/NavMenu.astro";
 import { HamNavMenu } from "@/components/core/HamNavMenu";
+import NavMenu from "@/components/core/NavMenu.astro";
+
+import { Button } from "@/components/ui/button";
+
+import { SITE } from "@/config";
 
 // To pass the tailwindcss classes to the astro component
 const { class: className } = Astro.props;
@@ -11,7 +13,7 @@ const { class: className } = Astro.props;
 
 <header
   class:list={[
-    "py-4 px-6 md:px-16 lg:px-48 w-full sticky top-0 bg-background z-50",
+    "py-4 px-6 md:px-16 lg:px-48 w-full sticky top-0 z-50",
     className,
   ]}
 >

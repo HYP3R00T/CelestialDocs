@@ -5,9 +5,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { MenuIcon } from "lucide-react";
-import { Button } from "../ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+
+import { MenuIcon } from "lucide-react";
+
 import { menu_items } from "@/config";
 
 export function HamNavMenu() {

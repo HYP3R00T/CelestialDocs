@@ -2,6 +2,7 @@
 import HeadSEO from "@/components/core/HeadSEO.astro";
 import Header from "@/components/core/Header.astro";
 import Footer from "@/components/core/Footer.astro";
+
 import { LOCALE } from "@/config";
 
 interface Props {
@@ -18,7 +19,7 @@ const { title, description, ogImage } = Astro.props;
   <head>
     <HeadSEO title={title} description={description} ogImage={ogImage} />
   </head>
-  <body class="min-h-screen bg-background text-foreground font-sans">
+  <body class="bg-background text-foreground font-sans">
     <div class="flex flex-col min-h-screen">
       <Header class="" />
       <main class="flex flex-1 flex-col md:flex-row justify-center py-6">
@@ -26,7 +27,7 @@ const { title, description, ogImage } = Astro.props;
           <slot />
         </div>
       </main>
-      <Footer class="border-t border-border" />
+      <Footer class="border-t border-border bg-background" />
     </div>
   </body>
 </html>

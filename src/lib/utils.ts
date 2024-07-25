@@ -1,3 +1,4 @@
+import type { MarkdownHeading } from "astro";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { getCollection } from "astro:content";
@@ -59,21 +60,6 @@ function buildMenu(
 }
 
 // Function to flatten nested menu structure into a linear array
-/* Sample array
-const sample = [
-  {
-    slug: "guide/main",
-    title: "",
-  },
-  {
-    slug: "guide/something",
-    title: "st",
-  },
-  {
-    slug: "guide/elsewhere",
-    title: "ew",
-  },
-]; */
 function flattenMenu(
   menu: { title?: string; slug: string; children: any[] }[]
 ) {
@@ -119,34 +105,20 @@ export function buildBreadcrumbs(
   return breadcrumbs;
 }
 
-import type { MarkdownHeading } from "astro";
-export interface TocItem extends MarkdownHeading {
-  children: TocItem[];
-}
-
-function diveChildren(item: TocItem, depth: number): TocItem[] {
-  if (depth === 1) {
-    return item.children;
-  } else {
-    // e.g., 2
-    return diveChildren(item.children[item.children.length - 1], depth - 1);
-  }
-}
-
 // create headings for ToC
 export function createHeadingHierarchy(headings: MarkdownHeading[]) {
   const topLevelHeadings: HeadingHierarchy[] = [];
 
   headings.forEach((heading) => {
-    if (heading.depth > 3) {
-      throw Error(
-        `Depths greater than 3 not allowed:\n${JSON.stringify(
-          heading,
-          null,
-          2
-        )}`
-      );
-    }
+    // if (heading.depth > 3) {
+    //   throw Error(
+    //     `Depths greater than 3 not allowed:\n${JSON.stringify(
+    //       heading,
+    //       null,
+    //       2
+    //     )}`
+    //   );
+    // }
     const h = {
       ...heading,
       subheadings: [],
