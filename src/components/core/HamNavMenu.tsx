@@ -6,7 +6,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { MenuIcon } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Separator } from "@/components/ui/separator";
 import { menu_items } from "@/config";
 
