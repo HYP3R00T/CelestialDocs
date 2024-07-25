@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { getCollection } from "astro:content";
-import type { DocEntry } from "@/lib/types";
+import type { DocEntry, HeadingHierarchy } from "@/lib/types";
 
 // for shadcn components
 export function cn(...inputs: ClassValue[]) {
@@ -133,45 +133,34 @@ function diveChildren(item: TocItem, depth: number): TocItem[] {
   }
 }
 
-export default function generateToc(
-  headings: MarkdownHeading[],
-  title = "Overview"
-) {
-  const overview = { depth: 2, slug: "overview", text: title };
-  headings = [
-    overview,
-    ...headings.filter(({ depth }) => depth > 1 && depth < 4),
-  ];
-  const toc: Array<TocItem> = [];
+// create headings for ToC
+export function createHeadingHierarchy(headings: MarkdownHeading[]) {
+  const topLevelHeadings: HeadingHierarchy[] = [];
 
-  for (const heading of headings) {
-    if (toc.length === 0) {
-      toc.push({
-        ...heading,
-        children: [],
-      });
+  headings.forEach((heading) => {
+    if (heading.depth > 3) {
+      throw Error(
+        `Depths greater than 3 not allowed:\n${JSON.stringify(
+          heading,
+          null,
+          2
+        )}`
+      );
+    }
+    const h = {
+      ...heading,
+      subheadings: [],
+    };
+
+    if (h.depth === 2) {
+      topLevelHeadings.push(h);
     } else {
-      const lastItemInToc = toc[toc.length - 1];
-      if (heading.depth < lastItemInToc.depth) {
-        throw new Error(`Orphan heading found: ${heading.text}.`);
-      }
-      if (heading.depth === lastItemInToc.depth) {
-        // same depth
-        toc.push({
-          ...heading,
-          children: [],
-        });
-      } else {
-        // higher depth
-        // push into children, or children' children alike
-        const gap = heading.depth - lastItemInToc.depth;
-        const target = diveChildren(lastItemInToc, gap);
-        target.push({
-          ...heading,
-          children: [],
-        });
+      let parent = topLevelHeadings[topLevelHeadings.length - 1];
+      if (parent) {
+        parent.subheadings.push(h);
       }
     }
-  }
-  return toc;
+  });
+
+  return topLevelHeadings;
 }

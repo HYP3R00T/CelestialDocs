@@ -2,20 +2,28 @@
 import HeadSEO from "@/components/core/HeadSEO.astro";
 import Header from "@/components/core/Header.astro";
 import Footer from "@/components/core/Footer.astro";
+
 import Breadcrumbs from "@/components/docs/Breadcrumbs.astro";
+import SideNavMenu from "@/components/docs/SideNavMenu.astro";
+import TableofContent from "@/components/docs/TableofContents.astro";
+
+import { ScrollArea } from "@/components/ui/scroll-area";
+
 import { menu, capitalizeFirstLetter } from "@/lib/utils";
 import { LOCALE } from "@/config";
-import TableOfContents from "@/components/docs/TableofContents.astro";
-import SideNavMenu from "@/components/docs/SideNavMenu.astro";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Props {
   title?: string | undefined;
   description?: string | undefined;
   ogImage?: URL | undefined;
+  headings: {
+    depth: number;
+    text: string;
+    slug: string;
+  }[];
 }
 
-const { title, description, ogImage } = Astro.props as Props;
+const { title, description, ogImage, headings } = Astro.props as Props;
 ---
 
 <!doctype html>
@@ -45,8 +53,11 @@ const { title, description, ogImage } = Astro.props as Props;
           </div>
         </div>
         <div
-          class="px-6 py-4 hidden lg:flex md:w-1/5 h-static_sidemenu bg-green-100 sticky top-[69px]"
+          class="px-6 py-4 hidden lg:flex md:w-1/5 h-static_sidemenu sticky top-[69px]"
         >
+          <ScrollArea className="h-full w-full" client:only="react">
+            <TableofContent {headings} />
+          </ScrollArea>
         </div>
       </main>
       <Footer class="border-t border-border sticky top-[69px]" />
