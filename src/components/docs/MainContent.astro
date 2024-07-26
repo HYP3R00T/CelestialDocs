@@ -2,11 +2,13 @@
 import { capitalizeFirstLetter } from "@/lib/utils";
 import { docconfig } from "config";
 import Breadcrumbs from "@/components/docs/Breadcrumbs.astro";
+import Datetime from "../Datetime";
 
 interface Props {
   title: string;
   author: string;
-  pubDatetime?: Date;
+  pubDatetime: Date | string;
+  modDatetime?: Date | string;
   description?: string;
   draft: boolean;
   tags: string[];
@@ -22,6 +24,7 @@ const {
   title,
   author,
   pubDatetime,
+  modDatetime,
   description,
   draft,
   tags,
@@ -32,7 +35,12 @@ const {
 
 {!docconfig.hide_breadcrumbs && <Breadcrumbs class="py-4" />}
 <h1 class="pb-6">{capitalizeFirstLetter(title)}</h1>
-{pubDatetime}
+<Datetime
+  pubDatetime={pubDatetime}
+  modDatetime={modDatetime}
+  size="sm"
+  className="my-2"
+/>
 <div class="prose">
   <slot />
 </div>

@@ -10,13 +10,14 @@ import TableofContent from "@/components/docs/TableofContents.astro";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { menu, capitalizeFirstLetter } from "@/lib/utils";
-import { LOCALE, docconfig } from "config";
+import { LOCALE, SITE, docconfig } from "config";
 import MainContent from "@/components/docs/MainContent.astro";
 
 interface Props {
   title: string;
   author: string;
-  pubDatetime?: Date;
+  pubDatetime: Date | string;
+  modDatetime?: Date | string;
   description?: string;
   draft: boolean;
   tags: string[];
@@ -32,6 +33,7 @@ const {
   title,
   author,
   pubDatetime,
+  modDatetime,
   description,
   draft,
   tags,
@@ -44,7 +46,7 @@ const {
 <html lang=`${LOCALE.lang ?? "en"}`>
   <head>
     <HeadSEO
-      title=`${title ? capitalizeFirstLetter(title) + " | Docs" : "Docs"}`
+      title=`${title ? capitalizeFirstLetter(title) + " | " + SITE.title : SITE.title}`
       description={description}
       ogImage={ogImage}
     />
@@ -69,6 +71,7 @@ const {
             title={title}
             author={author}
             pubDatetime={pubDatetime}
+            modDatetime={modDatetime}
             description={description}
             draft={draft}
             tags={tags}

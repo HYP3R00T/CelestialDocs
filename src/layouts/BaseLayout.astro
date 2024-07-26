@@ -3,7 +3,8 @@ import HeadSEO from "@/components/core/HeadSEO.astro";
 import Header from "@/components/core/Header.astro";
 import Footer from "@/components/core/Footer.astro";
 
-import { LOCALE } from "config";
+import { LOCALE, SITE } from "config";
+import { capitalizeFirstLetter } from "@/lib/utils";
 
 interface Props {
   title?: string | undefined;
@@ -17,7 +18,11 @@ const { title, description, ogImage } = Astro.props;
 <!doctype html>
 <html lang=`${LOCALE.lang ?? "en"}` class="scroll-smooth">
   <head>
-    <HeadSEO title={title} description={description} ogImage={ogImage} />
+    <HeadSEO
+      title=`${title ? capitalizeFirstLetter(title) : SITE.title}`
+      description={description}
+      ogImage={ogImage}
+    />
   </head>
   <body class="bg-background text-foreground font-sans">
     <div class="flex flex-col min-h-screen">
