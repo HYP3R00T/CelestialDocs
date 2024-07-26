@@ -7,11 +7,13 @@ interface DatetimesProps {
 }
 
 interface Props extends DatetimesProps {
+  hide_datetime: boolean;
   size?: "sm" | "lg";
   className?: string;
 }
 
 export default function Datetime({
+  hide_datetime,
   pubDatetime,
   modDatetime,
   size = "sm",

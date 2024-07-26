@@ -3,8 +3,13 @@ import type { MarkdownHeading } from "astro";
 
 // Make similar changes to config.ts in content folder
 export type DocData = {
-  title?: string;
+  title: string;
+  author: string;
+  pubDatetime: Date | string;
+  modDatetime?: Date | string;
   description?: string;
+  draft: boolean;
+  tags: string[];
 };
 
 // Define the type for docs collection
@@ -16,6 +21,7 @@ export type DocEntry = CollectionEntry<"docs"> & {
 export type MenuItem = {
   title?: string;
   slug: string;
+  darft: boolean;
   children: MenuItem[];
 };
 

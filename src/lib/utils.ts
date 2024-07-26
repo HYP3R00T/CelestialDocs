@@ -20,9 +20,14 @@ export const capitalizeFirstLetter = (str: string) => {
 
 // Function to build nested menu structure
 function buildMenu(
-  items: DocEntry[]
+  items: DocEntry[],
 ): { title?: string; slug: string; children: any[] }[] {
-  const menu: { title?: string; slug: string; children: any[] }[] = [];
+  const menu: {
+    title?: string;
+    slug: string;
+    draft: boolean;
+    children: any[];
+  }[] = [];
 
   items.forEach((item) => {
     const parts = item.slug.split("/"); // Split slug into parts
@@ -31,7 +36,7 @@ function buildMenu(
     // Traverse the menu structure based on folder depth
     parts.forEach((part: string, index: number) => {
       let existingItem = currentLevel.find(
-        (i) => i.slug === parts.slice(0, index + 1).join("/")
+        (i) => i.slug === parts.slice(0, index + 1).join("/"),
       );
 
       if (!existingItem) {
@@ -42,6 +47,7 @@ function buildMenu(
               ? capitalizeFirstLetter(item.data.title || "")
               : capitalizeFirstLetter(part),
           slug: parts.slice(0, index + 1).join("/"),
+          draft: item.data.draft,
           children: [],
         };
         currentLevel.push(existingItem);
@@ -61,12 +67,12 @@ function buildMenu(
 
 // Function to flatten nested menu structure into a linear array
 function flattenMenu(
-  menu: { title?: string; slug: string; children: any[] }[]
+  menu: { title?: string; slug: string; children: any[] }[],
 ) {
   const flatMenu: { title?: string; slug: string }[] = [];
 
   const traverse = (
-    items: { title?: string; slug: string; children: any[] }[]
+    items: { title?: string; slug: string; children: any[] }[],
   ) => {
     items.forEach((item) => {
       flatMenu.push({ title: item.title, slug: item.slug });
@@ -86,7 +92,7 @@ export const flatMenu = flattenMenu(menu);
 
 // Function to build breadcrumb structure
 export function buildBreadcrumbs(
-  slug: string
+  slug: string,
 ): { title: string; link: string }[] {
   const parts = slug.split("/");
   const breadcrumbs: { title: string; link: string }[] = [];

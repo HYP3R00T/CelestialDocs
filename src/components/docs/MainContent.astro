@@ -34,13 +34,18 @@ const {
 ---
 
 {!docconfig.hide_breadcrumbs && <Breadcrumbs class="py-4" />}
-<h1 class="pb-6">{capitalizeFirstLetter(title)}</h1>
-<Datetime
-  pubDatetime={pubDatetime}
-  modDatetime={modDatetime}
-  size="sm"
-  className="my-2"
-/>
-<div class="prose">
+<h1 class="pb-2">{capitalizeFirstLetter(title)}</h1>
+{
+  !docconfig.hide_datetime && (
+    <Datetime
+      hide_datetime={!docconfig.hide_datetime}
+      pubDatetime={pubDatetime}
+      modDatetime={modDatetime}
+      size="sm"
+      className="my-2"
+    />
+  )
+}
+<div class="prose pt-4">
   <slot />
 </div>
