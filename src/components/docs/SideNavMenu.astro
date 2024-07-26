@@ -15,7 +15,6 @@ const { class: className } = Astro.props;
       const label = item.title
         ? capitalizeFirstLetter(item.title)
         : capitalizeFirstLetter(item.slug.split("/").pop() || "");
-      var isTrueSet = pathname == item.slug;
       const className = `
         ${level === 0 ? "font-semibold" : "muted"}
         ${pathname === "/docs/" + item.slug ? "underline" : ""}
@@ -24,7 +23,7 @@ const { class: className } = Astro.props;
         <li>
           <a
             href={`/docs/${item.slug}`}
-            class={`${className} text-foreground text-sm leading-none w-full`}
+            class={`${className}  text-sm leading-none w-full`}
           >
             {label}
           </a>

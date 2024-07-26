@@ -1,6 +1,10 @@
 ---
 title: main
+draft: false
+pubDatetime: 2023-11-23
 ---
+
+## Hey
 
 Hey there, fellow developers! If you're like me, you probably spend a lot of time in Visual Studio Code (VSCode), and over time, your `settings.json` file might have become a bit of a mess. With so many extensions and configurations, it can be tough to keep things neat and tidy. So, I decided to tackle this problem head-on by creating a custom VSCode extension to organize my settings.
 

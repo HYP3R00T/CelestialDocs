@@ -1,0 +1,38 @@
+---
+import { capitalizeFirstLetter } from "@/lib/utils";
+import { docconfig } from "config";
+import Breadcrumbs from "@/components/docs/Breadcrumbs.astro";
+
+interface Props {
+  title: string;
+  author: string;
+  pubDatetime?: Date;
+  description?: string;
+  draft: boolean;
+  tags: string[];
+  ogImage?: URL | undefined;
+  headings?: {
+    depth: number;
+    text: string;
+    slug: string;
+  }[];
+}
+
+const {
+  title,
+  author,
+  pubDatetime,
+  description,
+  draft,
+  tags,
+  ogImage,
+  headings,
+} = Astro.props as Props;
+---
+
+{!docconfig.hide_breadcrumbs && <Breadcrumbs class="py-4" />}
+<h1 class="pb-6">{capitalizeFirstLetter(title)}</h1>
+{pubDatetime}
+<div class="prose">
+  <slot />
+</div>

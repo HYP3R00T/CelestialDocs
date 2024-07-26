@@ -4,9 +4,9 @@ import DocsLayout from "@/layouts/DocsLayout.astro";
 import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (async () => {
-  const docs = await getCollection("docs");
+  const docs = await getCollection("docs", ({ data }) => !data.draft);
   const headings = await Promise.all(
-    docs.map((entry) => entry.render().then((data) => data.headings))
+    docs.map((entry) => entry.render().then((data) => data.headings)),
   );
 
   const posts = docs.map((entry, index) => {

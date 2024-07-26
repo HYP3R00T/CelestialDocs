@@ -11,6 +11,7 @@ import { menu } from "@/lib/utils";
 import { menu_items, docconfig } from "config";
 
 const pathname = new URL(Astro.request.url).pathname;
+const pathname_part = pathname.split("/")[1];
 ---
 
 <style>
@@ -37,31 +38,31 @@ const pathname = new URL(Astro.request.url).pathname;
       <X className="h-[1.2rem] w-[1.2rem]" />
     </Button>
   </div>
-  <div class="mt-6 flex flex-col items-start px-6">
-    {
-      menu_items.map((item) => (
-        <a href={item.href}>
-          <Button
-            variant="link"
-            className={pathname === item.href ? "underline" : ""}
-            key={item.href}
-          >
-            {item.title}
-          </Button>
-        </a>
-      ))
-    }
-    {
-      !docconfig.hide_side_navinations && (
-        <div class="py-4 w-full max-h-static_hamnavmenu h-v">
-          <Separator />
-          <ScrollArea className="h-full w-full" client:only="react">
-            <SideNavMenu items={menu} level={0} class="px-4 " />
-          </ScrollArea>
-        </div>
-      )
-    }
-  </div>
+  <ScrollArea className=" w-full h-dynamic_hscreen mb-4" client:only="react">
+    <div class="mt-6 flex flex-col items-start px-6">
+      {
+        menu_items.map((item) => (
+          <a href={item.href}>
+            <Button
+              variant="link"
+              className=`${"/" + pathname_part === "/" + item.href.split("/")[1] ? "underline" : ""} text-foreground`
+              key={item.href}
+            >
+              {item.title}
+            </Button>
+          </a>
+        ))
+      }
+      {
+        !docconfig.hide_side_navinations && (
+          <div class="py-4 w-full">
+            <Separator />
+              <SideNavMenu items={menu} level={0} class="px-4 " />
+          </div>
+        )
+      }
+    </div>
+  </ScrollArea>
 </div>
 
 <script is:inline>
