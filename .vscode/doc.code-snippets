@@ -1,0 +1,18 @@
+{
+	"Doc template": {
+		"prefix": "docs",
+		"body": [
+			"---",
+			"title: $1",
+			"author: hyperoot",
+			"pubDatetime: $2 #2024-04-09T12:00:00-05:30",
+			"# modDatetime:''",
+			"# description:''",
+			"draft: true",
+			"#tags:",
+			"#- tag1",
+			"---",
+		],
+		"description": "Docs template"
+	}
+}
