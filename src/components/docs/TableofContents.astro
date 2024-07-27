@@ -1,6 +1,7 @@
 ---
 import type { HeadingHierarchy, HeadingProps } from "@/lib/types";
 import { createHeadingHierarchy } from "@/lib/utils";
+import { Heading } from "lucide-react";
 
 const { headings } = Astro.props as HeadingProps;
 const toc: HeadingHierarchy[] = createHeadingHierarchy(headings ?? []);
@@ -13,10 +14,14 @@ const { class: className } = Astro.props;
 {
   hasToC && (
     <div class:list={["relative", className]}>
-      <h2 class="">Table of Contents</h2>
-      <ul>
+      <h2 class="text-xl border-none">On This Page</h2>
+      <ul class="list-none m-0">
         {toc.map((heading) => (
-          <li>{heading.text}</li>
+          <li class=`${heading.depth === 2 ? "font-semibold" : "text-muted-foreground"}`>
+            <a href={`#${heading.slug}`} class="text-sm w-full leading-none">
+              {heading.text}
+              </a>
+          </li>
         ))}
       </ul>
     </div>

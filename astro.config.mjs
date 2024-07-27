@@ -9,7 +9,7 @@ export default defineConfig({
     smartypants: true,
     syntaxHighlight: "shiki",
     shikiConfig: {
-      theme: "github-dark",
+      theme: "catppuccin-mocha",
       // themes: {
       //   dark: "catppuccin-macchiato",
       //   light: "catppuccin-macchiato",

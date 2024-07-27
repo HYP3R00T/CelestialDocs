@@ -116,21 +116,12 @@ export function createHeadingHierarchy(headings: MarkdownHeading[]) {
   const topLevelHeadings: HeadingHierarchy[] = [];
 
   headings.forEach((heading) => {
-    // if (heading.depth > 3) {
-    //   throw Error(
-    //     `Depths greater than 3 not allowed:\n${JSON.stringify(
-    //       heading,
-    //       null,
-    //       2
-    //     )}`
-    //   );
-    // }
     const h = {
       ...heading,
       subheadings: [],
     };
 
-    if (h.depth === 2) {
+    if (h.depth >= 2) {
       topLevelHeadings.push(h);
     } else {
       let parent = topLevelHeadings[topLevelHeadings.length - 1];
