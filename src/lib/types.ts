@@ -2,7 +2,7 @@ import type { CollectionEntry } from "astro:content";
 import type { MarkdownHeading } from "astro";
 
 // Make similar changes to config.ts in content folder
-type DocsData = {
+export type DocsData = {
   title: string;
   author: string;
   pubDatetime: Date;
