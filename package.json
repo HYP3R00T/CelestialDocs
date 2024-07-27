@@ -7,8 +7,7 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "postbuild": "pagefind --site dist"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.8.2",
@@ -23,7 +22,6 @@
     "@radix-ui/react-toggle": "^1.1.0",
     "@types/react": "^18.3.3",
     "astro": "^4.12.2",
-    "astro-pagefind": "^1.6.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.411.0",
