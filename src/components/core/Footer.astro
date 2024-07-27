@@ -3,8 +3,10 @@
 const { class: className } = Astro.props;
 ---
 
-<footer class:list={["py-6 px-6 w-full container", className]}>
-  <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+<footer class:list={["py-6 px-6 w-full", className]}>
+  <div
+    class="flex flex-col items-center justify-between gap-4 md:flex-row container"
+  >
     <p
       class="text-center text-sm leading-loose text-muted-foreground md:text-left"
     >

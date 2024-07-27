@@ -69,7 +69,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       maxHeight: {
-        static_sidemenu: "calc(100vh - 69px)",
+        static_sidemenu: "calc(100vh - 69px - 76.8px)",
         static_hamnavmenu: "calc(100svh - 36px - 32px)",
         dynamic_hscreen: "calc(100dvh - 32px - 2rem)",
       },
