@@ -3,7 +3,7 @@ import { capitalizeFirstLetter } from "@/lib/utils";
 import type { SideNavMenuProps } from "@/lib/types";
 
 const { items, level } = Astro.props as SideNavMenuProps;
-const pathname = new URL(Astro.request.url).pathname;
+const pathname: string = new URL(Astro.request.url).pathname;
 
 // To pass the tailwindcss classes to the astro component
 const { class: className } = Astro.props;

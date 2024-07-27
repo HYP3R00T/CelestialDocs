@@ -27,5 +27,6 @@ export const docconfig = {
   hide_table_of_contents: false,
   hide_breadcrumbs: false,
   hide_side_navinations: false,
-  hide_datetime: true,
+  hide_datetime: false,
+  hide_time: true,
 };

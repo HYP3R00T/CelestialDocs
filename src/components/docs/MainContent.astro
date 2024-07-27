@@ -1,24 +1,12 @@
 ---
-import { capitalizeFirstLetter } from "@/lib/utils";
-import { docconfig } from "config";
-import Breadcrumbs from "@/components/docs/Breadcrumbs.astro";
-import Datetime from "../Datetime";
+import Datetime from "@/components/core/Datetime";
 
-interface Props {
-  title: string;
-  author: string;
-  pubDatetime: Date | string;
-  modDatetime?: Date | string;
-  description?: string;
-  draft: boolean;
-  tags: string[];
-  ogImage?: URL | undefined;
-  headings?: {
-    depth: number;
-    text: string;
-    slug: string;
-  }[];
-}
+import Breadcrumbs from "@/components/docs/Breadcrumbs.astro";
+
+import type { MainContentProps } from "@/lib/types";
+import { capitalizeFirstLetter } from "@/lib/utils";
+
+import { docconfig } from "config";
 
 const {
   title,
@@ -28,20 +16,19 @@ const {
   description,
   draft,
   tags,
-  ogImage,
   headings,
-} = Astro.props as Props;
+} = Astro.props as MainContentProps;
 ---
 
 {!docconfig.hide_breadcrumbs && <Breadcrumbs class="py-4" />}
 <h1 class="pb-2">{capitalizeFirstLetter(title)}</h1>
 {
-  !docconfig.hide_datetime && (
+  !docconfig.hide_datetime && pubDatetime && (
     <Datetime
-      hide_datetime={!docconfig.hide_datetime}
+      hide_datetime={docconfig.hide_datetime}
+      hide_time={docconfig.hide_time}
       pubDatetime={pubDatetime}
       modDatetime={modDatetime}
-      size="sm"
       className="my-2"
     />
   )

@@ -8,10 +8,11 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { MenuIcon, X } from "lucide-react";
 
 import { menu } from "@/lib/utils";
+
 import { menu_items, docconfig } from "config";
 
-const pathname = new URL(Astro.request.url).pathname;
-const pathname_part = pathname.split("/")[1];
+const pathname: string = new URL(Astro.request.url).pathname;
+const pathname_part: string = pathname.split("/")[1];
 ---
 
 <style>

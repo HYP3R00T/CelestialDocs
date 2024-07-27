@@ -2,7 +2,7 @@ import type { MarkdownHeading } from "astro";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { getCollection } from "astro:content";
-import type { DocEntry, HeadingHierarchy } from "@/lib/types";
+import type { DocsEntry, HeadingHierarchy } from "@/lib/types";
 
 // for shadcn components
 export function cn(...inputs: ClassValue[]) {
@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // Fetch the collection with type
-const docs: DocEntry[] = await getCollection("docs");
+const docs: DocsEntry[] = await getCollection("docs");
 
 // Helper function to capitalize the first letter of a string
 export const capitalizeFirstLetter = (str: string) => {
@@ -20,7 +20,7 @@ export const capitalizeFirstLetter = (str: string) => {
 
 // Function to build nested menu structure
 function buildMenu(
-  items: DocEntry[],
+  items: DocsEntry[],
 ): { title?: string; slug: string; children: any[] }[] {
   const menu: {
     title?: string;

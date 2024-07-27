@@ -3,31 +3,16 @@ import HeadSEO from "@/components/core/HeadSEO.astro";
 import Header from "@/components/core/Header.astro";
 import Footer from "@/components/core/Footer.astro";
 
-import Breadcrumbs from "@/components/docs/Breadcrumbs.astro";
 import SideNavMenu from "@/components/docs/SideNavMenu.astro";
 import TableofContent from "@/components/docs/TableofContents.astro";
+import MainContent from "@/components/docs/MainContent.astro";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+import type { DocsLayoutProps } from "@/lib/types";
 import { menu, capitalizeFirstLetter } from "@/lib/utils";
-import { LOCALE, SITE, docconfig } from "config";
-import MainContent from "@/components/docs/MainContent.astro";
 
-interface Props {
-  title: string;
-  author: string;
-  pubDatetime: Date | string;
-  modDatetime?: Date | string;
-  description?: string;
-  draft: boolean;
-  tags: string[];
-  ogImage?: URL | undefined;
-  headings?: {
-    depth: number;
-    text: string;
-    slug: string;
-  }[];
-}
+import { LOCALE, SITE, docconfig } from "config";
 
 const {
   title,
@@ -37,9 +22,8 @@ const {
   description,
   draft,
   tags,
-  ogImage,
   headings,
-} = Astro.props as Props;
+} = Astro.props as DocsLayoutProps;
 ---
 
 <!doctype html>
@@ -48,7 +32,6 @@ const {
     <HeadSEO
       title=`${title ? capitalizeFirstLetter(title) + " | " + SITE.title : SITE.title}`
       description={description}
-      ogImage={ogImage}
     />
   </head>
   <body class="bg-background text-foreground font-sans">
@@ -75,7 +58,6 @@ const {
             description={description}
             draft={draft}
             tags={tags}
-            ogImage={ogImage}
             headings={headings}
           >
             <slot />

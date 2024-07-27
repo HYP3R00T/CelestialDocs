@@ -12,7 +12,7 @@ const { class: className } = Astro.props;
 
 {
   hasToC && (
-    <div class="relative">
+    <div class:list={["relative", className]}>
       <h2 class="">Table of Contents</h2>
       <ul>
         {toc.map((heading) => (
