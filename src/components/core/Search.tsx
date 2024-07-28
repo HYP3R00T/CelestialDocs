@@ -6,31 +6,40 @@ import { Input } from "@/components/ui/input";
 
 import type { DocsEntry } from "@/lib/types";
 
-const options: IFuseOptions<DocsEntry> = {
+const options: IFuseOptions<Doc> = {
   includeScore: true,
   threshold: 0.5,
   keys: [
-    { name: "slug", weight: 2 },
+    // { name: "slug", weight: 2 },
     { name: "body", weight: 1.5 },
-    { name: "data.title", weight: 1.75 },
-    { name: "data.author", weight: 1.5 },
-    { name: "data.description", weight: 1.25 },
-    { name: "data.tags", weight: 1.0 },
-    { name: "data.pubDatetime", weight: 0.5 },
-    { name: "data.modDatetime", weight: 0.5 },
+    // { name: "data.title", weight: 1.75 },
   ],
 };
 
+interface Doc {
+  id: string; // or number, depending on the type of `item.id`
+  slug: string;
+  title: string;
+  description: string | undefined;
+  body: string;
+}
+
 export function Search() {
   const [searchValue, setSearchValue] = useState<string>("");
-  const [docs, setDocs] = useState<DocsEntry[]>([]);
+  const [docs, setDocs] = useState<Doc[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchDocs = async () => {
       const fetchedDocs: DocsEntry[] = await getCollection("docs");
-      console.log(fetchedDocs);
-      setDocs(fetchedDocs);
+      const docs: Doc[] = fetchedDocs.map((item) => ({
+        id: item.id,
+        slug: item.slug,
+        title: item.data.title,
+        description: item.data.description,
+        body: item.body,
+      }));
+      setDocs(docs);
       setLoading(false);
     };
     fetchDocs();
@@ -58,7 +67,7 @@ export function Search() {
 
       {results.map(({ item: post }, index) => (
         <p key={index}>
-          <a href={`docs/${post.slug}`}>{post.data.title}</a>
+          <a href={`docs/${post.slug}`}>{post.title}</a>
         </p>
       ))}
     </div>
