@@ -1,10 +1,7 @@
-import type { DocsEntry } from "@/lib/types";
 import { getCollection } from "astro:content";
 import Fuse, { type FuseResult, type IFuseOptions } from "fuse.js";
 import { useState, useMemo, useEffect } from "react";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
+
 import {
   Dialog,
   DialogContent,
@@ -13,8 +10,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { Search as SearchIcon } from "lucide-react";
+
+import type { DocsEntry } from "@/lib/types";
+import { capitalizeFirstLetter } from "@/lib/utils";
 
 const docs: DocsEntry[] = await getCollection("docs");
 
@@ -53,7 +56,7 @@ export function Search() {
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === "v" && (e.metaKey || e.ctrlKey)) {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((open) => !open);
       }
@@ -71,7 +74,7 @@ export function Search() {
             <SearchIcon className="w-[1.2rem] h-[1.2rem]" />
           </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className=" md:h-1/2 md:mx-0 w-full h-full ">
           <DialogHeader>
             <DialogTitle hidden={true}>Search</DialogTitle>
             <DialogDescription asChild>
@@ -82,15 +85,18 @@ export function Search() {
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
                 {results.length > 0 && (
-                  <ScrollArea className="h-36 my-4 border">
-                    <ul className="list-none m-0 px-4">
+                  <ScrollArea className="mt-4 h-auto">
+                    <ul className="list-none m-0">
                       {results.map(({ item, refIndex }) => (
-                        <li className="" key={refIndex}>
+                        <li
+                          className=" px-4 m-0 py-2 flex flex-row items-center hover:bg-secondary hover:rounded hover:text-secondary-foreground"
+                          key={refIndex}
+                        >
                           <a href={item.slug} key={refIndex}>
-                            {item.data.title}
+                            {item.data.title
+                              ? capitalizeFirstLetter(item.data.title)
+                              : capitalizeFirstLetter(item.slug.split("/")[-1])}
                           </a>
-                          <br />
-                          <p>{item.data.description}</p>
                         </li>
                       ))}
                     </ul>

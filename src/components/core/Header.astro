@@ -32,15 +32,16 @@ const { class: className } = Astro.props;
       </div>
     </div>
 
-    <div class="md:hidden flex flex-row-reverse gap-4">
-      <HamNavMenu />
-      <ModeToggle client:load transition:persist />
+    <div class="flex flex-row gap-4">
       <Search client:only="react" />
-    </div>
+      <div class="md:hidden flex flex-row-reverse gap-4">
+        <HamNavMenu />
+        <ModeToggle client:load transition:persist />
+      </div>
 
-    <div class="flex-row gap-4 hidden md:flex">
-      <Search client:only="react" />
-      <ModeToggle client:load transition:persist />
+      <div class="flex-row gap-4 hidden md:flex">
+        <ModeToggle client:load transition:persist />
+      </div>
     </div>
   </div>
 </header>
