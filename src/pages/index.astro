@@ -7,5 +7,65 @@ import Hero from "@/components/home/hero.astro";
   title="Astro Shadcn UI Documentation Template"
   description="This template helps you build Documentation with Astro, Tailwind CSS, and Shadcn UI."
 >
-  <Hero />
+  <div class="sample">
+    <Hero />
+    Something
+  </div>
+  <!-- <ul class="bg-red-400"> -->
+  <ol class="border list-inside px-4">
+    <li class="text-background">text-background</li>
+    <li class="text-foreground bg-background">text-foreground bg-background</li>
+    <li class="text-muted">text-muted</li>
+    <li class="text-muted-foreground bg-muted">
+      text-muted-foreground bg-muted
+    </li>
+    <li class="text-popover">text-popover</li>
+    <li class="text-popover-foreground bg-popover">
+      text-popover-foreground bg-popover
+    </li>
+    <li class="text-card">text-card</li>
+    <li class="text-card-foreground bg-card">text-card-foreground bg-card</li>
+    <li class="text-border">text-border</li>
+    <li class="text-input">text-input</li>
+    <li class="text-primary">text-primary</li>
+    <li class="text-primary-foreground bg-primary">
+      text-primary-foreground bg-primary
+    </li>
+    <li class="text-secondary">text-secondary</li>
+    <li class="text-secondary-foreground bg-secondary">
+      text-secondary-foreground bg-secondary
+    </li>
+    <li class="text-accent">text-accent</li>
+    <li class="text-accent-foreground bg-accent">
+      text-accent-foreground bg-accent
+    </li>
+    <li class="text-destructive">text-destructive</li>
+    <li class="text-destructive-foreground bg-destructive">
+      text-destructive-foreground bg-destructive
+    </li>
+    <li class="text-ring">text-ring</li>
+  </ol>
 </BaseLayout>
+
+<style>
+  .sample {
+    height: 300px;
+    --dot-bg: hsl(var(--background));
+    --dot-color: hsl(var(--foreground));
+    --dot-size: 1px;
+    --dot-space: 22px;
+    background:
+      linear-gradient(
+          90deg,
+          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+          transparent 1%
+        )
+        center / var(--dot-space) var(--dot-space),
+      linear-gradient(
+          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+          transparent 1%
+        )
+        center / var(--dot-space) var(--dot-space),
+      var(--dot-color);
+  }
+</style>

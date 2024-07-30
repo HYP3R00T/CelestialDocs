@@ -87,14 +87,18 @@ export function Search() {
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
                 {results.length > 0 && (
-                  <ScrollArea className="mt-4 h-auto">
+                  <ScrollArea className="mt-4 md:h-1/2">
                     <ul className="list-none m-0">
                       {results.map(({ item, refIndex }) => (
                         <li
-                          className=" px-4 m-0 py-2 flex flex-row items-center hover:bg-secondary hover:rounded hover:text-secondary-foreground"
+                          className=" px-4 m-0 py-2 flex flex-row items-center hover:bg-accent hover:rounded hover:text-accent-foreground"
                           key={refIndex}
                         >
-                          <a href={item.slug} key={refIndex}>
+                          <a
+                            href={item.slug}
+                            key={refIndex}
+                            className="hover:text-background"
+                          >
                             {item.data.title
                               ? capitalizeFirstLetter(item.data.title)
                               : capitalizeFirstLetter(item.slug.split("/")[-1])}

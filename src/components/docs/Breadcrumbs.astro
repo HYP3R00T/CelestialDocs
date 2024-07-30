@@ -19,9 +19,9 @@ const breadcrumbs: BreadcrumbsProps = buildBreadcrumbs(slug || "");
 const { class: className } = Astro.props;
 ---
 
-<div class:list={[className]}>
+<div class:list={className}>
   <Breadcrumb>
-    <BreadcrumbList>
+    <BreadcrumbList className="m-0">
       {
         breadcrumbs.map((breadcrumb, index) => (
           <BreadcrumbItem>
