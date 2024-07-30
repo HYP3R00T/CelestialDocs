@@ -1,13 +1,16 @@
 import type { MarkdownHeading } from "astro";
+import { getCollection } from "astro:content";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { getCollection } from "astro:content";
+
 import type {
   DocsEntry,
   HeadingHierarchy,
   MenuItem,
   MenuItemWithDraft,
 } from "@/lib/types";
+
+import { side_nav_menu_order } from "config";
 
 // for shadcn components
 export function cn(...inputs: ClassValue[]) {
@@ -23,11 +26,24 @@ export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-const menu_order = ["setup", "getting-started.md", "guide"];
-
 // Function to build nested menu structure
 function buildMenu(items: DocsEntry[]): MenuItem[] {
   const menu: MenuItemWithDraft[] = [];
+
+  // Create a map to quickly look up the order of top-level items
+  const orderMap = new Map(
+    side_nav_menu_order.map((item, index) => [item, index]),
+  );
+
+  // Helper function to sort top-level items
+  function sortTopLevel(items: MenuItemWithDraft[]): MenuItemWithDraft[] {
+    const sortedItems = items.slice().sort((a, b) => {
+      const aIndex = orderMap.get(a.slug) ?? Infinity;
+      const bIndex = orderMap.get(b.slug) ?? Infinity;
+      return aIndex - bIndex;
+    });
+    return sortedItems;
+  }
 
   items.forEach((item) => {
     const parts = item.slug.split("/"); // Split slug into parts
@@ -62,7 +78,10 @@ function buildMenu(items: DocsEntry[]): MenuItem[] {
     });
   });
 
-  return menu;
+  // Sort top-level items based on menu_order
+  const topLevelMenu = sortTopLevel(menu);
+
+  return topLevelMenu;
 }
 
 // Function to flatten nested menu structure into a linear array
