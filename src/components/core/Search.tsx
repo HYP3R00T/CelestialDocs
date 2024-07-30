@@ -55,8 +55,6 @@ export function Search() {
     () => fuse.search(searchValue),
     [fuse, searchValue],
   );
-  console.log(fuse);
-  console.log(results);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {

@@ -5,6 +5,8 @@ import type { SideNavMenuProps } from "@/lib/types";
 const { items, level } = Astro.props as SideNavMenuProps;
 const pathname: string = new URL(Astro.request.url).pathname;
 
+console.log(pathname);
+console.log(items);
 // To pass the tailwindcss classes to the astro component
 const { class: className } = Astro.props;
 ---
@@ -17,7 +19,7 @@ const { class: className } = Astro.props;
         : capitalizeFirstLetter(item.slug.split("/").pop() || "");
       const className = `
         ${level === 0 ? "font-semibold" : "muted"}
-        ${pathname === item.slug ? "underline" : ""}
+        ${pathname === "/" + item.slug ? "underline" : "no-underline"}
         `.trim();
       return (
         <li>

@@ -79,6 +79,11 @@ module.exports = {
     },
     fontFamily: {
       sans: ["Inter", ...defaultTheme.fontFamily.sans],
+      mono: ["'JetBrains Mono'", ...defaultTheme.fontFamily.mono],
+      norwester: ["Norwester", ...defaultTheme.fontFamily.sans],
+      montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
+      baloo_2: ["'Baloo 2 Variable'", ...defaultTheme.fontFamily.sans],
+      varela_round: ["'Varela Round'", ...defaultTheme.fontFamily.sans],
     },
   },
   plugins: [require("tailwindcss-animate")],
