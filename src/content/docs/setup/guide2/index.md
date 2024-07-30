@@ -2,6 +2,6 @@
 title: main
 ---
 
-# Hey
+## Hey
 
 This is sample

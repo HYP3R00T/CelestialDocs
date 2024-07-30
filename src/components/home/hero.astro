@@ -1,0 +1,19 @@
+---
+const { class: className } = Astro.props;
+import { Image } from "astro:assets";
+import { Button } from "@/components/ui/button";
+---
+
+<div class:list={["py-6 w-full", className]}>
+  <div class="">
+    <div>
+      <h1>Make your docs shine with CelestialDocs</h1>
+      <a href="/getting-started" class="py-4">
+        <Button> Get started </Button>
+      </a>
+    </div>
+    <div class="">
+      <!-- <Image src={} /> -->
+    </div>
+  </div>
+</div>

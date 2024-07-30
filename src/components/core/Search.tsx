@@ -24,7 +24,11 @@ const docs: DocsEntry[] = await getCollection("docs");
 const options: IFuseOptions<DocsEntry> = {
   includeScore: true,
   threshold: 0.5,
+  location: 0,
+  distance: 100,
+  includeMatches: true,
   minMatchCharLength: 2,
+  useExtendedSearch: true,
   findAllMatches: true,
   keys: [
     { name: "id", weight: 2.5 },

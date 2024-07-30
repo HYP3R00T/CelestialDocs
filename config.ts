@@ -12,14 +12,10 @@ export const LOCALE = {
 } as const;
 
 export const menu_items: { title: string; href: string }[] = [
-  {
-    title: "Home",
-    href: "/",
-  },
-  {
-    title: "Documentation",
-    href: "/docs/",
-  },
+  // {
+  //   title: "Home",
+  //   href: "/",
+  // },
 ];
 
 // Don't delete anything. You can use 'true' or 'false'.

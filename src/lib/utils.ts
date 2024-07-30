@@ -2,7 +2,12 @@ import type { MarkdownHeading } from "astro";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { getCollection } from "astro:content";
-import type { DocsEntry, HeadingHierarchy } from "@/lib/types";
+import type {
+  DocsEntry,
+  HeadingHierarchy,
+  MenuItem,
+  MenuItemWithDraft,
+} from "@/lib/types";
 
 // for shadcn components
 export function cn(...inputs: ClassValue[]) {
@@ -18,16 +23,11 @@ export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
+const menu_order = ["setup", "getting-started.md", "guide"];
+
 // Function to build nested menu structure
-function buildMenu(
-  items: DocsEntry[],
-): { title?: string; slug: string; children: any[] }[] {
-  const menu: {
-    title?: string;
-    slug: string;
-    draft: boolean;
-    children: any[];
-  }[] = [];
+function buildMenu(items: DocsEntry[]): MenuItem[] {
+  const menu: MenuItemWithDraft[] = [];
 
   items.forEach((item) => {
     const parts = item.slug.split("/"); // Split slug into parts

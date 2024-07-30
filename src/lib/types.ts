@@ -46,17 +46,23 @@ export interface HeadingHierarchy extends MarkdownHeading {
   subheadings: HeadingHierarchy[];
 }
 
-// Define the type for menu items to created nested object
 export type MenuItem = {
   title?: string;
   slug: string;
-  darft: boolean;
   children: MenuItem[];
+};
+
+// Define the type for menu items to created nested object
+export type MenuItemWithDraft = {
+  title?: string;
+  slug: string;
+  draft: boolean;
+  children: MenuItemWithDraft[];
 };
 
 // Define the props for the SideNavMenu component
 export type SideNavMenuProps = {
-  items: MenuItem[];
+  items: MenuItemWithDraft[];
   level: number;
 };
 

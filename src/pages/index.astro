@@ -1,23 +1,11 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Search } from "@/components/core/Search";
+import Hero from "@/components/home/hero.astro";
 ---
 
 <BaseLayout
   title="Astro Shadcn UI Documentation Template"
   description="This template helps you build Documentation with Astro, Tailwind CSS, and Shadcn UI."
 >
-  <h1>Astro</h1>
-  <ScrollArea className="h-[200px] w-[350px] rounded-md border p-4" client:load>
-    Jokester began sneaking into the castle in the middle of the night and
-    leaving jokes all over the place: under the king's pillow, in his soup, even
-    in the royal toilet. The king was furious, but he couldn't seem to stop
-    Jokester. And then, one day, the people of the kingdom discovered that the
-    jokes left by Jokester were so funny that they couldn't help but laugh. And
-    once they started laughing, they couldn't stop.
-  </ScrollArea>
-
-  <!-- <Search client:only="react" /> -->
+  <Hero />
 </BaseLayout>
