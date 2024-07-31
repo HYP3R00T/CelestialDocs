@@ -2,7 +2,7 @@ export const SITE = {
   website: "https://hyperoot.dev", // replace this with your deployed domain
   author: "HYP3R00T",
   desc: "Documentation theme using Astro and Shadcn",
-  title: "CelestialDocs",
+  title: "Celestial Docs",
   ogImage: "og-image.jpg",
 };
 

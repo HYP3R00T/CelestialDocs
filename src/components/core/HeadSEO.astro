@@ -24,11 +24,7 @@ const { title, description, ogImage } = Astro.props as HeadSEOProps;
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 <link rel="canonical" href={canonicalURL} />
-<link
-  rel="shortcut icon"
-  type="image/svg+xml"
-  href={`${Astro.site}favicon.svg`}
-/>
+<link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
