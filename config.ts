@@ -4,6 +4,7 @@ export const SITE = {
   desc: "Documentation theme using Astro and Shadcn",
   title: "Celestial Docs",
   ogImage: "og-image.jpg",
+  repo: "https://github.com/HYP3R00T/CelestialDocs",
 };
 
 export const LOCALE = {
@@ -30,4 +31,5 @@ export const docconfig = {
   hide_datetime: false,
   hide_time: true,
   hide_search: false,
+  hide_repo_button: false,
 };

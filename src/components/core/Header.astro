@@ -7,6 +7,7 @@ import { Search } from "@/components/core/Search";
 import { Button } from "@/components/ui/button";
 
 import { docconfig, SITE } from "config";
+import { Github } from "lucide-react";
 
 // To pass the tailwindcss classes to the astro component
 const { class: className } = Astro.props;
@@ -42,8 +43,17 @@ const { class: className } = Astro.props;
       </div>
     </div>
 
-    <div class="flex flex-row gap-4 md:px-8">
+    <div class="flex flex-row gap-2 md:px-8">
       {!docconfig.hide_search && <Search client:only="react" />}
+      {
+        !docconfig.hide_repo_button && (
+          <a href={SITE.repo} target="_blank">
+            <Button client:load className="" variant="ghost" size="icon">
+              <Github className="w-[1.2rem] h-[1.2rem]" />
+            </Button>
+          </a>
+        )
+      }
       <div class="md:hidden flex flex-row-reverse gap-4">
         <HamNavMenu />
         <ModeToggle client:load transition:persist />
