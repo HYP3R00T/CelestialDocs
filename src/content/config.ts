@@ -14,6 +14,7 @@ const docs = defineCollection({
     hide_breadcrumbs: z.boolean().optional().default(false),
     hide_toc: z.boolean().optional().default(false),
     hide_sidenav: z.boolean().optional().default(false),
+    max_width: z.boolean().optional().default(false),
   }),
 });
 

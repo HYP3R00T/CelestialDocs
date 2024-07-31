@@ -20,6 +20,7 @@ export type DocsData = {
   hide_breadcrumbs: boolean;
   hide_toc: boolean;
   hide_sidenav: boolean;
+  max_width: boolean;
 };
 
 // Define the type for docs collection

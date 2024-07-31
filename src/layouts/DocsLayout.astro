@@ -25,24 +25,28 @@ const {
   hide_breadcrumbs,
   hide_toc,
   hide_sidenav,
+  max_width,
   headings,
 } = Astro.props as DocsLayoutProps;
 ---
 
 <!doctype html>
-<html lang=`${LOCALE.lang ?? "en"}`>
+<html lang=`${LOCALE.lang ?? "en"}` class="scroll-smooth">
   <head>
     <HeadSEO
       title=`${title ? capitalizeFirstLetter(title) + " | " + SITE.title : SITE.title}`
       description={description}
     />
   </head>
-  <body class="font-sans bg-card">
+  <body
+    class=`font-sans ${hide_toc && hide_sidenav && max_width ? "" : "bg-card"}`
+  >
     <div class="flex flex-col min-h-screen">
       <Header class="border-b bg-background" />
       <main class="flex flex-1 flex-col md:flex-row container">
         <div
-          class="px-6 py-4 hidden md:flex md:w-1/4 lg:w-1/5 max-h-static_sidemenu sticky top-[69px]"
+          class=`py-4 hidden md:flex max-h-static_sidemenu sticky top-[69px] 
+          ${hide_toc && hide_sidenav && max_width ? "w-screen" : "md:px-6 md:w-1/4 lg:w-1/5"}`
         >
           <ScrollArea className="h-full w-full" client:only="react">
             {
@@ -52,7 +56,9 @@ const {
             }
           </ScrollArea>
         </div>
-        <div class="w-full md:w-3/4 lg:w-3/5">
+        <div
+          class=`w-full ${hide_toc && hide_sidenav && max_width ? "" : "md:w-3/4 lg:w-3/5"}`
+        >
           <MainContent
             title={title}
             author={author}
@@ -68,7 +74,7 @@ const {
           </MainContent>
         </div>
         <div
-          class="px-6 py-4 hidden lg:flex lg:w-1/5 max-h-static_sidemenu sticky top-[69px]"
+          class=`py-4 hidden lg:flex max-h-static_sidemenu sticky top-[69px] ${hide_toc && hide_sidenav && max_width ? "" : "px-6 lg:w-1/5"}`
         >
           <ScrollArea className="h-full w-full" client:only="react">
             {
