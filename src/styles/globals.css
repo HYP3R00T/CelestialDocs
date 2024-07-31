@@ -24,6 +24,16 @@
     --destructive-foreground: 220 23% 95%; /* Base */
     --ring: 220 91% 54%; /* Blue */
     --radius: 0.3rem;
+
+    --Pink: 316 73% 69%;
+    --Purple: 266 85% 58%;
+    --Red: 347 87% 44%;
+    --Orange: 22 99% 52%;
+    --Yellow: 35 77% 49%;
+    --Green: 109 58% 40%;
+    --Teal: 183 74% 35%;
+    --Sky: 197 97% 46%;
+    --Blue: 220 91% 54%;
   }
 
   .dark {
@@ -46,6 +56,16 @@
     --destructive: 351 74% 73%;
     --destructive-foreground: 232 23% 18%;
     --ring: 267 83% 80%;
+
+    --Pink: 316 74% 85%;
+    --Purple: 267 83% 80%;
+    --Red: 351 74% 73%;
+    --Orange: 21 86% 73%;
+    --Yellow: 40 70% 78%;
+    --Green: 105 48% 72%;
+    --Teal: 171 47% 69%;
+    --Sky: 189 59% 73%;
+    --Blue: 220 83% 75%;
   }
 }
 
