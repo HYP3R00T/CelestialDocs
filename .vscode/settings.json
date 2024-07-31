@@ -4,5 +4,8 @@
     ],
     "[astro]": {
         "editor.defaultFormatter": "astro-build.astro-vscode"
+    },
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-action.json": "file:///home/hyperoot/dev/projects/CelestialDocs/.github/workflows/deploy.yml"
     }
 }
