@@ -68,9 +68,13 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      minHeight: {
+        dynamic_hero: "calc(100vh - 69px - 76.8px)",
+        static_sidemenu: "calc(100vh - 69px - 76.8px)",
+      },
       maxHeight: {
         static_sidemenu: "calc(100vh - 69px - 76.8px)",
-        static_hamnavmenu: "calc(100svh - 36px - 32px)",
+        dynamic_search: "calc(50svh - 124px)",
         dynamic_hscreen: "calc(100dvh - 32px - 2rem)",
       },
       height: {
@@ -78,12 +82,8 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ["Inter", ...defaultTheme.fontFamily.sans],
+      sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
       mono: ["'JetBrains Mono'", ...defaultTheme.fontFamily.mono],
-      norwester: ["Norwester", ...defaultTheme.fontFamily.sans],
-      montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
-      baloo_2: ["'Baloo 2 Variable'", ...defaultTheme.fontFamily.sans],
-      varela_round: ["'Varela Round'", ...defaultTheme.fontFamily.sans],
     },
   },
   plugins: [require("tailwindcss-animate")],

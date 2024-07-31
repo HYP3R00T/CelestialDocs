@@ -76,28 +76,28 @@ export function Search() {
             <SearchIcon className="w-[1.2rem] h-[1.2rem]" />
           </Button>
         </DialogTrigger>
-        <DialogContent className=" md:h-1/2 md:mx-0 w-full h-full ">
+        <DialogContent className="md:h-1/2 md:mx-0 w-full h-full">
           <DialogHeader>
             <DialogTitle hidden={true}>Search</DialogTitle>
-            <DialogDescription asChild>
-              <div className="mt-6">
+            <DialogDescription asChild className="relative">
+              <div className="mt-6 flex flex-col">
                 <Input
                   placeholder="Search ..."
                   value={searchValue}
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
                 {results.length > 0 && (
-                  <ScrollArea className="mt-4 md:h-1/2">
+                  <ScrollArea className="relative md:max-h-dynamic_search mt-4">
                     <ul className="list-none m-0">
                       {results.map(({ item, refIndex }) => (
                         <li
-                          className=" px-4 m-0 py-2 flex flex-row items-center hover:bg-accent hover:rounded hover:text-accent-foreground"
+                          className=" px-4 m-0 py-2 flex flex-row items-center hover:rounded text-foreground bg-background hover:text-primary-foreground hover:bg-primary"
                           key={refIndex}
                         >
                           <a
                             href={item.slug}
                             key={refIndex}
-                            className="hover:text-background"
+                            className=" no-underline hover:text-primary-foreground"
                           >
                             {item.data.title
                               ? capitalizeFirstLetter(item.data.title)

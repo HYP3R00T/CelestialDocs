@@ -167,3 +167,27 @@ td {
 .prose code:not(.astro-code code) {
   @apply bg-popover text-popover-foreground p-1 rounded;
 }
+
+.prose h1 {
+  @apply italic;
+}
+
+/* ===== pattern ===== */
+.pattern {
+  --dot-bg: hsl(var(--background));
+  --dot-color: hsl(var(--foreground));
+  --dot-size: 1px;
+  --dot-space: 80px;
+  background: linear-gradient(
+        90deg,
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    linear-gradient(
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
+}
