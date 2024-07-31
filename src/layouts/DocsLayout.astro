@@ -23,6 +23,7 @@ const {
   draft,
   tags,
   hide_breadcrumbs,
+  hide_toc,
   headings,
 } = Astro.props as DocsLayoutProps;
 ---
@@ -60,6 +61,7 @@ const {
             draft={draft}
             tags={tags}
             hide_breadcrumbs={hide_breadcrumbs}
+            hide_toc={hide_toc}
             headings={headings}
           >
             <slot />
@@ -69,7 +71,11 @@ const {
           class="px-6 py-4 hidden lg:flex lg:w-1/5 max-h-static_sidemenu sticky top-[69px]"
         >
           <ScrollArea className="h-full w-full" client:only="react">
-            {!docconfig.hide_table_of_contents && <TableofContent {headings} />}
+            {
+              !docconfig.hide_table_of_contents && !hide_toc && (
+                <TableofContent {headings} />
+              )
+            }
           </ScrollArea>
         </div>
       </main>

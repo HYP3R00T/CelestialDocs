@@ -18,6 +18,7 @@ export type DocsData = {
   draft: boolean;
   tags: string[];
   hide_breadcrumbs: boolean;
+  hide_toc: boolean;
 };
 
 // Define the type for docs collection

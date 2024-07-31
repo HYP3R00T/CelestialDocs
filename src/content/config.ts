@@ -12,6 +12,7 @@ const docs = defineCollection({
     draft: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
     hide_breadcrumbs: z.boolean().optional().default(false),
+    hide_toc: z.boolean().optional().default(false),
   }),
 });
 
