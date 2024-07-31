@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import rehypeExternalLinks from "rehype-external-links";
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
@@ -15,6 +16,14 @@ export default defineConfig({
       //   light: "catppuccin-macchiato",
       // },
     },
+    rehypePlugins: [
+      [
+        rehypeExternalLinks,
+        {
+          target: "_blank",
+        },
+      ],
+    ],
     prefetch: true,
   },
   integrations: [
