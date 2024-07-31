@@ -17,6 +17,7 @@ export type DocsData = {
   description?: string;
   draft: boolean;
   tags: string[];
+  hide_breadcrumbs: boolean;
 };
 
 // Define the type for docs collection
@@ -84,6 +85,7 @@ export type SideNavMenuProps = {
 export type BreadcrumbsProps = {
   title: string;
   link: string;
+  hide_breadcrumbs?: boolean;
 }[];
 
 // To format datetime

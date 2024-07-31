@@ -16,12 +16,13 @@ const {
   description,
   draft,
   tags,
+  hide_breadcrumbs,
   headings,
 } = Astro.props as MainContentProps;
 ---
 
 <div class="bg-background py-4 px-6 min-h-static_sidemenu">
-  {!docconfig.hide_breadcrumbs && <Breadcrumbs class="" />}
+  {!docconfig.hide_breadcrumbs && !hide_breadcrumbs && <Breadcrumbs class="" />}
   <h1 class="pb-2 italic">{capitalizeFirstLetter(title)}</h1>
   {
     !docconfig.hide_datetime && pubDatetime && (

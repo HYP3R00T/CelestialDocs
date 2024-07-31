@@ -22,6 +22,7 @@ export const menu_items: { title: string; href: string }[] = [
 export const side_nav_menu_order: string[] = ["getting-started"];
 
 // Don't delete anything. You can use 'true' or 'false'.
+// These are global settings
 export const docconfig = {
   hide_table_of_contents: false,
   hide_breadcrumbs: false,
