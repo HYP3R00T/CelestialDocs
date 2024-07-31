@@ -3,17 +3,12 @@ import HeadSEO from "@/components/core/HeadSEO.astro";
 import Header from "@/components/core/Header.astro";
 import Footer from "@/components/core/Footer.astro";
 
+import type { BaseLayoutProps } from "@/lib/types";
 import { capitalizeFirstLetter } from "@/lib/utils";
 
 import { LOCALE, SITE } from "config";
 
-interface Props {
-  title?: string | undefined;
-  description?: string | undefined;
-  ogImage?: URL | undefined;
-}
-
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage } = Astro.props as BaseLayoutProps;
 ---
 
 <!doctype html>

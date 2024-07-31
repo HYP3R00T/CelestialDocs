@@ -1,6 +1,13 @@
 import type { CollectionEntry } from "astro:content";
 import type { MarkdownHeading } from "astro";
 
+// For HeadSEO.astro
+export interface HeadSEOProps {
+  title?: string | undefined;
+  description?: string | undefined;
+  ogImage?: URL | undefined;
+}
+
 // Make similar changes to config.ts in content folder
 export type DocsData = {
   title: string;
@@ -16,6 +23,13 @@ export type DocsData = {
 export type DocsEntry = CollectionEntry<"docs"> & {
   data: DocsData;
 };
+
+// For BaseLayout.astro
+export interface BaseLayoutProps {
+  title?: string | undefined;
+  description?: string | undefined;
+  ogImage?: URL | undefined;
+}
 
 // For [...slug].astro
 export interface Heading {
