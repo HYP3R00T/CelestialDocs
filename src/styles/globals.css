@@ -83,11 +83,11 @@ h1 {
 }
 
 h2 {
-  @apply mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-wide transition-colors first:mt-0;
+  @apply mt-5 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-wide transition-colors first:mt-0;
 }
 
 h3 {
-  @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight;
+  @apply mt-3 scroll-m-20 text-2xl font-semibold tracking-tight;
 }
 
 h4 {
@@ -210,4 +210,9 @@ td {
       )
       center / var(--dot-space) var(--dot-space),
     var(--dot-color);
+}
+
+/* callout */
+.callout a {
+  @apply hover:text-background;
 }

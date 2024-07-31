@@ -6,7 +6,7 @@ import { Search } from "@/components/core/Search";
 
 import { Button } from "@/components/ui/button";
 
-import { SITE } from "config";
+import { docconfig, SITE } from "config";
 
 // To pass the tailwindcss classes to the astro component
 const { class: className } = Astro.props;
@@ -43,7 +43,7 @@ const { class: className } = Astro.props;
     </div>
 
     <div class="flex flex-row gap-4 md:px-8">
-      <Search client:only="react" />
+      {!docconfig.hide_search && <Search client:only="react" />}
       <div class="md:hidden flex flex-row-reverse gap-4">
         <HamNavMenu />
         <ModeToggle client:load transition:persist />

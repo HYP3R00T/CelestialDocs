@@ -11,10 +11,6 @@ export default defineConfig({
     syntaxHighlight: "shiki",
     shikiConfig: {
       theme: "catppuccin-mocha",
-      // themes: {
-      //   dark: "catppuccin-macchiato",
-      //   light: "catppuccin-macchiato",
-      // },
     },
     rehypePlugins: [
       [

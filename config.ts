@@ -29,4 +29,5 @@ export const docconfig = {
   hide_side_navinations: false,
   hide_datetime: false,
   hide_time: true,
+  hide_search: false,
 };
