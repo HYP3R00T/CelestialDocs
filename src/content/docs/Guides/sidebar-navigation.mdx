@@ -1,0 +1,45 @@
+---
+title: Sidebar Navigation
+---
+By default, CelestialDocs sites include sidebar navigation. It is generated after parsing the folder structure of `docs` folder.
+
+## Custom order
+
+By default, it will order the top-level items (folders and files that are immediately inside the `docs` folder) alphabetically. But we can provide a custom order to the top level items. 
+
+In `config.js` you can set `side_nav_menu_order` with an order of items. Mind that the type is an array of strings. Each string is just the `slug` of that page.
+
+```js
+// config.js
+
+export const side_nav_menu_order: string[] = ["getting-started", "guides"];
+// getting-started.mdx (file)
+// guides (folder)
+```
+
+You can include `folder-name`, `md` & `mdx` files. If you don't order every items, then the left out folders and files will the ordered after that. Don't add extensions for `md` & `mdx` files.
+
+## Hide Sidebar Navigation
+
+### Hide globally
+
+In `config.js`, you can hide sidebar navigation by keeping the value of `hide_side_navinations` as `true`. This will hide the sidebar navigation for all pages. 
+
+```js
+// config.js
+
+export const docconfig = {
+  ...
+  hide_side_navinations: true,
+  ...
+};
+```
+
+### Hide locally
+
+To hide sidebar navigation for specific pages only, then add `hide_sidenav` in the frontmatter as `true`.
+```
+---
+hide_sidenav: true
+---
+```

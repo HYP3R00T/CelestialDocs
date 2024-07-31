@@ -16,7 +16,7 @@ const { class: className } = Astro.props;
         ? capitalizeFirstLetter(item.title)
         : capitalizeFirstLetter(item.slug.split("/").pop() || "");
       const className = `
-        ${level === 0 ? "font-bold" : "font-light"}
+        ${level === 0 ? "font-bold" : "font-normal"}
         ${pathname === "/" + item.slug ? "text-primary" : "no-underline"}
         `.trim();
       return (

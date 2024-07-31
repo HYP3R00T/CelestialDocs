@@ -18,6 +18,7 @@ import { Search as SearchIcon } from "lucide-react";
 
 import type { DocsEntry } from "@/lib/types";
 import { capitalizeFirstLetter } from "@/lib/utils";
+import { menu_items } from "config";
 
 const docs: DocsEntry[] = await getCollection("docs");
 
@@ -68,6 +69,8 @@ export function Search() {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
+  console.log(results);
+
   return (
     <div className="">
       <Dialog open={open} onOpenChange={setOpen}>
@@ -95,7 +98,7 @@ export function Search() {
                           key={refIndex}
                         >
                           <a
-                            href={item.slug}
+                            href={`/${item.slug}`}
                             key={refIndex}
                             className=" no-underline hover:text-primary-foreground"
                           >
