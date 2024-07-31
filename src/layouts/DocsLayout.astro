@@ -24,6 +24,7 @@ const {
   tags,
   hide_breadcrumbs,
   hide_toc,
+  hide_sidenav,
   headings,
 } = Astro.props as DocsLayoutProps;
 ---
@@ -45,7 +46,7 @@ const {
         >
           <ScrollArea className="h-full w-full" client:only="react">
             {
-              !docconfig.hide_side_navinations && (
+              !docconfig.hide_side_navinations && !hide_sidenav && (
                 <SideNavMenu items={menu} level={0} />
               )
             }
@@ -61,7 +62,6 @@ const {
             draft={draft}
             tags={tags}
             hide_breadcrumbs={hide_breadcrumbs}
-            hide_toc={hide_toc}
             headings={headings}
           >
             <slot />

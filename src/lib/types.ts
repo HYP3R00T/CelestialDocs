@@ -12,13 +12,14 @@ export interface HeadSEOProps {
 export type DocsData = {
   title: string;
   author: string;
-  pubDatetime: Date;
+  pubDatetime?: Date;
   modDatetime?: Date | null;
   description?: string;
   draft: boolean;
   tags: string[];
   hide_breadcrumbs: boolean;
   hide_toc: boolean;
+  hide_sidenav: boolean;
 };
 
 // Define the type for docs collection
