@@ -1,6 +1,8 @@
 import type { CollectionEntry } from "astro:content";
 import type { MarkdownHeading } from "astro";
 
+import { type LucideIcon } from "lucide-react";
+
 // For HeadSEO.astro
 export interface HeadSEOProps {
   title?: string | undefined;
@@ -104,4 +106,10 @@ export interface DatetimesProps extends DatetimesFormatProps {
   className?: string;
 }
 
-// ! Organized above
+//
+export type SocialObjects = {
+  name: string;
+  href: string;
+  active: boolean;
+  linkTitle: string;
+}[];

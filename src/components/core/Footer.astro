@@ -1,9 +1,13 @@
 ---
+import { Socials } from "config";
+import { getIconByName } from "@/components/core/Icons";
+import { Button } from "@/components/ui/button";
+
 // To pass the tailwindcss classes to the astro component
 const { class: className } = Astro.props;
 ---
 
-<footer class:list={["py-6 px-6 w-full", className]}>
+<footer class:list={["py-[1.2rem] px-6 w-full", className]}>
   <div
     class="flex flex-col items-center justify-between gap-4 md:flex-row container"
   >
@@ -23,5 +27,25 @@ const { class: className } = Astro.props;
         class="font-medium underline underline-offset-4">GitHub</a
       >.
     </p>
+    <div class="flex gap-4">
+      {
+        Socials.filter((social) => social.active).map((social) => {
+          const Icon = getIconByName(social.name);
+          return (
+            <a
+              href={social.href}
+              title={social.linkTitle}
+              target="_blank"
+              rel="noreferrer"
+              class="text-muted-foreground hover:text-primary"
+            >
+              <Button size="icon" variant="ghost">
+                {Icon && <Icon className="h-[1.2rem] w-[1.2rem]" />}
+              </Button>
+            </a>
+          );
+        })
+      }
+    </div>
   </div>
 </footer>
