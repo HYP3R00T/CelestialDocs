@@ -95,7 +95,7 @@ h4 {
 }
 
 p {
-  @apply leading-7 [&:not(:first-child)]:mt-6;
+  @apply leading-7 [&:not(:first-child)]:mt-2;
 }
 
 a {
@@ -190,6 +190,22 @@ td {
 
 .prose h1 {
   @apply italic;
+}
+
+.prose details {
+  @apply pl-4 border-l-4 border-primary py-2;
+}
+
+.prose summary {
+  @apply pl-0;
+}
+
+.prose .contains-task-list li {
+  @apply list-none;
+}
+
+.prose li input {
+  @apply appearance-none w-3 h-3 border-2 border-Red rounded-sm bg-background checked:bg-Green checked:border-0 mr-2;
 }
 
 /* ===== pattern ===== */

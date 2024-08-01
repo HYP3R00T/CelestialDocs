@@ -1,0 +1,117 @@
+---
+title: Authoring Content in MDX
+---
+
+CelestialDocs supports [MDX](https://mdxjs.com/) files, which extend Markdown by allowing the inclusion of React components within your content. This enables dynamic and interactive documentation. We specifically use [GitHub flavored markdown (GFM)](https://mdxjs.com/guides/gfm/). Markdown features, refer to the [Markdown documentation](/guides/authoring-content-in-md).
+
+## Using a component
+
+You can use a component by importing it into your MDX file and then rendering it as a JSX tag. These look like HTML tags but start with an uppercase letter matching the name in your import statement:
+
+```mdx
+---
+title: Welcome to my docs
+---
+
+import Callout from "@/components/Callout.astro";
+
+<Callout variant="info">
+Sample callout
+</Callout>
+```
+
+See the [components](/guides/components) for all custom components and their available fields. 
+
+## Using GFM (GitHub-Flavored Markdown)
+
+MDX in CelestialDocs supports [GitHub flavored markdown (GFM)](https://mdxjs.com/guides/gfm/), which includes additional features such as tables, task lists, and strikethrough text.
+
+### Task Lists
+
+You can create task lists using GFM syntax.
+
+- [x] Task 1
+- [ ] Task 2
+- [ ] Task 3
+
+```md
+- [x] Task 1
+- [ ] Task 2
+- [ ] Task 3
+```
+
+### Tables
+
+You can also create tables using GFM.
+
+| Syntax    | Description |
+| --------- | ----------- |
+| Header    | Title       |
+| Paragraph | Text        |
+
+```md
+| Syntax    | Description |
+| --------- | ----------- |
+| Header    | Title       |
+| Paragraph | Text        |
+```
+### Strikethrough
+
+Strikethrough text can be created using double tilde `~~`.
+
+This is ~~strikethrough~~ text.
+
+```md
+This is ~~strikethrough~~ text.
+```
+
+## Frontmatter
+
+MDX files support frontmatter in the same way as Markdown files. You can define metadata at the top of the file.
+
+```mdx
+---
+title: Sample MDX Page
+---
+
+Page content goes here, after `---`.
+```
+
+Refer to the frontmatter reference for all available fields and how to add custom fields.
+
+## Using JavaScript Expressions
+
+MDX allows you to use JavaScript expressions within your content. This can be useful for dynamic content and calculations.
+
+Current year: {new Date().getFullYear()}
+
+```mdx
+Current year: {new Date().getFullYear()}
+```
+
+
+```mdx
+**Fibonacci Sequence**
+
+The first 10 numbers in the Fibonacci sequence are:
+
+{
+  Array.from({ length: 10 }).map((_, i) => (
+    <span key={i}>{fibonacci(i)} </span>
+  ))
+}
+```
+
+## Syntax Highlighting
+
+MDX supports syntax highlighting for code blocks using backticks. You can specify the language for proper highlighting.
+
+````mdx
+```jsx
+const MyComponent = () => {
+  return <div>Hello, MDX!</div>;
+};
+```
+````
+
+MDX combines the best of Markdown and JSX, making it a powerful tool for creating rich, interactive documentation. For more details on Markdown syntax, please see the [Markdown documentation](/guides/authoring-content-in-md).

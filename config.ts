@@ -1,7 +1,7 @@
 export const SITE = {
   website: "https://hyperoot.dev", // replace this with your deployed domain
   author: "HYP3R00T",
-  desc: "Documentation theme using Astro and Shadcn",
+  desc: "Documentation template using Astro and Shadcn",
   title: "CelestialDocs",
   ogImage: "og-image.jpg",
   repo: "https://github.com/HYP3R00T/CelestialDocs",
@@ -20,16 +20,22 @@ export const menu_items: { title: string; href: string }[] = [
 ];
 
 // Just works with top-level folders and files. For files, don't add extension as it looks for the slug, and not the file name.
-export const side_nav_menu_order: string[] = ["getting-started"];
+export const side_nav_menu_order: string[] = [
+  "getting-started",
+  "guides",
+  "custom-components",
+  "reference",
+];
 
 // Don't delete anything. You can use 'true' or 'false'.
 // These are global settings
 export const docconfig = {
   hide_table_of_contents: false,
   hide_breadcrumbs: false,
-  hide_side_navinations: false,
+  hide_side_navigations: false,
   hide_datetime: false,
   hide_time: true,
   hide_search: false,
   hide_repo_button: false,
+  hide_author: false,
 };

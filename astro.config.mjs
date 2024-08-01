@@ -29,7 +29,7 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     mdx({
-      gfm: false,
+      gfm: true,
     }),
   ],
 });

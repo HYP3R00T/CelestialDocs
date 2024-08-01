@@ -34,7 +34,7 @@ const options: IFuseOptions<DocsEntry> = {
   keys: [
     { name: "id", weight: 2.5 },
     { name: "slug", weight: 2.5 },
-    { name: "body", weight: 1.5 },
+    { name: "body", weight: 1 },
     {
       name: "title",
       weight: 2,
@@ -44,6 +44,11 @@ const options: IFuseOptions<DocsEntry> = {
       name: "description",
       weight: 1.75,
       getFn: (docs: DocsEntry) => docs.data.description || "",
+    },
+    {
+      name: "tags",
+      weight: 1.5,
+      getFn: (docs: DocsEntry) => docs.data.tags.join(" ") || "",
     },
   ],
 };

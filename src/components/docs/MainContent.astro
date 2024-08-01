@@ -35,6 +35,7 @@ const {
       />
     )
   }
+  {!docconfig.hide_author && <h6 class="muted font-mono">By {author}</h6>}
   <div class="prose pt-4">
     <slot />
   </div>

@@ -11,27 +11,29 @@ const { class: className } = Astro.props;
 
 <ul class:list={["list-none m-0", className]}>
   {
-    items.map((item) => {
-      const label = item.title
-        ? capitalizeFirstLetter(item.title)
-        : capitalizeFirstLetter(item.slug.split("/").pop() || "");
-      const className = `
-        ${level === 0 ? "font-bold" : "font-normal"}
+    items
+      .filter((item) => !item.draft)
+      .map((item) => {
+        const label = item.title
+          ? capitalizeFirstLetter(item.title)
+          : capitalizeFirstLetter(item.slug.split("/").pop() || "");
+        const className = `
+        ${level === 0 ? "font-semibold" : "text-muted-foreground"}
         ${pathname === "/" + item.slug ? "text-primary" : "no-underline"}
         `.trim();
-      return (
-        <li class="w-full">
-          <a
-            href={`/${item.slug}`}
-            class={`${className}  text-sm leading-none w-full`}
-          >
-            {label}
-          </a>
-          {item.children.length > 0 && (
-            <Astro.self items={item.children} level={level + 1} />
-          )}
-        </li>
-      );
-    })
+        return (
+          <li class="w-full">
+            <a
+              href={`/${item.slug}`}
+              class={`${className}  text-sm leading-none w-full`}
+            >
+              {label}
+            </a>
+            {item.children.length > 0 && (
+              <Astro.self items={item.children} level={level + 1} />
+            )}
+          </li>
+        );
+      })
   }
 </ul>

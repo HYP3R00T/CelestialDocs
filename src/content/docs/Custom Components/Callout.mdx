@@ -1,0 +1,91 @@
+---
+title: Callout
+---
+import Callout from "@/components/Callout.astro";
+
+
+## Callout
+
+The `Callout` component is designed to highlight important information, warnings, errors, or successes in your application. It is a versatile alert box with customizable variants and titles.
+
+### Props
+
+**`variant`**
+
+Type: `"info" | "warning" | "danger" | "success"`
+
+Default: "info"
+
+Description: Defines the type of alert to display. The variant determines the color, icon, and default title of the alert.
+
+**`title`**
+
+Type: `string`
+
+Default: Default titles based on the variant
+
+Description: Custom title for the alert. If not provided, the default title for the specified variant will be used.
+
+### Basic Usage
+To use the Callout component, import it and use it in your Astro files with the desired variant and title.
+
+<Callout variant="info">
+  This is an info message.
+</Callout>
+
+<Callout variant="warning" title="Custom Warning Title">
+  This is a warning message with a custom title.
+</Callout>
+
+<Callout variant="danger">
+  This is a danger message.
+</Callout>
+
+<Callout variant="success" title="Custom Success Title">
+  This is a success message with a custom title.
+</Callout>
+
+```astro
+---
+import Callout from './components/Callout.astro';
+---
+
+<!-- Using default title for info variant -->
+<Callout variant="info">
+  This is an info message.
+</Callout>
+
+<!-- Using custom title for warning variant -->
+<Callout variant="warning" title="Custom Warning Title">
+  This is a warning message with a custom title.
+</Callout>
+
+<!-- Using default title for danger variant -->
+<Callout variant="danger">
+  This is a danger message.
+</Callout>
+
+<!-- Using custom title for success variant -->
+<Callout variant="success" title="Custom Success Title">
+  This is a success message with a custom title.
+</Callout>
+```
+
+### Default Behavior
+
+If no variant is provided, the info variant will be used by default. Similarly, if no title is provided, the default title for the specified variant will be used.
+
+<Callout>
+  This is an info message using the default settings.
+</Callout>
+
+```astro
+---
+import Callout from './components/Callout.astro';
+---
+
+<!-- Using default info variant and title -->
+<Callout>
+  This is an info message using the default settings.
+</Callout>
+```

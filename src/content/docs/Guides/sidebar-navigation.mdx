@@ -23,14 +23,14 @@ You can include `folder-name`, `md` & `mdx` files. If you don't order every item
 
 ### Hide globally
 
-In `config.js`, you can hide sidebar navigation by keeping the value of `hide_side_navinations` as `true`. This will hide the sidebar navigation for all pages. 
+In `config.js`, you can hide sidebar navigation by keeping the value of `hide_side_navigations` as `true`. This will hide the sidebar navigation for all pages. 
 
 ```js
 // config.js
 
 export const docconfig = {
   ...
-  hide_side_navinations: true,
+  hide_side_navigations: true,
   ...
 };
 ```
@@ -38,7 +38,8 @@ export const docconfig = {
 ### Hide locally
 
 To hide sidebar navigation for specific pages only, then add `hide_sidenav` in the frontmatter as `true`.
-```
+
+```yaml
 ---
 hide_sidenav: true
 ---
