@@ -2,6 +2,7 @@
 import HeadSEO from "@/components/core/HeadSEO.astro";
 import Header from "@/components/core/Header.astro";
 import Footer from "@/components/core/Footer.astro";
+import { Copy } from "@/components/core/Copy";
 
 import SideNavMenu from "@/components/docs/SideNavMenu.astro";
 import TableofContent from "@/components/docs/TableofContents.astro";
@@ -13,8 +14,6 @@ import type { DocsLayoutProps } from "@/lib/types";
 import { menu, capitalizeFirstLetter } from "@/lib/utils";
 
 import { LOCALE, SITE, docconfig } from "config";
-
-// import { Copy } from "@/components/core/Copy";
 
 const {
   title,
@@ -43,7 +42,7 @@ const {
   <body
     class=`font-sans ${hide_toc && hide_sidenav && max_width ? "" : "bg-card"}`
   >
-    <!-- <Copy client:only="react" /> -->
+    <Copy client:only="react" />
     <div class="flex flex-col min-h-screen">
       <Header class="border-b bg-background" />
       <main class="flex flex-1 flex-col md:flex-row container">

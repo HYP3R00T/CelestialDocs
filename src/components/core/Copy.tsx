@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Clipboard } from "lucide-react"; // Import icon from lucide-react
 
 export function Copy() {
   useEffect(() => {
@@ -14,8 +12,17 @@ export function Copy() {
 
         let copyButton = document.createElement("button");
         copyButton.className =
-          "copy-code absolute right-3 -top-3 rounded bg-skin-card px-2 py-1 text-xs leading-4 text-skin-base font-medium";
+          "absolute right-1 top-1 rounded px-2 py-1 text-xs leading-4 focus:outline-none bg-popover opacity-0 transition-opacity duration-300";
         copyButton.innerHTML = copyButtonLabel;
+
+        // Add hover effect to show the button
+        wrapper.addEventListener("mouseenter", () => {
+          copyButton.style.opacity = "1";
+        });
+        wrapper.addEventListener("mouseleave", () => {
+          copyButton.style.opacity = "0";
+        });
+
         codeBlock.setAttribute("tabindex", "0");
         codeBlock.appendChild(copyButton);
 
@@ -37,7 +44,7 @@ export function Copy() {
 
         await navigator.clipboard.writeText(text ?? "");
 
-        // visual feedback that task is completed
+        // Visual feedback that task is completed
         button.innerText = "Copied";
 
         setTimeout(() => {
