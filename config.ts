@@ -37,5 +37,5 @@ export const docconfig = {
   hide_time: true,
   hide_search: false,
   hide_repo_button: false,
-  hide_author: false,
+  hide_author: true,
 };

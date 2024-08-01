@@ -192,6 +192,10 @@ td {
   @apply italic;
 }
 
+.prose h4 {
+  @apply mt-3;
+}
+
 .prose details {
   @apply pl-4 border-l-4 border-primary py-2;
 }
