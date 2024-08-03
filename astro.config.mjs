@@ -11,7 +11,11 @@ export default defineConfig({
     smartypants: true,
     syntaxHighlight: "shiki",
     shikiConfig: {
-      theme: "catppuccin-mocha",
+      // theme: "catppuccin-mocha",
+      themes: {
+        light: "catppuccin-latte",
+        dark: "catppuccin-macchiato",
+      },
     },
     rehypePlugins: [
       [
