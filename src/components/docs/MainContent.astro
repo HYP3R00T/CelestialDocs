@@ -7,6 +7,7 @@ import type { MainContentProps } from "@/lib/types";
 import { capitalizeFirstLetter } from "@/lib/utils";
 
 import { docconfig } from "config";
+import BacktoTop from "@/components/core/BacktoTop.astro";
 
 const {
   title,
@@ -21,7 +22,7 @@ const {
 } = Astro.props as MainContentProps;
 ---
 
-<div class="bg-background py-4 px-6 min-h-static_sidemenu">
+<div class="bg-background pt-4 px-6 min-h-static_sidemenu">
   {!docconfig.hide_breadcrumbs && !hide_breadcrumbs && <Breadcrumbs class="" />}
   <h1 class="pb-2 italic">{capitalizeFirstLetter(title)}</h1>
   {
@@ -39,4 +40,5 @@ const {
   <div class="prose pt-4">
     <slot />
   </div>
+  <BacktoTop />
 </div>
