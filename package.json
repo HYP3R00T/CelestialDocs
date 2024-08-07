@@ -1,7 +1,7 @@
 {
   "name": "celestialdocs",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Documentation template using AstroJS and Shadcn",
   "author": "Hyperoot <rajesh@hyperoot.dev>",
   "license": "MIT",
