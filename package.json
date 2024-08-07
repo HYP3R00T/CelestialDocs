@@ -1,7 +1,15 @@
 {
   "name": "celestialdocs",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "description": "Documentation template using AstroJS and Shadcn",
+  "author": "Hyperoot <rajesh@hyperoot.dev>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HYP3R00T/CelestialDocs"
+  },
+  "homepage": "https://celestialdocs.hyperoot.dev/",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -9,6 +17,12 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "keywords": [
+    "docs",
+    "documentation",
+    "astro",
+    "withastro"
+  ],
   "dependencies": {
     "@astrojs/check": "^0.8.2",
     "@astrojs/mdx": "^3.1.3",
