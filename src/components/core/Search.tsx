@@ -18,7 +18,18 @@ import { Search as SearchIcon } from "lucide-react";
 
 import type { DocsEntry } from "@/lib/types";
 import { capitalizeFirstLetter } from "@/lib/utils";
-import { menu_items } from "config";
+
+function extractHeaders(body: string): string[] {
+  const headers = [];
+  const lines = body.split("\n");
+  for (const line of lines) {
+    const match = line.match(/^(#{1,6})\s+(.*)/);
+    if (match) {
+      headers.push(match[2]);
+    }
+  }
+  return headers;
+}
 
 const docs: DocsEntry[] = await getCollection("docs");
 
@@ -50,6 +61,11 @@ const options: IFuseOptions<DocsEntry> = {
       weight: 1.5,
       getFn: (docs: DocsEntry) => docs.data.tags.join(" ") || "",
     },
+    {
+      name: "headers",
+      weight: 2,
+      getFn: (docs: DocsEntry) => extractHeaders(docs.body).join(" "),
+    },
   ],
 };
 
@@ -73,8 +89,6 @@ export function Search() {
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
   }, []);
-
-  console.log(results);
 
   return (
     <div className="">
