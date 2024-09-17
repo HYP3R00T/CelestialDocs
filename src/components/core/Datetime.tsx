@@ -1,7 +1,7 @@
 import { Calendar } from "lucide-react";
 
 import type { DatetimesFormatProps, DatetimesProps } from "@/lib/types";
-import { LOCALE } from "config";
+import { LOCALE } from "@/config";
 
 export default function Datetime({
   hide_datetime,

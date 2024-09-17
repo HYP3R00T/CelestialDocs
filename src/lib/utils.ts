@@ -10,7 +10,7 @@ import type {
   MenuItemWithDraft,
 } from "@/lib/types";
 
-import { side_nav_menu_order } from "config";
+import { side_nav_menu_order } from "@/config";
 
 // for shadcn components
 export function cn(...inputs: ClassValue[]) {

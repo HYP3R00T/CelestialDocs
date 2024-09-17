@@ -1,5 +1,5 @@
 import { defineCollection, z } from "astro:content";
-import { SITE } from "config";
+import { SITE } from "@/config";
 
 const docs = defineCollection({
   type: "content",
