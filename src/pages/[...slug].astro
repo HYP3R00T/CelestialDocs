@@ -4,12 +4,17 @@ import type { GetStaticPaths, MarkdownHeading } from "astro";
 
 import DocsLayout from "@/layouts/DocsLayout.astro";
 
-import type { Heading } from "@/lib/types";
+import type { Heading, DocsData, DocsEntry } from "@/lib/types";
 
 export const getStaticPaths = (async () => {
-  const docs = await getCollection("docs", ({ data }) => !data.draft);
+  const docs: DocsEntry[] = await getCollection(
+    "docs",
+    (data: DocsEntry) => !data.data.draft
+  );
   const headings: MarkdownHeading[][] = await Promise.all(
-    docs.map((entry) => entry.render().then((data) => data.headings))
+    docs.map((entry) =>
+      entry.render().then((data: { headings: any }) => data.headings)
+    )
   );
 
   const posts = docs.map((entry, index) => {
