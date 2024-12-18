@@ -1,12 +1,12 @@
 import type { SocialObjects } from "@/lib/types";
 
 export const SITE = {
-  website: "https://hyperoot.dev", // replace this with your deployed domain
-  author: "HYP3R00T",
+  website: "https://yian1024.pages.dev/", // replace this with your deployed domain
+  author: "Eden",
   desc: "Documentation template using Astro and Shadcn",
-  title: "CelestialDocs",
+  title: "EdenDocs",
   ogImage: "og-image.jpg",
-  repo: "https://github.com/HYP3R00T/CelestialDocs",
+  repo: "https://github.com/yian1024/CelestialDocs",
 };
 
 export const LOCALE = {
@@ -30,6 +30,8 @@ export const side_nav_menu_order: string[] = [
   "guides/sidebar-navigation",
   "custom-components",
   "reference",
+  "Git",
+  "Linux"
 ];
 
 // Don't delete anything. You can use 'true' or 'false'.
@@ -49,67 +51,67 @@ export const docconfig = {
 export const Socials: SocialObjects = [
   {
     name: "Github",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: ` ${SITE.title} on Github`,
     active: true,
   },
   {
     name: "Facebook",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: `${SITE.title} on Facebook`,
     active: false,
   },
   {
     name: "Instagram",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: `${SITE.title} on Instagram`,
     active: false,
   },
   {
     name: "LinkedIn",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: `${SITE.title} on LinkedIn`,
     active: false,
   },
   {
     name: "Mail",
-    href: "mailto:rajesh@hyperoot.dev",
+    href: "mailto:yian0920@163.com",
     linkTitle: `Send an email to ${SITE.title}`,
     active: true,
   },
   {
     name: "Twitter",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: `${SITE.title} on Twitter`,
     active: false,
   },
   {
     name: "Twitch",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: `${SITE.title} on Twitch`,
     active: false,
   },
   {
     name: "YouTube",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: `${SITE.title} on YouTube`,
     active: false,
   },
   {
     name: "WhatsApp",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: `${SITE.title} on WhatsApp`,
     active: false,
   },
   {
     name: "Snapchat",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: `${SITE.title} on Snapchat`,
     active: false,
   },
   {
     name: "Pinterest",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: `${SITE.title} on Pinterest`,
     active: false,
   },
@@ -121,25 +123,25 @@ export const Socials: SocialObjects = [
   },
   {
     name: "GitLab",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: `${SITE.title} on GitLab`,
     active: false,
   },
   {
     name: "Reddit",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: `${SITE.title} on Reddit`,
     active: false,
   },
   {
     name: "Telegram",
-    href: "https://github.com/HYP3R00T/",
+    href: "https://github.com/yian1024/",
     linkTitle: `${SITE.title} on Telegram`,
     active: false,
   },
   {
     name: "Mastodon",
-    href: "https://mastodon.social/@hyp3r00t",
+    href: "",
     linkTitle: `${SITE.title} on Mastodon`,
     active: true,
   },
