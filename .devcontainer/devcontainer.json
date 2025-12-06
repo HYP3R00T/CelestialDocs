@@ -1,5 +1,5 @@
 {
-    "name": "devcontainer-astro-template",
+    "name": "CelestialDocs",
     "build": {
         "context": ".",
         "dockerfile": "Dockerfile"
