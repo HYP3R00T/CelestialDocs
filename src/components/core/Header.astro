@@ -1,40 +1,23 @@
 ---
 import { Icon } from "astro-icon/components";
 import { SITE, navItems } from "@data/config";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/core/ThemeToggle.astro";
 import { Separator } from "@/components/ui/separator";
+import {
+    getRepoStarCount,
+    formatStarCount,
+    shouldShowStarCount,
+} from "@/lib/github";
 
 const pathname = new URL(Astro.request.url).pathname;
 
-// Fetch GitHub stars count
-let starCount = 0;
-try {
-    const repoPath = SITE.repo.replace("https://github.com/", "");
-    const response = await fetch(`https://api.github.com/repos/${repoPath}`, {
-        headers: {
-            Accept: "application/vnd.github.v3+json",
-            "User-Agent": "celestialdocs-site",
-        },
-    });
-    if (response.ok) {
-        const data = await response.json();
-        starCount = data.stargazers_count ?? 0;
-    }
-} catch {
-    starCount = 0;
-}
+// const starCount = await getRepoStarCount(SITE.repo);
+// const showStarCount = shouldShowStarCount(starCount, SITE.starCountThreshold);
 
-const showStarCount = starCount > 50;
-
-// Format star count (e.g., 1234 -> 1.2k)
-const formatStarCount = (count: number): string => {
-    if (count >= 1000) {
-        return `${(count / 1000).toFixed(1)}k`;
-    }
-    return count.toString();
-};
+const starCount = 0;
+const showStarCount = false;
 ---
 
 <header
@@ -45,7 +28,7 @@ const formatStarCount = (count: number): string => {
         <div class="flex items-center gap-6">
             <Button variant="ghost" size="icon">
                 <a href="/" class="flex items-center gap-2" aria-label="Home">
-                    <Icon name="logo" class="size-6" />
+                    <Icon name="logo" class="size-5" />
                 </a>
             </Button>
         </div>
