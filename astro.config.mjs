@@ -5,13 +5,20 @@ import tailwindcss from "@tailwindcss/vite";
 
 import react from "@astrojs/react";
 
+import icon from "astro-icon";
+
 // https://astro.build/config
 export default defineConfig({
-  prefetch: true,
+    prefetch: true,
 
-  vite: {
-    plugins: [tailwindcss()],
-  },
+    vite: {
+        plugins: [tailwindcss()],
+    },
 
-  integrations: [react()],
+    integrations: [
+        icon({
+            iconDir: "src/assets/icons",
+        }),
+        react()
+    ],
 });
