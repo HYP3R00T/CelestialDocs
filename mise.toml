@@ -1,0 +1,20 @@
+[tools]
+python = "3.14"
+pre-commit = "latest"
+node = "lts"
+pnpm = "latest"
+
+[settings]
+experimental = true
+idiomatic_version_file_enable_tools = ["python"]
+
+[hooks]
+enter = "bash ./scripts/enter_project.sh"
+
+[env]
+_.path = ['{{config_root}}/node_modules/.bin']
+_.file = '.env'
+
+[tasks.dev]
+description = "Dev Mode"
+run = "astro dev --host 0.0.0.0"

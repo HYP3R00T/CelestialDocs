@@ -1,0 +1,29 @@
+# CODEOWNERS file
+#
+# This file defines individuals or teams responsible for code in specific
+# paths of the repository. When a pull request touches these files, the
+# designated owners will be automatically requested for review.
+#
+# For more details, see:
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Format:
+#   <file pattern>  <github-username-or-team>
+#
+# Examples:
+#   # Owners for everything in the repo
+#   * @your-org/team-core
+#
+#   # Owners for docs folder
+#   docs/ @your-org/team-docs
+#
+#   # Owners for Python source files
+#   *.py @your-org/python-devs
+#
+#   # Owners for specific files
+#   /setup.py @your-org/build-team
+#
+# Adjust and add entries below as appropriate for your project.
+
+# Default owners for all files
+* @HYP3R00T

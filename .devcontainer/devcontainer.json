@@ -1,0 +1,26 @@
+{
+    "name": "devcontainer-astro-template",
+    "build": {
+        "context": ".",
+        "dockerfile": "Dockerfile"
+    },
+    "containerEnv": {
+        "MISE_GITHUB_TOKEN": "${localEnv:MISE_GITHUB_TOKEN}"
+    },
+    "postCreateCommand": "scripts/setup.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "tamasfe.even-better-toml",
+                "christian-kohler.path-intellisense",
+                "redhat.vscode-yaml",
+                "hverlin.mise-vscode",
+                "astro-build.astro-vscode",
+                "bradlc.vscode-tailwindcss"
+            ]
+        }
+    },
+    "forwardPorts": [
+        4321
+    ]
+}

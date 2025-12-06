@@ -1,0 +1,30 @@
+{
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    "github.copilot.chat.reviewSelection.instructions": [
+        {
+            "file": "./.github/instructions/codeReview.instructions.md"
+        }
+    ],
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        {
+            "file": "./.github/instructions/commitMessageGeneration.instructions.md"
+        }
+    ],
+    "github.copilot.chat.pullRequestDescriptionGeneration.instructions": [
+        {
+            "file": "./.github/instructions/pullRequestDescriptionGeneration.instructions.md"
+        }
+    ],
+    "chat.instructionsFilesLocations": {
+        ".github/instructions": true
+    },
+    "chat.promptFiles": false,
+    "[toml]": {
+        "editor.defaultFormatter": "tamasfe.even-better-toml"
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+}

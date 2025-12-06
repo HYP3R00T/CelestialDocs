@@ -1,0 +1,62 @@
+name: 💡 Feature Request
+description: Suggest a new idea, enhancement, or improvement for the Astro project.
+title: "[Feature]: "
+labels: [enhancement]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please describe your idea clearly so we can evaluate it.
+
+  - type: input
+    id: motivation
+    attributes:
+      label: Problem or Motivation
+      description: What problem does this feature solve, or what’s the motivation behind it?
+      placeholder: "e.g. Current navigation is not mobile-friendly..."
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution
+      description: Describe the feature you’d like to see and how it should work.
+      placeholder: |
+        - Add a responsive navigation component
+        - Support dark mode toggle with Tailwind `dark:` classes
+        - Provide a config option in `astro.config.mjs`
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope of Change
+      description: What parts of the project would this affect? (e.g., components, layouts, config, Tailwind, CI/CD)
+      placeholder: "This would add a new layout in `src/layouts/` and update Tailwind config for theme support."
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What other solutions or approaches did you consider? Why are they not ideal?
+      placeholder: |
+        - Use a third-party component library (adds bloat)
+        - Inline custom CSS (harder to maintain with Tailwind)
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, or references here.
+      placeholder: "Screenshots of existing issues, inspiration from other projects, or related links."
+
+  - type: checkboxes
+    id: agreement
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow this project’s Code of Conduct.
+          required: true

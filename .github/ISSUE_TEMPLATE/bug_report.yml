@@ -1,0 +1,98 @@
+name: 🐛 Bug Report
+description: Report a reproducible issue or unexpected behavior in the Astro project.
+title: "[Bug]: "
+labels: [bug]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill out the form below so we can investigate the issue.
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Node.js version, pnpm version, browser(s), etc.
+      placeholder: "e.g. macOS 14, Node.js 20.11.1, pnpm 9.6.0, Chrome 126"
+    validations:
+      required: true
+
+  - type: input
+    id: versions
+    attributes:
+      label: Project Versions
+      description: Versions of Astro, Tailwind, and any relevant plugins/adapters.
+      placeholder: "e.g. astro@4.12.2, tailwindcss@3.4.1, @astrojs/vercel@6.2.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Describe the steps to trigger the issue. Be as specific as possible.
+      placeholder: |
+        1. Clone the repo
+        2. Run `pnpm install && pnpm dev`
+        3. Open http://localhost:4321/
+        4. Navigate to '...'
+        5. See error '...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs, Screenshots, or Build Output
+      description: Paste error logs, console output, or screenshots here, if any.
+      placeholder: |
+        ```
+        [astro] Error: Failed to load module ...
+        ```
+    validations:
+      required: false
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Relevant Config (if applicable)
+      description: Share parts of `astro.config.mjs`, `tailwind.config.js/ts`, or other setup that might be relevant.
+      placeholder: |
+        ```js
+        // astro.config.mjs
+        import { defineConfig } from 'astro/config';
+        export default defineConfig({
+          integrations: [],
+        });
+        ```
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I’ve verified this bug hasn’t been reported before.
+          required: true
+        - label: I’ve included all relevant logs/screenshots/configs.
+          required: false
+        - label: I can reproduce this issue in the latest `main` branch.
+          required: false
