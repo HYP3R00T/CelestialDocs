@@ -1,6 +1,9 @@
 {
     "editor.detectIndentation": false,
     "editor.formatOnSave": true,
+    "chat.instructionsFilesLocations": {
+        ".github/instructions": true
+    },
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
     "github.copilot.chat.reviewSelection.instructions": [
         {
@@ -17,14 +20,11 @@
             "file": "./.github/instructions/pullRequestDescriptionGeneration.instructions.md"
         }
     ],
-    "chat.instructionsFilesLocations": {
-        ".github/instructions": true
-    },
-    "chat.promptFiles": false,
     "[toml]": {
         "editor.defaultFormatter": "tamasfe.even-better-toml"
     },
     "[yaml]": {
         "editor.defaultFormatter": "redhat.vscode-yaml"
     },
+    "css.lint.unknownAtRules": "ignore"
 }
