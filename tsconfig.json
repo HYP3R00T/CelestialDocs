@@ -14,9 +14,8 @@
             "@/*": [
                 "./src/*"
             ],
-            "@posts/*": [
-                "./content/posts/*"
-            ]
-        }
+        },
+        "jsx": "react-jsx",
+        "jsxImportSource": "react"
     }
 }
