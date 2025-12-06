@@ -1,6 +1,97 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { getImage } from "astro:assets";
+
 import "@/styles/global.css";
+
+import type { HeadSEOProps } from "@/lib/types";
+import { SITE } from "@data/config";
+
+// Props with fallbacks from SITE config
+const {
+    title = SITE.title,
+    description = SITE.description,
+    image = SITE.image, // string | imported asset | content collection image()
+    imageAlt = SITE.imageAlt,
+    noIndex = false,
+} = Astro.props as HeadSEOProps;
+
+const canonicalURL = new URL(Astro.url);
+// Prefer configured site URL when Astro.site isn't available (e.g., in dev)
+const siteUrl = Astro.site ?? SITE.website ?? "http://127.0.0.1:4321";
+
+// Generate a fully qualified OG image URL
+let ogImageUrl: string;
+
+if (typeof image === "object" && "src" in image) {
+    // Case 1: Imported asset or content collection image()
+    ogImageUrl = new URL(image.src, siteUrl).toString();
+} else if (typeof image === "string" && !image.startsWith("http")) {
+    // Case 2: Local relative path (blogs/assets or similar)
+    try {
+        const { src } = await getImage({
+            src: image,
+            width: 1200,
+            height: 630,
+            format: "webp",
+        });
+        ogImageUrl = new URL(src, siteUrl).toString();
+    } catch {
+        // Fallback: just prefix with siteUrl if optimization fails
+        ogImageUrl = new URL(image, siteUrl).toString();
+    }
+} else {
+    // Case 3: External full URL
+    ogImageUrl = image;
+}
 ---
+
+<!-- Global Metadata -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<meta charset="UTF-8" />
+<meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
+<meta
+    name="googlebot"
+    content={noIndex ? "noindex, nofollow" : "index, follow"}
+/>
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- OpenGraph Meta Tags -->
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:alt" content={imageAlt} />
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+<meta name="twitter:image:alt" content={imageAlt} />
+<meta name="twitter:creator" content={SITE.twitterHandle} />
+
+<link rel="stylesheet" href="https://cdn.plyr.io/3.8.3/plyr.css" />
+
+<!-- Theme initialization script (inline to prevent flash) -->
+<script is:inline>
+    (function () {
+        const theme = localStorage.getItem("theme") || "dark";
+        if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+    })();
+</script>
 
 <ClientRouter />

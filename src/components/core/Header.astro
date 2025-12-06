@@ -1,0 +1,141 @@
+---
+import { Icon } from "astro-icon/components";
+import { SITE, navItems } from "@data/config";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/core/ThemeToggle.astro";
+import { Separator } from "@/components/ui/separator";
+
+const pathname = new URL(Astro.request.url).pathname;
+
+// Fetch GitHub stars count
+let starCount = 0;
+try {
+    const repoPath = SITE.repo.replace("https://github.com/", "");
+    const response = await fetch(`https://api.github.com/repos/${repoPath}`, {
+        headers: {
+            Accept: "application/vnd.github.v3+json",
+            "User-Agent": "celestialdocs-site",
+        },
+    });
+    if (response.ok) {
+        const data = await response.json();
+        starCount = data.stargazers_count ?? 0;
+    }
+} catch {
+    starCount = 0;
+}
+
+const showStarCount = starCount > 50;
+
+// Format star count (e.g., 1234 -> 1.2k)
+const formatStarCount = (count: number): string => {
+    if (count >= 1000) {
+        return `${(count / 1000).toFixed(1)}k`;
+    }
+    return count.toString();
+};
+---
+
+<header
+    class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60"
+>
+    <div class="container mx-auto flex h-14 max-w-6xl items-center px-4">
+        <!-- Left: Logo + Nav -->
+        <div class="flex items-center gap-6">
+            <Button variant="ghost" size="icon">
+                <a href="/" class="flex items-center gap-2" aria-label="Home">
+                    <Icon name="logo" class="size-6" />
+                </a>
+            </Button>
+        </div>
+
+        <!-- Right: GitHub + Theme -->
+        <div class="ml-auto flex items-center gap-2 lg:h-1/3">
+            <Separator orientation="vertical" />
+            <Button
+                variant="ghost"
+                size={showStarCount ? "default" : "icon"}
+                className={showStarCount ? "gap-2" : ""}
+                aria-label="GitHub repository"
+            >
+                <a
+                    href={SITE.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex gap-2 items-center"
+                >
+                    <Icon name="github" class="size-5" />
+                    {
+                        showStarCount && (
+                            <span class="text-xs font-medium text-muted-foreground">
+                                {formatStarCount(starCount)}
+                            </span>
+                        )
+                    }
+                </a>
+            </Button>
+            <Separator orientation="vertical" />
+            <ThemeToggle />
+
+            <!-- Mobile menu button -->
+            <Button
+                id="mobile-menu-btn"
+                className="md:hidden"
+                variant="ghost"
+                size="icon"
+                aria-expanded={"false"}
+                aria-controls="mobile-menu"
+            >
+                <Icon id="menu-icon" name="menu" class="size-5" />
+            </Button>
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <nav
+        id="mobile-menu"
+        class="hidden border-t border-border/40 bg-background px-4 py-3 md:hidden"
+    >
+        <div class="flex flex-col gap-1">
+            {
+                navItems.map((item) => {
+                    const isActive =
+                        pathname === item.href ||
+                        (item.href !== "/" && pathname.startsWith(item.href));
+                    return (
+                        <a
+                            href={item.href}
+                            target={item.blank ? "_blank" : "_self"}
+                            rel={item.blank ? "noopener noreferrer" : undefined}
+                            class={cn(
+                                "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                                isActive
+                                    ? "bg-accent text-accent-foreground"
+                                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                            )}
+                        >
+                            {item.label}
+                        </a>
+                    );
+                })
+            }
+        </div>
+    </nav>
+</header>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const menuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        menuBtn?.addEventListener("click", () => {
+            mobileMenu?.classList.toggle("hidden");
+            const isExpanded = !mobileMenu?.classList.contains("hidden");
+            menuBtn.setAttribute(
+                "aria-expanded",
+                isExpanded ? "true" : "false",
+            );
+        });
+    });
+</script>

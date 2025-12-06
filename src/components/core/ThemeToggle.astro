@@ -1,0 +1,68 @@
+---
+import { Icon } from "astro-icon/components";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+---
+
+<button
+    id="theme-toggle"
+    type="button"
+    class={cn(buttonVariants({ variant: "ghost", size: "icon" }), "relative")}
+    aria-label="Toggle theme"
+>
+    <Icon
+        name="sun"
+        class="size-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+    />
+    <Icon
+        name="moon"
+        class="absolute size-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+    />
+    <span class="sr-only">Toggle theme</span>
+</button>
+
+<script>
+    function initTheme() {
+        const themeToggle = document.getElementById("theme-toggle");
+
+        // Get the current theme from localStorage or default to dark
+        const getTheme = (): "light" | "dark" => {
+            if (typeof localStorage !== "undefined") {
+                const stored = localStorage.getItem("theme");
+                if (stored === "light" || stored === "dark") {
+                    return stored;
+                }
+            }
+            // Default to dark theme
+            return "dark";
+        };
+
+        // Apply theme to document
+        const applyTheme = (theme: "light" | "dark") => {
+            if (theme === "dark") {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
+            localStorage.setItem("theme", theme);
+        };
+
+        // Initialize theme
+        applyTheme(getTheme());
+
+        // Toggle theme on button click
+        themeToggle?.addEventListener("click", () => {
+            const currentTheme = document.documentElement.classList.contains(
+                "dark",
+            )
+                ? "dark"
+                : "light";
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            applyTheme(newTheme);
+        });
+    }
+
+    // Run on initial load and after Astro page transitions
+    initTheme();
+    document.addEventListener("astro:after-swap", initTheme);
+</script>
