@@ -1,14 +1,49 @@
 ---
 import HeadSEO from "@/components/core/HeadSEO.astro";
+import Header from "@/components/core/Header.astro";
+
+import { LOCALE } from "@data/config";
+import type { BaseLayoutProps } from "@/lib/types";
+
+interface Props extends BaseLayoutProps {
+    fullWidth?: boolean;
+}
+
+const {
+    title,
+    description,
+    image,
+    imageAlt,
+    contentType,
+    fullWidth = false,
+} = Astro.props as Props;
 ---
 
-<html lang="en">
-  <head>
-    <HeadSEO />
-  </head>
-  <body class="">
-    <main class="">
-      <slot />
-    </main>
-  </body>
+<html lang={LOCALE.lang ?? "en"}>
+    <head>
+        <HeadSEO
+            title={title}
+            description={description}
+            image={image}
+            imageAlt={imageAlt}
+            contentType={contentType}
+        />
+    </head>
+
+    <body class="min-h-screen bg-background text-foreground antialiased">
+        <div class="relative isolate flex min-h-screen flex-col">
+            <Header />
+            <main class="relative z-10 flex flex-1 flex-col">
+                {
+                    fullWidth ? (
+                        <slot />
+                    ) : (
+                        <div class="container mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-10 lg:gap-14 lg:py-14">
+                            <slot />
+                        </div>
+                    )
+                }
+            </main>
+        </div>
+    </body>
 </html>
