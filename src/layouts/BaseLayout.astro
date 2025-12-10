@@ -2,7 +2,7 @@
 import HeadSEO from "@/components/core/HeadSEO.astro";
 import Header from "@/components/core/Header.astro";
 
-import { LOCALE } from "@data/config";
+import { LOCALE, SITE } from "@data/config";
 import type { BaseLayoutProps } from "@/lib/types";
 
 interface Props extends BaseLayoutProps {
@@ -30,7 +30,19 @@ const {
         />
     </head>
 
-    <body class="min-h-screen bg-background text-foreground antialiased">
+    <body
+        class="min-h-screen bg-background text-foreground antialiased"
+        data-layout={SITE.enableLayoutWidthToggle ? undefined : "comfort"}
+    >
+        {SITE.enableLayoutWidthToggle && (
+            <script is:inline>
+                (function() {
+                    const saved = localStorage.getItem("layout-width-mode");
+                    const mode = saved === "comfort" ? "comfort" : "wide";
+                    document.body.dataset.layout = mode;
+                })();
+            </script>
+        )}
         <div class="relative isolate flex min-h-screen flex-col">
             <Header />
             <main class="relative z-10 flex flex-1 flex-col">
@@ -38,7 +50,10 @@ const {
                     fullWidth ? (
                         <slot />
                     ) : (
-                        <div class="container mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-10 lg:gap-14 lg:py-14">
+                        <div
+                            id="main-content"
+                            class="mx-auto flex w-full flex-col gap-10 px-4 py-10 lg:gap-14 lg:py-14"
+                        >
                             <slot />
                         </div>
                     )

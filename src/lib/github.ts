@@ -1,36 +1,88 @@
 /**
- * Fetch the stargazers count for a GitHub repository.
- * Accepts either a full repo URL (https://github.com/owner/repo) or an owner/repo string.
+ * GitHub star count with client-side caching and rate-limit handling
  */
-export async function getRepoStarCount(repo: string): Promise<number> {
+
+interface CachedStarData {
+  count: number;
+  timestamp: number;
+}
+
+const CACHE_KEY = "github-star-count";
+const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
+
+function normalizeRepo(repo: string): string | null {
+  const path = repo.replace(/^https?:\/\/github\.com\//, "").replace(/\/$/, "");
+  return path.includes("/") ? path : null;
+}
+
+function getCached(): CachedStarData | null {
   try {
-    // Normalize repo to 'owner/repo'
-    const repoPath = repo.replace(/^https?:\/\/github\.com\//, "").replace(/\/$/, "");
-    const url = `https://api.github.com/repos/${repoPath}`;
-
-    // Keep the same headers as the caller used previously
-    const headers: Record<string, string> = {
-      Accept: "application/vnd.github.v3+json",
-      "User-Agent": "celestialdocs-site",
-    };
-
-    const response = await fetch(url, { headers });
-    if (!response.ok) return 0;
-    const data = await response.json();
-    return data?.stargazers_count ?? 0;
-  } catch (err) {
-    return 0;
+    const item = localStorage.getItem(CACHE_KEY);
+    return item ? JSON.parse(item) : null;
+  } catch {
+    return null;
   }
 }
 
-/**
- * Format the number of stars (1_234 -> '1.2k').
- */
-export const formatStarCount = (count: number): string => {
-  if (count >= 1000) {
-    return `${(count / 1000).toFixed(1)}k`;
-  }
-  return count.toString();
-};
+function setCache(count: number): void {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ count, timestamp: Date.now() }));
+  } catch {}
+}
 
-export const shouldShowStarCount = (count: number, threshold = 50) => count > threshold;
+export async function fetchStarCount(repo: string): Promise<number> {
+  try {
+    const repoPath = normalizeRepo(repo);
+    if (!repoPath) return 0;
+
+    const cached = getCached();
+    if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+      return cached.count;
+    }
+
+    const response = await fetch(`https://api.github.com/repos/${repoPath}`, {
+      headers: {
+        Accept: "application/vnd.github.v3+json",
+        "User-Agent": "celestialdocs-site",
+      },
+    });
+
+    if (!response.ok) return cached?.count ?? 0;
+
+    const count = (await response.json())?.stargazers_count ?? 0;
+    setCache(count);
+    return count;
+  } catch {
+    return getCached()?.count ?? 0;
+  }
+}
+
+export function formatStarCount(count: number): string {
+  return count >= 1000 ? `${(count / 1000).toFixed(1)}k` : String(count);
+}
+
+export function shouldShowStarCount(count: number, threshold = 0): boolean {
+  return count > threshold;
+}
+
+export async function initGitHubStars(): Promise<void> {
+  const button = document.getElementById("github-star-button");
+  const countSpan = document.getElementById("github-star-count");
+
+  if (!button || !countSpan) return;
+
+  const repo = button.dataset.repo;
+  const threshold = parseInt(button.dataset.threshold || "0", 10);
+
+  if (!repo) return;
+
+  try {
+    const count = await fetchStarCount(repo);
+    if (shouldShowStarCount(count, threshold)) {
+      countSpan.textContent = formatStarCount(count);
+      countSpan.classList.remove("hidden");
+      button.classList.remove("size-9");
+      button.classList.add("h-9", "px-4", "py-2", "gap-2");
+    }
+  } catch {}
+}

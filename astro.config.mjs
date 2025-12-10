@@ -18,6 +18,16 @@ export default defineConfig({
     integrations: [
         icon({
             iconDir: "src/assets/icons",
+            svgoOptions: {
+                plugins: [
+                    {
+                        name: "convertColors",
+                        params: {
+                            currentColor: true,
+                        },
+                    },
+                ],
+            },
         }),
         react()
     ],

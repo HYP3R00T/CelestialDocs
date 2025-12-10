@@ -1,30 +1,20 @@
 ---
 import { Icon } from "astro-icon/components";
-import { SITE, navItems } from "@data/config";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/core/ThemeToggle.astro";
+import LayoutWidthToggle from "@/components/core/LayoutWidthToggle.astro";
 import { Separator } from "@/components/ui/separator";
-import {
-    getRepoStarCount,
-    formatStarCount,
-    shouldShowStarCount,
-} from "@/lib/github";
+import { SITE, Socials, navItems } from "@data/config";
 
-const pathname = new URL(Astro.request.url).pathname;
-
-// const starCount = await getRepoStarCount(SITE.repo);
-// const showStarCount = shouldShowStarCount(starCount, SITE.starCountThreshold);
-
-const starCount = 0;
-const showStarCount = false;
+const menuButtonId = "mobile-menu-btn";
+const menuPanelId = "mobile-menu";
+const activeSocials = Socials.filter((social) => social.active);
 ---
 
 <header
     class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60"
 >
-    <div class="container mx-auto flex h-14 max-w-6xl items-center px-4">
-        <!-- Left: Logo + Nav -->
+    <div id="header-inner" class="w-full flex items-center px-4 py-3 md:py-4">
         <div class="flex items-center gap-6">
             <Button variant="ghost" size="icon">
                 <a href="/" class="flex items-center gap-2" aria-label="Home">
@@ -33,14 +23,16 @@ const showStarCount = false;
             </Button>
         </div>
 
-        <!-- Right: GitHub + Theme -->
-        <div class="ml-auto flex items-center gap-2 lg:h-1/3">
-            <Separator orientation="vertical" />
+        <div class="ml-auto flex items-center gap-2 lg:h-4">
+            <Separator orientation="vertical" className="hidden lg:block" />
             <Button
+                id="github-star-button"
                 variant="ghost"
-                size={showStarCount ? "default" : "icon"}
-                className={showStarCount ? "gap-2" : ""}
+                size="icon"
+                className=""
                 aria-label="GitHub repository"
+                data-repo={SITE.repo}
+                data-threshold={SITE.starCountThreshold}
             >
                 <a
                     href={SITE.repo}
@@ -49,76 +41,106 @@ const showStarCount = false;
                     class="flex gap-2 items-center"
                 >
                     <Icon name="github" class="size-5" />
-                    {
-                        showStarCount && (
-                            <span class="text-xs font-medium text-muted-foreground">
-                                {formatStarCount(starCount)}
-                            </span>
-                        )
-                    }
+                    <span
+                        id="github-star-count"
+                        class="text-xs font-medium text-muted-foreground hidden"
+                        aria-live="polite"
+                    >
+                    </span>
                 </a>
             </Button>
-            <Separator orientation="vertical" />
+            {
+                SITE.enableLayoutWidthToggle && (
+                    <>
+                        <Separator
+                            orientation="vertical"
+                            className="hidden lg:block"
+                        />
+                        <LayoutWidthToggle />
+                    </>
+                )
+            }
+            <Separator orientation="vertical" className="hidden lg:block" />
             <ThemeToggle />
 
-            <!-- Mobile menu button -->
             <Button
-                id="mobile-menu-btn"
+                id={menuButtonId}
                 className="md:hidden"
                 variant="ghost"
                 size="icon"
                 aria-expanded={"false"}
-                aria-controls="mobile-menu"
+                aria-controls={menuPanelId}
+                aria-label="Toggle navigation menu"
+                data-state="closed"
             >
-                <Icon id="menu-icon" name="menu" class="size-5" />
+                <Icon data-icon="menu" name="menu" class="size-5" />
+                <Icon data-icon="close" name="close" class="size-5 hidden" />
             </Button>
         </div>
     </div>
-
-    <!-- Mobile menu -->
-    <nav
-        id="mobile-menu"
-        class="hidden border-t border-border/40 bg-background px-4 py-3 md:hidden"
-    >
-        <div class="flex flex-col gap-1">
-            {
-                navItems.map((item) => {
-                    const isActive =
-                        pathname === item.href ||
-                        (item.href !== "/" && pathname.startsWith(item.href));
-                    return (
-                        <a
-                            href={item.href}
-                            target={item.blank ? "_blank" : "_self"}
-                            rel={item.blank ? "noopener noreferrer" : undefined}
-                            class={cn(
-                                "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                                isActive
-                                    ? "bg-accent text-accent-foreground"
-                                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-                            )}
-                        >
-                            {item.label}
-                        </a>
-                    );
-                })
-            }
-        </div>
-    </nav>
 </header>
 
-<script>
-    document.addEventListener("astro:page-load", () => {
-        const menuBtn = document.getElementById("mobile-menu-btn");
-        const mobileMenu = document.getElementById("mobile-menu");
+<div
+    id={menuPanelId}
+    class="fixed inset-0 z-40 hidden md:hidden bg-background/80 backdrop-blur-sm supports-backdrop-filter:bg-background/60"
+    aria-hidden="true"
+>
+    <div class="flex h-full w-full flex-col px-4 pb-4 pt-19 overflow-hidden">
+        <div
+            class="mx-auto w-full max-w-md rounded-lg border border-border/50 bg-linear-to-b from-background/85 via-background/95 to-background/98 shadow-xl max-h-[calc(100vh-5.5rem)] overflow-y-auto"
+        >
+            <div class="flex flex-col gap-6 px-6 py-6">
+                <nav
+                    class="flex flex-col items-center gap-3 text-sm font-medium"
+                >
+                    {
+                        navItems.map(({ href, label, special, blank }) => (
+                            <a
+                                href={href}
+                                target={blank ? "_blank" : undefined}
+                                rel={blank ? "noreferrer" : undefined}
+                                class={`tracking-wide transition hover:text-primary ${special ? "text-primary" : "text-muted-foreground"}`}
+                            >
+                                {label}
+                            </a>
+                        ))
+                    }
+                </nav>
 
-        menuBtn?.addEventListener("click", () => {
-            mobileMenu?.classList.toggle("hidden");
-            const isExpanded = !mobileMenu?.classList.contains("hidden");
-            menuBtn.setAttribute(
-                "aria-expanded",
-                isExpanded ? "true" : "false",
-            );
-        });
+                <div
+                    class="flex items-center justify-center gap-3 border-t border-border/40 pt-4"
+                >
+                    {
+                        activeSocials.map(({ name, href, linkTitle }) => (
+                            <Button
+                                key={name}
+                                variant="ghost"
+                                size="icon"
+                                asChild
+                            >
+                                <a
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={linkTitle ?? name}
+                                >
+                                    <Icon name={name} class="size-5" />
+                                </a>
+                            </Button>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    import { initGitHubStars } from "@/lib/github";
+    import { initMobileMenu } from "@/lib/menu";
+
+    document.addEventListener("astro:page-load", () => {
+        initGitHubStars();
+        initMobileMenu();
     });
 </script>

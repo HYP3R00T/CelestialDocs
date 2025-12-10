@@ -1,0 +1,26 @@
+---
+import { Icon } from "astro-icon/components";
+import { Button } from "@/components/ui/button";
+
+const STORAGE_KEY = "layout-width-mode";
+const COMFORT = "comfort";
+const WIDE = "wide";
+---
+
+<Button
+    id="layout-width-toggle"
+    variant="ghost"
+    size="icon"
+    className="hidden md:inline-flex"
+    aria-label="Toggle layout width"
+    aria-pressed="false"
+    title="Wide"
+>
+    <Icon name="spacing" class="size-5" aria-hidden="true" />
+</Button>
+
+<script>
+    import { initLayoutToggle } from "@/lib/layout";
+
+    document.addEventListener("astro:page-load", initLayoutToggle);
+</script>
