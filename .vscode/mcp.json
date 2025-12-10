@@ -3,6 +3,13 @@
         "astro-mcp": {
             "url": "https://mcp.docs.astro.build/mcp",
             "type": "http"
+        },
+        "shadcn": {
+            "command": "npx",
+            "args": [
+                "shadcn@latest",
+                "mcp"
+            ]
         }
     },
     "inputs": []
