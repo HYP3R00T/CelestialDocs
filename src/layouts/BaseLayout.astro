@@ -34,15 +34,6 @@ const {
         class="min-h-screen bg-background text-foreground antialiased"
         data-layout={SITE.enableLayoutWidthToggle ? undefined : "comfort"}
     >
-        {SITE.enableLayoutWidthToggle && (
-            <script is:inline>
-                (function() {
-                    const saved = localStorage.getItem("layout-width-mode");
-                    const mode = saved === "comfort" ? "comfort" : "wide";
-                    document.body.dataset.layout = mode;
-                })();
-            </script>
-        )}
         <div class="relative isolate flex min-h-screen flex-col">
             <Header />
             <main class="relative z-10 flex flex-1 flex-col">

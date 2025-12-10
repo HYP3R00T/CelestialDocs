@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/core/ThemeToggle.astro";
 import LayoutWidthToggle from "@/components/core/LayoutWidthToggle.astro";
 import { Separator } from "@/components/ui/separator";
-import { SITE, Socials, navItems } from "@data/config";
+import { SITE } from "@data/config";
+import HeaderLogo from "@/components/core/HeaderLogo.astro";
+import HeaderGithubButton from "@/components/core/HeaderGithubButton.astro";
+import HeaderMobileMenu from "@/components/core/HeaderMobileMenu.astro";
 
 const menuButtonId = "mobile-menu-btn";
 const menuPanelId = "mobile-menu";
-const activeSocials = Socials.filter((social) => social.active);
 ---
 
 <header
@@ -16,51 +18,32 @@ const activeSocials = Socials.filter((social) => social.active);
 >
     <div id="header-inner" class="w-full flex items-center px-4 py-3 md:py-4">
         <div class="flex items-center gap-6">
-            <Button variant="ghost" size="icon">
-                <a href="/" class="flex items-center gap-2" aria-label="Home">
-                    <Icon name="logo" class="size-5" />
-                </a>
-            </Button>
+            <HeaderLogo />
         </div>
 
         <div class="ml-auto flex items-center gap-2 lg:h-4">
-            <Separator orientation="vertical" className="hidden lg:block" />
-            <Button
-                id="github-star-button"
-                variant="ghost"
-                size="icon"
-                className=""
-                aria-label="GitHub repository"
-                data-repo={SITE.repo}
-                data-threshold={SITE.starCountThreshold}
-            >
-                <a
-                    href={SITE.repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex gap-2 items-center"
-                >
-                    <Icon name="github" class="size-5" />
-                    <span
-                        id="github-star-count"
-                        class="text-xs font-medium text-muted-foreground hidden"
-                        aria-live="polite"
-                    >
-                    </span>
-                </a>
-            </Button>
             {
-                SITE.enableLayoutWidthToggle && (
+                SITE.enableGitHubButton && (
                     <>
+                        <HeaderGithubButton />
                         <Separator
                             orientation="vertical"
                             className="hidden lg:block"
                         />
-                        <LayoutWidthToggle />
                     </>
                 )
             }
-            <Separator orientation="vertical" className="hidden lg:block" />
+            {
+                SITE.enableLayoutWidthToggle && (
+                    <>
+                        <LayoutWidthToggle />
+                        <Separator
+                            orientation="vertical"
+                            className="hidden lg:block"
+                        />
+                    </>
+                )
+            }
             <ThemeToggle />
 
             <Button
@@ -80,67 +63,4 @@ const activeSocials = Socials.filter((social) => social.active);
     </div>
 </header>
 
-<div
-    id={menuPanelId}
-    class="fixed inset-0 z-40 hidden md:hidden bg-background/80 backdrop-blur-sm supports-backdrop-filter:bg-background/60"
-    aria-hidden="true"
->
-    <div class="flex h-full w-full flex-col px-4 pb-4 pt-19 overflow-hidden">
-        <div
-            class="mx-auto w-full max-w-md rounded-lg border border-border/50 bg-linear-to-b from-background/85 via-background/95 to-background/98 shadow-xl max-h-[calc(100vh-5.5rem)] overflow-y-auto"
-        >
-            <div class="flex flex-col gap-6 px-6 py-6">
-                <nav
-                    class="flex flex-col items-center gap-3 text-sm font-medium"
-                >
-                    {
-                        navItems.map(({ href, label, special, blank }) => (
-                            <a
-                                href={href}
-                                target={blank ? "_blank" : undefined}
-                                rel={blank ? "noreferrer" : undefined}
-                                class={`tracking-wide transition hover:text-primary ${special ? "text-primary" : "text-muted-foreground"}`}
-                            >
-                                {label}
-                            </a>
-                        ))
-                    }
-                </nav>
-
-                <div
-                    class="flex items-center justify-center gap-3 border-t border-border/40 pt-4"
-                >
-                    {
-                        activeSocials.map(({ name, href, linkTitle }) => (
-                            <Button
-                                key={name}
-                                variant="ghost"
-                                size="icon"
-                                asChild
-                            >
-                                <a
-                                    href={href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label={linkTitle ?? name}
-                                >
-                                    <Icon name={name} class="size-5" />
-                                </a>
-                            </Button>
-                        ))
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    import { initGitHubStars } from "@/lib/github";
-    import { initMobileMenu } from "@/lib/menu";
-
-    document.addEventListener("astro:page-load", () => {
-        initGitHubStars();
-        initMobileMenu();
-    });
-</script>
+<HeaderMobileMenu />

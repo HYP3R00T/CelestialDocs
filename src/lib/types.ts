@@ -41,4 +41,5 @@ export interface SiteConfig {
     twitterHandle?: string;
     starCountThreshold?: number;
     enableLayoutWidthToggle?: boolean;
+    enableGitHubButton?: boolean;
 }

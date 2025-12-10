@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon/components";
+import { Button } from "@/components/ui/button";
+import { SITE } from "@data/config";
+---
+
+<Button
+    id="github-star-button"
+    variant="ghost"
+    size="icon"
+    className=""
+    aria-label="GitHub repository"
+    data-repo={SITE.repo}
+    data-threshold={SITE.starCountThreshold}
+>
+    <a
+        href={SITE.repo}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex gap-2 items-center"
+    >
+        <Icon name="github" class="size-5" />
+        <span
+            id="github-star-count"
+            class="text-xs font-medium text-muted-foreground hidden"
+            aria-live="polite"></span>
+    </a>
+</Button>
+
+<script>
+    import { initGitHubStars } from "@/lib/github";
+    document.addEventListener("astro:page-load", initGitHubStars);
+</script>

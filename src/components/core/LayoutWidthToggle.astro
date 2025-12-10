@@ -24,3 +24,11 @@ const WIDE = "wide";
 
     document.addEventListener("astro:page-load", initLayoutToggle);
 </script>
+
+<script is:inline>
+    (function () {
+        const saved = localStorage.getItem("layout-width-mode");
+        const mode = saved === "comfort" ? "comfort" : "wide";
+        document.body.dataset.layout = mode;
+    })();
+</script>

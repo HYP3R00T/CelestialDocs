@@ -12,7 +12,8 @@ export const SITE: SiteConfig = {
     imageAlt: "Check out celestialdocs.hyperoot.dev",
     twitterHandle: "@HYP3R00T",
     starCountThreshold: 0,
-    enableLayoutWidthToggle: true
+    enableLayoutWidthToggle: true,
+    enableGitHubButton: true
 };
 
 export const LOCALE = {
