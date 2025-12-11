@@ -1,0 +1,39 @@
+---
+interface Entry {
+    slug: string;
+    label: string;
+    icon?: string;
+}
+
+interface Props {
+    entry: Entry;
+    currentSlug: string;
+}
+
+const { entry, currentSlug } = Astro.props;
+const isActive = currentSlug === entry.slug;
+---
+
+<li>
+    <a
+        href={`/docs/${entry.slug}`}
+        class={`
+      flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors
+      ${
+          isActive
+              ? "bg-secondary text-secondary-foreground font-medium"
+              : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+      }
+    `}
+        aria-current={isActive ? "page" : undefined}
+    >
+        {
+            entry.icon && (
+                <span class="text-base" aria-hidden="true">
+                    {entry.icon}
+                </span>
+            )
+        }
+        <span>{entry.label}</span>
+    </a>
+</li>

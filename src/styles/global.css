@@ -144,7 +144,7 @@
     /* ===== selection ===== */
 
     ::selection {
-        @apply bg-accent text-background;
+        @apply bg-accent-foreground text-background;
     }
 
     /* ===== scrollbar ===== */

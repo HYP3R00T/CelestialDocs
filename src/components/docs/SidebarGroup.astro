@@ -1,0 +1,131 @@
+---
+import SidebarEntry from "./SidebarEntry.astro";
+import { Icon } from "astro-icon/components";
+
+interface Entry {
+    slug: string;
+    label: string;
+    icon?: string;
+}
+
+interface Group {
+    id: string;
+    label: string;
+    icon?: string;
+    groups?: Group[];
+    entries?: Entry[];
+}
+
+interface Props {
+    group: Group;
+    currentSlug: string;
+    level?: number;
+}
+
+const { group, currentSlug, level = 0 } = Astro.props;
+
+// Determine if this group or any of its children contain the current page
+function containsSlug(g: Group, slug: string): boolean {
+    if (g.entries?.some((e) => e.slug === slug)) {
+        return true;
+    }
+    if (g.groups) {
+        return g.groups.some((subgroup) => containsSlug(subgroup, slug));
+    }
+    return false;
+}
+
+const isExpanded = containsSlug(group, currentSlug);
+---
+
+<div class={`sidebar-group ${level > 0 ? "ml-4" : ""}`}>
+    <button
+        class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary/50"
+        aria-expanded={isExpanded}
+        data-group-toggle={group.id}
+    >
+        <span class="flex items-center gap-2">
+            {
+                group.icon && (
+                    <span class="text-base" aria-hidden="true">
+                        {group.icon}
+                    </span>
+                )
+            }
+            <span>{group.label}</span>
+        </span>
+        <Icon
+            name="right"
+            class={`h-4 w-4 transition-transform ${isExpanded ? "rotate-90" : ""}`}
+            aria-hidden="true"
+        />
+    </button>
+
+    <div
+        class={`sidebar-group-content mt-1 space-y-1 ${isExpanded ? "" : "hidden"}`}
+        data-group-content={group.id}
+    >
+        {
+            group.entries && group.entries.length > 0 && (
+                <ul class="space-y-1">
+                    {group.entries.map((entry) => (
+                        <SidebarEntry entry={entry} currentSlug={currentSlug} />
+                    ))}
+                </ul>
+            )
+        }
+
+        {
+            group.groups && group.groups.length > 0 && (
+                <div class="space-y-1">
+                    {group.groups.map((subgroup) => (
+                        <Astro.self
+                            group={subgroup}
+                            currentSlug={currentSlug}
+                            level={level + 1}
+                        />
+                    ))}
+                </div>
+            )
+        }
+    </div>
+</div>
+
+<script>
+    function initGroupToggles() {
+        const toggleButtons = document.querySelectorAll<HTMLButtonElement>(
+            "[data-group-toggle]",
+        );
+
+        toggleButtons.forEach((button) => {
+            // Remove any existing listeners to prevent duplicates
+            const newButton = button.cloneNode(true) as HTMLButtonElement;
+            button.parentNode?.replaceChild(newButton, button);
+
+            newButton.addEventListener("click", () => {
+                const groupId = newButton.getAttribute("data-group-toggle");
+                const content = document.querySelector<HTMLDivElement>(
+                    `[data-group-content="${groupId}"]`,
+                );
+                const chevron = newButton.querySelector<SVGSVGElement>("svg");
+
+                if (content && chevron) {
+                    const isExpanded = !content.classList.contains("hidden");
+
+                    if (isExpanded) {
+                        content.classList.add("hidden");
+                        chevron.classList.remove("rotate-90");
+                        newButton.setAttribute("aria-expanded", "false");
+                    } else {
+                        content.classList.remove("hidden");
+                        chevron.classList.add("rotate-90");
+                        newButton.setAttribute("aria-expanded", "true");
+                    }
+                }
+            });
+        });
+    }
+
+    // Initialize on page load
+    document.addEventListener("astro:page-load", initGroupToggles);
+</script>

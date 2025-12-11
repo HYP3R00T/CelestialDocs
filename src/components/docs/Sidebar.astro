@@ -1,0 +1,167 @@
+---
+import SidebarGroup from "./SidebarGroup.astro";
+import SidebarEntry from "./SidebarEntry.astro";
+import type { Tab } from "@/lib/navigation";
+
+interface Entry {
+    slug: string;
+    label: string;
+    icon?: string;
+}
+
+interface Group {
+    id: string;
+    label: string;
+    icon?: string;
+    groups?: Group[];
+    entries?: Entry[];
+}
+
+interface Props {
+    tabs: Tab[];
+    showTabs: boolean;
+    activeTab?: Tab;
+    currentSlug: string;
+}
+
+const { tabs, showTabs, activeTab, currentSlug } = Astro.props;
+
+// Helper to find first entry in a group
+function findFirstEntry(group: any): string | null {
+    if (group.entries && group.entries.length > 0) {
+        return group.entries[0].slug;
+    }
+    if (group.groups && group.groups.length > 0) {
+        for (const subgroup of group.groups) {
+            const entry = findFirstEntry(subgroup);
+            if (entry) return entry;
+        }
+    }
+    return null;
+}
+---
+
+<aside
+    class="sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto border-r border-border bg-background"
+>
+    <nav aria-label="Documentation navigation" class="flex h-full flex-col">
+        {/* Tabs section - pinned at top */}
+        {
+            showTabs && (
+                <div class="border-b border-border px-4 py-4">
+                    <div class="space-y-1">
+                        {tabs.map((tab) => {
+                            const isActive = activeTab?.id === tab.id;
+                            const firstEntry = findFirstEntry(tab.group);
+                            const href = firstEntry
+                                ? `/docs/${firstEntry}`
+                                : `/docs`;
+
+                            return (
+                                <a
+                                    href={href}
+                                    class={`
+                  flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors
+                  ${
+                      isActive
+                          ? "bg-secondary text-secondary-foreground"
+                          : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+                  }
+                `}
+                                    aria-current={isActive ? "page" : undefined}
+                                >
+                                    {tab.icon && (
+                                        <span
+                                            class="text-base"
+                                            aria-hidden="true"
+                                        >
+                                            {tab.icon}
+                                        </span>
+                                    )}
+                                    <span>{tab.label}</span>
+                                </a>
+                            );
+                        })}
+                    </div>
+                </div>
+            )
+        }
+
+        {/* Groups and entries section - scrollable */}
+        <div class="flex-1 overflow-y-auto px-4 py-4">
+            <div class="space-y-2">
+                {
+                    activeTab && (
+                        <>
+                            {/* Root-level entries (if any) */}
+                            {activeTab.group.entries &&
+                                activeTab.group.entries.length > 0 && (
+                                    <ul class="space-y-1">
+                                        {activeTab.group.entries.map(
+                                            (entry) => (
+                                                <SidebarEntry
+                                                    entry={entry}
+                                                    currentSlug={currentSlug}
+                                                />
+                                            ),
+                                        )}
+                                    </ul>
+                                )}
+
+                            {/* Root-level groups */}
+                            {activeTab.group.groups &&
+                                activeTab.group.groups.length > 0 && (
+                                    <div class="space-y-2">
+                                        {activeTab.group.groups.map((group) => (
+                                            <SidebarGroup
+                                                group={group}
+                                                currentSlug={currentSlug}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
+                        </>
+                    )
+                }
+            </div>
+        </div>
+    </nav>
+</aside>
+
+<style>
+    aside {
+        width: 280px;
+    }
+
+    @media (max-width: 768px) {
+        aside {
+            position: fixed;
+            left: -100%;
+            transition: left 0.3s ease-in-out;
+            z-index: 40;
+            width: 280px;
+        }
+
+        aside.open {
+            left: 0;
+        }
+    }
+
+    /* Custom scrollbar */
+    aside::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    aside::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    aside::-webkit-scrollbar-thumb {
+        background: hsl(var(--muted));
+        border-radius: 3px;
+    }
+
+    aside::-webkit-scrollbar-thumb:hover {
+        background: hsl(var(--muted-foreground) / 0.5);
+    }
+</style>

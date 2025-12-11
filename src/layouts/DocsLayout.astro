@@ -1,0 +1,36 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Sidebar from "@/components/docs/Sidebar.astro";
+import { buildNavigation, getActiveTab } from "@/lib/navigation";
+import { navigation } from "@data/config";
+import type { HeadSEOProps } from "@/lib/types";
+
+interface Props extends Partial<HeadSEOProps> {
+    currentSlug: string;
+}
+
+const { currentSlug, ...headProps } = Astro.props;
+
+// Build navigation
+const navResult = await buildNavigation(navigation);
+const activeTab = getActiveTab(currentSlug, navResult.tabs);
+---
+
+<BaseLayout {...headProps}>
+    <div class="min-h-screen flex">
+        {/* Sidebar with tabs inside */}
+        <Sidebar
+            tabs={navResult.tabs}
+            showTabs={navResult.showTabs}
+            activeTab={activeTab}
+            currentSlug={currentSlug}
+        />
+
+        {/* Main content */}
+        <main class="flex-1 px-8 py-6">
+            <article class="prose prose-slate dark:prose-invert max-w-4xl">
+                <slot />
+            </article>
+        </main>
+    </div>
+</BaseLayout>
