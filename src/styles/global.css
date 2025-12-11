@@ -138,39 +138,45 @@
     p {
         @apply leading-7 not-first:mt-6;
     }
+}
 
-    blockquote {
-        @apply mt-6 border-l-2 pl-6 italic;
+@layer base {
+    /* ===== selection ===== */
+
+    ::selection {
+        @apply bg-accent text-background;
     }
 
-    table {
-        @apply w-full;
+    /* ===== scrollbar ===== */
+
+    /* width */
+    ::-webkit-scrollbar {
+        @apply rounded-lg h-2 w-2;
     }
 
-    th {
-        @apply border px-4 py-2 text-left font-bold [[align=center]]:text-center [[align=right]]:text-right;
+    /* Track */
+    ::-webkit-scrollbar-track {
+        @apply bg-transparent;
     }
 
-    tr {
-        @apply even:bg-muted m-0 border-t p-0;
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        @apply bg-secondary rounded-lg;
     }
 
-    td {
-        @apply border px-4 py-2 text-left [[align=center]]:text-center [[align=right]]:text-right;
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-accent-foreground;
     }
 
-    ul {
-        @apply my-6 ml-6 list-disc [&>li]:mt-2;
-    }
-
-    code {
-        @apply bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
-    }
+    /* ===== button ===== */
 
     button:not(:disabled),
     [role="button"]:not(:disabled) {
         @apply cursor-pointer;
     }
+
+    /* ===== layout ===== */
 
     body[data-layout="comfort"] #header-inner {
         @apply max-w-7xl mx-auto;
@@ -186,5 +192,43 @@
 
     body[data-layout="wide"] #main-content {
         @apply max-w-full;
+    }
+}
+
+@layer base {
+    .prose {
+        @apply w-full;
+    }
+
+    .prose blockquote {
+        @apply mt-6 border-l-2 pl-6 italic;
+    }
+
+    .prose table {
+        @apply w-full;
+    }
+
+    .prose th {
+        @apply border px-4 py-2 text-left font-bold [[align=center]]:text-center [[align=right]]:text-right;
+    }
+
+    .prose tr {
+        @apply even:bg-muted m-0 border-t p-0;
+    }
+
+    .prose td {
+        @apply border px-4 py-2 text-left [[align=center]]:text-center [[align=right]]:text-right;
+    }
+
+    .prose ul {
+        @apply my-6 ml-6 list-disc [&>li]:mt-2;
+    }
+
+    .prose code {
+        @apply bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+    }
+
+    .prose iframe {
+        @apply aspect-video h-auto w-full;
     }
 }
