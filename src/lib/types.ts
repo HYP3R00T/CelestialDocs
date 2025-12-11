@@ -42,4 +42,9 @@ export interface SiteConfig {
     starCountThreshold?: number;
     enableLayoutWidthToggle?: boolean;
     enableGitHubButton?: boolean;
+    /**
+     * When true, attempt to use the shadcn `navigation-menu` component in the header.
+     * This requires running the shadcn CLI to add the component to your project.
+     */
+    useShadcnNav?: boolean;
 }

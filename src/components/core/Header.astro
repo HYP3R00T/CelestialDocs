@@ -6,6 +6,7 @@ import LayoutWidthToggle from "@/components/core/LayoutWidthToggle.astro";
 import { Separator } from "@/components/ui/separator";
 import { SITE } from "@data/config";
 import HeaderLogo from "@/components/core/HeaderLogo.astro";
+import HeaderNav from "@/components/core/HeaderNav.astro";
 import HeaderGithubButton from "@/components/core/HeaderGithubButton.astro";
 import HeaderMobileMenu from "@/components/core/HeaderMobileMenu.astro";
 
@@ -19,6 +20,7 @@ const menuPanelId = "mobile-menu";
     <div id="header-inner" class="w-full flex items-center px-4 py-3 md:py-4">
         <div class="flex items-center gap-6">
             <HeaderLogo />
+            <HeaderNav />
         </div>
 
         <div class="ml-auto flex items-center gap-2 lg:h-4">
