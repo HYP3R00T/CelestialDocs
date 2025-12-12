@@ -180,12 +180,60 @@ export async function buildNavigation(config: Sidebar): Promise<NavigationResult
     processGroup(group, filesystemStructure, allDocs)
   );
 
-  // Separate tab groups from default groups
-  const tabGroups = processedGroups.filter((g) => g.tab === true);
-  const defaultGroups = processedGroups.filter((g) => g.tab !== true);
+  // Collect all tabs recursively (including nested groups with tab: true)
+  function collectTabs(groups: ProcessedGroup[]): ProcessedGroup[] {
+    const tabs: ProcessedGroup[] = [];
+
+    groups.forEach((group) => {
+      if (group.tab === true) {
+        tabs.push(group);
+      }
+      // Recursively check subgroups
+      if (group.groups && group.groups.length > 0) {
+        tabs.push(...collectTabs(group.groups));
+      }
+    });
+
+    return tabs;
+  }
+
+  // Collect all groups that should be tabs (at any level)
+  const allTabGroups = collectTabs(processedGroups);
+
+  // Remove tab groups from their parent groups and clean up the hierarchy
+  function removeTabGroups(groups: ProcessedGroup[]): ProcessedGroup[] {
+    return groups
+      .filter((group) => group.tab !== true)
+      .map((group) => {
+        if (group.groups && group.groups.length > 0) {
+          // Filter out groups that are tabs and recursively process remaining groups
+          const nonTabSubgroups = group.groups.filter((g) => g.tab !== true);
+          return {
+            ...group,
+            groups: removeTabGroups(nonTabSubgroups),
+          };
+        }
+        return group;
+      });
+  }
+
+  // For tabs that have subgroups, also remove nested tabs from their structure
+  const cleanedTabGroups = allTabGroups.map((tabGroup) => {
+    if (tabGroup.groups && tabGroup.groups.length > 0) {
+      const nonTabSubgroups = tabGroup.groups.filter((g) => g.tab !== true);
+      return {
+        ...tabGroup,
+        groups: removeTabGroups(nonTabSubgroups),
+      };
+    }
+    return tabGroup;
+  });
+
+  // Get non-tab groups (with tab groups removed from hierarchy)
+  const defaultGroups = removeTabGroups(processedGroups);
 
   // Create tabs
-  const tabs: Tab[] = tabGroups.map((group) => ({
+  const tabs: Tab[] = cleanedTabGroups.map((group) => ({
     id: group.id,
     label: group.label,
     icon: group.icon,

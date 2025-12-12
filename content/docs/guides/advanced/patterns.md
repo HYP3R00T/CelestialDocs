@@ -4,8 +4,6 @@ description: "Best practices and design patterns for documentation."
 pubDatetime: 2024-01-04T00:00:00Z
 ---
 
-# Design Patterns
-
 Learn about effective documentation design patterns.
 
 ## Clear Structure

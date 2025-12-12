@@ -4,8 +4,6 @@ description: "Common mistakes to avoid in documentation."
 pubDatetime: 2024-01-05T00:00:00Z
 ---
 
-# Anti-Patterns
-
 Learn what to avoid when writing documentation.
 
 ## Overly Technical

@@ -5,8 +5,6 @@ pubDatetime: 2024-01-07T00:00:00Z
 navIcon: "📝"
 ---
 
-# Input Component
-
 A flexible input component for text entry.
 
 ## Usage

@@ -1,6 +1,7 @@
 ---
 import SidebarGroup from "./SidebarGroup.astro";
 import SidebarEntry from "./SidebarEntry.astro";
+import DocIcon from "./DocIcon.astro";
 import type { Tab } from "@/lib/navigation";
 
 interface Entry {
@@ -42,13 +43,13 @@ function findFirstEntry(group: any): string | null {
 ---
 
 <aside
-    class="sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto border-r border-border bg-background"
+    class="sticky top-17 h-[calc(100vh-4.25rem)] overflow-y-auto bg-background"
 >
     <nav aria-label="Documentation navigation" class="flex h-full flex-col">
         {/* Tabs section - pinned at top */}
         {
             showTabs && (
-                <div class="border-b border-border px-4 py-4">
+                <div class="border-border rounded-lg p-2 bg-secondary">
                     <div class="space-y-1">
                         {tabs.map((tab) => {
                             const isActive = activeTab?.id === tab.id;
@@ -64,20 +65,17 @@ function findFirstEntry(group: any): string | null {
                   flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors
                   ${
                       isActive
-                          ? "bg-secondary text-secondary-foreground"
+                          ? "bg-popover text-secondary-foreground"
                           : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
                   }
                 `}
                                     aria-current={isActive ? "page" : undefined}
                                 >
-                                    {tab.icon && (
-                                        <span
-                                            class="text-base"
-                                            aria-hidden="true"
-                                        >
-                                            {tab.icon}
-                                        </span>
-                                    )}
+                                    <DocIcon
+                                        name={tab.icon || "document"}
+                                        class="h-4 w-4"
+                                        aria-hidden="true"
+                                    />
                                     <span>{tab.label}</span>
                                 </a>
                             );

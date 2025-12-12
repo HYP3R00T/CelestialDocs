@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon/components";
+import { readdirSync } from "node:fs";
+import { resolve } from "node:path";
+
+interface Props {
+    name?: string;
+    class?: string;
+    [key: string]: any;
+}
+
+const { name, class: className, ...rest } = Astro.props;
+
+// Only render icon if name is provided
+if (!name) {
+    return null;
+}
+
+// Dynamically check if icon exists in the icons folder
+const iconsPath = resolve("./src/assets/icons");
+let iconExists = false;
+
+try {
+    const files = readdirSync(iconsPath);
+    iconExists = files.includes(`${name}.svg`);
+} catch (error) {
+    // If we can't read the directory, assume icon doesn't exist
+    iconExists = false;
+}
+
+// Determine which icon to use - use provided icon if available, otherwise fallback to document
+const iconName = iconExists ? name : "document";
+---
+
+<Icon name={iconName} class={className} {...rest} />

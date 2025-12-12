@@ -1,4 +1,6 @@
 ---
+import DocIcon from "./DocIcon.astro";
+
 interface Entry {
     slug: string;
     label: string;
@@ -18,7 +20,7 @@ const isActive = currentSlug === entry.slug;
     <a
         href={`/docs/${entry.slug}`}
         class={`
-      flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors
+      flex items-center gap-2 rounded-sm px-2 py-1 text-sm transition-colors
       ${
           isActive
               ? "bg-secondary text-secondary-foreground font-medium"
@@ -29,9 +31,7 @@ const isActive = currentSlug === entry.slug;
     >
         {
             entry.icon && (
-                <span class="text-base" aria-hidden="true">
-                    {entry.icon}
-                </span>
+                <DocIcon name={entry.icon} class="h-4 w-4" aria-hidden="true" />
             )
         }
         <span>{entry.label}</span>

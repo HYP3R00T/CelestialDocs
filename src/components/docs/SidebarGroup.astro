@@ -1,5 +1,6 @@
 ---
 import SidebarEntry from "./SidebarEntry.astro";
+import DocIcon from "./DocIcon.astro";
 import { Icon } from "astro-icon/components";
 
 interface Entry {
@@ -40,24 +41,19 @@ const isExpanded = containsSlug(group, currentSlug);
 
 <div class={`sidebar-group ${level > 0 ? "ml-4" : ""}`}>
     <button
-        class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary/50"
+        class="flex w-full items-center justify-between gap-2 rounded-sm px-2 py-1 text-sm font-medium text-foreground transition-colors hover:bg-secondary/50"
         aria-expanded={isExpanded}
         data-group-toggle={group.id}
     >
         <span class="flex items-center gap-2">
-            {
-                group.icon && (
-                    <span class="text-base" aria-hidden="true">
-                        {group.icon}
-                    </span>
-                )
-            }
+            <DocIcon name={group.icon} class="h-4 w-4" aria-hidden="true" />
             <span>{group.label}</span>
         </span>
         <Icon
             name="right"
             class={`h-4 w-4 transition-transform ${isExpanded ? "rotate-90" : ""}`}
             aria-hidden="true"
+            data-chevron
         />
     </button>
 
@@ -107,7 +103,8 @@ const isExpanded = containsSlug(group, currentSlug);
                 const content = document.querySelector<HTMLDivElement>(
                     `[data-group-content="${groupId}"]`,
                 );
-                const chevron = newButton.querySelector<SVGSVGElement>("svg");
+                const chevron =
+                    newButton.querySelector<SVGSVGElement>("[data-chevron]");
 
                 if (content && chevron) {
                     const isExpanded = !content.classList.contains("hidden");

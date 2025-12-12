@@ -4,8 +4,6 @@ description: "Frequently asked questions about CelestialDocs."
 pubDatetime: 2024-01-10T00:00:00Z
 ---
 
-# General Questions
-
 ## What is CelestialDocs?
 
 CelestialDocs is a modern documentation template built with Astro and Shadcn UI.

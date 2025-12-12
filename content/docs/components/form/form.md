@@ -4,8 +4,6 @@ description: "Complete form component with validation support."
 pubDatetime: 2024-01-08T00:00:00Z
 ---
 
-# Form Component
-
 Build complex forms with ease.
 
 ## Basic Usage

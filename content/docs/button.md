@@ -7,8 +7,6 @@ navLabel: "Button"
 navIcon: "🔘"
 ---
 
-# Button Component
-
 This page explains how the Button component works.
 
 ## Usage

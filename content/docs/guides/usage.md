@@ -4,8 +4,6 @@ description: "Learn how to use CelestialDocs effectively."
 pubDatetime: 2024-01-03T00:00:00Z
 ---
 
-# Usage Guide
-
 Learn how to make the most of CelestialDocs.
 
 ## Creating Pages

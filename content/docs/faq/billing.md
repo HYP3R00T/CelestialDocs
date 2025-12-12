@@ -4,8 +4,6 @@ description: "Questions about billing and pricing."
 pubDatetime: 2024-01-11T00:00:00Z
 ---
 
-# Billing & Pricing
-
 ## Is CelestialDocs free?
 
 Yes, CelestialDocs is completely free and open source.

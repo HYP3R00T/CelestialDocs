@@ -4,8 +4,6 @@ description: "Welcome to CelestialDocs - a modern documentation template."
 pubDatetime: 2024-01-01T00:00:00Z
 ---
 
-# Introduction
-
 Welcome to **CelestialDocs**, a beautiful and flexible documentation template built with Astro and Shadcn UI.
 
 ## Features

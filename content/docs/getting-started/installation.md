@@ -4,8 +4,6 @@ description: "How to install and set up CelestialDocs."
 pubDatetime: 2024-01-02T00:00:00Z
 ---
 
-# Installation
-
 Get started with CelestialDocs in just a few steps.
 
 ## Prerequisites
