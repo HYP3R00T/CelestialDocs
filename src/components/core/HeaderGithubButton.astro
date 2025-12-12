@@ -4,20 +4,15 @@ import { Button } from "@/components/ui/button";
 import { SITE } from "@data/config";
 ---
 
-<Button
-    id="github-star-button"
-    variant="ghost"
-    size="icon"
-    className=""
-    aria-label="GitHub repository"
-    data-repo={SITE.repo}
-    data-threshold={SITE.starCountThreshold}
->
+<Button asChild>
     <a
+        id="github-star-button"
         href={SITE.repo}
         target="_blank"
         rel="noopener noreferrer"
-        class="flex gap-2 items-center"
+        data-repo={SITE.repo}
+        data-threshold={SITE.starCountThreshold}
+        class="flex items-center gap-2"
     >
         <Icon name="github" class="size-5" />
         <span
