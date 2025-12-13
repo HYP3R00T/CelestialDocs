@@ -39,80 +39,135 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+    --color-red: var(--red);
+    --color-orange: var(--orange);
+    --color-yellow: var(--yellow);
+    --color-green: var(--green);
+    --color-cyan: var(--cyan);
+    --color-blue: var(--blue);
+    --color-purple: var(--purple);
+    --color-pink: var(--pink);
 }
 
 :root {
-    --radius: 0.625rem;
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.646 0.222 41.116);
-    --chart-2: oklch(0.6 0.118 184.704);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --radius: 0.5rem;
+    --background: hsl(220, 20%, 98%);
+    --foreground: hsl(220, 15%, 12%);
+    --card: hsl(220, 20%, 96%);
+    --card-foreground: hsl(220, 15%, 12%);
+    --popover: hsl(220, 20%, 96%);
+    --popover-foreground: hsl(220, 15%, 12%);
+    --secondary: hsl(220, 18%, 92%);
+    --secondary-foreground: hsl(220, 15%, 12%);
+    --muted: hsl(220, 18%, 92%);
+    --muted-foreground: hsl(220, 10%, 40%);
+    --accent: hsl(220, 18%, 92%);
+    --accent-foreground: hsl(220, 15%, 12%);
+    --border: hsl(220, 14%, 85%);
+    --input: hsl(220, 14%, 85%);
+    --ring: hsl(210, 70%, 55%);
+    --primary: hsl(210, 70%, 55%);
+    --primary-foreground: hsl(220, 20%, 98%);
+    --destructive: hsl(0, 65%, 55%);
+    --chart-1: hsl(0, 60%, 50%);
+    --chart-2: hsl(30, 65%, 50%);
+    --chart-3: hsl(45, 70%, 50%);
+    --chart-4: hsl(130, 45%, 45%);
+    --chart-5: hsl(185, 55%, 45%);
+    --sidebar: hsl(220, 20%, 96%);
+    --sidebar-foreground: hsl(220, 15%, 12%);
+    --sidebar-primary: hsl(210, 70%, 55%);
+    --sidebar-primary-foreground: hsl(220, 20%, 98%);
+    --sidebar-accent: hsl(220, 18%, 92%);
+    --sidebar-accent-foreground: hsl(220, 15%, 12%);
+    --sidebar-border: hsl(220, 14%, 85%);
+    --sidebar-ring: hsl(210, 70%, 55%);
+
+    /* Accents & Statuses */
+    --red: hsl(0, 60%, 50%);
+    --orange: hsl(30, 65%, 50%);
+    --yellow: hsl(45, 70%, 50%);
+    --green: hsl(130, 45%, 45%);
+    --teal: hsl(165, 45%, 45%);
+    --cyan: hsl(185, 55%, 45%);
+    --blue: hsl(210, 70%, 55%);
+    --purple: hsl(270, 55%, 55%);
+    --pink: hsl(330, 60%, 55%);
+
+    --astro-code-background: var(--secondary);
+    --astro-code-foreground: var(--foreground);
+    --astro-code-token-constant: var(--pink);
+    --astro-code-token-string: var(--green);
+    --astro-code-token-comment: var(--text-faint);
+    --astro-code-token-keyword: var(--pink);
+    --astro-code-token-parameter: var(--red);
+    --astro-code-token-function: var(--blue);
+    --astro-code-token-string-expression: var(--green);
+    --astro-code-token-punctuation: var(--red);
+    --astro-code-token-link: var(--green);
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    --background: hsl(220, 15%, 8%);
+    --foreground: hsl(220, 13%, 93%);
+    --card: hsl(220, 14%, 11%);
+    --card-foreground: hsl(220, 13%, 93%);
+    --popover: hsl(220, 14%, 11%);
+    --popover-foreground: hsl(220, 13%, 93%);
+    --secondary: hsl(220, 13%, 16%);
+    --secondary-foreground: hsl(220, 13%, 93%);
+    --muted: hsl(220, 13%, 16%);
+    --muted-foreground: hsl(220, 9%, 70%);
+    --accent: hsl(220, 13%, 16%);
+    --accent-foreground: hsl(220, 13%, 93%);
+    --border: hsl(220, 12%, 22%);
+    --input: hsl(220, 12%, 22%);
+    --ring: hsl(210, 70%, 63%);
+    --primary: hsl(210, 70%, 63%);
+    --primary-foreground: hsl(220, 15%, 8%);
+    --destructive: hsl(0, 65%, 62%);
+    --chart-1: hsl(0, 65%, 62%);
+    --chart-2: hsl(30, 70%, 60%);
+    --chart-3: hsl(45, 75%, 65%);
+    --chart-4: hsl(130, 40%, 55%);
+    --chart-5: hsl(185, 50%, 60%);
+    --sidebar: hsl(220, 14%, 11%);
+    --sidebar-foreground: hsl(220, 13%, 93%);
+    --sidebar-primary: hsl(210, 70%, 63%);
+    --sidebar-primary-foreground: hsl(220, 15%, 8%);
+    --sidebar-accent: hsl(220, 13%, 16%);
+    --sidebar-accent-foreground: hsl(220, 13%, 93%);
+    --sidebar-border: hsl(220, 12%, 22%);
+    --sidebar-ring: hsl(210, 70%, 63%);
+
+    /* Accents & Statuses */
+    --red: hsl(0, 65%, 62%);
+    --orange: hsl(30, 70%, 60%);
+    --yellow: hsl(45, 75%, 65%);
+    --green: hsl(130, 40%, 55%);
+    --teal: hsl(165, 45%, 53%);
+    --cyan: hsl(185, 50%, 60%);
+    --blue: hsl(210, 70%, 63%);
+    --purple: hsl(270, 60%, 65%);
+    --pink: hsl(330, 65%, 67%);
+
+    --astro-code-background: var(--secondary);
+    --astro-code-foreground: var(--foreground);
+    --astro-code-token-constant: var(--pink);
+    --astro-code-token-string: var(--green);
+    --astro-code-token-comment: var(--text-faint);
+    --astro-code-token-keyword: var(--pink);
+    --astro-code-token-parameter: var(--red);
+    --astro-code-token-function: var(--blue);
+    --astro-code-token-string-expression: var(--green);
+    --astro-code-token-punctuation: var(--red);
+    --astro-code-token-link: var(--green);
 }
+
 
 @layer base {
     * {
-        @apply border-border outline-ring/50;
+        @apply border-border;
     }
 
     body {
@@ -196,39 +251,146 @@
 }
 
 @layer base {
+    /* ======== Root prose container ======== */
+
     .prose {
-        @apply w-full;
+        @apply w-full max-w-none text-foreground;
     }
 
-    .prose blockquote {
-        @apply mt-6 border-l-2 pl-6 italic;
+    /* ======== Links ======== */
+
+    .prose a {
+        @apply relative font-medium text-primary underline underline-offset-4 decoration-primary/30 transition-colors;
     }
 
-    .prose table {
-        @apply w-full;
+    .prose a:hover {
+        @apply text-primary decoration-primary;
     }
 
-    .prose th {
-        @apply border px-4 py-2 text-left font-bold [[align=center]]:text-center [[align=right]]:text-right;
+    /* ======== Headings ======== */
+
+    .prose h1 {
+        @apply mt-0 mb-6 text-5xl font-extrabold leading-tight tracking-tight;
     }
 
-    .prose tr {
-        @apply even:bg-muted m-0 border-t p-0;
+    .prose h2 {
+        @apply mt-12 mb-4 text-4xl font-bold leading-snug tracking-tight;
     }
 
-    .prose td {
-        @apply border px-4 py-2 text-left [[align=center]]:text-center [[align=right]]:text-right;
+    .prose h3 {
+        @apply mt-10 mb-3 text-2xl font-semibold leading-snug;
+    }
+
+    .prose h4 {
+        @apply mt-8 mb-2 text-xl font-semibold;
+    }
+
+    .prose h5 {
+        @apply mt-6 mb-1 text-base font-semibold uppercase tracking-wide text-muted-foreground;
+    }
+
+    .prose h6 {
+        @apply mt-6 mb-1 text-sm font-semibold uppercase tracking-wide text-muted-foreground;
+    }
+
+    /* ======== Paragraphs ======== */
+
+    .prose p {
+        @apply my-6;
+    }
+
+    .prose p:first-child {
+        @apply mt-0;
+    }
+
+    /* ======== Lists ======== */
+
+    .prose ul,
+    .prose ol {
+        @apply my-6 space-y-2;
     }
 
     .prose ul {
-        @apply my-6 ml-6 list-disc [&>li]:mt-2;
+        @apply list-disc pl-6;
     }
 
+    .prose ol {
+        @apply list-decimal pl-6;
+    }
+
+    .prose li {
+        @apply leading-relaxed;
+    }
+
+    /* ======== Blockquotes ======== */
+
+    .prose blockquote {
+        @apply my-8 border-l-4 border-primary/40 bg-muted/40 px-6 py-4 italic text-muted-foreground;
+    }
+
+    .prose blockquote p {
+        @apply my-0;
+    }
+
+    /* ======== Inline code ======== */
+
     .prose code {
-        @apply bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+        @apply rounded bg-muted px-1.5 py-0.5 font-mono text-base font-medium;
+    }
+
+    /* Avoid double styling inside code blocks */
+    .prose pre code {
+        @apply bg-transparent p-0 text-inherit;
+    }
+
+    /* ======== Code blocks ======== */
+
+    .prose pre {
+        @apply my-8 overflow-x-auto rounded-lg bg-secondary px-6 py-5 text-base leading-relaxed;
+    }
+
+    .astro-code {
+        @apply my-8 rounded-lg bg-secondary px-6 py-5 font-mono text-base;
+    }
+
+    /* ======== Tables ======== */
+
+    .prose table {
+        @apply my-8 w-full border-collapse text-base;
+    }
+
+    .prose th {
+        @apply border-b border-border px-4 py-3 text-left font-semibold;
+    }
+
+    .prose td {
+        @apply border-b border-border px-4 py-3 align-top;
+    }
+
+    .prose tr:last-child td {
+        @apply border-b-0;
+    }
+
+    /* ======== Media ======== */
+
+    .prose img {
+        @apply my-8 rounded-lg;
     }
 
     .prose iframe {
-        @apply aspect-video h-auto w-full;
+        @apply my-8 aspect-video w-full rounded-lg;
     }
+
+    /* ======== Horizontal rule ======== */
+
+    .prose hr {
+        @apply my-12 border-border;
+    }
+}
+
+/* shiki theme */
+html.dark .astro-code,
+html.dark .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
 }

@@ -15,6 +15,17 @@ export default defineConfig({
         plugins: [tailwindcss()],
     },
 
+    markdown: {
+        shikiConfig: {
+            // theme: "css-variables",
+            // defaultColor: false,
+            themes: {
+                light: 'github-light',
+                dark: 'github-dark',
+            },
+        },
+    },
+
     integrations: [
         icon({
             iconDir: "src/assets/icons",
