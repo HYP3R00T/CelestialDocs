@@ -18,3 +18,5 @@ A flexible input component for text entry.
 - `type` - Input type (text, email, password, etc.)
 - `placeholder` - Placeholder text
 - `disabled` - Disable the input
+
+[https://docs.astro.build/en/guides/content-collections/](https://docs.astro.build/en/guides/content-collections/)

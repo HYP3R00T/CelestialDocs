@@ -3,6 +3,7 @@ import BaseLayout from "./BaseLayout.astro";
 import Sidebar from "@/components/docs/Sidebar.astro";
 import TableOfContents from "@/components/docs/TableOfContents.astro";
 import Breadcrumb from "@/components/docs/Breadcrumb.astro";
+import SourceButton from "@/components/docs/SourceButton.astro";
 import { buildNavigation, getActiveTab } from "@/lib/navigation";
 import { buildBreadcrumbItems } from "@/lib/docs/breadcrumb";
 import { navigation } from "@data/config";
@@ -41,7 +42,10 @@ const tableOfContentsHeadings = headings.map((h) => ({
 
         <!-- Main content  -->
         <main class="flex-1 px-8 py-6">
-            <Breadcrumb items={breadcrumbItems} />
+            <div class="flex items-center justify-between gap-4 mb-6">
+                <Breadcrumb items={breadcrumbItems} />
+                <SourceButton slug={currentSlug} />
+            </div>
             <article class="prose prose-slate dark:prose-invert">
                 <slot />
             </article>

@@ -1,0 +1,17 @@
+---
+import { Button } from "@/components/ui/button";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    slug: string;
+}
+
+const { slug } = Astro.props;
+---
+
+<a href={`/docs/${slug}.md`} target="_blank" rel="noopener noreferrer">
+    <Button variant="outline" size="sm" className="gap-2">
+        <Icon name="github" class="size-4" />
+        View as Markdown
+    </Button>
+</a>
