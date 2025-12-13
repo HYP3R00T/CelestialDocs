@@ -2,6 +2,12 @@
  * Mobile menu toggle functionality
  */
 
+function getFirstFocusable(container: HTMLElement): HTMLElement | null {
+  return (
+    container.querySelector('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])') as HTMLElement | null
+  );
+}
+
 function setMenuState(isOpen: boolean): void {
   const menu = document.getElementById("mobile-menu");
   const btn = document.getElementById("mobile-menu-btn");
@@ -9,14 +15,30 @@ function setMenuState(isOpen: boolean): void {
   const closeIcon = btn?.querySelector('[data-icon="close"]');
 
   if (!menu || !btn) return;
+  // Simplified sequence: ensure focus is moved before hiding the menu
+  if (isOpen) {
+    menu.classList.remove("hidden");
+    menu.setAttribute("aria-hidden", "false");
+    btn.setAttribute("aria-expanded", "true");
+    btn.setAttribute("data-state", "open");
+    menuIcon?.classList.toggle("hidden", true);
+    closeIcon?.classList.toggle("hidden", false);
+    document.body.style.overflow = "hidden";
 
-  menu.classList.toggle("hidden", !isOpen);
-  btn.setAttribute("aria-expanded", String(isOpen));
-  menu.setAttribute("aria-hidden", String(!isOpen));
-  btn.setAttribute("data-state", isOpen ? "open" : "closed");
-  menuIcon?.classList.toggle("hidden", isOpen);
-  closeIcon?.classList.toggle("hidden", !isOpen);
-  document.body.style.overflow = isOpen ? "hidden" : "";
+    const firstFocusable = getFirstFocusable(menu);
+    if (firstFocusable) firstFocusable.focus();
+    return;
+  }
+
+  // closing: move focus back to toggle first, then hide and mark aria-hidden
+  btn.focus();
+  menu.setAttribute("aria-hidden", "true");
+  menu.classList.add("hidden");
+  btn.setAttribute("aria-expanded", "false");
+  btn.setAttribute("data-state", "closed");
+  menuIcon?.classList.toggle("hidden", false);
+  closeIcon?.classList.toggle("hidden", true);
+  document.body.style.overflow = "";
 }
 
 export function initMobileMenu(): void {
