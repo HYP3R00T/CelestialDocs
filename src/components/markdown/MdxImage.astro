@@ -1,0 +1,17 @@
+---
+import { ImagePreview } from "@/components/markdown/ImagePreview";
+
+interface Props {
+    src: string | ImageMetadata;
+    alt?: string;
+    class?: string;
+    [key: string]: unknown;
+}
+
+const { src, alt = "", class: className, ...rest } = Astro.props;
+
+// Handle both string paths (from markdown) and ImageMetadata (from imports)
+const imageSrc = typeof src === "string" ? src : src.src;
+---
+
+<ImagePreview client:visible src={imageSrc} alt={alt} className={className} />

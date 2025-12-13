@@ -1,0 +1,37 @@
+---
+interface Props {
+    href?: string;
+    class?: string;
+    [key: string]: unknown;
+}
+
+const { href = "", class: className, ...rest } = Astro.props;
+
+/**
+ * Determines if a URL is external.
+ * External URLs start with http://, https://, or // (protocol-relative).
+ */
+function isExternalUrl(url: string): boolean {
+    return /^(https?:)?\/\//.test(url);
+}
+
+const isExternal = isExternalUrl(href);
+---
+
+{
+    isExternal ? (
+        <a
+            href={href}
+            class={className}
+            target="_blank"
+            rel="noopener noreferrer"
+            {...rest}
+        >
+            <slot />
+        </a>
+    ) : (
+        <a href={href} class={className} {...rest}>
+            <slot />
+        </a>
+    )
+}

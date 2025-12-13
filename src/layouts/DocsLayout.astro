@@ -18,7 +18,7 @@ const activeTab = getActiveTab(currentSlug, navResult.tabs);
 
 <BaseLayout {...headProps}>
     <div class="min-h-screen flex">
-        {/* Sidebar with tabs inside */}
+        <!-- Sidebar with tabs inside  -->
         <Sidebar
             tabs={navResult.tabs}
             showTabs={navResult.showTabs}
@@ -26,9 +26,9 @@ const activeTab = getActiveTab(currentSlug, navResult.tabs);
             currentSlug={currentSlug}
         />
 
-        {/* Main content */}
+        <!-- Main content  -->
         <main class="flex-1 px-8 py-6">
-            <article class="prose prose-slate dark:prose-invert max-w-4xl">
+            <article class="prose prose-slate dark:prose-invert">
                 <slot />
             </article>
         </main>

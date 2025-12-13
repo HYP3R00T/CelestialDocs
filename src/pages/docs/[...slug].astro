@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from "astro:content";
 import DocsLayout from "@/layouts/DocsLayout.astro";
+import MdxImage from "@/components/markdown/MdxImage.astro";
+import MdxLink from "@/components/markdown/MdxLink.astro";
 
 export async function getStaticPaths() {
     const docs = await getCollection("docs");
@@ -15,6 +17,11 @@ const { doc } = Astro.props;
 const { Content } = await render(doc);
 
 const { title, description } = doc.data;
+
+const components = {
+    img: MdxImage,
+    a: MdxLink,
+};
 ---
 
 <DocsLayout
@@ -25,5 +32,5 @@ const { title, description } = doc.data;
 >
     <h1>{title}</h1>
     {description && <p class="lead">{description}</p>}
-    <Content />
+    <Content components={components} />
 </DocsLayout>
