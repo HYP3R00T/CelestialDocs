@@ -1,5 +1,5 @@
 import { getCollection } from "astro:content";
-import type { Entry, Group, Sidebar } from "./types";
+import type { Entry, Group, Sidebar } from "./docs/types";
 
 interface DocEntry {
   id: string;

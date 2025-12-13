@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon/components";
 import { readdirSync } from "node:fs";
 import { resolve } from "node:path";
-import type { DocIconProps } from "@/lib/types";
+import type { DocIconProps } from "@/lib/docs/types";
 
 const { name, class: className, ...rest } = Astro.props as DocIconProps;
 

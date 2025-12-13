@@ -1,6 +1,6 @@
 ---
 import DocIcon from "./DocIcon.astro";
-import type { SidebarEntryProps } from "@/lib/types";
+import type { SidebarEntryProps } from "@/lib/docs/types";
 
 const { entry, currentSlug } = Astro.props as SidebarEntryProps;
 const isActive = currentSlug === entry.slug;
