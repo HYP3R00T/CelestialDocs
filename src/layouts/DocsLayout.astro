@@ -4,14 +4,13 @@ import Sidebar from "@/components/docs/Sidebar.astro";
 import TableOfContents from "@/components/docs/TableOfContents.astro";
 import { buildNavigation, getActiveTab } from "@/lib/navigation";
 import { navigation } from "@data/config";
-import type { HeadSEOProps } from "@/lib/types";
+import type { DocsLayoutProps } from "@/lib/types";
 
-interface Props extends Partial<HeadSEOProps> {
-    currentSlug: string;
-    headings?: { depth: number; slug: string; text: string }[];
-}
-
-const { currentSlug, headings = [], ...headProps } = Astro.props;
+const {
+    currentSlug,
+    headings = [],
+    ...headProps
+} = Astro.props as DocsLayoutProps;
 
 // Build navigation
 const navResult = await buildNavigation(navigation);
@@ -21,7 +20,7 @@ const activeTab = getActiveTab(currentSlug, navResult.tabs);
 const tableOfContentsHeadings = headings.map((h) => ({
     depth: h.depth,
     text: h.text,
-    id: h.slug,
+    id: h.id,
 }));
 ---
 

@@ -1,15 +1,7 @@
 ---
-interface Heading {
-    depth: number;
-    text: string;
-    id: string;
-}
+import type { TableOfContentsProps } from "@/lib/types";
 
-interface Props {
-    headings?: Heading[];
-}
-
-const { headings = [] } = Astro.props;
+const { headings = [] } = Astro.props as TableOfContentsProps;
 
 // Filter to only include h2 and h3 headings for the TOC
 const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);

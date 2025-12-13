@@ -1,6 +1,10 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Button } from "@/components/ui/button";
+import type { ThemeToggleProps } from "@/lib/types";
+
+// Component accepts no props
+Astro.props as ThemeToggleProps;
 ---
 
 <Button

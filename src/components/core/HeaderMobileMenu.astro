@@ -3,6 +3,9 @@ import { Icon } from "astro-icon/components";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Socials, navItems } from "@data/config";
+import type { HeaderMobileMenuProps } from "@/lib/types";
+
+const props = Astro.props as HeaderMobileMenuProps;
 
 const activeSocials = Socials.filter((social) => social.active);
 const menuPanelId = "mobile-menu";

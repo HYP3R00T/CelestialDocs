@@ -1,18 +1,8 @@
 ---
 import DocIcon from "./DocIcon.astro";
+import type { SidebarEntryProps } from "@/lib/types";
 
-interface Entry {
-    slug: string;
-    label: string;
-    icon?: string;
-}
-
-interface Props {
-    entry: Entry;
-    currentSlug: string;
-}
-
-const { entry, currentSlug } = Astro.props;
+const { entry, currentSlug } = Astro.props as SidebarEntryProps;
 const isActive = currentSlug === entry.slug;
 ---
 

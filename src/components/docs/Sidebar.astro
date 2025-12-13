@@ -2,33 +2,12 @@
 import SidebarGroup from "./SidebarGroup.astro";
 import SidebarEntry from "./SidebarEntry.astro";
 import DocIcon from "./DocIcon.astro";
-import type { Tab } from "@/lib/navigation";
+import type { SidebarProps, Tab, SidebarGroupItem } from "@/lib/types";
 
-interface Entry {
-    slug: string;
-    label: string;
-    icon?: string;
-}
-
-interface Group {
-    id: string;
-    label: string;
-    icon?: string;
-    groups?: Group[];
-    entries?: Entry[];
-}
-
-interface Props {
-    tabs: Tab[];
-    showTabs: boolean;
-    activeTab?: Tab;
-    currentSlug: string;
-}
-
-const { tabs, showTabs, activeTab, currentSlug } = Astro.props;
+const { tabs, showTabs, activeTab, currentSlug } = Astro.props as SidebarProps;
 
 // Helper to find first entry in a group
-function findFirstEntry(group: any): string | null {
+function findFirstEntry(group: SidebarGroupItem): string | null {
     if (group.entries && group.entries.length > 0) {
         return group.entries[0].slug;
     }

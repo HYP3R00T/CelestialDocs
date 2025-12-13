@@ -2,6 +2,10 @@
 import { Icon } from "astro-icon/components";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@data/config";
+import type { HeaderGithubButtonProps } from "@/lib/types";
+
+// Component accepts no props
+Astro.props as HeaderGithubButtonProps;
 ---
 
 <Button asChild>

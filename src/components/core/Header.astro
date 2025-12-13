@@ -9,6 +9,10 @@ import HeaderLogo from "@/components/core/HeaderLogo.astro";
 import HeaderNav from "@/components/core/HeaderNav.astro";
 import HeaderGithubButton from "@/components/core/HeaderGithubButton.astro";
 import HeaderMobileMenu from "@/components/core/HeaderMobileMenu.astro";
+import type { HeaderProps } from "@/lib/types";
+
+// Component accepts no props
+Astro.props as HeaderProps;
 
 const menuButtonId = "mobile-menu-btn";
 const menuPanelId = "mobile-menu";

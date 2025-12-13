@@ -1,14 +1,13 @@
 ---
 import { ImagePreview } from "@/components/markdown/ImagePreview";
+import type { MdxImageProps } from "@/lib/types";
 
-interface Props {
-    src: string | ImageMetadata;
-    alt?: string;
-    class?: string;
-    [key: string]: unknown;
-}
-
-const { src, alt = "", class: className, ...rest } = Astro.props;
+const {
+    src,
+    alt = "",
+    class: className,
+    ...rest
+} = Astro.props as MdxImageProps;
 
 // Handle both string paths (from markdown) and ImageMetadata (from imports)
 const imageSrc = typeof src === "string" ? src : src.src;

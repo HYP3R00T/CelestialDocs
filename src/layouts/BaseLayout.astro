@@ -5,10 +5,6 @@ import Header from "@/components/core/Header.astro";
 import { LOCALE, SITE } from "@data/config";
 import type { BaseLayoutProps } from "@/lib/types";
 
-interface Props extends BaseLayoutProps {
-    fullWidth?: boolean;
-}
-
 const {
     title,
     description,
@@ -16,7 +12,7 @@ const {
     imageAlt,
     contentType,
     fullWidth = false,
-} = Astro.props as Props;
+} = Astro.props as BaseLayoutProps;
 ---
 
 <html lang={LOCALE.lang ?? "en"}>

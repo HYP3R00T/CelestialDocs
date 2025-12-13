@@ -1,6 +1,9 @@
 ---
 import { navItems } from "@data/config";
 import { HeaderNavClient } from "./HeaderNav.client";
+import type { HeaderNavProps } from "@/lib/types";
+
+const props = Astro.props as HeaderNavProps;
 ---
 
 <HeaderNavClient client:only="react" navItems={navItems} />
