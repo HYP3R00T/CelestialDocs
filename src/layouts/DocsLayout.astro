@@ -2,7 +2,9 @@
 import BaseLayout from "./BaseLayout.astro";
 import Sidebar from "@/components/docs/Sidebar.astro";
 import TableOfContents from "@/components/docs/TableOfContents.astro";
+import Breadcrumb from "@/components/docs/Breadcrumb.astro";
 import { buildNavigation, getActiveTab } from "@/lib/navigation";
+import { buildBreadcrumbItems } from "@/lib/docs/breadcrumb";
 import { navigation } from "@data/config";
 import type { DocsLayoutProps } from "@/lib/docs/types";
 
@@ -15,6 +17,9 @@ const {
 // Build navigation
 const navResult = await buildNavigation(navigation);
 const activeTab = getActiveTab(currentSlug, navResult.tabs);
+
+// Build breadcrumb items
+const breadcrumbItems = buildBreadcrumbItems(currentSlug);
 
 // Convert headings to TableOfContents format
 const tableOfContentsHeadings = headings.map((h) => ({
@@ -36,6 +41,7 @@ const tableOfContentsHeadings = headings.map((h) => ({
 
         <!-- Main content  -->
         <main class="flex-1 px-8 py-6">
+            <Breadcrumb items={breadcrumbItems} />
             <article class="prose prose-slate dark:prose-invert">
                 <slot />
             </article>

@@ -1,5 +1,6 @@
 import setupImage from "@/assets/setup.png";
-import type { NavItem, SiteConfig, SocialObjects, Sidebar } from "@/lib/types";
+import type { Sidebar } from "@/lib/docs/types";
+import type { NavItem, SiteConfig, SocialObjects } from "@/lib/types";
 
 export const SITE: SiteConfig = {
     website: "https://celestialdocs.hyperoot.dev",
