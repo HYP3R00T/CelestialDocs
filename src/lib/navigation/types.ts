@@ -54,4 +54,21 @@ export interface NavigationResult {
   showTabs: boolean;
 }
 
+export interface NavigationEntryItem {
+  type: "entry";
+  entry: ProcessedEntry;
+}
+
+export interface NavigationGroupItem {
+  type: "group";
+  group: ProcessedGroup;
+}
+
+export type NavigationItem = NavigationEntryItem | NavigationGroupItem;
+
+export interface BuildDefaultChildrenResult {
+  children: Array<ProcessedGroup | ProcessedEntry>;
+  slugs: Set<string>;
+}
+
 export type { Entry, Group, Sidebar };
