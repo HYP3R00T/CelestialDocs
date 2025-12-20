@@ -6,25 +6,43 @@ import type { DocIconProps } from "@/lib/docs/types";
 
 const { name, class: className, ...rest } = Astro.props as DocIconProps;
 
-// Only render icon if name is provided
 if (!name) {
     return null;
 }
 
-// Dynamically check if icon exists in the icons folder
-const iconsPath = resolve("./src/assets/icons");
-let iconExists = false;
+const emojiRegex = /\p{Emoji}/u;
+const isEmoji = emojiRegex.test(name);
 
-try {
-    const files = readdirSync(iconsPath);
-    iconExists = files.includes(`${name}.svg`);
-} catch (error) {
-    // If we can't read the directory, assume icon doesn't exist
-    iconExists = false;
+const emojiClass = [
+    "inline-flex items-center justify-center leading-none",
+    className,
+]
+    .filter(Boolean)
+    .join(" ");
+
+let iconName = "document";
+
+if (!isEmoji) {
+    const iconsPath = resolve("./src/assets/icons");
+    let iconExists = false;
+
+    try {
+        const files = readdirSync(iconsPath);
+        iconExists = files.includes(`${name}.svg`);
+    } catch (error) {
+        iconExists = false;
+    }
+
+    iconName = iconExists ? name : "document";
 }
-
-// Determine which icon to use - use provided icon if available, otherwise fallback to document
-const iconName = iconExists ? name : "document";
 ---
 
-<Icon name={iconName} class={className} {...rest} />
+{
+    isEmoji ? (
+        <span class={emojiClass} {...rest}>
+            {name}
+        </span>
+    ) : (
+        <Icon name={iconName} class={className} {...rest} />
+    )
+}
