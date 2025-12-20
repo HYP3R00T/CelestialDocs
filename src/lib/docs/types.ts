@@ -161,6 +161,7 @@ export interface Heading {
     depth: number;
     text: string;
     id: string;
+    slug?: string;
 }
 
 /**

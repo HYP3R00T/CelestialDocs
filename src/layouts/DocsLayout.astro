@@ -7,7 +7,7 @@ import SourceButton from "@/components/docs/SourceButton.astro";
 import { buildNavigation, getActiveTab } from "@/lib/navigation";
 import { buildBreadcrumbItems } from "@/lib/docs/breadcrumb";
 import { navigation } from "@data/config";
-import type { DocsLayoutProps } from "@/lib/docs/types";
+import type { DocsLayoutProps, Heading } from "@/lib/docs/types";
 
 const {
     currentSlug,
@@ -23,11 +23,13 @@ const activeTab = getActiveTab(currentSlug, navResult.tabs);
 const breadcrumbItems = buildBreadcrumbItems(currentSlug);
 
 // Convert headings to TableOfContents format
-const tableOfContentsHeadings = headings.map((h) => ({
-    depth: h.depth,
-    text: h.text,
-    id: h.id,
-}));
+const tableOfContentsHeadings = headings
+    .map((h) => ({
+        depth: h.depth,
+        text: h.text,
+        id: h.id ?? h.slug,
+    }))
+    .filter((heading): heading is Heading => Boolean(heading.id));
 ---
 
 <BaseLayout {...headProps}>

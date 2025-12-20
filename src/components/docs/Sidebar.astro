@@ -39,7 +39,7 @@ function findFirstEntry(group: SidebarGroupItem): string | null {
         {/* Tabs section - pinned at top */}
         {
             showTabs && (
-                <div class="border-border rounded-lg p-2 bg-secondary">
+                <div class="border-border rounded-lg p-2 bg-popover">
                     <div class="space-y-1">
                         {tabs.map((tab) => {
                             const isActive = activeTab?.id === tab.id;
@@ -55,7 +55,7 @@ function findFirstEntry(group: SidebarGroupItem): string | null {
                   flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors
                   ${
                       isActive
-                          ? "bg-popover text-secondary-foreground"
+                          ? "bg-secondary text-secondary-foreground"
                           : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
                   }
                 `}
