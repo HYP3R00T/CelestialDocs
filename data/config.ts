@@ -105,3 +105,5 @@ export const navigation: Sidebar = {
         }
     ]
 };
+
+export const enableTableOfContentsExtra = false;
