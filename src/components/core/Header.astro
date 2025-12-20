@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/core/ThemeToggle.astro";
 import LayoutWidthToggle from "@/components/core/LayoutWidthToggle.astro";
 import { Separator } from "@/components/ui/separator";
-import { SITE } from "@data/config";
+import { HEADER_FEATURES } from "@data/config";
 import HeaderLogo from "@/components/core/HeaderLogo.astro";
 import HeaderNav from "@/components/core/HeaderNav.astro";
 import HeaderGithubButton from "@/components/core/HeaderGithubButton.astro";
@@ -27,7 +27,7 @@ const menuPanelId = "mobile-menu";
 
         <div class="ml-auto flex items-center gap-2 lg:h-4">
             {
-                SITE.enableGitHubButton && (
+                HEADER_FEATURES.enableGitHubButton && (
                     <>
                         <HeaderGithubButton />
                         <Separator
@@ -38,7 +38,7 @@ const menuPanelId = "mobile-menu";
                 )
             }
             {
-                SITE.enableLayoutWidthToggle && (
+                HEADER_FEATURES.enableLayoutWidthToggle && (
                     <>
                         <LayoutWidthToggle />
                         <Separator

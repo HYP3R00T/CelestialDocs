@@ -22,12 +22,11 @@
  */
 
 // Re-export commonly used types for convenience
-export type { NavItem, SocialObjects, SiteConfig } from "./types";
+export type { HeadSEOProps, NavItem, SocialObjects, SiteConfig } from "./types";
 export type {
     Entry,
     Group,
     Sidebar,
-    HeadSEOProps,
     BaseLayoutProps,
     DocsLayoutProps,
     SidebarProps,

@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Button } from "@/components/ui/button";
-import { SITE } from "@data/config";
+import { SITE, HEADER_FEATURES } from "@data/config";
 import type { HeaderGithubButtonProps } from "@/lib/types";
 
 // Component accepts no props
@@ -15,7 +15,7 @@ Astro.props as HeaderGithubButtonProps;
         target="_blank"
         rel="noopener noreferrer"
         data-repo={SITE.repo}
-        data-threshold={SITE.starCountThreshold}
+        data-threshold={HEADER_FEATURES.starCountThreshold}
         class="flex items-center gap-2"
     >
         <Icon name="github" class="size-5" />

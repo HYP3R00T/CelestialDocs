@@ -1,10 +1,10 @@
 ---
-import { enableTableOfContentsExtra } from "@data/config";
+import { TABLE_OF_CONTENTS } from "@data/config";
 import TableOfContentsExtra from "./TableOfContentsExtra.astro";
 import type { TableOfContentsProps } from "@/lib/docs/types";
 
 const { headings = [] } = Astro.props as TableOfContentsProps;
-const extraEnabled = enableTableOfContentsExtra;
+const extraEnabled = TABLE_OF_CONTENTS.enableExtra;
 const tocMaxHeight = extraEnabled
     ? "calc((100vh - 5.25rem) * 0.66)"
     : "calc(100vh - 5.25rem)";

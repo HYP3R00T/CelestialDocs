@@ -6,7 +6,7 @@ import Breadcrumb from "@/components/docs/Breadcrumb.astro";
 import SourceButton from "@/components/docs/SourceButton.astro";
 import { buildNavigation, getActiveTab } from "@/lib/navigation";
 import { buildBreadcrumbItems } from "@/lib/docs/breadcrumb";
-import { navigation } from "@data/config";
+import { SIDEBAR_NAVIGATION } from "@data/config";
 import type { DocsLayoutProps, Heading } from "@/lib/docs/types";
 
 const {
@@ -16,7 +16,7 @@ const {
 } = Astro.props as DocsLayoutProps;
 
 // Build navigation
-const navResult = await buildNavigation(navigation);
+const navResult = await buildNavigation(SIDEBAR_NAVIGATION);
 const activeTab = getActiveTab(currentSlug, navResult.tabs);
 
 // Build breadcrumb items

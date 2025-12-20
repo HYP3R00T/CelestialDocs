@@ -1,13 +1,12 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Socials, navItems } from "@data/config";
+import { HEADER_SOCIAL_LINKS, HEADER_NAV_ITEMS } from "@data/config";
 import type { HeaderMobileMenuProps } from "@/lib/types";
 
 const props = Astro.props as HeaderMobileMenuProps;
 
-const activeSocials = Socials.filter((social) => social.active);
+const activeSocials = HEADER_SOCIAL_LINKS.filter((social) => social.active);
 const menuPanelId = "mobile-menu";
 const menuButtonId = "mobile-menu-btn";
 ---
@@ -26,16 +25,18 @@ const menuButtonId = "mobile-menu-btn";
                     class="flex flex-col items-center gap-3 text-sm font-medium"
                 >
                     {
-                        navItems.map(({ href, label, special, blank }) => (
-                            <a
-                                href={href}
-                                target={blank ? "_blank" : undefined}
-                                rel={blank ? "noreferrer" : undefined}
-                                class={`tracking-wide transition hover:text-primary ${special ? "text-primary" : "text-muted-foreground"}`}
-                            >
-                                {label}
-                            </a>
-                        ))
+                        HEADER_NAV_ITEMS.map(
+                            ({ href, label, special, blank }) => (
+                                <a
+                                    href={href}
+                                    target={blank ? "_blank" : undefined}
+                                    rel={blank ? "noreferrer" : undefined}
+                                    class={`tracking-wide transition hover:text-primary ${special ? "text-primary" : "text-muted-foreground"}`}
+                                >
+                                    {label}
+                                </a>
+                            ),
+                        )
                     }
                 </nav>
 

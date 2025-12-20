@@ -34,13 +34,36 @@ export interface SiteConfig {
     branch?: string;
     title: string;
     description: string;
-    image?: unknown;
+    image: string | ImageMetadata;
     imageAlt?: string;
     twitterHandle?: string;
     starCountThreshold?: number;
     enableLayoutWidthToggle?: boolean;
     enableGitHubButton?: boolean;
     defaultDocRedirect?: string;
+}
+
+export interface LocaleConfig {
+    lang: string;
+}
+
+export interface HeaderFeatures {
+    starCountThreshold: number;
+    enableLayoutWidthToggle: boolean;
+    enableGitHubButton: boolean;
+}
+
+export interface TableOfContentsConfig {
+    enableExtra: boolean;
+}
+
+export interface HeadSEOProps {
+    title?: string;
+    description?: string;
+    image?: string | ImageMetadata;
+    imageAlt?: string;
+    contentType?: string;
+    noIndex?: boolean;
 }
 
 // ============================================================================

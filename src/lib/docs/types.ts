@@ -1,4 +1,4 @@
-import type { ImageMetadata } from "astro";
+import type { HeadSEOProps } from "@/lib/types";
 
 // ============================================================================
 // NAVIGATION TYPES - Documentation Navigation
@@ -56,18 +56,6 @@ export interface Sidebar {
 // ============================================================================
 // LAYOUT COMPONENT TYPES
 // ============================================================================
-
-/**
- * Props for HeadSEO component
- */
-export interface HeadSEOProps {
-    title: string;
-    description: string;
-    image: string | ImageMetadata;
-    imageAlt: string;
-    contentType: string;
-    noIndex?: boolean;
-}
 
 /**
  * Props for BaseLayout component

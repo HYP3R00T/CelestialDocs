@@ -1,16 +1,24 @@
-import { navigation } from "@data/config";
-import type { Group, Entry } from "./types";
+import { SIDEBAR_NAVIGATION } from "@data/config";
+import type { Entry, Group, GroupOrEntry } from "./types";
 
 /**
  * Find a group in the navigation tree by its path
  */
-function findGroupByPath(path: string, groups: Group[] = navigation.groups): Group | undefined {
-    for (const group of groups) {
-        if (group.path === path || group.id === path) {
-            return group;
+function isGroup(item: GroupOrEntry): item is Group {
+    return "id" in item && typeof item.id === "string";
+}
+
+function findGroupByPath(path: string, groups: GroupOrEntry[] = SIDEBAR_NAVIGATION.groups): Group | undefined {
+    for (const node of groups) {
+        if (!isGroup(node)) {
+            continue;
         }
-        if (group.groups) {
-            const found = findGroupByPath(path, group.groups);
+
+        if (node.path === path || node.id === path) {
+            return node;
+        }
+        if (node.groups) {
+            const found = findGroupByPath(path, node.groups);
             if (found) return found;
         }
     }
@@ -20,17 +28,24 @@ function findGroupByPath(path: string, groups: Group[] = navigation.groups): Gro
 /**
  * Find an entry in the navigation tree by its slug
  */
-function findEntryBySlug(slug: string, groups: Group[] = navigation.groups): Entry | undefined {
-    for (const group of groups) {
-        if (group.entries) {
-            for (const entry of group.entries) {
+function findEntryBySlug(slug: string, nodes: GroupOrEntry[] = SIDEBAR_NAVIGATION.groups): Entry | undefined {
+    for (const node of nodes) {
+        if (!isGroup(node)) {
+            if (node.slug === slug) {
+                return node;
+            }
+            continue;
+        }
+
+        if (node.entries) {
+            for (const entry of node.entries) {
                 if (entry.slug === slug) {
                     return entry;
                 }
             }
         }
-        if (group.groups) {
-            const found = findEntryBySlug(slug, group.groups);
+        if (node.groups) {
+            const found = findEntryBySlug(slug, node.groups);
             if (found) return found;
         }
     }
@@ -66,25 +81,30 @@ function getBreadcrumbLabel(currentPath: string): string | null {
  * Check if a path corresponds to an actual page entry (not just a group)
  */
 function isPageEntry(slug: string): boolean {
-    function checkGroups(groups: Group[]): boolean {
-        for (const group of groups) {
-            // Check entries in this group
-            if (group.entries) {
-                for (const entry of group.entries) {
+    function checkNodes(nodes: GroupOrEntry[]): boolean {
+        for (const node of nodes) {
+            if (!isGroup(node)) {
+                if (node.slug === slug) {
+                    return true;
+                }
+                continue;
+            }
+
+            if (node.entries) {
+                for (const entry of node.entries) {
                     if (entry.slug === slug) {
                         return true;
                     }
                 }
             }
-            // Recursively check subgroups
-            if (group.groups && checkGroups(group.groups)) {
+            if (node.groups && checkNodes(node.groups)) {
                 return true;
             }
         }
         return false;
     }
 
-    return checkGroups(navigation.groups);
+    return checkNodes(SIDEBAR_NAVIGATION.groups);
 }
 
 /**

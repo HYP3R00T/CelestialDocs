@@ -1,10 +1,10 @@
 import type { APIRoute } from "astro";
 import { buildNavigation } from "@/lib/navigation";
-import { navigation } from "@data/config";
+import { SIDEBAR_NAVIGATION } from "@data/config";
 
 export const GET: APIRoute = async () => {
   try {
-    const nav = await buildNavigation(navigation as any);
+    const nav = await buildNavigation(SIDEBAR_NAVIGATION as any);
     return new Response(JSON.stringify(nav, null, 2), {
       headers: {
         "Content-Type": "application/json; charset=utf-8",
