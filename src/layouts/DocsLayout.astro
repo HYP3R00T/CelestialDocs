@@ -43,12 +43,12 @@ const tableOfContentsHeadings = headings
         />
 
         <!-- Main content  -->
-        <main class="flex-1 px-8 py-6">
+        <main class="flex-1 px-8 py-6 min-w-0">
             <div class="flex items-center justify-between gap-4 mb-6">
                 <Breadcrumb items={breadcrumbItems} />
                 <SourceButton slug={currentSlug} />
             </div>
-            <article class="prose prose-slate dark:prose-invert">
+            <article class="prose prose-slate dark:prose-invert min-w-0">
                 <slot />
             </article>
         </main>
