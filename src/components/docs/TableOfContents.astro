@@ -1,4 +1,5 @@
 ---
+import TableOfContentsExtra from "./TableOfContentsExtra.astro";
 import type { TableOfContentsProps } from "@/lib/docs/types";
 
 const { headings = [] } = Astro.props as TableOfContentsProps;
@@ -9,27 +10,35 @@ const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 
 {
     filteredHeadings.length > 0 && (
-        <aside class="sticky top-17 hidden h-[calc(100vh-5.25rem)] overflow-y-auto bg-popover xl:block rounded-lg">
-            <nav
-                aria-label="Table of contents"
-                class="flex h-full flex-col px-4 py-6"
-            >
-                <h3 class="mb-4 text-sm font-semibold text-foreground">
-                    On this page
-                </h3>
-                <ul class="space-y-2 text-sm">
-                    {filteredHeadings.map((heading) => (
-                        <li class={heading.depth === 3 ? "ml-4" : ""}>
-                            <a
-                                href={`#${heading.id}`}
-                                class="text-muted-foreground transition-colors hover:text-foreground"
-                            >
-                                {heading.text}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
+        <aside class="sticky top-17 hidden h-[calc(100vh-5.25rem)] xl:block">
+            <div class="flex h-full flex-col gap-4">
+                <section
+                    class="rounded-2xl bg-popover p-5"
+                    style="max-height: calc((100vh - 5.25rem) * 0.66)"
+                >
+                    <nav
+                        aria-label="Table of contents"
+                        class="flex h-full flex-col"
+                    >
+                        <h3 class="mb-4 text-sm font-semibold text-foreground">
+                            On this page
+                        </h3>
+                        <ul class="flex-1 space-y-2 overflow-y-auto text-sm">
+                            {filteredHeadings.map((heading) => (
+                                <li class={heading.depth === 3 ? "ml-4" : ""}>
+                                    <a
+                                        href={`#${heading.id}`}
+                                        class="text-muted-foreground transition-colors hover:text-foreground"
+                                    >
+                                        {heading.text}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                </section>
+                <TableOfContentsExtra />
+            </div>
         </aside>
     )
 }

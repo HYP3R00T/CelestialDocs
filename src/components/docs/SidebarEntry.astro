@@ -13,8 +13,8 @@ const isActive = currentSlug === entry.slug;
       flex items-center gap-2 rounded-sm px-2 py-1 text-sm transition-colors
       ${
           isActive
-              ? "bg-secondary text-secondary-foreground font-medium"
-              : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+              ? "bg-popover text-popover-foreground font-medium"
+              : "text-muted-foreground hover:bg-popover/50 hover:text-foreground"
       }
     `}
         aria-current={isActive ? "page" : undefined}
