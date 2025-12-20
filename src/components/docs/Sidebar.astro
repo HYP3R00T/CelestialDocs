@@ -2,12 +2,23 @@
 import SidebarGroup from "./SidebarGroup.astro";
 import SidebarEntry from "./SidebarEntry.astro";
 import DocIcon from "./DocIcon.astro";
-import type { SidebarProps, Tab, SidebarGroupItem } from "@/lib/docs/types";
+import type { SidebarGroupItem, SidebarProps, Tab } from "@/lib/docs/types";
 
 const { tabs, showTabs, activeTab, currentSlug } = Astro.props as SidebarProps;
 
 // Helper to find first entry in a group
 function findFirstEntry(group: SidebarGroupItem): string | null {
+    if (group.children && group.children.length > 0) {
+        for (const child of group.children) {
+            if ("slug" in child) {
+                return child.slug;
+            }
+
+            const entry = findFirstEntry(child as SidebarGroupItem);
+            if (entry) return entry;
+        }
+    }
+
     if (group.entries && group.entries.length > 0) {
         return group.entries[0].slug;
     }
@@ -71,9 +82,10 @@ function findFirstEntry(group: SidebarGroupItem): string | null {
                     activeTab && (
                         <>
                             {/* Ordered children (entries and groups) if present */}
-                            {activeTab.group.children && activeTab.group.children.length > 0 ? (
+                            {activeTab.group.children &&
+                            activeTab.group.children.length > 0 ? (
                                 <div class="space-y-2">
-                                    {activeTab.group.children.map((child) => (
+                                    {activeTab.group.children.map((child) =>
                                         (child as any).slug ? (
                                             <ul class="space-y-1">
                                                 <SidebarEntry
@@ -83,11 +95,13 @@ function findFirstEntry(group: SidebarGroupItem): string | null {
                                             </ul>
                                         ) : (
                                             <SidebarGroup
-                                                group={child as any as SidebarGroupItem}
+                                                group={
+                                                    child as any as SidebarGroupItem
+                                                }
                                                 currentSlug={currentSlug}
                                             />
-                                        )
-                                    ))}
+                                        ),
+                                    )}
                                 </div>
                             ) : (
                                 <>
@@ -99,7 +113,9 @@ function findFirstEntry(group: SidebarGroupItem): string | null {
                                                     (entry) => (
                                                         <SidebarEntry
                                                             entry={entry}
-                                                            currentSlug={currentSlug}
+                                                            currentSlug={
+                                                                currentSlug
+                                                            }
                                                         />
                                                     ),
                                                 )}
@@ -110,12 +126,16 @@ function findFirstEntry(group: SidebarGroupItem): string | null {
                                     {activeTab.group.groups &&
                                         activeTab.group.groups.length > 0 && (
                                             <div class="space-y-2">
-                                                {activeTab.group.groups.map((group) => (
-                                                    <SidebarGroup
-                                                        group={group}
-                                                        currentSlug={currentSlug}
-                                                    />
-                                                ))}
+                                                {activeTab.group.groups.map(
+                                                    (group) => (
+                                                        <SidebarGroup
+                                                            group={group}
+                                                            currentSlug={
+                                                                currentSlug
+                                                            }
+                                                        />
+                                                    ),
+                                                )}
                                             </div>
                                         )}
                                 </>

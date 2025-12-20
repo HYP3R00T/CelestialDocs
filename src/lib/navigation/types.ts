@@ -52,7 +52,6 @@ export interface Tab {
 export interface NavigationResult {
   tabs: Tab[];
   showTabs: boolean;
-  defaultTab?: Tab;
 }
 
 export type { Entry, Group, Sidebar };

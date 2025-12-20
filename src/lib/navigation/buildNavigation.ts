@@ -1,157 +1,176 @@
-import type { Sidebar } from "../docs/types";
+import type { Entry, Group, GroupOrEntry, Sidebar } from "../docs/types";
 import { getDocsFromFilesystem } from "./loader";
 import { buildFilesystemStructure } from "./buildFilesystemStructure";
 import { processGroup } from "./process";
-import { collectTabs, removeTabGroups } from "./tabs";
-import type { ProcessedGroup, ProcessedEntry, Tab, NavigationResult } from "./types";
+import { collectTabGroups, stripTabGroups } from "./tabs";
+import type { DocEntry, NavigationResult, ProcessedEntry, ProcessedGroup, Tab } from "./types";
+
+type NavigationItem = NavigationEntryItem | NavigationGroupItem;
+
+interface NavigationEntryItem {
+  type: "entry";
+  entry: ProcessedEntry;
+}
+
+interface NavigationGroupItem {
+  type: "group";
+  group: ProcessedGroup;
+}
 
 /**
- * Build the complete navigation structure
- *
- * Example config fragment:
- * {
- *   groups: [
- *     { id: 'getting-started', label: 'Getting started', entries: [{slug: 'getting-started/installation'}] },
- *     { id: 'guides', tab: true, groups: [{ id: 'advanced'}] }
- *   ]
- * }
+ * Build the navigation tabs and default area from the sidebar configuration.
  */
 export async function buildNavigation(config: Sidebar): Promise<NavigationResult> {
-  // Get all docs from filesystem
   const allDocs = await getDocsFromFilesystem();
   const filesystemStructure = buildFilesystemStructure(allDocs);
 
-  // Map configuration items (Group or bare Entry) into processed items while preserving original order
-  const orderedConfigItems = config.groups
-    .map((item: any, idx: number) => {
-      if (item && (item as any).slug) {
-        const entrySlug = (item as any).slug as string;
-        const doc = allDocs.find((d) => d.slug === entrySlug);
-        if (!doc) {
-          console.warn(`Top-level entry ${entrySlug} not found in docs collection`);
-          return null;
-        }
-        if (item.hidden || doc.data.navHidden) return null;
+  const navigationItems = buildNavigationItems(config.groups, filesystemStructure, allDocs);
+  const tabs = buildTabs(navigationItems);
 
-        return {
-          type: "entry",
-          index: idx,
-          entry: {
-            slug: entrySlug,
-            label: (item as any).label || doc.data.navLabel || doc.data.title,
-            icon: (item as any).icon || doc.data.navIcon,
-            hidden: false,
-            order: doc.data.navOrder,
-          } as ProcessedEntry,
-        };
-      }
+  const { children: defaultChildren, slugs } = buildDefaultChildren(navigationItems);
+  const rootEntries = buildRootEntries(filesystemStructure, slugs);
+  const children = [...defaultChildren, ...rootEntries];
 
-      // Process group
-      const processed = processGroup(item as any, filesystemStructure, allDocs);
-      return { type: "group", index: idx, group: processed } as any;
-    })
-    .filter(Boolean) as Array<{ type: "entry" | "group"; index: number; entry?: ProcessedEntry; group?: ProcessedGroup }>;
-
-  // Extract processed groups for tab computations (from orderedConfigItems)
-  const processedGroups = orderedConfigItems.filter((i) => i?.type === "group").map((i) => (i as any).group as ProcessedGroup);
-
-  // Collect all groups that should be tabs (at any level)
-  const allTabGroups = collectTabs(processedGroups);
-
-  // For tabs that have subgroups, also remove nested tabs from their structure
-  const cleanedTabGroups = allTabGroups.map((tabGroup) => {
-    if (tabGroup.groups && tabGroup.groups.length > 0) {
-      const nonTabSubgroups = tabGroup.groups.filter((g) => (g as any).tab !== true);
-      return {
-        ...tabGroup,
-        groups: removeTabGroups(nonTabSubgroups),
-      } as ProcessedGroup;
-    }
-    return tabGroup;
-  });
-
-  // Get non-tab groups (with tab groups removed from hierarchy)
-  const defaultGroups = removeTabGroups(processedGroups);
-
-  // Create tabs
-  const tabs: Tab[] = cleanedTabGroups.map((group) => ({
-    id: group.id,
-    label: group.label,
-    icon: group.icon,
-    group: group,
-  }));
-
-  // Create default tab if there are non-tab groups
-  let defaultTab: Tab | undefined;
-  if (defaultGroups.length > 0) {
-    // Collect all existing slugs from processed groups to avoid duplicates
-    const existingSlugs = new Set<string>();
-    function collectSlugs(groups: ProcessedGroup[]) {
-      groups.forEach((g) => {
-        (g.entries || []).forEach((e) => existingSlugs.add(e.slug));
-        if (g.groups && g.groups.length) collectSlugs(g.groups);
-      });
-    }
-    collectSlugs(defaultGroups);
-
-    // Build ordered children: iterate original orderedConfigItems to preserve configured ordering
-    const defaultChildren: Array<ProcessedGroup | ProcessedEntry> = [];
-
-    orderedConfigItems.forEach((item) => {
-      if (item.type === "entry" && item.entry) {
-        const entry = item.entry;
-        if (!existingSlugs.has(entry.slug)) {
-          defaultChildren.push(entry);
-          existingSlugs.add(entry.slug);
-        }
-      } else if (item.type === "group" && item.group) {
-        const group = item.group;
-        if ((group as any).tab !== true) {
-          const cleaned = {
-            ...group,
-            groups: removeTabGroups(group.groups || []),
-          } as ProcessedGroup;
-          defaultChildren.push(cleaned);
-        }
-      }
-    });
-
-    // Add root-level docs as top-level entries (not grouped), excluding index and already included slugs
-    const rootDocs = filesystemStructure.get("") || [];
-    const rootEntries = rootDocs
-      .filter((doc) => !doc.data.navHidden && doc.slug !== "index" && !existingSlugs.has(doc.slug))
-      .map((doc) => ({
-        slug: doc.slug,
-        label: doc.data.navLabel || doc.data.title,
-        icon: doc.data.navIcon,
-        order: doc.data.navOrder,
-      }))
-      .sort((a, b) => a.label.localeCompare(b.label));
-
-    // Finally append root entries (filesystem-root docs) after configured items
-    const children = [...defaultChildren, ...rootEntries];
-
-    defaultTab = {
-      id: "_default",
-      label: "Docs",
-      group: {
-        id: "_default",
-        label: "Docs",
-        groups: defaultGroups,
-        entries: [],
-        // ordered mix of entries and groups for rendering
-        children: children as any,
-      },
-    };
-  }
-
-  // Determine if we should show tabs
+  const defaultTab = children.length ? createDefaultTab(children) : undefined;
   const visibleTabs = defaultTab ? [defaultTab, ...tabs] : tabs;
-  const showTabs = visibleTabs.length >= 2;
 
   return {
     tabs: visibleTabs,
-    showTabs,
-    defaultTab,
-  } as NavigationResult;
+    showTabs: visibleTabs.length >= 2,
+  };
+}
+
+function buildNavigationItems(
+  items: GroupOrEntry[],
+  filesystemStructure: Map<string, DocEntry[]>,
+  allDocs: DocEntry[],
+): NavigationItem[] {
+  const navigationItems: NavigationItem[] = [];
+
+  for (const item of items) {
+    if (isEntryConfig(item)) {
+      const doc = allDocs.find((d) => d.slug === item.slug);
+      if (!doc) {
+        console.warn(`Top-level entry ${item.slug} not found in docs collection`);
+        continue;
+      }
+
+      if (item.hidden || doc.data.navHidden) {
+        continue;
+      }
+
+      navigationItems.push({
+        type: "entry",
+        entry: {
+          slug: item.slug,
+          label: item.label || doc.data.navLabel || doc.data.title,
+          icon: item.icon || doc.data.navIcon,
+          hidden: false,
+          order: doc.data.navOrder,
+        },
+      });
+      continue;
+    }
+
+    navigationItems.push({
+      type: "group",
+      group: processGroup(item as Group, filesystemStructure, allDocs),
+    });
+  }
+
+  return navigationItems;
+}
+
+function isEntryConfig(item: GroupOrEntry): item is Entry {
+  return "slug" in item && typeof item.slug === "string";
+}
+
+function buildTabs(items: NavigationItem[]): Tab[] {
+  const tabGroups: ProcessedGroup[] = [];
+
+  for (const item of items) {
+    if (item.type !== "group") {
+      continue;
+    }
+
+    collectTabGroups([item.group]).forEach((group) => {
+      tabGroups.push(stripTabGroups(group));
+    });
+  }
+
+  return tabGroups.map((group) => ({
+    id: group.id,
+    label: group.label,
+    icon: group.icon,
+    group,
+  }));
+}
+
+function buildDefaultChildren(items: NavigationItem[]): {
+  children: Array<ProcessedGroup | ProcessedEntry>;
+  slugs: Set<string>;
+} {
+  const children: Array<ProcessedGroup | ProcessedEntry> = [];
+  const slugs = new Set<string>();
+
+  for (const item of items) {
+    if (item.type === "entry") {
+      if (slugs.has(item.entry.slug)) {
+        continue;
+      }
+
+      slugs.add(item.entry.slug);
+      children.push(item.entry);
+      continue;
+    }
+
+    if (item.group.tab) {
+      continue;
+    }
+
+    const normalizedGroup = stripTabGroups(item.group);
+    children.push(normalizedGroup);
+    collectGroupSlugs(normalizedGroup, slugs);
+  }
+
+  return { children, slugs };
+}
+
+function createDefaultTab(children: Array<ProcessedGroup | ProcessedEntry>): Tab {
+  return {
+    id: "_default",
+    label: "Docs",
+    group: {
+      id: "_default",
+      label: "Docs",
+      entries: [],
+      groups: [],
+      children,
+    },
+  };
+}
+
+function collectGroupSlugs(group: ProcessedGroup, slugs: Set<string>): void {
+  (group.entries ?? []).forEach((entry) => slugs.add(entry.slug));
+  (group.groups ?? []).forEach((child) => collectGroupSlugs(child, slugs));
+}
+
+function buildRootEntries(
+  filesystemStructure: Map<string, DocEntry[]>,
+  slugs: Set<string>,
+): ProcessedEntry[] {
+  const rootDocs = filesystemStructure.get("") ?? [];
+
+  const rootEntries = rootDocs
+    .filter((doc) => !doc.data.navHidden && doc.slug !== "index" && !slugs.has(doc.slug))
+    .map((doc) => ({
+      slug: doc.slug,
+      label: doc.data.navLabel || doc.data.title || doc.slug,
+      icon: doc.data.navIcon,
+      order: doc.data.navOrder,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+
+  rootEntries.forEach((entry) => slugs.add(entry.slug));
+  return rootEntries;
 }

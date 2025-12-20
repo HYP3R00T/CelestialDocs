@@ -8,12 +8,9 @@ import type { Tab } from "./types";
  * getActiveTab('guides/advanced/patterns', tabs)
  */
 export function getActiveTab(slug: string, tabs: Tab[]): Tab | undefined {
-  // Find which tab contains this slug
-  for (const tab of tabs) {
-    if (containsSlug(tab.group, slug)) {
-      return tab;
-    }
-  }
-
-  return tabs.find((t) => t.id === "_default") || tabs[0];
+  return (
+    tabs.find((tab) => containsSlug(tab.group, slug)) ??
+    tabs.find((tab) => tab.id === "_default") ??
+    tabs[0]
+  );
 }
