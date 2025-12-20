@@ -29,10 +29,28 @@ export interface Group {
 }
 
 /**
+ * A top-level sidebar item can be either a Group or a bare Entry.
+ * This allows mixing entries and groups in the configuration and preserving order.
+ */
+export type GroupOrEntry = Group | Entry;
+
+/**
+ * Sidebar group used by components may contain ordered children (mix of groups and entries)
+ */
+export interface SidebarGroupItem {
+    id: string;
+    label: string;
+    icon?: string;
+    groups?: SidebarGroupItem[];
+    entries?: SidebarEntryItem[];
+    children?: Array<SidebarGroupItem | SidebarEntryItem>;
+}
+
+/**
  * Sidebar configuration containing groups
  */
 export interface Sidebar {
-    groups: Group[];
+    groups: GroupOrEntry[];
 }
 
 // ============================================================================

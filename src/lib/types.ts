@@ -40,6 +40,7 @@ export interface SiteConfig {
     starCountThreshold?: number;
     enableLayoutWidthToggle?: boolean;
     enableGitHubButton?: boolean;
+    defaultDocRedirect?: string;
 }
 
 // ============================================================================

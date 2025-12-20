@@ -1,4 +1,36 @@
 ---
-// Redirect to the first documentation page
-return Astro.redirect("/docs/getting-started/introduction");
+import { getCollection, render } from "astro:content";
+import { SITE } from "@data/config";
+import DocsLayout from "@/layouts/DocsLayout.astro";
+import MdxImage from "@/components/docs/markdown/MdxImage.astro";
+import MdxLink from "@/components/docs/markdown/MdxLink.astro";
+
+// Render the docs `index` page instead of redirecting
+const docs = await getCollection("docs");
+const doc = docs.find((d) => d.id === "index");
+
+if (!doc) {
+    // Fallback to redirect if index doc is missing
+    return Astro.redirect(SITE.defaultDocRedirect ?? "/");
+}
+
+const { Content, headings } = await render(doc);
+const { title, description } = doc.data;
+
+const components = {
+    img: MdxImage,
+    a: MdxLink,
+};
 ---
+
+<DocsLayout
+    title={title}
+    description={description}
+    currentSlug={doc.id}
+    contentType="article"
+    headings={headings}
+>
+    <h1>{title}</h1>
+    {description && <p class="lead">{description}</p>}
+    <Content components={components} />
+</DocsLayout>

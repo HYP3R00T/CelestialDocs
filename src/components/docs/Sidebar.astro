@@ -70,33 +70,56 @@ function findFirstEntry(group: SidebarGroupItem): string | null {
                 {
                     activeTab && (
                         <>
-                            {/* Root-level entries (if any) */}
-                            {activeTab.group.entries &&
-                                activeTab.group.entries.length > 0 && (
-                                    <ul class="space-y-1">
-                                        {activeTab.group.entries.map(
-                                            (entry) => (
+                            {/* Ordered children (entries and groups) if present */}
+                            {activeTab.group.children && activeTab.group.children.length > 0 ? (
+                                <div class="space-y-2">
+                                    {activeTab.group.children.map((child) => (
+                                        (child as any).slug ? (
+                                            <ul class="space-y-1">
                                                 <SidebarEntry
-                                                    entry={entry}
+                                                    entry={child as any}
                                                     currentSlug={currentSlug}
                                                 />
-                                            ),
-                                        )}
-                                    </ul>
-                                )}
-
-                            {/* Root-level groups */}
-                            {activeTab.group.groups &&
-                                activeTab.group.groups.length > 0 && (
-                                    <div class="space-y-2">
-                                        {activeTab.group.groups.map((group) => (
+                                            </ul>
+                                        ) : (
                                             <SidebarGroup
-                                                group={group}
+                                                group={child as any as SidebarGroupItem}
                                                 currentSlug={currentSlug}
                                             />
-                                        ))}
-                                    </div>
-                                )}
+                                        )
+                                    ))}
+                                </div>
+                            ) : (
+                                <>
+                                    {/* Root-level entries (if any) */}
+                                    {activeTab.group.entries &&
+                                        activeTab.group.entries.length > 0 && (
+                                            <ul class="space-y-1">
+                                                {activeTab.group.entries.map(
+                                                    (entry) => (
+                                                        <SidebarEntry
+                                                            entry={entry}
+                                                            currentSlug={currentSlug}
+                                                        />
+                                                    ),
+                                                )}
+                                            </ul>
+                                        )}
+
+                                    {/* Root-level groups */}
+                                    {activeTab.group.groups &&
+                                        activeTab.group.groups.length > 0 && (
+                                            <div class="space-y-2">
+                                                {activeTab.group.groups.map((group) => (
+                                                    <SidebarGroup
+                                                        group={group}
+                                                        currentSlug={currentSlug}
+                                                    />
+                                                ))}
+                                            </div>
+                                        )}
+                                </>
+                            )}
                         </>
                     )
                 }

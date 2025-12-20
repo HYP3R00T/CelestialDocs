@@ -14,7 +14,8 @@ export const SITE: SiteConfig = {
     twitterHandle: "@HYP3R00T",
     starCountThreshold: 0,
     enableLayoutWidthToggle: true,
-    enableGitHubButton: true
+    enableGitHubButton: true,
+    defaultDocRedirect: "/docs/getting-started/introduction",
 };
 
 export const LOCALE = {
@@ -66,6 +67,8 @@ export const navigation: Sidebar = {
                 }
             ]
         },
+        // Top-level bare entry (not grouped) to be rendered inline
+        { slug: "quick-tour", label: "Quick Tour", icon: "sparkles" },
         {
             id: "components",
             label: "Components",
