@@ -1,7 +1,6 @@
 ---
 title: "Source Button (component)"
 description: "User-facing notes for the Source Button component."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Source Button"
 ---
 

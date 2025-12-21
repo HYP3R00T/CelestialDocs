@@ -1,7 +1,6 @@
 ---
 title: "MDX & Components"
 description: "For developers: how to add MDX components and expose them to docs."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "MDX & Components"
 ---
 
@@ -57,7 +56,6 @@ const components = { img: MdxImage, a: MdxLink, ExampleAlert };
 ```mdx
 ---
 title: "Tips"
-pubDatetime: 2025-12-21T00:00:00Z
 ---
 
 <ExampleAlert>

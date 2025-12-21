@@ -1,7 +1,6 @@
 ---
 title: "Add a Guide"
 description: "End-to-end example: add a new guide and configure the sidebar."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Add a Guide"
 ---
 
@@ -40,7 +39,6 @@ Example with sidebar options:
 ---
 title: "My New Guide"
 description: "Short summary of what this guide covers."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Quick Guide"
 navIcon: "📘"
 ---

@@ -1,7 +1,6 @@
 ---
 title: "Config Modifications"
 description: "How to edit `data/config.ts` to customize behavior for end users."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Config Modifications"
 ---
 

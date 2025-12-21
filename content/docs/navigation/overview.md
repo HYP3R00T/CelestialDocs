@@ -1,7 +1,6 @@
 ---
 title: "Navigation Overview"
 description: "How the documentation navigation is generated and how you can control it."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Navigation Overview"
 ---
 

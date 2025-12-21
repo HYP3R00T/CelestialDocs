@@ -1,7 +1,6 @@
 ---
 title: "Theme and Layout Width"
 description: "What the theme toggle and layout width toggle do (user-facing)."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Theme & Width"
 ---
 

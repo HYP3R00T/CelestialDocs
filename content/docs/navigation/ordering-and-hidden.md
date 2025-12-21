@@ -1,7 +1,6 @@
 ---
 title: "Ordering and Hidden Pages"
 description: "How `navHidden` affects navigation."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Order & Hidden"
 ---
 

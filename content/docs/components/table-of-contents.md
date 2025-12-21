@@ -1,7 +1,6 @@
 ---
 title: "Table of Contents"
 description: "How the on-page Table of Contents behaves and how to control it."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Table of Contents"
 ---
 

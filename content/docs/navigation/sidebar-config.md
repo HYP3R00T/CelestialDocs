@@ -1,7 +1,6 @@
 ---
 title: "Sidebar Configuration"
 description: "Detailed reference for sidebar group and entry settings in `data/config.ts`."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Sidebar Config"
 ---
 

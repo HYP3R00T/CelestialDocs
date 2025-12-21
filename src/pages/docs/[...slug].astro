@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 const { doc } = Astro.props;
 const { Content, headings } = await render(doc);
 
-const { title, description } = doc.data;
+const { title, description, authors } = doc.data;
 
 const components = {
     img: MdxImage,
@@ -33,5 +33,12 @@ const components = {
 >
     <h1>{title}</h1>
     {description && <p class="lead">{description}</p>}
+    {
+        authors && authors.length > 0 && (
+            <p class="text-sm text-muted-foreground mb-2">
+                By {authors.map((a) => `@${a}`).join(", ")}
+            </p>
+        )
+    }
     <Content components={components} />
 </DocsLayout>

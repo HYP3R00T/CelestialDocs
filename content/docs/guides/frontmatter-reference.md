@@ -1,7 +1,6 @@
 ---
 title: "Frontmatter Reference"
 description: "Reference for all supported frontmatter fields for docs."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Frontmatter"
 ---
 
@@ -15,6 +14,7 @@ This page documents the supported frontmatter fields you can add to pages under 
 
 - `description` (string) — Short summary shown in meta tags and sometimes on listing pages.
 - `draft` (boolean) — Mark a page as a draft while authoring. Treat drafts as not ready for publication; how you handle drafts in CI or publishing is up to your workflow.
+- `authors` (string[]) — Optional list of GitHub username handles for the page (e.g., `authors: ["octocat"]`).
 
 ## Media
 
@@ -44,6 +44,7 @@ Behavior and precedence:
 title: "My Guide"
 description: "A short summary of this guide."
 draft: false
+authors: ["octocat"]
 navLabel: "Quick Guide"
 navIcon: "📚"
 navHidden: false

@@ -1,7 +1,6 @@
 ---
 title: "Config Reference"
 description: "Developer-level reference for `data/config.ts` options and types."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Config Reference"
 ---
 

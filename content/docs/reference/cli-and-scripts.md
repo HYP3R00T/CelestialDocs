@@ -1,7 +1,6 @@
 ---
 title: "CLI & Scripts"
 description: "Commands and scripts useful for site authors."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "CLI & Scripts"
 ---
 

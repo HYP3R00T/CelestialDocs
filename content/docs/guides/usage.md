@@ -1,7 +1,6 @@
 ---
 title: "Writing docs: Markdown vs MDX"
 description: "Guidance for content authors on choosing between Markdown and MDX."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Usage"
 ---
 

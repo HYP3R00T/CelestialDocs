@@ -14,6 +14,12 @@ const docs = defineCollection({
       navLabel: z.string().optional(),
       navIcon: z.string().optional(),
       navHidden: z.boolean().optional().default(false),
+
+      /**
+       * `authors` — optional list of GitHub usernames (string handles) for the page.
+       * Example: ['octocat', 'another-user']
+       */
+      authors: z.array(z.string()).optional().default([]),
     }),
 });
 

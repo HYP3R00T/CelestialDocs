@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 description: "What CelestialDocs is and who it's for."
-pubDatetime: 2025-12-21T00:00:00Z
+authors: ["HYP3R00T"]
 navLabel: "Introduction"
 ---
 

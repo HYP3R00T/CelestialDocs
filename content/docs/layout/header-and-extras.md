@@ -1,7 +1,6 @@
 ---
 title: "Header & Extras"
 description: "Header behavior and Table of Contents basics."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Header & TOC"
 ---
 

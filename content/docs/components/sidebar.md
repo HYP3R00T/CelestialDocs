@@ -1,7 +1,6 @@
 ---
 title: "Sidebar"
 description: "How the Sidebar behaves from a user's perspective."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Sidebar"
 ---
 
@@ -69,7 +68,6 @@ The Sidebar organizes your docs into top-level tabs, groups, and entries. It's d
 ```yaml
 ---
 title: "Secret Notes"
-pubDatetime: 2025-12-21T00:00:00Z
 navHidden: true
 ---
 ```

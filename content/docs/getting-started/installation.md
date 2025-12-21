@@ -1,7 +1,6 @@
 ---
 title: "Installation"
 description: "Fork, clone, and run the site locally (recommended workflow)."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Installation"
 ---
 

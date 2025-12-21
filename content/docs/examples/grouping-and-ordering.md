@@ -1,7 +1,6 @@
 ---
 title: "Grouping & Ordering"
 description: "Examples demonstrating groups, manual entries, mixing auto-generated content, and how `navHidden` affects the resulting sidebar."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Grouping & Ordering"
 ---
 
@@ -57,7 +56,6 @@ To keep a page accessible but not listed in the sidebar, set `navHidden: true` i
 ```yaml
 ---
 title: "Notes"
-pubDatetime: 2025-12-21T00:00:00Z
 navHidden: true
 ---
 ```

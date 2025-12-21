@@ -24,6 +24,7 @@ export async function getDocsFromFilesystem(): Promise<DocEntry[]> {
       navLabel: (doc.data as any).navLabel,
       navIcon: (doc.data as any).navIcon,
       navHidden: (doc.data as any).navHidden,
+      authors: (doc.data as any).authors,
     },
   }));
 }

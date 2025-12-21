@@ -1,7 +1,6 @@
 ---
 title: "Documentation"
 description: "Overview of the CelestialDocs documentation site and where to get started."
-pubDatetime: 2024-01-06T00:00:00Z
 
 navLabel: "Docs"
 navIcon: "📚"

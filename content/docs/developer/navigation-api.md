@@ -1,7 +1,6 @@
 ---
 title: "Navigation API"
 description: "Developer reference for `src/lib/navigation/*`"
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Navigation API"
 ---
 

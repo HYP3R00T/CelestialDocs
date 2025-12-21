@@ -1,7 +1,6 @@
 ---
 title: "Quick Start"
 description: "Minimal steps to add content and see it on the site."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Quick Start"
 ---
 

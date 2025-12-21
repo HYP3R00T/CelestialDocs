@@ -1,7 +1,6 @@
 ---
 title: "Tabs and Defaults"
 description: "How docs tabs and the default area are created and how to control them."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Tabs & Defaults"
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: "Content Collections"
 description: "Developer guide for `src/content.config.ts` and customizing collections."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Content Collections"
 ---
 
@@ -39,6 +38,7 @@ const docs = defineCollection({
       navLabel: z.string().optional(),
       navIcon: z.string().optional(),
       navHidden: z.boolean().optional().default(false),
+      authors: z.array(z.string()).optional().default([]),
     }),
 });
 

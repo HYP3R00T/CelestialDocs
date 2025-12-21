@@ -1,7 +1,6 @@
 ---
 title: "Contributing"
 description: "How to contribute documentation and follow this project's doc standards."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Contributing"
 ---
 
@@ -33,6 +32,7 @@ Use this template for new pages:
 title: "Short, descriptive title"
 description: "One-line summary"
 # Optional:
+# authors: ["octocat"]
 # navLabel: "Short label"
 # navIcon: "📚"
 # navHidden: false

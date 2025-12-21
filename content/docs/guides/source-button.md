@@ -1,7 +1,6 @@
 ---
 title: "Source Button"
 description: "Explain the "View as Markdown" / source button behavior."
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Source Button"
 ---
 
