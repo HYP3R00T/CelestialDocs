@@ -83,9 +83,18 @@ const isExpanded = containsSlug(group, currentSlug);
 
             newButton.addEventListener("click", () => {
                 const groupId = newButton.getAttribute("data-group-toggle");
-                const content = document.querySelector<HTMLDivElement>(
-                    `[data-group-content="${groupId}"]`,
-                );
+
+                // Prefer the content that belongs to the same `.sidebar-group` instance
+                const hostGroup =
+                    newButton.closest<HTMLDivElement>(".sidebar-group");
+                const content =
+                    hostGroup?.querySelector<HTMLDivElement>(
+                        `[data-group-content="${groupId}"]`,
+                    ) ??
+                    document.querySelector<HTMLDivElement>(
+                        `[data-group-content="${groupId}"]`,
+                    );
+
                 const chevron =
                     newButton.querySelector<SVGSVGElement>("[data-chevron]");
 
