@@ -15,13 +15,12 @@ Create a new Markdown file under `content/docs/guides/`, for example:
 content/docs/guides/my-new-guide.md
 ```
 
-Add required frontmatter (at minimum `title` and `pubDatetime`):
+Add required frontmatter (at minimum `title`; date fields like `pubDatetime` are optional):
 
 ```yaml
 ---
 title: "My New Guide"
 description: "Short summary of what this guide covers."
-pubDatetime: 2025-12-21T00:00:00Z
 ---
 ```
 
@@ -75,7 +74,6 @@ Add `cover` and `coverAlt` fields to show a representative image for the guide. 
 ---
 title: "My New Guide"
 description: "How to use X to Y"
-pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Quick Guide"
 navIcon: "📘"
 ---

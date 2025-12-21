@@ -24,7 +24,7 @@ Key concepts:
 
 ## Example: the `docs` collection (what this template uses)
 
-The `docs` collection in this template is defined with a glob loader and a Zod schema that includes common fields such as `title`, `description`, `pubDatetime`, and navigation-related fields like `navLabel`/`navHidden`.
+The `docs` collection in this template is defined with a glob loader and a Zod schema that includes common fields such as `title`, `description`, and navigation-related fields like `navLabel`/`navHidden`.
 
 ```ts
 const docs = defineCollection({
@@ -33,9 +33,6 @@ const docs = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
-      pubDatetime: z.date(),
-      modDatetime: z.date().optional().nullable(),
-      featured: z.boolean().optional().default(false),
       draft: z.boolean().optional().default(false),
       category: z.string().optional(),
       tags: z.array(z.string()).default([]),
@@ -66,7 +63,7 @@ const tutorials = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      pubDatetime: z.date(),
+
       summary: z.string().optional(),
       cover: image().optional(),
     }),

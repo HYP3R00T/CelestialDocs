@@ -17,7 +17,7 @@ Contributions are welcome! Below are clear steps and a checklist to help content
 
 ## Contribution checklist (use when opening a PR)
 
-- [ ] The docs page has valid frontmatter (`title`, `pubDatetime` at minimum).
+- [ ] The docs page has valid frontmatter (`title` at minimum).
 - [ ] Headings are semantic (H1 for page title, H2/H3 for sections) to make the TOC useful.
 - [ ] Images are added to `public/images/` and referenced by absolute path, and `coverAlt` is provided when using `cover`.
 - [ ] If relevant, `navLabel` or `navIcon` frontmatter is set to control sidebar presentation.
@@ -32,9 +32,7 @@ Use this template for new pages:
 ---
 title: "Short, descriptive title"
 description: "One-line summary"
-pubDatetime: 2025-12-21T00:00:00Z
 # Optional:
-# modDatetime: 2025-12-22T00:00:00Z
 # tags: ["example","guide"]
 # navLabel: "Short label"
 # navIcon: "📚"

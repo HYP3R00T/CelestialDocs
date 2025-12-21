@@ -8,13 +8,12 @@ navLabel: "Quick Start"
 Follow these minimal steps to add your first documentation page and have it show up in the sidebar.
 
 1. Create a file under `content/docs/` (e.g., `content/docs/getting-started/my-topic.md`).
-2. Add required frontmatter. At minimum include `title` and `pubDatetime` (see the Frontmatter Reference for all fields):
+2. Add required frontmatter. At minimum include `title` (see the Frontmatter Reference for all fields; date fields like `pubDatetime` are optional):
 
 ```yaml
 ---
 title: "My Topic"
 description: "A short summary of this page"
-pubDatetime: 2025-12-21T00:00:00Z
 ---
 ```
 
