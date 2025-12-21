@@ -9,8 +9,6 @@ const docs = defineCollection({
       title: z.string(),
       description: z.string(),
       draft: z.boolean().optional().default(false),
-      category: z.string().optional(),
-      tags: z.array(z.string()).default([]),
 
       // ===== Media =====
       cover: image().optional(),

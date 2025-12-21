@@ -34,8 +34,6 @@ const docs = defineCollection({
       title: z.string(),
       description: z.string(),
       draft: z.boolean().optional().default(false),
-      category: z.string().optional(),
-      tags: z.array(z.string()).default([]),
 
       cover: image().optional(),
       coverAlt: z.string().optional(),
@@ -102,7 +100,7 @@ export const collections = { docs, tutorials };
 ## Best practices
 
 - Keep collection schemas small and additive — add new optional fields before making them required.
-- Prefer human-readable frontmatter keys (`title`, `description`, `tags`) to help non-developers author content.
+- Prefer human-readable frontmatter keys (`title`, `description`) to help non-developers author content.
 - Add examples and templates in `content/` (e.g., `content/docs/_templates/`) to give contributors a starting point.
 
 If you'd like, I can add a code example that demonstrates rendering a collection in a page, or add migration notes for converting an existing repository to use the `docs` collection format.

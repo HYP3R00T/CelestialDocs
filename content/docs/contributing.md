@@ -33,7 +33,6 @@ Use this template for new pages:
 title: "Short, descriptive title"
 description: "One-line summary"
 # Optional:
-# tags: ["example","guide"]
 # navLabel: "Short label"
 # navIcon: "📚"
 # navHidden: false
@@ -46,7 +45,7 @@ description: "One-line summary"
 - Keep paragraphs short and focused (2–4 sentences). Use lists and code blocks where it helps readability.
 - Prefer plain Markdown (`.md`) for most pages. Use MDX (`.mdx`) only when you need interactive components or custom React work.
 - Use examples and copyable snippets for commands and configuration.
-- Add links to related docs and tag pages with `tags` where relevant.
+- Add links to related docs where relevant.
 
 ## PR review & acceptance criteria
 

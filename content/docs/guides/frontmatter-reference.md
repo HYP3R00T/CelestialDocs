@@ -15,8 +15,6 @@ This page documents the supported frontmatter fields you can add to pages under 
 
 - `description` (string) — Short summary shown in meta tags and sometimes on listing pages.
 - `draft` (boolean) — Mark a page as a draft while authoring. Treat drafts as not ready for publication; how you handle drafts in CI or publishing is up to your workflow.
-- `category` (string) — Optional category label you can use for grouping or filtering.
-- `tags` (string[]) — Array of tags to help categorize or filter pages (e.g., `tags: ["cli","guides"]`).
 
 ## Media
 
@@ -48,8 +46,6 @@ Behavior and precedence:
 title: "My Guide"
 description: "A short summary of this guide."
 draft: false
-category: "Guides"
-tags: ["getting-started","example"]
 cover: "/images/guides/my-cover.jpg"
 coverAlt: "Illustration showing guide flow"
 navLabel: "Quick Guide"
