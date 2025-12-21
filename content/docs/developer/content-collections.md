@@ -35,8 +35,6 @@ const docs = defineCollection({
       description: z.string(),
       draft: z.boolean().optional().default(false),
 
-      cover: image().optional(),
-      coverAlt: z.string().optional(),
 
       navLabel: z.string().optional(),
       navIcon: z.string().optional(),
@@ -63,7 +61,7 @@ const tutorials = defineCollection({
       title: z.string(),
 
       summary: z.string().optional(),
-      cover: image().optional(),
+
     }),
 });
 

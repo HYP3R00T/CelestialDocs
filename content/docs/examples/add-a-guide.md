@@ -64,9 +64,9 @@ If you prefer to pin the page to the top of the group regardless of folder order
 - Manual entry warning: if you add a manual slug in `data/config.ts` and see a warning, verify the slug is correct and the file exists.
 - Ordering surprises: remember manual `entries` control top ordering.
 
-## 5) Optional: Add a cover image and meta info
+## 5) Optional: Add image assets and meta info
 
-Add `cover` and `coverAlt` fields to show a representative image for the guide. Place images in `public/images/` and reference them by path (e.g., `/images/guides/cover.jpg`).
+Place images in `public/images/` and reference them by path (e.g., `/images/guides/cover.jpg`). Include descriptive alt text in the page content or frontmatter for accessibility.
 
 ## Example final file
 

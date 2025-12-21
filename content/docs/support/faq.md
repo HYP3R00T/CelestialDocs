@@ -34,7 +34,7 @@ This FAQ collects common questions from content authors and site maintainers wit
 - A: `title` is required by the `docs` collection schema. Other fields (`description`, `navLabel`, `pubDatetime`, etc.) are optional but useful.
 
 **Q: How do I add images or covers?**
-- A: Place images in `public/images/` and reference them in frontmatter with absolute paths (e.g., `cover: '/images/guides/cover.jpg'`); use `coverAlt` for alt text.
+- A: Place images in `public/images/` and reference them in frontmatter with absolute paths (e.g., `/images/guides/cover.jpg`), and provide descriptive alt text for accessibility.
 
 
 ## Source Button & Drafts

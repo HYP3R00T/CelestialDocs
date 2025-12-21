@@ -18,11 +18,9 @@ This page documents the supported frontmatter fields you can add to pages under 
 
 ## Media
 
-- `cover` (image) — Optional cover image. You can reference images placed in `public/` (e.g., `/images/my-cover.png`) or a path in your repository. The collection schema validates image values where possible.
-- `coverAlt` (string) — Alt text for the cover image (important for accessibility).
+Place images in `public/images/` and reference them with absolute paths (e.g., `/images/guide-cover.jpg`). Include descriptive alt text in the page content or nearby markup for accessibility.
 
 Notes:
-- For simple usage, place images in `public/images/` and reference them with their absolute path (e.g., `/images/guide-cover.jpg`).
 - For advanced usage you can keep image assets under `src/assets/` and import them from pages; consult the Developer docs if you need explicit examples.
 
 ## Navigation controls (important for content authors)
@@ -46,8 +44,6 @@ Behavior and precedence:
 title: "My Guide"
 description: "A short summary of this guide."
 draft: false
-cover: "/images/guides/my-cover.jpg"
-coverAlt: "Illustration showing guide flow"
 navLabel: "Quick Guide"
 navIcon: "📚"
 navHidden: false

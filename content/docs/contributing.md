@@ -19,7 +19,7 @@ Contributions are welcome! Below are clear steps and a checklist to help content
 
 - [ ] The docs page has valid frontmatter (`title` at minimum).
 - [ ] Headings are semantic (H1 for page title, H2/H3 for sections) to make the TOC useful.
-- [ ] Images are added to `public/images/` and referenced by absolute path, and `coverAlt` is provided when using `cover`.
+- [ ] Images are added to `public/images/` and referenced by absolute path.
 - [ ] If relevant, `navLabel` or `navIcon` frontmatter is set to control sidebar presentation.
 - [ ] If the page is a draft or internal note, set `draft: true` or `navHidden: true` as appropriate (see Drafts & Visibility).
 - [ ] The PR description explains the change and includes a link to the docs preview (if applicable).

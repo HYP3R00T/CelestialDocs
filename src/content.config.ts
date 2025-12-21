@@ -10,10 +10,6 @@ const docs = defineCollection({
       description: z.string(),
       draft: z.boolean().optional().default(false),
 
-      // ===== Media =====
-      cover: image().optional(),
-      coverAlt: z.string().optional(),
-
       // ===== Navigation Overrides =====
       navLabel: z.string().optional(),
       navIcon: z.string().optional(),
