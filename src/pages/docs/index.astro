@@ -9,13 +9,12 @@ import MdxLink from "@/components/docs/markdown/MdxLink.astro";
 const docs = await getCollection("docs");
 const doc = docs.find((d) => d.id === "index");
 
+// Fallback to redirect if index doc is missing
 if (!doc) {
-    // Fallback to redirect if index doc is missing
     return Astro.redirect(SITE.defaultDocRedirect ?? "/");
 }
 
 const { Content, headings } = await render(doc);
-const { title, description } = doc.data;
 
 const components = {
     img: MdxImage,
@@ -23,14 +22,6 @@ const components = {
 };
 ---
 
-<DocsLayout
-    title={title}
-    description={description}
-    currentSlug={doc.id}
-    contentType="article"
-    headings={headings}
->
-    <h1>{title}</h1>
-    {description && <p class="lead">{description}</p>}
+<DocsLayout frontmatter={doc} headings={headings}>
     <Content components={components} />
 </DocsLayout>

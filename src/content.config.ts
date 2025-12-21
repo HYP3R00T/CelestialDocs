@@ -14,6 +14,8 @@ const docs = defineCollection({
       navLabel: z.string().optional(),
       navIcon: z.string().optional(),
       navHidden: z.boolean().optional().default(false),
+      // `hide_breadcrumbs` — opt-out flag to hide breadcrumbs on an individual page
+      hide_breadcrumbs: z.boolean().optional().default(false),
 
       /**
        * `authors` — optional list of GitHub usernames (string handles) for the page.

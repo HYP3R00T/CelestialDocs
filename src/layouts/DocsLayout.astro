@@ -9,18 +9,15 @@ import { buildBreadcrumbItems } from "@/lib/docs/breadcrumb";
 import { SIDEBAR_NAVIGATION } from "@data/config";
 import type { DocsLayoutProps, Heading } from "@/lib/docs/types";
 
-const {
-    currentSlug,
-    headings = [],
-    ...headProps
-} = Astro.props as DocsLayoutProps;
+const { headings = [], frontmatter } = Astro.props as DocsLayoutProps &
+    Record<string, unknown>;
 
 // Build navigation
 const navResult = await buildNavigation(SIDEBAR_NAVIGATION);
-const activeTab = getActiveTab(currentSlug, navResult.tabs);
+const activeTab = getActiveTab(frontmatter.id, navResult.tabs);
 
 // Build breadcrumb items
-const breadcrumbItems = buildBreadcrumbItems(currentSlug);
+const breadcrumbItems = buildBreadcrumbItems(frontmatter.id);
 
 // Convert headings to TableOfContents format
 const tableOfContentsHeadings = headings
@@ -32,14 +29,14 @@ const tableOfContentsHeadings = headings
     .filter((heading): heading is Heading => Boolean(heading.id));
 ---
 
-<BaseLayout {...headProps}>
+<BaseLayout>
     <div class="min-h-screen flex">
         <!-- Sidebar with tabs inside  -->
         <Sidebar
             tabs={navResult.tabs}
             showTabs={navResult.showTabs}
             activeTab={activeTab}
-            currentSlug={currentSlug}
+            currentSlug={frontmatter.id}
         />
 
         <!-- Main content  -->
@@ -47,10 +44,11 @@ const tableOfContentsHeadings = headings
             <div class="flex items-center justify-between gap-4 mb-6">
                 <div class="hidden lg:flex justify-between w-full items-center">
                     <Breadcrumb items={breadcrumbItems} />
-                    <SourceButton slug={currentSlug} />
+                    <SourceButton slug={frontmatter.id} />
                 </div>
             </div>
             <article class="prose prose-slate dark:prose-invert min-w-0">
+                <h1>{frontmatter.data.title}</h1>
                 <slot />
             </article>
         </main>

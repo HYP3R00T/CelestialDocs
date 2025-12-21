@@ -32,6 +32,7 @@ These fields control how your page appears in the sidebar and how it interacts w
   - Emoji: use an emoji (e.g., `navIcon: "📚"`).
   - Icon file: place an SVG in `src/assets/icons/` named `myicon.svg` and set `navIcon: "myicon"` (the site will use the SVG if present, otherwise it falls back to a default document icon).
 - `navHidden` (boolean) — If `true`, the page will be hidden from the sidebar but remains accessible by URL. Use this for utility pages or internal notes.
+- `hide_breadcrumbs` (boolean) — If `true`, the page will not show breadcrumbs in the header. Use this when the breadcrumb is redundant or you want a minimal header.
 
 Behavior and precedence:
 - The navigation is filesystem-driven by default (pages are discovered from `content/docs/`). If you add manual entries in `data/config.ts` (`SIDEBAR_NAVIGATION`), manual entries take precedence for placement.
@@ -48,6 +49,7 @@ authors: ["octocat"]
 navLabel: "Quick Guide"
 navIcon: "📚"
 navHidden: false
+hide_breadcrumbs: false
 ---
 ```
 

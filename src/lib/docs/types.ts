@@ -1,4 +1,5 @@
 import type { HeadSEOProps } from "@/lib/types";
+import type { CollectionEntry } from "astro:content";
 
 // ============================================================================
 // NAVIGATION TYPES - Documentation Navigation
@@ -68,8 +69,8 @@ export interface BaseLayoutProps extends Partial<HeadSEOProps> {
  * Props for DocsLayout component
  */
 export interface DocsLayoutProps extends Partial<HeadSEOProps> {
-    currentSlug: string;
     headings?: Heading[];
+    frontmatter: CollectionEntry<"docs">
 }
 
 // ============================================================================

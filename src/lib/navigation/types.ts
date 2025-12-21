@@ -12,6 +12,7 @@ export interface DocEntry {
     navLabel?: string;
     navIcon?: string;
     navHidden?: boolean;
+    hide_breadcrumbs?: boolean;
     authors?: string[];
   };
 }

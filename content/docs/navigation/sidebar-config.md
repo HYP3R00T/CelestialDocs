@@ -84,6 +84,7 @@ You can define nested groups and use `path` when the folder name does not match 
 ### 4) Hiding pages and using `navHidden`
 
 - To hide a page from the sidebar while keeping it accessible by URL, set `navHidden: true` in the page frontmatter. This is useful for partial pages or internal notes.
+- To hide breadcrumbs on a per-page basis, set `hide_breadcrumbs: true` in a page's frontmatter.
 - To hide a manual entry configured in `data/config.ts`, set `hidden: true` on that entry.
 
 
