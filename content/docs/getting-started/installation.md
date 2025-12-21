@@ -1,21 +1,31 @@
 ---
 title: "Installation"
-description: "How to install and set up CelestialDocs."
-pubDatetime: 2024-01-02T00:00:00Z
+description: "Fork, clone, and run the site locally (recommended workflow)."
+pubDatetime: 2025-12-21T00:00:00Z
+navLabel: "Installation"
 ---
 
-Get started with CelestialDocs in just a few steps.
+This project assumes a basic development environment with Node.js. The recommended, supported workflow for end users is:
 
-## Prerequisites
+1. Fork this repository on GitHub (use the Fork button).
+2. Clone your fork locally and change into the project directory:
 
-- Node.js 18 or higher
-- pnpm (recommended) or npm
+```bash
+git clone https://github.com/YOUR_USERNAME/CelestialDocs.git
+cd CelestialDocs
+```
 
-## Steps
+3. Install dependencies and run the dev server:
 
-1. Clone the repository
-2. Install dependencies with `pnpm install`
-3. Start the dev server with `pnpm dev`
-4. Open your browser to `http://localhost:4321`
+```bash
+pnpm install
+pnpm dev
+```
 
-That's it! You're ready to start building your documentation.
+Notes and tips:
+
+- Node.js 18+ is recommended. If you don't have `pnpm`, install it (`npm i -g pnpm`) or use it from npx if needed.
+- The development server supports live reload — save changes to files in `content/docs/` and the site will update automatically.
+- Keep your work on a feature branch and open a pull request against your fork when ready to merge.
+
+If you need CI or deployment help, see the Reference section for common build commands (`pnpm build`, `pnpm preview`).

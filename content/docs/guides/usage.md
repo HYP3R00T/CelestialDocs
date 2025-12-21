@@ -1,19 +1,18 @@
 ---
-title: "Usage Guide"
-description: "Learn how to use CelestialDocs effectively."
-pubDatetime: 2024-01-03T00:00:00Z
+title: "Writing docs: Markdown vs MDX"
+description: "Guidance for content authors on choosing between Markdown and MDX."
+pubDatetime: 2025-12-21T00:00:00Z
+navLabel: "Usage"
 ---
 
-Learn how to make the most of CelestialDocs.
+This guide explains the differences between plain Markdown (`.md`) and MDX (`.mdx`), and recommends when to use each:
 
-## Creating Pages
+- Markdown (`.md`): simple, fast, and sufficient for most documentation pages.
+- MDX (`.mdx`): allows embedding React/interactive components — use only when you need components in content.
 
-Add new markdown files to the `content/docs/` folder to create new documentation pages.
+Recommendations for end users:
 
-## Organizing Content
+- Prefer `.md` for most pages to keep content simple.
+- Use `.mdx` when you need to embed interactive widgets (advanced users).
 
-Use folders to organize your documentation into logical sections.
-
-## Navigation
-
-The navigation system automatically builds a sidebar from your folder structure.
+<!-- TODO: add examples showing conversion and typical use cases -->

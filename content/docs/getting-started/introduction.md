@@ -1,19 +1,26 @@
 ---
 title: "Introduction"
-description: "Welcome to CelestialDocs - a modern documentation template."
-pubDatetime: 2024-01-01T00:00:00Z
+description: "What CelestialDocs is and who it's for."
+pubDatetime: 2025-12-21T00:00:00Z
+navLabel: "Introduction"
 ---
 
-Welcome to **CelestialDocs**, a beautiful and flexible documentation template built with Astro and Shadcn UI.
+Welcome to **CelestialDocs** — a lightweight documentation template built with Astro and Shadcn, made for content authors and non-developer contributors who want to write documentation without worrying about tooling.
 
-## Features
+What you'll get:
 
-- 🚀 Fast and modern
-- 📱 Fully responsive
-- 🎨 Beautiful design with Tailwind CSS
-- 🔍 Easy to navigate
-- 📝 Markdown-based content
+- A filesystem-driven docs site: add Markdown (`.md`) or MDX (`.mdx`) files under `content/docs/` and they become pages.
+- A configurable sidebar: control groups, ordering, and labels from `data/config.ts` without touching the code.
+- User-friendly helpers such as a "View as Markdown" source button, a Table of Contents panel, and simple theme/layout toggles.
 
-## Getting Started
+Who this guide is for:
 
-Check out the installation guide to get started with CelestialDocs.
+- Content writers and product people who want to author and maintain docs with minimal setup.
+- People who will fork this repo, edit content in `content/` and configuration in `data/`, and submit pull requests.
+
+Focus areas for end users:
+
+- content/docs/ — Put your documentation files here (this is where you author pages).
+- data/config.ts — Customize the sidebar, site metadata, and TOC behavior (only change what you need).
+
+Next steps: see the Installation page for the recommended workflow (fork → clone → run), then follow the Quick Start to add your first page.
