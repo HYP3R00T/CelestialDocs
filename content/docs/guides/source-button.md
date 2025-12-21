@@ -1,6 +1,6 @@
 ---
 title: "Source Button"
-description: "Explain the "View as Markdown" / source button behavior."
+description: "Explain the View as Markdown"
 navLabel: "Source Button"
 ---
 
