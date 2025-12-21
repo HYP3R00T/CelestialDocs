@@ -28,7 +28,6 @@ export function buildNavigationItems(
           label: item.label || doc.data.navLabel || doc.data.title,
           icon: item.icon || doc.data.navIcon,
           hidden: false,
-          order: doc.data.navOrder,
         },
       });
       continue;

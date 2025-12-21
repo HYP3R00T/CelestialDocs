@@ -9,7 +9,7 @@ import type { DocEntry } from "./types";
  *   {
  *     id: 'guides/advanced/patterns',
  *     slug: 'guides/advanced/patterns',
- *     data: { title: 'Patterns', navLabel: 'Patterns', navIcon: 'pattern', navOrder: 10 }
+ *     data: { title: 'Patterns', navLabel: 'Patterns', navIcon: 'pattern' }
  *   },
  *   { id: 'index', slug: 'index', data: { title: 'Overview' } }
  * ]
@@ -23,7 +23,6 @@ export async function getDocsFromFilesystem(): Promise<DocEntry[]> {
       title: (doc.data as any).title,
       navLabel: (doc.data as any).navLabel,
       navIcon: (doc.data as any).navIcon,
-      navOrder: (doc.data as any).navOrder,
       navHidden: (doc.data as any).navHidden,
     },
   }));

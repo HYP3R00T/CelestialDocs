@@ -87,9 +87,6 @@ You can define nested groups and use `path` when the folder name does not match 
 - To hide a page from the sidebar while keeping it accessible by URL, set `navHidden: true` in the page frontmatter. This is useful for partial pages or internal notes.
 - To hide a manual entry configured in `data/config.ts`, set `hidden: true` on that entry.
 
-### 5) Using `navOrder` to influence ordering
-
-If you mix manual entries and auto-generated entries in the same group, you can use the page frontmatter `navOrder` (a number) to influence ordering. Lower numbers come first. Manual entries maintain their configured order, then auto-generated entries are appended and sorted by label (unless `navOrder` adjusts them).
 
 ## Practical tips & best practices
 
@@ -106,7 +103,7 @@ If you mix manual entries and auto-generated entries in the same group, you can 
 
 ## When to edit `data/config.ts` vs page frontmatter
 
-- Edit page-level controls (labels, icons, hidden flags, `navOrder`) in the page frontmatter when the page author controls presentation.
+- Edit page-level controls (labels, icons, hidden flags) in the page frontmatter when the page author controls presentation.
 - Edit `data/config.ts` to structure the overall sidebar (group labels, manual entries, top-level ordering, and special grouping behavior).
 
 If you need examples of common setups or want me to add visual examples/screenshots of how changes affect the sidebar, I can add them here.

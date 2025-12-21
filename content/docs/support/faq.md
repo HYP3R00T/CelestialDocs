@@ -31,7 +31,7 @@ This FAQ collects common questions from content authors and site maintainers wit
   - Use `.mdx` only when you need to embed React components or advanced interactivity; MDX is intended for power users.
 
 **Q: What frontmatter is required?**
-- A: `title` and `pubDatetime` are required by the `docs` collection schema. Other fields (`description`, `tags`, `navLabel`, `navOrder`, etc.) are optional but useful.
+- A: `title` and `pubDatetime` are required by the `docs` collection schema. Other fields (`description`, `tags`, `navLabel`, etc.) are optional but useful.
 
 **Q: How do I add images or covers?**
 - A: Place images in `public/images/` and reference them in frontmatter with absolute paths (e.g., `cover: '/images/guides/cover.jpg'`); use `coverAlt` for alt text.

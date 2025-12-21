@@ -11,7 +11,6 @@ export interface DocEntry {
     title: string;
     navLabel?: string;
     navIcon?: string;
-    navOrder?: number;
     navHidden?: boolean;
   };
 }

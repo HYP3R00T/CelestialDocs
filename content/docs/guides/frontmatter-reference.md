@@ -38,7 +38,6 @@ These fields control how your page appears in the sidebar and how it interacts w
 - `navIcon` (string) — Optional icon name or an emoji to show beside the sidebar entry. Two options:
   - Emoji: use an emoji (e.g., `navIcon: "📚"`).
   - Icon file: place an SVG in `src/assets/icons/` named `myicon.svg` and set `navIcon: "myicon"` (the site will use the SVG if present, otherwise it falls back to a default document icon).
-- `navOrder` (number) — Ordering hint used when combining manual entries and auto-generated entries in a group. Lower numbers come first.
 - `navHidden` (boolean) — If `true`, the page will be hidden from the sidebar but remains accessible by URL. Use this for utility pages or internal notes.
 
 Behavior and precedence:
@@ -61,7 +60,6 @@ cover: "/images/guides/my-cover.jpg"
 coverAlt: "Illustration showing guide flow"
 navLabel: "Quick Guide"
 navIcon: "📚"
-navOrder: 20
 navHidden: false
 ---
 ```

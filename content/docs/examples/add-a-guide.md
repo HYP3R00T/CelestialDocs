@@ -33,7 +33,6 @@ By default, pages under `content/docs/guides/` will be auto-generated into the `
 
 - `navLabel` — change the text shown in the sidebar
 - `navIcon` — emoji or icon name to display next to the entry
-- `navOrder` — numeric hint for ordering when mixed with auto-generated entries
 - `navHidden` — set to `true` to keep the page accessible by URL but hide it from the sidebar
 
 Example with sidebar options:
@@ -45,7 +44,6 @@ description: "Short summary of what this guide covers."
 pubDatetime: 2025-12-21T00:00:00Z
 navLabel: "Quick Guide"
 navIcon: "📘"
-navOrder: 10
 ---
 ```
 
@@ -65,7 +63,7 @@ If you prefer to pin the page to the top of the group regardless of folder order
 
 - Page not showing: check the file path and slug; ensure `navHidden` is not set to `true`.
 - Manual entry warning: if you add a manual slug in `data/config.ts` and see a warning, verify the slug is correct and the file exists.
-- Ordering surprises: remember manual `entries` control top ordering; `navOrder` affects auto-generated items.
+- Ordering surprises: remember manual `entries` control top ordering.
 
 ## 5) Optional: Add a cover image and meta info
 

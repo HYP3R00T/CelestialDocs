@@ -45,7 +45,6 @@ const docs = defineCollection({
 
       navLabel: z.string().optional(),
       navIcon: z.string().optional(),
-      navOrder: z.number().optional(),
       navHidden: z.boolean().optional().default(false),
     }),
 });

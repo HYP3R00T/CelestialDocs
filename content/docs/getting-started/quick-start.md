@@ -24,7 +24,6 @@ pubDatetime: 2025-12-21T00:00:00Z
 Optional frontmatter and tips:
 
 - `navLabel`: override how the page appears in the sidebar.
-- `navOrder`: provide an ordering hint within a group if you need custom ordering.
 - `navHidden`: set to `true` to keep a page accessible via URL but hidden from the sidebar.
 - `draft`: mark as `true` while working on a page; treat drafts as not-ready-for-publication (how you handle drafts in your workflow is up to your repository/CI).
 

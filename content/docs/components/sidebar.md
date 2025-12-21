@@ -30,7 +30,7 @@ The Sidebar organizes your docs into top-level tabs, groups, and entries. It's d
 
 - To hide a page from the sidebar while keeping it accessible, set `navHidden: true` in the page frontmatter.
 - Use the `hidden` flag on a manual `entries` item in `data/config.ts` to hide that configured entry.
-- `navOrder` in frontmatter controls ordering for auto-generated entries (lower numbers sort first). Manual `entries` are shown in the configured order followed by auto-generated entries.
+- Auto-generated entries are appended alphabetically by label. Manual `entries` are shown in the configured order and appear before auto-generated entries.
 
 ## Responsive behavior
 

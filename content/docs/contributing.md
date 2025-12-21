@@ -20,7 +20,7 @@ Contributions are welcome! Below are clear steps and a checklist to help content
 - [ ] The docs page has valid frontmatter (`title`, `pubDatetime` at minimum).
 - [ ] Headings are semantic (H1 for page title, H2/H3 for sections) to make the TOC useful.
 - [ ] Images are added to `public/images/` and referenced by absolute path, and `coverAlt` is provided when using `cover`.
-- [ ] If relevant, `navLabel`, `navIcon`, or `navOrder` frontmatter is set to control sidebar presentation.
+- [ ] If relevant, `navLabel` or `navIcon` frontmatter is set to control sidebar presentation.
 - [ ] If the page is a draft or internal note, set `draft: true` or `navHidden: true` as appropriate (see Drafts & Visibility).
 - [ ] The PR description explains the change and includes a link to the docs preview (if applicable).
 
@@ -38,7 +38,6 @@ pubDatetime: 2025-12-21T00:00:00Z
 # tags: ["example","guide"]
 # navLabel: "Short label"
 # navIcon: "📚"
-# navOrder: 10
 # navHidden: false
 # draft: false
 ---

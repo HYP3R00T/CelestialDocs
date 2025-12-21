@@ -60,7 +60,7 @@ export function processGroup(
         label: entry.label || doc.data.navLabel || doc.data.title,
         icon: entry.icon || doc.data.navIcon,
         hidden: false,
-        order: doc.data.navOrder,
+
       });
     });
   }
@@ -76,7 +76,6 @@ export function processGroup(
         slug: doc.slug,
         label: doc.data.navLabel || doc.data.title,
         icon: doc.data.navIcon,
-        order: doc.data.navOrder,
       }))
       .sort((a, b) => a.label.localeCompare(b.label));
 

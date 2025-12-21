@@ -12,7 +12,6 @@ export function buildRootEntries(
       slug: doc.slug,
       label: doc.data.navLabel || doc.data.title || doc.slug,
       icon: doc.data.navIcon,
-      order: doc.data.navOrder,
     }))
     .sort((a, b) => a.label.localeCompare(b.label));
 
