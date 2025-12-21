@@ -4,32 +4,10 @@ import SidebarEntry from "./SidebarEntry.astro";
 import DocIcon from "./DocIcon.astro";
 import type { SidebarGroupItem, SidebarProps } from "@/lib/docs/types";
 
+import DocsTabs from "./DocsTabs.astro";
+import DocsContent from "./DocsContent.astro";
+
 const { tabs, showTabs, activeTab, currentSlug } = Astro.props as SidebarProps;
-
-// Helper to find first entry in a group
-function findFirstEntry(group: SidebarGroupItem): string | null {
-    if (group.children && group.children.length > 0) {
-        for (const child of group.children) {
-            if ("slug" in child) {
-                return child.slug;
-            }
-
-            const entry = findFirstEntry(child as SidebarGroupItem);
-            if (entry) return entry;
-        }
-    }
-
-    if (group.entries && group.entries.length > 0) {
-        return group.entries[0].slug;
-    }
-    if (group.groups && group.groups.length > 0) {
-        for (const subgroup of group.groups) {
-            const entry = findFirstEntry(subgroup);
-            if (entry) return entry;
-        }
-    }
-    return null;
-}
 ---
 
 <aside
@@ -37,112 +15,12 @@ function findFirstEntry(group: SidebarGroupItem): string | null {
 >
     <nav aria-label="Documentation navigation" class="flex h-full flex-col">
         <!-- Tabs section - pinned at top  -->
-        {
-            showTabs && (
-                <div class="border-border rounded-lg p-2 bg-popover">
-                    <div class="space-y-1">
-                        {tabs.map((tab) => {
-                            const isActive = activeTab?.id === tab.id;
-                            const firstEntry = findFirstEntry(tab.group);
-                            const href = firstEntry
-                                ? `/docs/${firstEntry}`
-                                : `/docs`;
-
-                            return (
-                                <a
-                                    href={href}
-                                    class={`
-                  flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors
-                  ${
-                      isActive
-                          ? "bg-secondary text-secondary-foreground"
-                          : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
-                  }
-                `}
-                                    aria-current={isActive ? "page" : undefined}
-                                >
-                                    <DocIcon
-                                        name={tab.icon || "document"}
-                                        class="h-4 w-4"
-                                        aria-hidden="true"
-                                    />
-                                    <span>{tab.label}</span>
-                                </a>
-                            );
-                        })}
-                    </div>
-                </div>
-            )
-        }
+        <DocsTabs tabs={tabs} showTabs={showTabs} activeTab={activeTab} />
 
         <!-- Groups and entries section - scrollable  -->
         <div class="flex-1 overflow-y-auto px-4 py-4">
             <div class="space-y-2">
-                {
-                    activeTab && (
-                        <>
-                            {/* Ordered children (entries and groups) if present */}
-                            {activeTab.group.children &&
-                            activeTab.group.children.length > 0 ? (
-                                <div class="space-y-2">
-                                    {activeTab.group.children.map((child) =>
-                                        (child as any).slug ? (
-                                            <ul class="space-y-1">
-                                                <SidebarEntry
-                                                    entry={child as any}
-                                                    currentSlug={currentSlug}
-                                                />
-                                            </ul>
-                                        ) : (
-                                            <SidebarGroup
-                                                group={
-                                                    child as any as SidebarGroupItem
-                                                }
-                                                currentSlug={currentSlug}
-                                            />
-                                        ),
-                                    )}
-                                </div>
-                            ) : (
-                                <>
-                                    {/* Root-level entries (if any) */}
-                                    {activeTab.group.entries &&
-                                        activeTab.group.entries.length > 0 && (
-                                            <ul class="space-y-1">
-                                                {activeTab.group.entries.map(
-                                                    (entry) => (
-                                                        <SidebarEntry
-                                                            entry={entry}
-                                                            currentSlug={
-                                                                currentSlug
-                                                            }
-                                                        />
-                                                    ),
-                                                )}
-                                            </ul>
-                                        )}
-
-                                    {/* Root-level groups */}
-                                    {activeTab.group.groups &&
-                                        activeTab.group.groups.length > 0 && (
-                                            <div class="space-y-2">
-                                                {activeTab.group.groups.map(
-                                                    (group) => (
-                                                        <SidebarGroup
-                                                            group={group}
-                                                            currentSlug={
-                                                                currentSlug
-                                                            }
-                                                        />
-                                                    ),
-                                                )}
-                                            </div>
-                                        )}
-                                </>
-                            )}
-                        </>
-                    )
-                }
+                <DocsContent activeTab={activeTab} currentSlug={currentSlug} />
             </div>
         </div>
     </nav>

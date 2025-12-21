@@ -1,0 +1,46 @@
+---
+import DocIcon from "./DocIcon.astro";
+import { findFirstEntry } from "@/lib/docs/utils";
+
+const { tabs, showTabs, activeTab } = Astro.props as {
+    tabs: any[];
+    showTabs: boolean;
+    activeTab: any;
+};
+---
+
+{
+    showTabs && (
+        <div class="border-border rounded-lg p-2 bg-popover">
+            <div class="space-y-1">
+                {tabs.map((tab) => {
+                    const isActive = activeTab?.id === tab.id;
+                    const firstEntry = findFirstEntry(tab.group);
+                    const href = firstEntry ? `/docs/${firstEntry}` : `/docs`;
+
+                    return (
+                        <a
+                            href={href}
+                            class={`
+              flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors
+              ${
+                  isActive
+                      ? "bg-secondary text-secondary-foreground"
+                      : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+              }
+            `}
+                            aria-current={isActive ? "page" : undefined}
+                        >
+                            <DocIcon
+                                name={tab.icon || "document"}
+                                class="h-4 w-4"
+                                aria-hidden="true"
+                            />
+                            <span>{tab.label}</span>
+                        </a>
+                    );
+                })}
+            </div>
+        </div>
+    )
+}

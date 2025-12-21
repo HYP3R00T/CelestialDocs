@@ -1,0 +1,64 @@
+---
+import SidebarGroup from "./SidebarGroup.astro";
+import SidebarEntry from "./SidebarEntry.astro";
+
+const { activeTab, currentSlug } = Astro.props as {
+    activeTab: any;
+    currentSlug: string | null;
+};
+---
+
+{
+    activeTab && (
+        <>
+            {/* Ordered children (entries and groups) if present */}
+            {activeTab.group.children && activeTab.group.children.length > 0 ? (
+                <div class="space-y-2">
+                    {activeTab.group.children.map((child: any) =>
+                        (child as any).slug ? (
+                            <ul class="space-y-1">
+                                <SidebarEntry
+                                    entry={child as any}
+                                    currentSlug={currentSlug}
+                                />
+                            </ul>
+                        ) : (
+                            <SidebarGroup
+                                group={child as any}
+                                currentSlug={currentSlug}
+                            />
+                        ),
+                    )}
+                </div>
+            ) : (
+                <>
+                    {/* Root-level entries (if any) */}
+                    {activeTab.group.entries &&
+                        activeTab.group.entries.length > 0 && (
+                            <ul class="space-y-1">
+                                {activeTab.group.entries.map((entry: any) => (
+                                    <SidebarEntry
+                                        entry={entry}
+                                        currentSlug={currentSlug}
+                                    />
+                                ))}
+                            </ul>
+                        )}
+
+                    {/* Root-level groups */}
+                    {activeTab.group.groups &&
+                        activeTab.group.groups.length > 0 && (
+                            <div class="space-y-2">
+                                {activeTab.group.groups.map((group: any) => (
+                                    <SidebarGroup
+                                        group={group}
+                                        currentSlug={currentSlug}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                </>
+            )}
+        </>
+    )
+}

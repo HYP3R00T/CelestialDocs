@@ -9,6 +9,8 @@ import {
 import SidebarGroup from "@/components/docs/SidebarGroup.astro";
 import SidebarEntry from "@/components/docs/SidebarEntry.astro";
 import DocIcon from "@/components/docs/DocIcon.astro";
+import DocsTabs from "@/components/docs/DocsTabs.astro";
+import DocsContent from "@/components/docs/DocsContent.astro";
 import { buildNavigation, getActiveTab } from "@/lib/navigation";
 import type { SidebarGroupItem } from "@/lib/docs/types";
 
@@ -26,29 +28,6 @@ const navResult = await buildNavigation(SIDEBAR_NAVIGATION);
 const activeTab = currentSlug
     ? getActiveTab(currentSlug, navResult.tabs)
     : navResult.tabs[0] || null;
-
-// Helper to find first entry in a group
-function findFirstEntry(group: SidebarGroupItem): string | null {
-    if (group.children && group.children.length > 0) {
-        for (const child of group.children) {
-            if ("slug" in child) {
-                return child.slug;
-            }
-            const entry = findFirstEntry(child as SidebarGroupItem);
-            if (entry) return entry;
-        }
-    }
-    if (group.entries && group.entries.length > 0) {
-        return group.entries[0].slug;
-    }
-    if (group.groups && group.groups.length > 0) {
-        for (const subgroup of group.groups) {
-            const entry = findFirstEntry(subgroup);
-            if (entry) return entry;
-        }
-    }
-    return null;
-}
 
 const showDocs = isOnDocsPage;
 ---
@@ -88,126 +67,16 @@ const showDocs = isOnDocsPage;
                     showDocs && activeTab && (
                         <div class="docs-sidenav border-t border-border/40 pt-4 px-4">
                             <div class="flex flex-col gap-3">
-                                {/* Docs Tabs */}
-                                {navResult.showTabs && (
-                                    <div class="space-y-2 mb-4">
-                                        {navResult.tabs.map((tab) => {
-                                            const isActive =
-                                                activeTab?.id === tab.id;
-                                            const firstEntry = findFirstEntry(
-                                                tab.group,
-                                            );
-                                            const href = firstEntry
-                                                ? `/docs/${firstEntry}`
-                                                : `/docs`;
-
-                                            return (
-                                                <a
-                                                    href={href}
-                                                    data-tab-link
-                                                    class={`
-                      flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors
-                      ${
-                          isActive
-                              ? "bg-secondary text-secondary-foreground"
-                              : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
-                      }
-                    `}
-                                                    aria-current={
-                                                        isActive
-                                                            ? "page"
-                                                            : undefined
-                                                    }
-                                                >
-                                                    <DocIcon
-                                                        name={
-                                                            tab.icon ||
-                                                            "document"
-                                                        }
-                                                        class="h-4 w-4"
-                                                        aria-hidden="true"
-                                                    />
-                                                    <span>{tab.label}</span>
-                                                </a>
-                                            );
-                                        })}
-                                    </div>
-                                )}
-
-                                {/* Docs Entries and Groups */}
+                                <DocsTabs
+                                    tabs={navResult.tabs}
+                                    showTabs={navResult.showTabs}
+                                    activeTab={activeTab}
+                                />
                                 <div class="space-y-2">
-                                    {/* Ordered children (entries and groups) if present */}
-                                    {activeTab.group.children &&
-                                    activeTab.group.children.length > 0 ? (
-                                        <div class="space-y-2">
-                                            {activeTab.group.children.map(
-                                                (child) =>
-                                                    (child as any).slug ? (
-                                                        <ul class="space-y-1">
-                                                            <SidebarEntry
-                                                                entry={
-                                                                    child as any
-                                                                }
-                                                                currentSlug={
-                                                                    currentSlug
-                                                                }
-                                                            />
-                                                        </ul>
-                                                    ) : (
-                                                        <SidebarGroup
-                                                            group={
-                                                                child as any as SidebarGroupItem
-                                                            }
-                                                            currentSlug={
-                                                                currentSlug
-                                                            }
-                                                        />
-                                                    ),
-                                            )}
-                                        </div>
-                                    ) : (
-                                        <>
-                                            {/* Root-level entries (if any) */}
-                                            {activeTab.group.entries &&
-                                                activeTab.group.entries.length >
-                                                    0 && (
-                                                    <ul class="space-y-1">
-                                                        {activeTab.group.entries.map(
-                                                            (entry) => (
-                                                                <SidebarEntry
-                                                                    entry={
-                                                                        entry
-                                                                    }
-                                                                    currentSlug={
-                                                                        currentSlug
-                                                                    }
-                                                                />
-                                                            ),
-                                                        )}
-                                                    </ul>
-                                                )}
-
-                                            {/* Root-level groups */}
-                                            {activeTab.group.groups &&
-                                                activeTab.group.groups.length >
-                                                    0 && (
-                                                    <div class="space-y-2">
-                                                        {activeTab.group.groups.map(
-                                                            (group) => (
-                                                                <SidebarGroup
-                                                                    group={
-                                                                        group
-                                                                    }
-                                                                    currentSlug={
-                                                                        currentSlug
-                                                                    }
-                                                                />
-                                                            ),
-                                                        )}
-                                                    </div>
-                                                )}
-                                        </>
-                                    )}
+                                    <DocsContent
+                                        activeTab={activeTab}
+                                        currentSlug={currentSlug}
+                                    />
                                 </div>
                             </div>
                         </div>
