@@ -8,9 +8,7 @@ import { CONTENT } from "@data/config";
 export async function getStaticPaths() {
     const paths: any[] = [];
 
-    for (const sys of CONTENT.systems ?? [
-        { id: "docs", dir: "content/docs" },
-    ]) {
+    for (const sys of CONTENT.systems) {
         const entries = (await getCollection(sys.id as any)) as any[];
         for (const doc of entries) {
             paths.push({
@@ -23,7 +21,7 @@ export async function getStaticPaths() {
     return paths;
 }
 
-const { doc } = Astro.props as any;
+const { doc, collection } = Astro.props as any;
 const { Content, headings } = await render(doc);
 
 const components = {
@@ -32,6 +30,6 @@ const components = {
 };
 ---
 
-<DocsLayout frontmatter={doc} headings={headings}>
+<DocsLayout frontmatter={doc} headings={headings} collection={collection}>
     <Content components={components} />
 </DocsLayout>

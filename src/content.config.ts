@@ -20,10 +20,8 @@ const createSchema = ({ image }: { image?: any } = {}) =>
 
 // Build collection definitions dynamically from `CONTENT.systems`.
 const collectionsMap: Record<string, any> = {};
-// Prefer explicit `CONTENT.systems`. Fall back to legacy docs dir when absent.
-const systems = CONTENT.systems ?? [{ id: "docs", dir: "content/docs", defaultDocRedirect: "/docs/getting-started/introduction" }];
 
-for (const sys of systems) {
+for (const sys of CONTENT.systems) {
   collectionsMap[sys.id] = defineCollection({
     loader: glob({ pattern: "**/*.{md,mdx}", base: `./${sys.dir}` }),
     schema: createSchema,

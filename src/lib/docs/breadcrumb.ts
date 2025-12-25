@@ -1,5 +1,7 @@
-import { SIDEBAR_NAVIGATION, CONTENT } from "@data/config";
+import { SIDEBAR_NAVIGATION } from "@data/config";
+import type { ContentSystem } from "@/lib/types";
 import type { Entry, Group, GroupOrEntry } from "./types";
+import { resolveSystem } from "../resolveSystem";
 
 /**
  * Find a group in the navigation tree by its path
@@ -9,13 +11,15 @@ function isGroup(item: GroupOrEntry): item is Group {
 }
 
 function getGroupsForCollection(collectionId?: string): GroupOrEntry[] {
-    if ((SIDEBAR_NAVIGATION as any).groups) {
-        // legacy single Sidebar config
-        return (SIDEBAR_NAVIGATION as any).groups as GroupOrEntry[];
-    }
     const map = SIDEBAR_NAVIGATION as Record<string, { groups: GroupOrEntry[] }>;
     const key = collectionId ?? "docs";
-    return map[key]?.groups ?? map["docs"]?.groups ?? Object.values(map)[0]?.groups ?? [];
+    const groups = map[key]?.groups;
+
+    if (!groups) {
+        throw new Error(`Sidebar configuration not found for collection: ${key}`);
+    }
+
+    return groups;
 }
 
 function findGroupByPath(path: string, groups: GroupOrEntry[] = getGroupsForCollection()): Group | undefined {
@@ -129,7 +133,7 @@ export function buildBreadcrumbItems(
     collectionId?: string,
 ): Array<{ label: string; href?: string }> {
     const parts = slug.split("/");
-    const system = (CONTENT.systems ?? []).find((s: any) => s.id === collectionId) ?? (CONTENT.systems ?? [])[0];
+    const system = resolveSystem(collectionId);
 
     const items: Array<{ label: string; href?: string }> = [
         { label: system ? (system.id.charAt(0).toUpperCase() + system.id.slice(1)) : "Docs", href: system ? (system.route ?? `/${system.id}`) : "/docs" },

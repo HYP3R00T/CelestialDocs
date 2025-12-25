@@ -5,6 +5,16 @@ import type { ImageMetadata } from "astro";
 // ============================================================================
 
 /**
+ * Content system configuration
+ */
+export interface ContentSystem {
+    id: string;
+    dir: string;
+    defaultDocRedirect: string;
+    route: string;
+}
+
+/**
  * Navigation item in the header navigation
  */
 export interface NavItem {
@@ -54,6 +64,13 @@ export interface HeaderFeatures {
 
 export interface TableOfContentsConfig {
     enableExtra: boolean;
+}
+
+/**
+ * Content configuration mapping systems to their settings
+ */
+export interface ContentConfig {
+    systems: ContentSystem[];
 }
 
 export interface HeadSEOProps {

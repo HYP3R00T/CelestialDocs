@@ -83,7 +83,8 @@ export interface BaseLayoutProps extends Partial<HeadSEOProps> {
  */
 export interface DocsLayoutProps extends Partial<HeadSEOProps> {
     headings?: Heading[];
-    frontmatter: CollectionEntry<"docs">
+    frontmatter: CollectionEntry<any>;
+    collection?: string;
 }
 
 // ============================================================================

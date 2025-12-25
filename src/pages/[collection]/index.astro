@@ -7,9 +7,7 @@ import MdxLink from "@/components/docs/markdown/MdxLink.astro";
 
 export async function getStaticPaths() {
     const paths: any[] = [];
-    for (const sys of CONTENT.systems ?? [
-        { id: "docs", dir: "content/docs" },
-    ]) {
+    for (const sys of CONTENT.systems) {
         paths.push({
             params: { collection: sys.id },
             props: { collection: sys.id },
@@ -39,6 +37,6 @@ const components = {
 };
 ---
 
-<DocsLayout frontmatter={doc} headings={headings}>
+<DocsLayout frontmatter={doc} headings={headings} collection={collection}>
     <Content components={components} />
 </DocsLayout>

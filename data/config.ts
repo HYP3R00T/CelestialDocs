@@ -1,6 +1,7 @@
 import setupImage from "@/assets/setup.png";
 import type { SidebarNavigation } from "@/lib/docs/types";
 import type {
+    ContentConfig,
     HeaderFeatures,
     LocaleConfig,
     NavItem,
@@ -16,7 +17,7 @@ export const LOCALE: LocaleConfig = {
     lang: "en",
 };
 
-export const CONTENT = {
+export const CONTENT: ContentConfig = {
     // `systems` enables multiple documentation systems (e.g., docs, notes)
     // Add more entries here to register additional content systems.
     systems: [
@@ -90,6 +91,8 @@ export const SIDEBAR_NAVIGATION: SidebarNavigation = {
                     { slug: "guides/usage" },
                     { slug: "guides/frontmatter-reference" },
                     { slug: "guides/source-button" },
+                    { slug: "guides/multi-collection-migration" },
+                    { slug: "guides/adding-new-collection" },
                 ],
                 groups: [
                     {

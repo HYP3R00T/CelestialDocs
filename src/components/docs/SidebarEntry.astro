@@ -2,15 +2,12 @@
 import DocIcon from "./DocIcon.astro";
 import type { SidebarEntryProps } from "@/lib/docs/types";
 
-import { CONTENT } from "@data/config";
+import { getSystemRoute } from "@/lib/resolveSystem";
 const { entry, currentSlug, collectionId } =
     Astro.props as SidebarEntryProps & { collectionId?: string };
 const isActive = currentSlug === entry.slug;
 
-const system =
-    (CONTENT.systems ?? []).find((s: any) => s.id === collectionId) ??
-    (CONTENT.systems ?? [])[0];
-const base = system?.route ?? `/${system?.id ?? "docs"}`;
+const base = getSystemRoute(collectionId);
 ---
 
 <li>

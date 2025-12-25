@@ -1,7 +1,7 @@
 ---
 import { Button } from "@/components/ui/button";
 import { Icon } from "astro-icon/components";
-import { CONTENT } from "@data/config";
+import { getSystemRoute } from "@/lib/resolveSystem";
 
 interface Props {
     slug: string;
@@ -9,10 +9,7 @@ interface Props {
 }
 
 const { slug, collectionId } = Astro.props;
-const system =
-    (CONTENT.systems ?? []).find((s: any) => s.id === collectionId) ??
-    (CONTENT.systems ?? [])[0];
-const base = system?.route ?? `/${system?.id ?? "docs"}`;
+const base = getSystemRoute(collectionId);
 ---
 
 <a href={`${base}/${slug}.md`} target="_blank" rel="noopener noreferrer">

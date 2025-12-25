@@ -9,16 +9,15 @@ import type { NavigationResult, NavigationItem, ProcessedGroup } from "./types";
 
 /**
  * Build the navigation tabs and default area from the sidebar configuration.
+ * Configuration must be a mapping of collectionId to Sidebar.
  * If a `collectionId` is provided, the filesystem discovery is scoped to that collection.
  */
-export async function buildNavigation(config: Sidebar | Record<string, Sidebar>, collectionId?: string): Promise<NavigationResult> {
-  // Resolve config per collection if a mapping is provided
-  let effectiveConfig: Sidebar;
-  if ((config as any).groups) {
-    effectiveConfig = config as Sidebar;
-  } else {
-    const map = config as Record<string, Sidebar>;
-    effectiveConfig = collectionId ? map[collectionId] ?? map["docs"] ?? Object.values(map)[0] : map["docs"] ?? Object.values(map)[0];
+export async function buildNavigation(config: Record<string, Sidebar>, collectionId?: string): Promise<NavigationResult> {
+  const key = collectionId ?? "docs";
+  const effectiveConfig = config[key];
+
+  if (!effectiveConfig) {
+    throw new Error(`Sidebar configuration not found for collection: ${key}`);
   }
 
   const allDocs = collectionId ? await getCollectionFromFilesystem(collectionId) : await getDocsFromFilesystem();
