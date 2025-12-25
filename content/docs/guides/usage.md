@@ -1,7 +1,7 @@
 ---
 title: "Writing docs: Markdown vs MDX"
 description: "Guidance for content authors on choosing between Markdown and MDX."
-navLabel: "Usage"
+navIcon: "📚"
 ---
 
 This guide explains the differences between plain Markdown (`.md`) and MDX (`.mdx`), and recommends when to use each:
