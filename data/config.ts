@@ -54,6 +54,10 @@ export const HEADER_SOCIAL_LINKS: SocialObjects[] = [
 // Sidebar navigation structure for docs content
 // ---------------------------------------------------------------------------
 export const SIDEBAR_NAVIGATION: Sidebar = {
+    defaultTab: {
+        label: "Docs",
+        icon: "book",
+    },
     groups: [
         {
             id: "guides-more",

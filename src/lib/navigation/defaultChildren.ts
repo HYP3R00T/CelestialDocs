@@ -28,13 +28,14 @@ export function buildDefaultChildren(items: NavigationItem[]): BuildDefaultChild
   return { children, slugs };
 }
 
-export function createDefaultTab(children: Array<ProcessedGroup | ProcessedEntry>): Tab {
+export function createDefaultTab(children: Array<ProcessedGroup | ProcessedEntry>, label = "Docs", icon?: string): Tab {
   return {
     id: "_default",
-    label: "Docs",
+    label,
+    icon,
     group: {
       id: "_default",
-      label: "Docs",
+      label,
       entries: [],
       groups: [],
       children,

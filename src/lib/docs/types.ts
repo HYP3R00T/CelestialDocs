@@ -52,6 +52,12 @@ export interface SidebarGroupItem {
  */
 export interface Sidebar {
     groups: GroupOrEntry[];
+
+    /** Optional configuration for the default tab shown when root docs exist */
+    defaultTab?: {
+        label?: string;
+        icon?: string;
+    };
 }
 
 // ============================================================================

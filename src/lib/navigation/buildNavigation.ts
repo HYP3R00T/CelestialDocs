@@ -39,7 +39,14 @@ export async function buildNavigation(config: Sidebar): Promise<NavigationResult
   const rootEntries = buildRootEntries(filesystemStructure, slugs);
   const children = [...defaultChildren, ...rootEntries];
 
-  const defaultTab = children.length ? createDefaultTab(children) : undefined;
+  const defaultTab = children.length
+    ? createDefaultTab(
+        children,
+        config.defaultTab?.label ?? undefined,
+        config.defaultTab?.icon ?? undefined,
+      )
+    : undefined;
+
   const visibleTabs = defaultTab ? [defaultTab, ...tabs] : tabs;
 
   return {
