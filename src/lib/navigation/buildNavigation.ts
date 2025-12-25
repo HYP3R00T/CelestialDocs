@@ -1,5 +1,5 @@
 import type { Sidebar } from "../docs/types";
-import { getDocsFromFilesystem } from "./loader";
+import { getDocsFromFilesystem, getCollectionFromFilesystem } from "./loader";
 import { buildFilesystemStructure } from "./buildFilesystemStructure";
 import { buildNavigationItems } from "./buildNavigationItems";
 import { buildTabs } from "./buildTabs";
@@ -9,12 +9,22 @@ import type { NavigationResult, NavigationItem, ProcessedGroup } from "./types";
 
 /**
  * Build the navigation tabs and default area from the sidebar configuration.
+ * If a `collectionId` is provided, the filesystem discovery is scoped to that collection.
  */
-export async function buildNavigation(config: Sidebar): Promise<NavigationResult> {
-  const allDocs = await getDocsFromFilesystem();
+export async function buildNavigation(config: Sidebar | Record<string, Sidebar>, collectionId?: string): Promise<NavigationResult> {
+  // Resolve config per collection if a mapping is provided
+  let effectiveConfig: Sidebar;
+  if ((config as any).groups) {
+    effectiveConfig = config as Sidebar;
+  } else {
+    const map = config as Record<string, Sidebar>;
+    effectiveConfig = collectionId ? map[collectionId] ?? map["docs"] ?? Object.values(map)[0] : map["docs"] ?? Object.values(map)[0];
+  }
+
+  const allDocs = collectionId ? await getCollectionFromFilesystem(collectionId) : await getDocsFromFilesystem();
   const filesystemStructure = buildFilesystemStructure(allDocs);
 
-  const navigationItems = buildNavigationItems(config.groups, filesystemStructure, allDocs);
+  const navigationItems = buildNavigationItems(effectiveConfig.groups, filesystemStructure, allDocs);
   const tabs = buildTabs(navigationItems);
 
   const { children: defaultChildren, slugs } = buildDefaultChildren(navigationItems);
@@ -42,15 +52,19 @@ export async function buildNavigation(config: Sidebar): Promise<NavigationResult
   const defaultTab = children.length
     ? createDefaultTab(
         children,
-        config.defaultTab?.label ?? undefined,
-        config.defaultTab?.icon ?? undefined,
+        effectiveConfig.defaultTab?.label ?? undefined,
+        effectiveConfig.defaultTab?.icon ?? undefined,
       )
     : undefined;
 
-  const visibleTabs = defaultTab ? [defaultTab, ...tabs] : tabs;
+  // Avoid duplicate tabs: if any computed tab has the same label as the default tab,
+  // prefer the explicit tab and skip the default tab.
+  const dedupedDefaultTab = defaultTab && tabs.some((t) => t.label === defaultTab.label) ? undefined : defaultTab;
+
+  const visibleTabs = dedupedDefaultTab ? [dedupedDefaultTab, ...tabs] : tabs;
 
   return {
     tabs: visibleTabs,
-    showTabs: visibleTabs.length >= 2,
+    showTabs: visibleTabs.length >= 1,
   };
 }

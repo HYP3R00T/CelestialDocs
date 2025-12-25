@@ -60,6 +60,13 @@ export interface Sidebar {
     };
 }
 
+/**
+ * Mapping of content systems to their sidebar configuration
+ */
+export interface SidebarNavigation {
+    [systemId: string]: Sidebar;
+}
+
 // ============================================================================
 // LAYOUT COMPONENT TYPES
 // ============================================================================

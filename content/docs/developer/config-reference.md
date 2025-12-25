@@ -23,7 +23,7 @@ Important fields:
 - `description` — site description used in meta tags.
 - `image` / `imageAlt` — global preview image and alt text (commonly imported from `src/assets` like `import setupImage from "@/assets/setup.png"`).
 - `twitterHandle` — used to populate social meta tags.
-- `CONTENT.defaultDocRedirect` — the path to redirect `/docs` to (e.g., `/docs/getting-started/introduction`).
+- `CONTENT.systems` — an array of content systems; each system may include a `defaultDocRedirect` that controls where the collection root redirects (e.g., a system object `{ id: 'docs', defaultDocRedirect: '/docs/getting-started/introduction' }`).
 
 Example:
 

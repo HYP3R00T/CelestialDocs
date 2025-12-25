@@ -1,4 +1,4 @@
-import { SIDEBAR_NAVIGATION } from "@data/config";
+import { SIDEBAR_NAVIGATION, CONTENT } from "@data/config";
 import type { Entry, Group, GroupOrEntry } from "./types";
 
 /**
@@ -8,7 +8,17 @@ function isGroup(item: GroupOrEntry): item is Group {
     return "id" in item && typeof item.id === "string";
 }
 
-function findGroupByPath(path: string, groups: GroupOrEntry[] = SIDEBAR_NAVIGATION.groups): Group | undefined {
+function getGroupsForCollection(collectionId?: string): GroupOrEntry[] {
+    if ((SIDEBAR_NAVIGATION as any).groups) {
+        // legacy single Sidebar config
+        return (SIDEBAR_NAVIGATION as any).groups as GroupOrEntry[];
+    }
+    const map = SIDEBAR_NAVIGATION as Record<string, { groups: GroupOrEntry[] }>;
+    const key = collectionId ?? "docs";
+    return map[key]?.groups ?? map["docs"]?.groups ?? Object.values(map)[0]?.groups ?? [];
+}
+
+function findGroupByPath(path: string, groups: GroupOrEntry[] = getGroupsForCollection()): Group | undefined {
     for (const node of groups) {
         if (!isGroup(node)) {
             continue;
@@ -28,7 +38,7 @@ function findGroupByPath(path: string, groups: GroupOrEntry[] = SIDEBAR_NAVIGATI
 /**
  * Find an entry in the navigation tree by its slug
  */
-function findEntryBySlug(slug: string, nodes: GroupOrEntry[] = SIDEBAR_NAVIGATION.groups): Entry | undefined {
+function findEntryBySlug(slug: string, nodes: GroupOrEntry[] = getGroupsForCollection()): Entry | undefined {
     for (const node of nodes) {
         if (!isGroup(node)) {
             if (node.slug === slug) {
@@ -80,7 +90,7 @@ function getBreadcrumbLabel(currentPath: string): string | null {
 /**
  * Check if a path corresponds to an actual page entry (not just a group)
  */
-function isPageEntry(slug: string): boolean {
+function isPageEntry(slug: string, collectionId?: string): boolean {
     function checkNodes(nodes: GroupOrEntry[]): boolean {
         for (const node of nodes) {
             if (!isGroup(node)) {
@@ -104,7 +114,7 @@ function isPageEntry(slug: string): boolean {
         return false;
     }
 
-    return checkNodes(SIDEBAR_NAVIGATION.groups);
+    return checkNodes(getGroupsForCollection(collectionId));
 }
 
 /**
@@ -115,11 +125,14 @@ function isPageEntry(slug: string): boolean {
  * "guides/advanced/patterns" -> [{ label: "Docs", href: "/docs" }, { label: "Guides", href: "/docs/guides" }, { label: "Advanced Topics" }, { label: "Design Patterns" }]
  */
 export function buildBreadcrumbItems(
-    slug: string
+    slug: string,
+    collectionId?: string,
 ): Array<{ label: string; href?: string }> {
     const parts = slug.split("/");
+    const system = (CONTENT.systems ?? []).find((s: any) => s.id === collectionId) ?? (CONTENT.systems ?? [])[0];
+
     const items: Array<{ label: string; href?: string }> = [
-        { label: "Docs", href: "/docs" },
+        { label: system ? (system.id.charAt(0).toUpperCase() + system.id.slice(1)) : "Docs", href: system ? (system.route ?? `/${system.id}`) : "/docs" },
     ];
 
     let currentPath = "";
@@ -133,12 +146,12 @@ export function buildBreadcrumbItems(
         const label = getBreadcrumbLabel(currentPath) || part;
 
         // Only make it clickable if it's an actual page entry and not the last item
-        const isPagePath = isPageEntry(currentPath);
+        const isPagePath = isPageEntry(currentPath, collectionId);
         const shouldBeClickable = isPagePath && !isLast;
 
         items.push({
             label,
-            href: shouldBeClickable ? `/docs/${currentPath}` : undefined,
+            href: shouldBeClickable ? `${system?.route ?? `/${system?.id ?? 'docs'}/${currentPath}`}` : undefined,
         });
     }
 

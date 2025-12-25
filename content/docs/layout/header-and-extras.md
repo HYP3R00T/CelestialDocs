@@ -21,7 +21,7 @@ Open `data/config.ts` and update the following exports:
 - `HEADER_FEATURES` controls feature toggles (example shown below).
 - `HEADER_NAV_ITEMS` is an array of `NavItem` objects (`{ href, label, special?, blank? }`).
 - `HEADER_SOCIAL_LINKS` is an array of `SocialObjects` (`{ name, href, active, linkTitle? }`).
-- `CONTENT.defaultDocRedirect` controls where `/docs` sends visitors.
+- `CONTENT.systems` lets you configure per-system redirects: set `defaultDocRedirect` on the `docs` system to control where `/docs` sends visitors (e.g., `{ id: 'docs', defaultDocRedirect: '/docs/getting-started/introduction' }`).
 
 ### Example `HEADER_FEATURES`
 

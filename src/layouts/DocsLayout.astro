@@ -12,12 +12,18 @@ import type { DocsLayoutProps, Heading } from "@/lib/docs/types";
 const { headings = [], frontmatter } = Astro.props as DocsLayoutProps &
     Record<string, unknown>;
 
-// Build navigation
-const navResult = await buildNavigation(SIDEBAR_NAVIGATION);
+// Build navigation (scoped to collection if available)
+// Prefer an explicit `collection` prop (set by the page's getStaticPaths),
+// then a `collection` field on frontmatter (fallback), then default to 'docs'.
+const collectionId =
+    (Astro.props as any).collection ??
+    (frontmatter as any).collection ??
+    "docs";
+const navResult = await buildNavigation(SIDEBAR_NAVIGATION, collectionId);
 const activeTab = getActiveTab(frontmatter.id, navResult.tabs);
 
 // Build breadcrumb items
-const breadcrumbItems = buildBreadcrumbItems(frontmatter.id);
+const breadcrumbItems = buildBreadcrumbItems(frontmatter.id, collectionId);
 
 // Convert headings to TableOfContents format
 const tableOfContentsHeadings = headings
@@ -37,6 +43,7 @@ const tableOfContentsHeadings = headings
             showTabs={navResult.showTabs}
             activeTab={activeTab}
             currentSlug={frontmatter.id}
+            collectionId={collectionId}
         />
 
         <!-- Main content  -->
@@ -50,7 +57,10 @@ const tableOfContentsHeadings = headings
                             )
                         }
                     </div>
-                    <SourceButton slug={frontmatter.id} />
+                    <SourceButton
+                        slug={frontmatter.id}
+                        collectionId={collectionId}
+                    />
                 </div>
             </div>
             <article class="prose prose-slate dark:prose-invert min-w-0">

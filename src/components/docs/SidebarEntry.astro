@@ -2,13 +2,20 @@
 import DocIcon from "./DocIcon.astro";
 import type { SidebarEntryProps } from "@/lib/docs/types";
 
-const { entry, currentSlug } = Astro.props as SidebarEntryProps;
+import { CONTENT } from "@data/config";
+const { entry, currentSlug, collectionId } =
+    Astro.props as SidebarEntryProps & { collectionId?: string };
 const isActive = currentSlug === entry.slug;
+
+const system =
+    (CONTENT.systems ?? []).find((s: any) => s.id === collectionId) ??
+    (CONTENT.systems ?? [])[0];
+const base = system?.route ?? `/${system?.id ?? "docs"}`;
 ---
 
 <li>
     <a
-        href={`/docs/${entry.slug}`}
+        href={`${base}/${entry.slug}`}
         class={`
       flex items-center gap-2 rounded-sm px-2 py-1 text-sm transition-colors
       ${

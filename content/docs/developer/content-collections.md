@@ -28,8 +28,12 @@ The `docs` collection in this template is defined with a glob loader and a Zod s
 ```ts
 import { CONTENT } from "@data/config";
 
+// The template now supports multiple content systems via `CONTENT.systems`.
+// Example: find the docs system and use its `dir` to create a collection loader.
+const docsSystem = (CONTENT.systems ?? []).find((s: any) => s.id === "docs") ?? { dir: "content/docs" };
+
 const docs = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: `./${CONTENT.dir}` }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: `./${docsSystem.dir}` }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),

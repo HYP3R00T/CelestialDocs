@@ -1,15 +1,21 @@
 ---
 import { Button } from "@/components/ui/button";
 import { Icon } from "astro-icon/components";
+import { CONTENT } from "@data/config";
 
 interface Props {
     slug: string;
+    collectionId?: string;
 }
 
-const { slug } = Astro.props;
+const { slug, collectionId } = Astro.props;
+const system =
+    (CONTENT.systems ?? []).find((s: any) => s.id === collectionId) ??
+    (CONTENT.systems ?? [])[0];
+const base = system?.route ?? `/${system?.id ?? "docs"}`;
 ---
 
-<a href={`/docs/${slug}.md`} target="_blank" rel="noopener noreferrer">
+<a href={`${base}/${slug}.md`} target="_blank" rel="noopener noreferrer">
     <Button variant="outline" size="sm" className="gap-2">
         <Icon name="github" class="size-4" />
         View as Markdown

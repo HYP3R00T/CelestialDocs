@@ -7,7 +7,8 @@ import type { SidebarGroupItem, SidebarProps } from "@/lib/docs/types";
 import DocsTabs from "./DocsTabs.astro";
 import DocsContent from "./DocsContent.astro";
 
-const { tabs, showTabs, activeTab, currentSlug } = Astro.props as SidebarProps;
+const { tabs, showTabs, activeTab, currentSlug, collectionId } =
+    Astro.props as SidebarProps & { collectionId?: string };
 ---
 
 <aside
@@ -15,12 +16,21 @@ const { tabs, showTabs, activeTab, currentSlug } = Astro.props as SidebarProps;
 >
     <nav aria-label="Documentation navigation" class="flex h-full flex-col">
         <!-- Tabs section - pinned at top  -->
-        <DocsTabs tabs={tabs} showTabs={showTabs} activeTab={activeTab} />
+        <DocsTabs
+            tabs={tabs}
+            showTabs={showTabs}
+            activeTab={activeTab}
+            collectionId={collectionId}
+        />
 
         <!-- Groups and entries section - scrollable  -->
         <div class="flex-1 overflow-y-auto px-4 py-4">
             <div class="space-y-2">
-                <DocsContent activeTab={activeTab} currentSlug={currentSlug} />
+                <DocsContent
+                    activeTab={activeTab}
+                    currentSlug={currentSlug}
+                    collectionId={collectionId}
+                />
             </div>
         </div>
     </nav>

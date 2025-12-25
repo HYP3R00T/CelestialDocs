@@ -2,9 +2,10 @@
 import SidebarGroup from "./SidebarGroup.astro";
 import SidebarEntry from "./SidebarEntry.astro";
 
-const { activeTab, currentSlug } = Astro.props as {
+const { activeTab, currentSlug, collectionId } = Astro.props as {
     activeTab: any;
     currentSlug: string | null;
+    collectionId?: string;
 };
 ---
 
@@ -20,12 +21,14 @@ const { activeTab, currentSlug } = Astro.props as {
                                 <SidebarEntry
                                     entry={child as any}
                                     currentSlug={currentSlug}
+                                    collectionId={collectionId}
                                 />
                             </ul>
                         ) : (
                             <SidebarGroup
                                 group={child as any}
                                 currentSlug={currentSlug}
+                                collectionId={collectionId}
                             />
                         ),
                     )}
@@ -40,6 +43,7 @@ const { activeTab, currentSlug } = Astro.props as {
                                     <SidebarEntry
                                         entry={entry}
                                         currentSlug={currentSlug}
+                                        collectionId={collectionId}
                                     />
                                 ))}
                             </ul>
@@ -53,6 +57,7 @@ const { activeTab, currentSlug } = Astro.props as {
                                     <SidebarGroup
                                         group={group}
                                         currentSlug={currentSlug}
+                                        collectionId={collectionId}
                                     />
                                 ))}
                             </div>

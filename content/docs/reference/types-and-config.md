@@ -38,7 +38,8 @@ If you import the config in a TypeScript file you get autocompletion and type ch
 import { SITE, SIDEBAR_NAVIGATION, CONTENT } from '@data/config';
 
 function getDefaultRedirect(): string {
-  return CONTENT.defaultDocRedirect || '/docs';
+  // Prefer per-system redirect (docs system), fall back to '/docs'
+  return (CONTENT.systems ?? []).find((s: any) => s.id === 'docs')?.defaultDocRedirect || '/docs';
 }
 
 // ensure the sidebar structure is valid before passing to the builder

@@ -2,11 +2,16 @@
 import DocIcon from "./DocIcon.astro";
 import { findFirstEntry } from "@/lib/docs/utils";
 
-const { tabs, showTabs, activeTab } = Astro.props as {
+import { CONTENT } from "@data/config";
+
+const { tabs, showTabs, activeTab, collectionId } = Astro.props as {
     tabs: any[];
     showTabs: boolean;
     activeTab: any;
+    collectionId?: string;
 };
+
+// No further changes
 ---
 
 {
@@ -16,7 +21,14 @@ const { tabs, showTabs, activeTab } = Astro.props as {
                 {tabs.map((tab) => {
                     const isActive = activeTab?.id === tab.id;
                     const firstEntry = findFirstEntry(tab.group);
-                    const href = firstEntry ? `/docs/${firstEntry}` : `/docs`;
+                    const system =
+                        (CONTENT.systems ?? []).find(
+                            (s: any) => s.id === collectionId,
+                        ) ?? (CONTENT.systems ?? [])[0];
+                    const base = system?.route ?? `/${system?.id ?? "docs"}`;
+                    const href = firstEntry
+                        ? `${base}/${firstEntry}`
+                        : `${base}`;
 
                     return (
                         <a

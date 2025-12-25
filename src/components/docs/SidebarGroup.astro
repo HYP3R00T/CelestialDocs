@@ -4,7 +4,12 @@ import DocIcon from "./DocIcon.astro";
 import { Icon } from "astro-icon/components";
 import type { SidebarGroupProps, SidebarGroupItem } from "@/lib/docs/types";
 
-const { group, currentSlug, level = 0 } = Astro.props as SidebarGroupProps;
+const {
+    group,
+    currentSlug,
+    level = 0,
+    collectionId,
+} = Astro.props as SidebarGroupProps & { collectionId?: string };
 
 // Determine if this group or any of its children contain the current page
 function containsSlug(g: SidebarGroupItem, slug: string): boolean {
@@ -48,7 +53,11 @@ const isExpanded = containsSlug(group, currentSlug);
             group.entries && group.entries.length > 0 && (
                 <ul class="space-y-1">
                     {group.entries.map((entry) => (
-                        <SidebarEntry entry={entry} currentSlug={currentSlug} />
+                        <SidebarEntry
+                            entry={entry}
+                            currentSlug={currentSlug}
+                            collectionId={collectionId}
+                        />
                     ))}
                 </ul>
             )
@@ -62,6 +71,7 @@ const isExpanded = containsSlug(group, currentSlug);
                             group={subgroup}
                             currentSlug={currentSlug}
                             level={level + 1}
+                            collectionId={collectionId}
                         />
                     ))}
                 </div>
