@@ -1,5 +1,6 @@
 import type { Entry, Group, GroupOrEntry } from "../docs/types";
 import { processGroup } from "./process";
+import { deriveLabel } from "./label.ts";
 import type { DocEntry, NavigationItem } from "./types";
 
 export function buildNavigationItems(
@@ -25,7 +26,7 @@ export function buildNavigationItems(
         type: "entry",
         entry: {
           slug: item.slug,
-          label: item.label || doc.data.navLabel || doc.data.title,
+          label: deriveLabel(doc, item.label),
           icon: item.icon || doc.data.navIcon,
           hidden: false,
         },

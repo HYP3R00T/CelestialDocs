@@ -1,4 +1,5 @@
 import type { DocEntry, ProcessedEntry } from "./types";
+import { deriveLabel } from "./label.ts";
 
 export function buildRootEntries(
   filesystemStructure: Map<string, DocEntry[]>,
@@ -10,7 +11,7 @@ export function buildRootEntries(
     .filter((doc) => !doc.data.navHidden && doc.slug !== "index" && !slugs.has(doc.slug))
     .map((doc) => ({
       slug: doc.slug,
-      label: doc.data.navLabel || doc.data.title || doc.slug,
+      label: deriveLabel(doc),
       icon: doc.data.navIcon,
     }))
     .sort((a, b) => a.label.localeCompare(b.label));
