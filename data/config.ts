@@ -28,6 +28,10 @@ export const SITE: SiteConfig = {
     defaultDocRedirect: "/docs/getting-started/introduction",
 };
 
+// Filesystem location for docs content (change this to move the content folder)
+// Example: "content/notes" to use content/notes instead of content/docs
+export const CONTENT_DIR = "content/docs";
+
 // ---------------------------------------------------------------------------
 // Header-specific configuration
 // ---------------------------------------------------------------------------

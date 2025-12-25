@@ -26,8 +26,10 @@ Key concepts:
 The `docs` collection in this template is defined with a glob loader and a Zod schema that includes common fields such as `title`, `description`, and navigation-related fields like `navLabel`/`navHidden`.
 
 ```ts
+import { CONTENT_DIR } from "@data/config";
+
 const docs = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./content/docs" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: `./${CONTENT_DIR}` }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
