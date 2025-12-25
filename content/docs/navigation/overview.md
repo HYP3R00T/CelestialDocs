@@ -30,7 +30,7 @@ Debugging & tips:
 - If a page is missing from the sidebar: check `navHidden` in its frontmatter, and verify the slug matches the file path (no file extension in slug).
 - If a configured slug is not found, the navigation builder will warn in the console: verify the file exists and the path is correct.
 - Use the `debug/navigation.json.ts` page (if present) or add a temporary API route to print the results of the navigation builder for inspection.
-- If you want a different default landing page for `/docs`, update `SITE.defaultDocRedirect` in `data/config.ts`.
+- If you want a different default landing page for `/docs`, update `CONTENT.defaultDocRedirect` in `data/config.ts`.
 
 Examples & common patterns:
 

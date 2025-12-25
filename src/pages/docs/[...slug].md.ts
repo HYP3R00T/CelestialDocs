@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { CONTENT_DIR } from "@data/config";
+import { CONTENT } from "@data/config";
 
 export const getStaticPaths = async () => {
     const { getCollection } = await import("astro:content");
@@ -20,7 +20,7 @@ export const GET: APIRoute = async ({ params }) => {
     }
 
     try {
-        const contentDir = join(process.cwd(), CONTENT_DIR);
+        const contentDir = join(process.cwd(), CONTENT.dir);
         let filePath = join(contentDir, `${slug}.mdx`);
         let content = "";
 

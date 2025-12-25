@@ -16,6 +16,11 @@ export const LOCALE: LocaleConfig = {
     lang: "en",
 };
 
+export const CONTENT = {
+    dir: "content/docs",
+    defaultDocRedirect: "/docs/getting-started/introduction",
+};
+
 export const SITE: SiteConfig = {
     website: "https://celestialdocs.hyperoot.dev",
     author: "Rajesh",
@@ -25,12 +30,8 @@ export const SITE: SiteConfig = {
     image: setupImage,
     imageAlt: "Check out celestialdocs.hyperoot.dev",
     twitterHandle: "@HYP3R00T",
-    defaultDocRedirect: "/docs/getting-started/introduction",
 };
 
-// Filesystem location for docs content (change this to move the content folder)
-// Example: "content/notes" to use content/notes instead of content/docs
-export const CONTENT_DIR = "content/docs";
 
 // ---------------------------------------------------------------------------
 // Header-specific configuration

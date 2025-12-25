@@ -1,9 +1,9 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
-import { CONTENT_DIR } from "@data/config";
+import { CONTENT } from "@data/config";
 
 const docs = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: `./${CONTENT_DIR}` }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: `./${CONTENT.dir}` }),
   schema: ({ image }) =>
     z.object({
       // ===== Basic Metadata =====

@@ -23,7 +23,7 @@ Important fields:
 - `description` — site description used in meta tags.
 - `image` / `imageAlt` — global preview image and alt text (commonly imported from `src/assets` like `import setupImage from "@/assets/setup.png"`).
 - `twitterHandle` — used to populate social meta tags.
-- `defaultDocRedirect` — the path to redirect `/docs` to (e.g., `/docs/getting-started/introduction`).
+- `CONTENT.defaultDocRedirect` — the path to redirect `/docs` to (e.g., `/docs/getting-started/introduction`).
 
 Example:
 
@@ -36,11 +36,19 @@ export const SITE = {
   description: 'Official docs for Acme products',
   image: setupImage,
   imageAlt: 'Acme Docs preview',
+};
+```
+
+Example (CONTENT):
+
+```ts
+export const CONTENT = {
+  dir: 'content/docs',
   defaultDocRedirect: '/docs/getting-started/introduction',
 };
 ```
 
-Changing `defaultDocRedirect` updates where the top-level "Docs" header link sends users.
+Changing `CONTENT.defaultDocRedirect` updates where the top-level "Docs" header link sends users.
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
-import { SITE } from "@data/config";
+import { SITE, CONTENT } from "@data/config";
 import DocsLayout from "@/layouts/DocsLayout.astro";
 import MdxImage from "@/components/docs/markdown/MdxImage.astro";
 import MdxLink from "@/components/docs/markdown/MdxLink.astro";
@@ -11,7 +11,7 @@ const doc = docs.find((d) => d.id === "index");
 
 // Fallback to redirect if index doc is missing
 if (!doc) {
-    return Astro.redirect(SITE.defaultDocRedirect ?? "/");
+    return Astro.redirect(CONTENT.defaultDocRedirect ?? "/");
 }
 
 const { Content, headings } = await render(doc);

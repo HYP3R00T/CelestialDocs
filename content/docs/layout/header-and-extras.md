@@ -21,7 +21,7 @@ Open `data/config.ts` and update the following exports:
 - `HEADER_FEATURES` controls feature toggles (example shown below).
 - `HEADER_NAV_ITEMS` is an array of `NavItem` objects (`{ href, label, special?, blank? }`).
 - `HEADER_SOCIAL_LINKS` is an array of `SocialObjects` (`{ name, href, active, linkTitle? }`).
-- `SITE.defaultDocRedirect` controls where `/docs` sends visitors.
+- `CONTENT.defaultDocRedirect` controls where `/docs` sends visitors.
 
 ### Example `HEADER_FEATURES`
 
@@ -61,6 +61,6 @@ export const HEADER_SOCIAL_LINKS = [
 
 - Toggle not appearing: check `HEADER_FEATURES` in `data/config.ts` and ensure the corresponding flag is `true`.
 - Social link not visible: confirm the `active` field in `HEADER_SOCIAL_LINKS` is `true` and the `href` is correct.
-- `Docs` not going where you expect: update `SITE.defaultDocRedirect` to the desired default (e.g., `/docs/getting-started/introduction`).
+- `Docs` not going where you expect: update `CONTENT.defaultDocRedirect` to the desired default (e.g., `/docs/getting-started/introduction`).
 
 If you'd like, I can add an annotated screenshot of the header with callouts for each control, or include a short GIF showing the layout width and theme toggles in action.

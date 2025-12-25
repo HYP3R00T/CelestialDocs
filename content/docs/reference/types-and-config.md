@@ -16,7 +16,7 @@ This page maps the runtime configuration options in `data/config.ts` to the Type
 ## Important types & where they map
 
 - `SiteConfig` (`src/lib/types.ts`) — maps to the exported `SITE` object in `data/config.ts`.
-  - Fields: `website`, `author`, `repo`, `branch?`, `title`, `description`, `image`, `imageAlt?`, `twitterHandle?`, `starCountThreshold?`, `enableLayoutWidthToggle?`, `enableGitHubButton?`, `defaultDocRedirect?`.
+  - Fields: `website`, `author`, `repo`, `branch?`, `title`, `description`, `image`, `imageAlt?`, `twitterHandle?`, `starCountThreshold?`, `enableLayoutWidthToggle?`, `enableGitHubButton?`.
 
 - `HeaderFeatures` — maps to `HEADER_FEATURES` (`starCountThreshold`, `enableLayoutWidthToggle`, `enableGitHubButton`).
 
@@ -35,10 +35,10 @@ If you need exact field signatures, see the type files listed above. Keep these 
 If you import the config in a TypeScript file you get autocompletion and type checking:
 
 ```ts
-import { SITE, SIDEBAR_NAVIGATION } from '@data/config';
+import { SITE, SIDEBAR_NAVIGATION, CONTENT } from '@data/config';
 
 function getDefaultRedirect(): string {
-  return SITE.defaultDocRedirect || '/docs';
+  return CONTENT.defaultDocRedirect || '/docs';
 }
 
 // ensure the sidebar structure is valid before passing to the builder
