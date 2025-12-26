@@ -19,11 +19,11 @@ The goal of code review is to ensure high-quality, maintainable, accessible, and
 ### Code Style & Structure
 
 - Astro file layout follows conventions: `src/pages`, `src/layouts`, `src/components`, `src/content`, `public/`.
-- Components are small, single-purpose, and reusable; avoid deep prop drilling—prefer composition.
+- Components are small, single-purpose, and reusable; avoid deep prop drilling-prefer composition.
 - Imports grouped and ordered: Node built-ins → third-party → internal aliases (use `tsconfig` path aliases).
 - No duplicated logic; utilities extracted to `src/lib`/`src/utils`.
 - Avoid magic numbers/strings; centralize constants and feature flags.
-- **No** direct DOM mutation when a framework island is used—keep state within the island.
+- **No** direct DOM mutation when a framework island is used-keep state within the island.
 
 ### Type Safety
 

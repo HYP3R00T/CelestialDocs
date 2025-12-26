@@ -214,13 +214,23 @@
         @apply bg-transparent;
     }
 
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
+    /* Handle - Vertical */
+    ::-webkit-scrollbar-thumb:vertical {
         @apply bg-secondary rounded-lg;
     }
 
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
+    /* Handle - Horizontal */
+    ::-webkit-scrollbar-thumb:horizontal {
+        @apply bg-muted-foreground rounded-lg;
+    }
+
+    /* Handle on hover - Vertical */
+    ::-webkit-scrollbar-thumb:vertical:hover {
+        @apply bg-accent-foreground;
+    }
+
+    /* Handle on hover - Horizontal */
+    ::-webkit-scrollbar-thumb:horizontal:hover {
         @apply bg-accent-foreground;
     }
 
@@ -274,7 +284,7 @@
     }
 
     .prose h2 {
-        @apply mt-12 mb-4 text-4xl font-bold leading-snug tracking-tight;
+        @apply mt-12 mb-4 text-4xl font-bold leading-snug tracking-tight border-none;
     }
 
     .prose h3 {
