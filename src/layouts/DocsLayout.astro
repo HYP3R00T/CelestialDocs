@@ -9,16 +9,11 @@ import { buildBreadcrumbItems } from "@/lib/docs/breadcrumb";
 import { SIDEBAR_NAVIGATION } from "@data/config";
 import type { DocsLayoutProps, Heading } from "@/lib/docs/types";
 
-const { headings = [], frontmatter } = Astro.props as DocsLayoutProps &
-    Record<string, unknown>;
+interface Props extends DocsLayoutProps {}
 
-// Build navigation (scoped to collection if available)
-// Prefer an explicit `collection` prop (set by the page's getStaticPaths),
-// then a `collection` field on frontmatter (fallback), then default to 'docs'.
-const collectionId =
-    (Astro.props as any).collection ??
-    (frontmatter as any).collection ??
-    "docs";
+const props = Astro.props as Props;
+const { headings = [], frontmatter, collection } = props;
+const collectionId = collection ?? "docs";
 const navResult = await buildNavigation(SIDEBAR_NAVIGATION, collectionId);
 const activeTab = getActiveTab(frontmatter.id, navResult.tabs);
 

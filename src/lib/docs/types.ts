@@ -1,5 +1,34 @@
 import type { HeadSEOProps } from "@/lib/types";
-import type { CollectionEntry } from "astro:content";
+
+// ============================================================================
+// FRONTMATTER TYPES
+// ============================================================================
+
+/**
+ * Frontmatter metadata for content entries
+ * Matches the schema defined in content.config.ts
+ */
+export interface Frontmatter {
+    title: string;
+    description: string;
+    draft?: boolean;
+    authors?: string[];
+    navLabel?: string;
+    navIcon?: string;
+    navHidden?: boolean;
+    hide_breadcrumbs?: boolean;
+}
+
+/**
+ * Collection entry with Frontmatter data
+ */
+export interface FrontmatterEntry {
+    id: string;
+    collection: string;
+    data: Frontmatter;
+    body: string;
+    filePath: string;
+}
 
 // ============================================================================
 // NAVIGATION TYPES - Documentation Navigation
@@ -83,7 +112,7 @@ export interface BaseLayoutProps extends Partial<HeadSEOProps> {
  */
 export interface DocsLayoutProps extends Partial<HeadSEOProps> {
     headings?: Heading[];
-    frontmatter: CollectionEntry<any>;
+    frontmatter: FrontmatterEntry;
     collection?: string;
 }
 
