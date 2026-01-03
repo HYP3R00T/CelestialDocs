@@ -164,6 +164,10 @@
     --astro-code-token-link: var(--green);
 }
 
+@theme {
+    --font-mono: 'Fira Code Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
 
 @layer base {
     * {
@@ -345,7 +349,7 @@
     /* ======== Inline code ======== */
 
     .prose code {
-        @apply rounded bg-muted px-1.5 py-0.5 font-mono text-base font-medium;
+        @apply rounded bg-muted px-1.5 py-0.5 font-mono font-medium;
     }
 
     /* Avoid double styling inside code blocks */
@@ -356,11 +360,11 @@
     /* ======== Code blocks ======== */
 
     .prose pre {
-        @apply my-8 overflow-x-auto rounded-lg bg-secondary px-6 py-5 text-base leading-relaxed;
+        @apply my-8 overflow-x-auto rounded-lg bg-secondary px-6 py-5 leading-relaxed;
     }
 
     .astro-code {
-        @apply my-8 rounded-lg bg-secondary px-6 py-5 font-mono text-base;
+        @apply my-8 rounded-lg bg-secondary px-6 py-5 font-mono text-sm;
     }
 
     /* ======== Tables ======== */
