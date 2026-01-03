@@ -46,9 +46,9 @@ export const SITE: SiteConfig = {
 // Header-specific configuration
 // ---------------------------------------------------------------------------
 export const HEADER_FEATURES: HeaderFeatures = {
+    enableGitHubButton: true,
     starCountThreshold: 0,
     enableLayoutWidthToggle: true,
-    enableGitHubButton: true,
 };
 
 export const HEADER_NAV_ITEMS: NavItem[] = [

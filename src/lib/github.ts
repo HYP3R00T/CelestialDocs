@@ -82,7 +82,7 @@ export async function initGitHubStars(): Promise<void> {
       countSpan.textContent = formatStarCount(count);
       countSpan.classList.remove("hidden");
       button.classList.remove("size-9");
-      button.classList.add("h-9", "px-4", "py-2", "gap-2");
+      button.classList.add("h-9");
     }
   } catch {}
 }
