@@ -13,6 +13,16 @@ export default defineConfig({
 
     vite: {
         plugins: [tailwindcss()],
+        server: {
+            watch: {
+                ignored: [
+                    '**/.pnpm/**',
+                    '**/.pnpm-store/**',
+                    '**/node_modules/**',
+                    '**/.git/**'
+                ]
+            }
+        }
     },
 
     markdown: {
