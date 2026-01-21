@@ -12,10 +12,10 @@ The main configuration file for CelestialDocs is `data/config.ts`. This single f
 
 It's a TypeScript file that exports configuration objects for:
 
-- **Site metadata** (title, description, author, social links)
-- **Header navigation** (nav items, buttons, features)
-- **Sidebar navigation** (groups, entries, tabs)
-- **Content systems** (multiple doc collections)
+- **Site metadata**
+- **Header**
+- **Sidebar navigation**
+- **Content systems**
 - **Table of contents behavior**
 
 ## Location
@@ -23,7 +23,7 @@ It's a TypeScript file that exports configuration objects for:
 ```sh
 your-project/
 ├─ data/
-│  └─ config.ts  ← The main config file
+│  └─ config.ts  # The main config file
 ├─ content/
 ├─ src/
 └─ ...

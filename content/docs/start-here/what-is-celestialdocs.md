@@ -6,8 +6,6 @@ navIcon: "🌟"
 draft: false
 ---
 
-## Welcome to CelestialDocs!
-
 CelestialDocs is a **documentation template** built with [Astro](https://astro.build/) that makes it easy to create and maintain documentation sites - without needing to be a developer.
 
 ### What makes it special?
