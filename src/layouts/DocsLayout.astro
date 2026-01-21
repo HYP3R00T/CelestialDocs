@@ -25,7 +25,7 @@ const tableOfContentsHeadings = headings
     .map((h) => ({
         depth: h.depth,
         text: h.text,
-        id: h.id ?? h.slug,
+        id: h.slug,
     }))
     .filter((heading): heading is Heading => Boolean(heading.id));
 ---

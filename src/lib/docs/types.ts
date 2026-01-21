@@ -1,4 +1,5 @@
 import type { HeadSEOProps } from "@/lib/types";
+import type { MarkdownHeading } from "astro";
 
 // ============================================================================
 // FRONTMATTER TYPES
@@ -111,7 +112,7 @@ export interface BaseLayoutProps extends Partial<HeadSEOProps> {
  * Props for DocsLayout component
  */
 export interface DocsLayoutProps extends Partial<HeadSEOProps> {
-    headings?: Heading[];
+    headings?: MarkdownHeading[];
     frontmatter: FrontmatterEntry;
     collection?: string;
 }
