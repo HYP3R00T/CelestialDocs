@@ -78,15 +78,8 @@ export const SIDEBAR_NAVIGATION: SidebarNavigation = {
             icon: "📚",
         },
         groups: [
-            {
-                id: "foundation",
-                label: "Foundation",
-                icon: "🏗️",
-                entries: [
-                    { slug: "introduction" },
-                    { slug: "why-celestialdocs" },
-                ],
-            },
+            { slug: "introduction" },
+            { slug: "why-celestialdocs" },
             {
                 id: "getting-started",
                 label: "Getting Started",
