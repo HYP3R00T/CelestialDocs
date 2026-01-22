@@ -22,7 +22,7 @@ export const CONTENT: ContentConfig = {
         {
             id: "docs",
             dir: "content/docs",
-            defaultDocRedirect: "/docs/getting-started/introduction",
+            defaultDocRedirect: "/docs/introduction",
             route: "/docs",
         },
         {
@@ -74,32 +74,55 @@ export const HEADER_SOCIAL_LINKS: SocialObjects[] = [
 export const SIDEBAR_NAVIGATION: SidebarNavigation = {
     docs: {
         defaultTab: {
-            label: "Learn",
-            icon: "book",
+            label: "Overview",
+            icon: "📚",
         },
         groups: [
+            {
+                id: "foundation",
+                label: "Foundation",
+                icon: "🏗️",
+                entries: [
+                    { slug: "introduction" },
+                    { slug: "why-celestialdocs" },
+                ],
+            },
             {
                 id: "getting-started",
                 label: "Getting Started",
                 icon: "🚀",
                 tab: true,
                 entries: [
-                    { slug: "getting-started/introduction" },
-                    { slug: "getting-started/installation" },
-                    { slug: "getting-started/quick-start" },
+                    { slug: "getting-started/setup" },
+                    { slug: "getting-started/first-collection" },
                     { slug: "getting-started/first-page" },
                 ],
             },
             {
-                id: "core-concepts",
-                label: "Core Concepts",
-                icon: "💡",
+                id: "navigation-system",
+                label: "Navigation System",
+                icon: "🗺️",
                 tab: true,
-                entries: [
-                    { slug: "core-concepts/content-collections" },
-                    { slug: "core-concepts/markdown-mdx" },
-                    { slug: "core-concepts/frontmatter" },
-                    { slug: "core-concepts/navigation-system" },
+                groups: [
+                    {
+                        id: "core-concepts",
+                        label: "Core Concepts",
+                        entries: [
+                            { slug: "navigation-system/core-concepts/entries" },
+                            { slug: "navigation-system/core-concepts/groups" },
+                            { slug: "navigation-system/core-concepts/nested-groups" },
+                            { slug: "navigation-system/core-concepts/tabs" },
+                        ],
+                    },
+                    {
+                        id: "hierarchy",
+                        label: "Understanding the Hierarchy",
+                        entries: [
+                            { slug: "navigation-system/hierarchy/three-tier-overview" },
+                            { slug: "navigation-system/hierarchy/visual-guide" },
+                            { slug: "navigation-system/hierarchy/real-world-examples" },
+                        ],
+                    },
                 ],
             },
             {
@@ -107,43 +130,130 @@ export const SIDEBAR_NAVIGATION: SidebarNavigation = {
                 label: "Configuration",
                 icon: "⚙️",
                 tab: true,
-                entries: [
-                    { slug: "configuration/overview", icon: "📋" },
-                    { slug: "configuration/content-systems", icon: "🔗" },
-                    { slug: "configuration/header-navigation", icon: "🎯" },
-                    { slug: "configuration/sidebar-navigation", icon: "📑" },
-                    { slug: "configuration/site-metadata", icon: "📝" },
-                    { slug: "configuration/nested-navigation", icon: "📝" },
+                groups: [
+                    {
+                        id: "basics",
+                        label: "Configuration Basics",
+                        entries: [
+                            { slug: "configuration/basics/overview" },
+                            { slug: "configuration/basics/content-systems" },
+                            { slug: "configuration/basics/sidebar-structure" },
+                        ],
+                    },
+                    {
+                        id: "advanced",
+                        label: "Advanced Configuration",
+                        groups: [
+                            {
+                                id: "nested-setup",
+                                label: "Nested Groups Setup",
+                                entries: [
+                                    { slug: "configuration/advanced/nested-setup/single-level" },
+                                    { slug: "configuration/advanced/nested-setup/multi-level" },
+                                    { slug: "configuration/advanced/nested-setup/best-practices" },
+                                ],
+                            },
+                            {
+                                id: "tab-management",
+                                label: "Tab Management",
+                                entries: [
+                                    { slug: "configuration/advanced/tab-management/creating-tabs" },
+                                    { slug: "configuration/advanced/tab-management/grouping-tabs" },
+                                    { slug: "configuration/advanced/tab-management/organization-patterns" },
+                                ],
+                            },
+                        ],
+                    },
                 ],
             },
             {
-                id: "features",
-                label: "Features",
+                id: "generation-strategies",
+                label: "Generation Strategies",
                 icon: "✨",
                 tab: true,
-                entries: [
-                    { slug: "features/auto-generation", icon: "⚡" },
-                    { slug: "features/breadcrumbs", icon: "🗂️" },
-                    { slug: "features/icons", icon: "🎨" },
-                    { slug: "features/multiple-collections", icon: "📚" },
-                    { slug: "features/table-of-contents", icon: "📖" },
-                    { slug: "features/tabs-and-groups", icon: "🏷️" },
-                    { slug: "features/theme", icon: "🌙" },
+                groups: [
+                    {
+                        id: "auto-generation",
+                        label: "Auto-Generation",
+                        entries: [
+                            { slug: "generation-strategies/auto-generation/how-it-works" },
+                            { slug: "generation-strategies/auto-generation/when-to-use" },
+                            { slug: "generation-strategies/auto-generation/examples" },
+                        ],
+                    },
+                    {
+                        id: "manual-creation",
+                        label: "Manual Creation",
+                        entries: [
+                            { slug: "generation-strategies/manual-creation/explicit-control" },
+                            { slug: "generation-strategies/manual-creation/ordering-content" },
+                            { slug: "generation-strategies/manual-creation/use-cases" },
+                        ],
+                    },
+                    {
+                        id: "hybrid-approach",
+                        label: "Hybrid Approach",
+                        entries: [
+                            { slug: "generation-strategies/hybrid-approach/best-of-both" },
+                            { slug: "generation-strategies/hybrid-approach/pin-and-expand" },
+                            { slug: "generation-strategies/hybrid-approach/real-world-patterns" },
+                        ],
+                    },
                 ],
             },
             {
-                id: "patterns",
-                label: "Common Patterns",
-                icon: "🎯",
+                id: "content",
+                label: "Content & Metadata",
+                icon: "📝",
                 tab: true,
-                autoGenerated: true,
+                groups: [
+                    {
+                        id: "markdown",
+                        label: "Markdown & MDX",
+                        entries: [
+                            { slug: "content/markdown/markdown-basics" },
+                            { slug: "content/markdown/mdx-introduction" },
+                            { slug: "content/markdown/components-in-mdx" },
+                        ],
+                    },
+                    {
+                        id: "frontmatter",
+                        label: "Frontmatter & Metadata",
+                        entries: [
+                            { slug: "content/frontmatter/overview" },
+                            { slug: "content/frontmatter/required-fields" },
+                            { slug: "content/frontmatter/optional-fields" },
+                            { slug: "content/frontmatter/navigation-overrides" },
+                        ],
+                    },
+                ],
             },
             {
-                id: "help",
-                label: "Help",
-                icon: "🆘",
+                id: "advanced-topics",
+                label: "Advanced Topics",
+                icon: "🎓",
                 tab: true,
-                autoGenerated: true,
+                groups: [
+                    {
+                        id: "multiple-collections",
+                        label: "Multiple Collections",
+                        entries: [
+                            { slug: "advanced-topics/multiple-collections/setup" },
+                            { slug: "advanced-topics/multiple-collections/independent-navigation" },
+                            { slug: "advanced-topics/multiple-collections/use-cases" },
+                        ],
+                    },
+                    {
+                        id: "selling-points",
+                        label: "Why Use CelestialDocs",
+                        entries: [
+                            { slug: "advanced-topics/selling-points/hybrid-flexibility" },
+                            { slug: "advanced-topics/selling-points/hierarchical-power" },
+                            { slug: "advanced-topics/selling-points/type-safety" },
+                            { slug: "advanced-topics/selling-points/developer-experience" },
+                        ],
+                    },
+                ],
             },
         ],
     },
