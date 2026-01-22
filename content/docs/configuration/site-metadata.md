@@ -1,214 +1,267 @@
 ---
-title: "Site Metadata"
-description: "Configure site-level information like title, description, author, and social links."
+title: "Site Metadata Configuration"
+description: "Configure your site's basic information including title, description, author, and social metadata"
 navLabel: "Site Metadata"
-navIcon: "📌"
-draft: false
 ---
 
-Site metadata is configured through the `SITE` object in `data/config.ts`. This information appears in:
+The `SITE` configuration object contains all the essential metadata about your documentation site. This information is used throughout your site for SEO, social sharing, and branding.
 
-- Browser tabs
-- Search engine results
-- Social media previews
-- Header links
+## Configuration Object
 
-## SITE Configuration
+The `SITE` object is defined in `data/config.ts` and includes the following fields:
 
 ```typescript
-export const SITE = {
-  website: "https://example.com",
-  author: "Your Name",
-  repo: "https://github.com/yourname/project",
-  title: "My Documentation",
-  description: "Clear documentation for my amazing project",
-  image: setupImage,
-  imageAlt: "Documentation preview",
-  twitterHandle: "@yourhandle"
-}
+export const SITE: SiteConfig = {
+    website: "https://celestialdocs.hyperoot.dev",
+    author: "Rajesh",
+    repo: "https://github.com/HYP3R00T/CelestialDocs",
+    title: "CelestialDocs",
+    description: "Documentation template using Astro and Shadcn",
+    image: setupImage,
+    imageAlt: "Check out celestialdocs.hyperoot.dev",
+    twitterHandle: "@HYP3R00T",
+};
 ```
 
-## Fields
+## Field Reference
 
-### `website` (Required)
+### website
 
-The full URL of your documentation site.
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** The full URL of your documentation site
+
+This is used for generating canonical URLs, sitemaps, and social sharing metadata.
 
 ```typescript
-website: "https://celestialdocs.hyperoot.dev"
+website: "https://docs.example.com"
 ```
 
-Used for:
-- SEO canonical URLs
-- Social media previews
-- Meta tags
+### author
 
-### `author` (Required)
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** The name of the site author or organization
 
-Your name or organization name.
+This appears in metadata and can be used throughout your site.
 
 ```typescript
-author: "Rajesh"
+author: "Your Name"
 ```
 
-Used for:
-- Page author attribution
-- Footer/header information
-- Content metadata
+### repo
 
-### `repo` (Required)
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** The full URL to your GitHub repository
 
-Link to your GitHub repository.
+This is used for the GitHub button in the header and "Edit this page" links.
 
 ```typescript
-repo: "https://github.com/HYP3R00T/CelestialDocs"
+repo: "https://github.com/username/repository"
 ```
 
-Used for:
-- GitHub button in header (if enabled)
-- Source links
-- Contribution links
+### title
 
-### `title` (Required)
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** The main title of your documentation site
 
-Your site's main title.
+This appears in the browser tab, search results, and social sharing cards.
 
 ```typescript
-title: "CelestialDocs"
+title: "My Documentation"
 ```
 
-Used for:
-- Browser tab title
-- Header branding
-- SEO title tag
+### description
 
-### `description` (Required)
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** A brief description of your documentation site
 
-One-sentence description of your project.
+This is used for SEO meta tags and social sharing descriptions. Keep it concise but descriptive (150-160 characters is ideal).
 
 ```typescript
-description: "A documentation template built with Astro and Shadcn"
+description: "Comprehensive documentation for building amazing applications"
 ```
 
-Used for:
-- Meta description tag
-- Search results preview
-- Social media preview
+### image
 
-### `image` (Required)
+- **Type:** `ImageMetadata`
+- **Required:** Yes
+- **Description:** An imported image used for social sharing (Open Graph, Twitter Cards)
 
-Open Graph image for social media previews.
+Import your image at the top of the config file and reference it here:
 
 ```typescript
 import setupImage from "@/assets/setup.png";
 
-image: setupImage
+export const SITE: SiteConfig = {
+    // ... other fields
+    image: setupImage,
+};
 ```
 
-Used for:
-- Twitter card preview
-- Facebook preview
-- Discord embed preview
+**Image Guidelines:**
 
-### `imageAlt` (Optional)
+- Recommended size: 1200x630 pixels
+- Format: PNG or JPG
+- Keep file size under 1MB
+- Use high contrast and readable text
 
-Alt text for the image.
+### imageAlt
+
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** Alternative text describing the social sharing image
+
+This is important for accessibility and appears when the image can't be loaded.
 
 ```typescript
-imageAlt: "CelestialDocs documentation site preview"
+imageAlt: "My Documentation - Build amazing applications"
 ```
 
-Used for:
-- Accessibility
-- Image fallback
+### twitterHandle
 
-### `twitterHandle` (Optional)
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** Your Twitter/X handle (including the @ symbol)
 
-Your Twitter username.
+This is used in Twitter Card metadata to attribute the content to your account.
 
 ```typescript
-twitterHandle: "@HYP3R00T"
+twitterHandle: "@yourusername"
 ```
 
-Used for:
-- Twitter card attribution
-- Social sharing
+## Complete Example
 
-### `branch` (Optional)
-
-Git branch for edit links.
+Here's a complete example configuration for a fictional project:
 
 ```typescript
-branch: "main"
+import projectLogo from "@/assets/project-logo.png";
+
+export const SITE: SiteConfig = {
+    website: "https://docs.myproject.com",
+    author: "MyProject Team",
+    repo: "https://github.com/myorg/myproject",
+    title: "MyProject Documentation",
+    description: "Complete guide to building applications with MyProject - a modern framework for developers",
+    image: projectLogo,
+    imageAlt: "MyProject Documentation - Build faster, ship better",
+    twitterHandle: "@myproject",
+};
 ```
 
-### `starCountThreshold` (Optional)
+## How It's Used
 
-Show GitHub stars if count exceeds this.
+### SEO Meta Tags
+
+The site metadata is automatically used to generate SEO meta tags in the HTML `<head>`:
+
+```html
+<title>MyProject Documentation</title>
+<meta name="description" content="Complete guide to building applications..." />
+<meta name="author" content="MyProject Team" />
+<link rel="canonical" href="https://docs.myproject.com/current-page" />
+```
+
+### Social Sharing
+
+When your documentation is shared on social media, the metadata creates rich preview cards:
+
+**Open Graph (Facebook, LinkedIn):**
+
+```html
+<meta property="og:title" content="MyProject Documentation" />
+<meta property="og:description" content="Complete guide to building..." />
+<meta property="og:image" content="https://docs.myproject.com/project-logo.png" />
+<meta property="og:url" content="https://docs.myproject.com" />
+```
+
+**Twitter Cards:**
+
+```html
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@myproject" />
+<meta name="twitter:title" content="MyProject Documentation" />
+<meta name="twitter:description" content="Complete guide to building..." />
+<meta name="twitter:image" content="https://docs.myproject.com/project-logo.png" />
+```
+
+### Header Components
+
+The repository URL is used for:
+
+- GitHub button in the header (if enabled)
+- "Edit this page" links on documentation pages
+- Star count display (if enabled)
+
+## Best Practices
+
+### Writing Descriptions
+
+- **Be Specific:** Clearly state what your documentation covers
+- **Include Keywords:** Use terms people might search for
+- **Stay Concise:** Aim for 150-160 characters for optimal display
+- **Avoid Jargon:** Make it accessible to newcomers
+
+**Good Example:**
 
 ```typescript
-starCountThreshold: 100  // Only show if repo has 100+ stars
+description: "Learn to build scalable web applications with MyProject - includes tutorials, API reference, and deployment guides"
 ```
 
-## Example: Complete SITE Configuration
+**Avoid:**
 
 ```typescript
-import siteImage from "@/assets/docs-preview.png";
-
-export const SITE = {
-  website: "https://mydocs.example.com",
-  author: "Jane Developer",
-  repo: "https://github.com/janedev/my-docs",
-  branch: "main",
-  title: "MyProject Documentation",
-  description: "Complete guide to using MyProject framework",
-  image: siteImage,
-  imageAlt: "MyProject Documentation Site",
-  twitterHandle: "@janedev",
-  starCountThreshold: 50
-}
+description: "Documentation" // Too vague
+description: "This is the official documentation for MyProject which is a framework..." // Too long
 ```
 
-## Where This Appears
+### Choosing Social Images
 
-### Browser Tab
-```yaml
-Title: "CelestialDocs"
-```
+- Use your logo or a branded graphic
+- Include your project name in the image
+- Ensure text is readable at small sizes
+- Test how it looks on different platforms
+- Use consistent branding across all social images
 
-### Search Results
-```yaml
-CelestialDocs
-Description: "A documentation template built with Astro and Shadcn"
-Website: https://celestialdocs.hyperoot.dev
-```
+### Repository URLs
 
-### Social Media Preview
-When someone shares your link on Twitter, Discord, etc.:
+- Always use HTTPS URLs
+- Link to the main repository, not a specific branch
+- Ensure the repository is public if you want the GitHub button to work
+- The URL should not include trailing slashes
 
-```yaml
-[Image from SITE.image]
-CelestialDocs
-A documentation template built with Astro and Shadcn
-celestialdocs.hyperoot.dev
-```
+## Testing Your Configuration
 
-### Header
-The site title appears as a link/branding in the header.
+After updating your site metadata:
 
-## Tips & Best Practices
+1. **Run the development server:**
 
-- ✅ **Keep description under 160 characters** - search engines truncate longer text
-- ✅ **Make description unique** - describe what makes YOUR docs special
-- ✅ **Use a high-quality image** - appears in social previews
-- ✅ **Keep author name current** - for attribution
-- ✅ **Include Twitter handle if active** - helps social sharing
-- ❌ **Don't use special characters** - some platforms don't render them
-- ❌ **Don't make title too long** - it truncates in browser tabs
-- ❌ **Don't use placeholder repo** - update to your real repository
+   ```bash
+   npm run dev
+   ```
+
+2. **Check the browser tab** - Your title should appear correctly
+
+3. **View page source** - Verify meta tags are generated correctly
+
+4. **Test social sharing** - Use tools like:
+   - [Twitter Card Validator](https://cards-dev.twitter.com/validator)
+   - [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+   - [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/)
+
+5. **Validate types:**
+
+   ```bash
+   npm run check
+   ```
 
 ## Next Steps
 
-- 🔗 Configure [Header Navigation](/docs/3-configuration/header-navigation)
-- 📦 Set up [Content Systems](/docs/3-configuration/content-systems)
-- 📑 Master [Sidebar Navigation](/docs/4-sidebar-navigation/sidebar-overview)
+Now that you've configured your site metadata, continue with:
+
+- **[Content Systems](./content-systems)** - Set up your documentation collections
+- **[Header Navigation](./header-navigation)** - Customize the top navigation bar
+- **[Sidebar Navigation](./sidebar-navigation)** - Organize your documentation structure

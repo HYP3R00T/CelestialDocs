@@ -1,108 +1,391 @@
 ---
 title: "Frequently Asked Questions"
-description: "Common questions about CelestialDocs and answers."
+description: "Common questions and answers about CelestialDocs - navigation, configuration, content, and more."
 navLabel: "FAQ"
 navIcon: "❓"
-draft: false
 ---
 
-## Can I use CelestialDocs for my project?
+Got questions? We've got answers! Here are the most common questions about CelestialDocs.
 
-**Yes!** CelestialDocs is a template repository. You can fork it and customize it for your needs.
+## Getting Started
 
-## How do I add a new page?
+### What is CelestialDocs?
 
-1. Create a `.md` or `.mdx` file in `content/docs/` (or your collection folder)
-2. Add frontmatter with `title` and `description`
-3. Write your content
-4. Save and refresh - it appears automatically!
+CelestialDocs is a modern documentation template built with Astro. It provides a flexible navigation system, multi-collection support, and beautiful theming out of the box. Think of it as a ready-to-use foundation for creating professional documentation sites.
 
-See [Your First Page](/docs/1-start-here/your-first-page) for details.
+### Do I need to know Astro to use CelestialDocs?
 
-## How do I organize pages?
+Not necessarily! If you just want to write documentation, you only need to know Markdown. However, basic Astro knowledge is helpful if you want to customize components or layouts.
 
-Create folders under `content/docs/`:
+### Can I use CelestialDocs for my project?
 
-```
-content/docs/
-├─ getting-started/
-│  ├─ introduction.md
-│  └─ installation.md
-├─ guides/
-│  ├─ configuration.md
-│  └─ advanced.md
-```
+Yes! CelestialDocs is open source and free to use for any project - personal, commercial, or open source.
 
-Folders become sidebar groups. See [Content Structure](/docs/2-core-concepts/content-structure).
+### How is CelestialDocs different from other documentation tools?
 
-## How do I control the sidebar?
+CelestialDocs stands out with:
 
-Edit `data/config.ts` and modify `SIDEBAR_NAVIGATION`. See [Sidebar Configuration Examples](/docs/4-sidebar-navigation/sidebar-config-examples) for real examples.
+- **True multi-collection support** - Multiple documentation sets in one project
+- **Flexible navigation** - Mix manual and auto-generated navigation
+- **Tab-level organization** - Create distinct navigation contexts
+- **Type-safe configuration** - Everything configured in TypeScript
 
-## Can I have multiple documentation collections?
+## Installation & Setup
 
-**Yes!** Create multiple content systems in `data/config.ts`. See [Content Systems](/docs/3-configuration/content-systems).
+### What are the system requirements?
 
-## How do I change the site title?
+You need:
 
-Edit `data/config.ts` and change the `SITE` object:
+- Node.js 18 or higher
+- npm, yarn, or pnpm
+- A code editor (VS Code recommended)
+- Git (optional but recommended)
 
-```typescript
-export const SITE = {
-  title: "My New Title",
-  // ...
-}
-```
+### Can I use this with an existing Astro project?
 
-## How do I add images?
+CelestialDocs is designed as a standalone template. While you could integrate it into an existing project, it's easier to start fresh and migrate your content.
 
-Place images in `public/images/` and reference them:
+### How do I update CelestialDocs?
+
+Since CelestialDocs is a template (not a package), updates require manual merging. Check the repository for updates and merge changes into your project. We recommend using Git to track your customizations.
+
+### Can I deploy CelestialDocs for free?
+
+Yes! You can deploy for free on:
+
+- Vercel
+- Netlify
+- GitHub Pages
+- Cloudflare Pages
+
+See our [Deployment Guide](/docs/advanced/deployment) for details.
+
+## Content & Writing
+
+### Should I use Markdown or MDX?
+
+Use Markdown (`.md`) for simple documentation. Use MDX (`.mdx`) when you need to include custom components or interactive elements.
+
+### How do I add images?
+
+Place images in `src/assets/` or `public/` and reference them:
 
 ```markdown
-![Alt text](/images/my-image.png)
+<!-- Using assets (optimized) -->
+![Alt text](../../assets/image.png)
+
+<!-- Using public (not optimized) -->
+![Alt text](/images/image.png)
 ```
 
-Or store in `src/assets/` and import them in MDX files.
+### Can I use custom components in my docs?
 
-## Can I use React components?
-
-**Yes!** Use `.mdx` files to embed React components:
+Yes! Use MDX files and import your components:
 
 ```mdx
-import { Button } from "@/components/ui/button";
-
-<Button>Click me!</Button>
-```
-
-See [MDX and Components](/docs/2-core-concepts/mdx-and-components).
-
-## How do I hide a page from the sidebar?
-
-Set `navHidden: true` in frontmatter:
-
-```yaml
 ---
 title: "My Page"
+---
+
+import MyComponent from '../../components/MyComponent.astro';
+
+# My Page
+
+<MyComponent />
+```
+
+See [Custom Components](/docs/advanced/custom-components) for details.
+
+### How do I add code blocks with syntax highlighting?
+
+Just use standard Markdown code fences with a language:
+
+````markdown
+```typescript
+const greeting = "Hello, world!";
+console.log(greeting);
+```
+````
+
+### Can I hide a page from navigation?
+
+Yes! Use the `navHidden` frontmatter field:
+
+```markdown
+---
+title: "Hidden Page"
 navHidden: true
 ---
 ```
 
-The page is still accessible via URL, just not shown in sidebar.
+## Navigation
 
-## How do I customize colors?
+### What's the difference between groups and tabs?
 
-Edit `tailwind.config.ts` to change theme colors. Or use Tailwind's `dark:` classes for dark mode support.
+- **Groups** are sections in the sidebar that organize related pages
+- **Tabs** are top-level navigation contexts that completely switch the sidebar content
 
-## Can I deploy this?
+Tabs are like different "modes" of navigation, while groups are sections within a mode.
 
-**Yes!** CelestialDocs builds to static HTML. Deploy to:
-- Vercel
-- Netlify
-- GitHub Pages
-- Any static hosting
+### How do I create a new navigation group?
 
-## Next Steps
+Add a group to `SIDEBAR_NAVIGATION` in `data/config.ts`:
 
-- 📚 Explore [Sidebar Navigation](/docs/4-sidebar-navigation/sidebar-overview)
-- 🔧 Configure [Header Navigation](/docs/3-configuration/header-navigation)
-- 💡 Learn [MDX and Components](/docs/2-core-concepts/mdx-and-components)
+```typescript
+{
+  id: "my-group",
+  label: "My Group",
+  icon: "🎯",
+  autoGenerated: true,
+}
+```
+
+### What's auto-generated navigation?
+
+Auto-generated navigation automatically discovers and includes all files in a folder without you having to list them manually. Just set `autoGenerated: true` on a group.
+
+### Can I mix manual and auto-generated entries?
+
+Yes! This is called a hybrid group. List some entries manually, then set `autoGenerated: true` to include the rest:
+
+```typescript
+{
+  id: "guides",
+  label: "Guides",
+  icon: "📖",
+  entries: [
+    { slug: "guides/overview" },  // Manual
+    // Other files auto-generated
+  ],
+  autoGenerated: true,
+}
+```
+
+See [Hybrid Groups](/docs/patterns/hybrid-groups) for details.
+
+### How do I control the order of auto-generated pages?
+
+Use the `order` field in frontmatter:
+
+```markdown
+---
+title: "My Page"
+order: 1
+---
+```
+
+Lower numbers appear first. Pages without an order field are sorted alphabetically.
+
+### Can I use custom icons in navigation?
+
+Yes! You can use:
+
+- **Emoji icons:** Just use the emoji character: `icon: "🚀"`
+- **SVG icons:** Reference a file in `src/assets/icons/`: `icon: "document"`
+
+## Configuration
+
+### Where is everything configured?
+
+Most configuration is in `data/config.ts`:
+
+- `SITE` - Site metadata
+- `CONTENT` - Content collections
+- `HEADER_NAV_ITEMS` - Header navigation
+- `SIDEBAR_NAVIGATION` - Sidebar navigation
+
+### How do I change the site title?
+
+Edit the `SITE` object in `data/config.ts`:
+
+```typescript
+export const SITE: SiteConfig = {
+  title: "My Documentation",
+  // ...
+};
+```
+
+### How do I add social links to the header?
+
+Add them to `HEADER_SOCIAL_LINKS` in `data/config.ts`:
+
+```typescript
+export const HEADER_SOCIAL_LINKS: HeaderSocialLink[] = [
+  {
+    platform: "github",
+    href: "https://github.com/yourusername",
+  },
+  {
+    platform: "twitter",
+    href: "https://twitter.com/yourusername",
+  },
+];
+```
+
+### Can I customize the theme colors?
+
+Yes! Edit `tailwind.config.js` to customize colors:
+
+```js
+theme: {
+  extend: {
+    colors: {
+      primary: {
+        500: '#your-color',
+      },
+    },
+  },
+}
+```
+
+See [Custom Styling](/docs/advanced/custom-styling) for details.
+
+### How do I disable dark mode?
+
+Dark mode is built into the theme. To disable it, you'd need to modify the theme toggle component and remove dark mode styles. We recommend keeping it - users love dark mode!
+
+## Multiple Collections
+
+### What are content collections?
+
+Content collections are separate documentation sets within one project. For example, you might have a "docs" collection for user documentation and an "api" collection for API reference.
+
+### How do I create a second collection?
+
+1. Define it in `src/content.config.ts`
+2. Add it to `CONTENT.systems` in `data/config.ts`
+3. Add navigation in `SIDEBAR_NAVIGATION`
+4. Create the content folder
+
+See [Two-Collection Layout](/docs/patterns/two-collection-layout) for a complete guide.
+
+### Can I have more than two collections?
+
+Yes! You can have as many collections as you need. Just follow the same pattern for each one.
+
+### Can collections have different styles?
+
+Yes! You can apply collection-specific styles using CSS:
+
+```css
+[data-collection="docs"] {
+  --accent-color: blue;
+}
+
+[data-collection="api"] {
+  --accent-color: green;
+}
+```
+
+## Troubleshooting
+
+### My changes aren't showing up
+
+Try:
+
+1. Restart the dev server (`Ctrl+C`, then `npm run dev`)
+2. Clear your browser cache
+3. Check the terminal for error messages
+
+### I'm getting TypeScript errors
+
+Run `npm run check` to see all errors. Common issues:
+
+- Missing required frontmatter fields (title, description)
+- Invalid configuration in `data/config.ts`
+- Incorrect file paths in navigation
+
+### Navigation isn't working
+
+Check:
+
+- File paths match the slugs in your configuration
+- Files have valid frontmatter with a title
+- The group ID matches the folder name
+- You've restarted the dev server after config changes
+
+### Build fails
+
+Common causes:
+
+- TypeScript errors (run `npm run check`)
+- Missing dependencies (run `npm install`)
+- Invalid frontmatter in content files
+- Broken internal links
+
+See [Troubleshooting](/docs/help/troubleshooting) for more solutions.
+
+### Dark mode looks broken
+
+Ensure:
+
+- CSS variables are defined for both light and dark modes
+- The `dark` class is being toggled on the `<html>` element
+- Tailwind's `darkMode: 'class'` is configured
+
+## Performance
+
+### How fast is CelestialDocs?
+
+Very fast! Astro generates static HTML, so pages load instantly. The site is optimized for performance with:
+
+- Static site generation
+- Minimal JavaScript
+- Optimized images
+- Efficient CSS
+
+### Can I add analytics?
+
+Yes! Add your analytics script to the base layout. Most analytics services (Google Analytics, Plausible, Fathom) work great with static sites.
+
+### Does it work offline?
+
+The built site is static HTML, so pages work offline once loaded. You could add a service worker for full offline support.
+
+## Customization
+
+### Can I change the layout?
+
+Yes! Layouts are in `src/layouts/`. You can modify existing layouts or create new ones.
+
+### Can I add a blog?
+
+CelestialDocs is focused on documentation, but you could add a blog collection following the same pattern as other collections.
+
+### Can I use a different CSS framework?
+
+CelestialDocs uses Tailwind CSS. You could replace it with another framework, but it would require significant refactoring.
+
+### How do I add a custom landing page?
+
+Create `src/pages/index.astro` with your custom content. See [Custom Landing Pages](/docs/patterns/custom-landing) for examples.
+
+## Contributing
+
+### Can I contribute to CelestialDocs?
+
+Yes! Contributions are welcome. Check the GitHub repository for contribution guidelines.
+
+### I found a bug. Where do I report it?
+
+Open an issue on the GitHub repository with:
+
+- Description of the bug
+- Steps to reproduce
+- Expected vs actual behavior
+- Your environment (OS, Node version, etc.)
+
+### Can I request a feature?
+
+Absolutely! Open an issue on GitHub describing the feature and why it would be useful.
+
+## Still Have Questions?
+
+If your question isn't answered here:
+
+1. Check the [Troubleshooting Guide](/docs/help/troubleshooting)
+2. Search the documentation
+3. Open an issue on GitHub
+4. Check existing GitHub issues - your question might already be answered
+
+We're here to help! 🚀

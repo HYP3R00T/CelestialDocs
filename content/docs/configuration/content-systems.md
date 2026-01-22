@@ -1,275 +1,448 @@
 ---
-title: "Content Systems"
-description: "How to create and manage multiple documentation collections."
+title: "Content Systems Configuration"
+description: "Configure multiple documentation collections with independent routes and navigation structures"
 navLabel: "Content Systems"
-navIcon: "🔄"
-draft: false
 ---
 
-A **content system** is a separate documentation collection. By default, CelestialDocs has:
+Content systems allow you to create multiple independent documentation collections, each with its own directory, route, and navigation structure. This is perfect for separating different types of documentation or maintaining multiple documentation sets.
 
-- `docs` - Main documentation
-- `notes` - Quick notes and tips
+## What Are Content Systems?
 
-You can create as many as you want: tutorials, guides, API docs, blog posts, etc.
+A content system is a self-contained documentation collection that includes:
+
+- **Directory** - A folder in your project containing Markdown/MDX files
+- **Route** - A URL path prefix for accessing the documentation
+- **Navigation** - An independent sidebar navigation structure
+- **Default Redirect** - A landing page for the collection
+
+CelestialDocs comes with two content systems by default: `docs` (main documentation) and `funnydocs` (a demo collection).
+
+## Configuration Object
+
+Content systems are configured in the `CONTENT` object in `data/config.ts`:
+
+```typescript
+export const CONTENT: ContentConfig = {
+    systems: [
+        {
+            id: "docs",
+            dir: "content/docs",
+            defaultDocRedirect: "/docs/getting-started",
+            route: "/docs",
+        },
+        {
+            id: "funnydocs",
+            dir: "content/funnydocs",
+            defaultDocRedirect: "/funnydocs/getting-started",
+            route: "/funnydocs",
+        }
+    ],
+};
+```
+
+## Field Reference
+
+### systems
+
+- **Type:** `Array<ContentSystem>`
+- **Required:** Yes
+- **Description:** An array of content system configurations
+
+Each system in the array defines a separate documentation collection.
+
+### id
+
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** A unique identifier for the content system
+
+This ID is used:
+
+- To reference the system in `SIDEBAR_NAVIGATION`
+- As the collection name in Astro's content collections
+- For internal routing and organization
+
+**Naming Rules:**
+
+- Use lowercase letters
+- Use hyphens for multi-word IDs (kebab-case)
+- Keep it short and descriptive
+- Must be unique across all systems
+
+```typescript
+id: "docs"           // Good
+id: "api-reference"  // Good
+id: "API Reference"  // Bad - use kebab-case
+id: "docs"           // Bad if another system already uses "docs"
+```
+
+### dir
+
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** The directory path containing the content files
+
+This path is relative to your project root and should point to a folder containing Markdown/MDX files.
+
+```typescript
+dir: "content/docs"
+dir: "content/api-reference"
+dir: "content/guides"
+```
+
+**Directory Structure Example:**
+
+```
+content/
+├── docs/
+│   ├── getting-started/
+│   │   ├── index.md
+│   │   └── installation.md
+│   └── core-concepts/
+│       └── navigation.md
+└── api-reference/
+    ├── authentication.md
+    └── endpoints.md
+```
+
+### defaultDocRedirect
+
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** The default page to redirect to when accessing the collection root
+
+When users visit the collection's base route (e.g., `/docs`), they'll be redirected to this page.
+
+```typescript
+defaultDocRedirect: "/docs/getting-started"
+defaultDocRedirect: "/api-reference/overview"
+```
+
+**Important:**
+
+- Must start with the collection's route prefix
+- Should point to an existing page
+- Typically points to an introduction or getting started page
+
+### route
+
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** The URL path prefix for the collection
+
+All pages in this collection will be accessible under this route.
+
+```typescript
+route: "/docs"          // Pages: /docs/page-name
+route: "/api-reference" // Pages: /api-reference/page-name
+route: "/guides"        // Pages: /guides/page-name
+```
+
+**Routing Rules:**
+
+- Must start with `/`
+- Should not end with `/`
+- Must be unique across all systems
+- Use kebab-case for multi-word routes
+
+## Complete Examples
+
+### Single Documentation Collection
+
+The simplest setup with just one documentation collection:
+
+```typescript
+export const CONTENT: ContentConfig = {
+    systems: [
+        {
+            id: "docs",
+            dir: "content/docs",
+            defaultDocRedirect: "/docs/introduction",
+            route: "/docs",
+        },
+    ],
+};
+```
+
+### Multiple Documentation Collections
+
+A more complex setup with separate collections for different purposes:
+
+```typescript
+export const CONTENT: ContentConfig = {
+    systems: [
+        {
+            id: "docs",
+            dir: "content/docs",
+            defaultDocRedirect: "/docs/getting-started",
+            route: "/docs",
+        },
+        {
+            id: "api-reference",
+            dir: "content/api",
+            defaultDocRedirect: "/api-reference/overview",
+            route: "/api-reference",
+        },
+        {
+            id: "guides",
+            dir: "content/guides",
+            defaultDocRedirect: "/guides/introduction",
+            route: "/guides",
+        },
+        {
+            id: "blog",
+            dir: "content/blog",
+            defaultDocRedirect: "/blog/latest",
+            route: "/blog",
+        },
+    ],
+};
+```
 
 ## How Content Systems Work
 
-Each system is independent:
+### File to URL Mapping
 
-- **Own folder** - `content/docs/`, `content/notes/`, etc.
-- **Own URL route** - `/docs/...`, `/notes/...`
-- **Own sidebar navigation** - Configured separately
-- **Own config** - In `SIDEBAR_NAVIGATION` object
+Content systems automatically map files to URLs based on the route and file path:
 
-## CONTENT Configuration
+```
+File: content/docs/getting-started/installation.md
+Route: /docs
+URL: /docs/getting-started/installation
 
-In `data/config.ts`, define systems:
-
-```typescript
-export const CONTENT = {
-  systems: [
-    {
-      id: "docs",                                    // Unique identifier
-      dir: "content/docs",                          // Folder with .md files
-      defaultDocRedirect: "/docs/getting-started/introduction",  // Landing page
-      route: "/docs"                                // URL prefix
-    },
-    {
-      id: "notes",                                  // Another system
-      dir: "notes",
-      defaultDocRedirect: "/notes/index",
-      route: "/notes"
-    }
-  ]
-}
+File: content/api/authentication/oauth.md
+Route: /api-reference
+URL: /api-reference/authentication/oauth
 ```
 
-## Creating a New Content System
+### Independent Navigation
 
-### Step 1: Create the folder
+Each content system has its own sidebar navigation configuration in `SIDEBAR_NAVIGATION`:
+
+```typescript
+export const SIDEBAR_NAVIGATION: SidebarNavigation = {
+    docs: {
+        defaultTab: { label: "Documentation", icon: "document" },
+        groups: [ /* docs navigation */ ],
+    },
+    "api-reference": {
+        defaultTab: { label: "API Reference", icon: "code" },
+        groups: [ /* API navigation */ ],
+    },
+};
+```
+
+The key in `SIDEBAR_NAVIGATION` must match the `id` in your content system.
+
+### Content Collections Integration
+
+Content systems integrate with Astro's content collections. Each system becomes a collection that you can query:
+
+```typescript
+import { getCollection } from 'astro:content';
+
+// Get all docs
+const docs = await getCollection('docs');
+
+// Get all API reference pages
+const apiPages = await getCollection('api-reference');
+```
+
+## Adding a New Content System
+
+Here's a step-by-step guide to adding a new content system:
+
+### Step 1: Create the Content Directory
 
 ```bash
-mkdir -p content/tutorials
+mkdir -p content/api-reference
 ```
 
-### Step 2: Add files
+### Step 2: Add the System Configuration
 
-```
-content/tutorials/
-├─ getting-started.md
-├─ advanced.md
-└─ troubleshooting.md
-```
-
-### Step 3: Register in CONTENT
-
-Edit `data/config.ts`:
+Update `data/config.ts`:
 
 ```typescript
-export const CONTENT = {
-  systems: [
-    // ... existing systems ...
-    {
-      id: "tutorials",
-      dir: "content/tutorials",
-      defaultDocRedirect: "/tutorials/getting-started",
-      route: "/tutorials"
-    }
-  ]
-}
+export const CONTENT: ContentConfig = {
+    systems: [
+        // ... existing systems
+        {
+            id: "api-reference",
+            dir: "content/api-reference",
+            defaultDocRedirect: "/api-reference/overview",
+            route: "/api-reference",
+        },
+    ],
+};
 ```
 
-### Step 4: Configure sidebar
+### Step 3: Configure Sidebar Navigation
 
-Still in `data/config.ts`, add to `SIDEBAR_NAVIGATION`:
+Add navigation for the new system:
 
 ```typescript
-export const SIDEBAR_NAVIGATION = {
-  docs: { ... },
-  notes: { ... },
-  tutorials: {  // ← Add this
-    defaultTab: {
-      label: "Tutorials",
-      icon: "graduation-cap"
+export const SIDEBAR_NAVIGATION: SidebarNavigation = {
+    // ... existing systems
+    "api-reference": {
+        defaultTab: {
+            label: "API Reference",
+            icon: "code",
+        },
+        groups: [
+            {
+                id: "endpoints",
+                label: "Endpoints",
+                autoGenerated: true,
+            },
+        ],
     },
-    groups: [
-      {
-        id: "tutorials",
-        label: "Tutorials",
-        autoGenerated: true
-      }
-    ]
-  }
-}
+};
 ```
 
-### Step 5: Add navigation link
+### Step 4: Add Content Files
 
-Add to `HEADER_NAV_ITEMS`:
+Create your first page:
+
+```markdown
+---
+title: "API Overview"
+description: "Introduction to the API"
+---
+
+# API Overview
+
+Welcome to the API documentation!
+```
+
+### Step 5: Update Header Navigation (Optional)
+
+Add a link to the new collection in the header:
 
 ```typescript
-export const HEADER_NAV_ITEMS = [
-  { href: "/docs", label: "Docs" },
-  { href: "/notes", label: "Notes" },
-  { href: "/tutorials", label: "Tutorials" }  // ← Add this
+export const HEADER_NAV_ITEMS: NavItem[] = [
+    { href: "/docs", label: "Docs" },
+    { href: "/api-reference", label: "API" },
+];
+```
+
+## Use Cases
+
+### Separate User and Developer Docs
+
+```typescript
+systems: [
+    {
+        id: "user-guide",
+        dir: "content/user-guide",
+        defaultDocRedirect: "/user-guide/introduction",
+        route: "/user-guide",
+    },
+    {
+        id: "developer-docs",
+        dir: "content/developer-docs",
+        defaultDocRedirect: "/developer-docs/getting-started",
+        route: "/developer-docs",
+    },
 ]
 ```
 
-### Step 6: Done!
-
-Your new system is live. Visit: `http://localhost:3000/tutorials`
-
-## Configuration Fields
-
-### `id`
-Unique identifier for this system. Used in:
-- Collection name
-- SIDEBAR_NAVIGATION key
-- Internal references
+### Version-Specific Documentation
 
 ```typescript
-id: "tutorials"  // Must be unique
-```
-
-### `dir`
-Folder containing your markdown files. Relative to project root.
-
-```typescript
-dir: "content/tutorials"   // Creates /docs/tutorials/... URLs
-dir: "tutorials"           // Creates /tutorials/... URLs
-dir: "my-guides"           // Creates /my-guides/... URLs
-```
-
-### `defaultDocRedirect`
-Where to redirect when visiting `/route` with no page specified.
-
-```typescript
-defaultDocRedirect: "/tutorials/getting-started"
-// Visiting /tutorials → redirects to /tutorials/getting-started
-```
-
-### `route`
-URL prefix for this collection.
-
-```typescript
-route: "/tutorials"
-// Files become: /tutorials/page-name, /tutorials/folder/page-name, etc.
-```
-
-## Example Setups
-
-### Setup 1: Docs + Guides
-
-```typescript
-export const CONTENT = {
-  systems: [
+systems: [
     {
-      id: "docs",
-      dir: "content/docs",
-      defaultDocRedirect: "/docs/intro",
-      route: "/docs"
+        id: "v2-docs",
+        dir: "content/v2",
+        defaultDocRedirect: "/v2/introduction",
+        route: "/v2",
     },
     {
-      id: "guides",
-      dir: "content/guides",
-      defaultDocRedirect: "/guides/start",
-      route: "/guides"
-    }
-  ]
-}
-```
-
-### Setup 2: Docs + API + Blog
-
-```typescript
-export const CONTENT = {
-  systems: [
-    {
-      id: "docs",
-      dir: "content/docs",
-      defaultDocRedirect: "/docs/introduction",
-      route: "/docs"
+        id: "v1-docs",
+        dir: "content/v1",
+        defaultDocRedirect: "/v1/introduction",
+        route: "/v1",
     },
-    {
-      id: "api",
-      dir: "content/api",
-      defaultDocRedirect: "/api/reference",
-      route: "/api"
-    },
-    {
-      id: "blog",
-      dir: "content/blog",
-      defaultDocRedirect: "/blog",
-      route: "/blog"
-    }
-  ]
-}
-```
-
-## Multiple Collections in Header
-
-Link all collections in the header:
-
-```typescript
-export const HEADER_NAV_ITEMS = [
-  { href: "/docs", label: "Documentation" },
-  { href: "/api", label: "API Reference" },
-  { href: "/guides", label: "Guides" },
-  { href: "/blog", label: "Blog" }
 ]
 ```
 
-## Organizing Files Across Systems
-
-### Option 1: Separate Folders (Recommended)
-
-```sh
-content/
-├─ docs/
-│  ├─ getting-started/
-│  ├─ guides/
-│  └─ reference/
-├─ api/
-│  ├─ endpoints/
-│  └─ types/
-└─ blog/
-   ├─ 2024/
-   └─ 2025/
-```
-
-### Option 2: Single Folder with Subfolders
-
-```sh
-content/
-└─ all-docs/
-   ├─ docs/
-   ├─ api/
-   └─ blog/
-```
-
-Then in config:
+### Multi-Product Documentation
 
 ```typescript
-{
-  id: "docs",
-  dir: "content/all-docs/docs",
-  ...
-}
+systems: [
+    {
+        id: "product-a",
+        dir: "content/product-a",
+        defaultDocRedirect: "/product-a/overview",
+        route: "/product-a",
+    },
+    {
+        id: "product-b",
+        dir: "content/product-b",
+        defaultDocRedirect: "/product-b/overview",
+        route: "/product-b",
+    },
+]
 ```
 
-## Tips & Best Practices
+## Best Practices
 
-- ✅ **Use clear, descriptive IDs** - `tutorials`, `api`, `blog` are clear
-- ✅ **Separate concerns** - Different types of content → different systems
-- ✅ **Add to header nav** - Let users access all collections
-- ✅ **Use consistent naming** - All IDs lowercase, hyphens for spaces
-- ❌ **Don't create too many systems** - 3-4 max is usually enough
-- ❌ **Don't put everything in one system** - Separate docs from blog
-- ❌ **Don't forget navigation links** - Users need to find them
+### Naming Conventions
+
+- **IDs:** Use descriptive, lowercase, kebab-case names
+- **Routes:** Match the ID for consistency
+- **Directories:** Use clear, organized folder names
+
+### Organization
+
+- Keep related content in the same system
+- Use separate systems for distinctly different content types
+- Don't create too many systems - it can confuse users
+- Consider your navigation structure when planning systems
+
+### Default Redirects
+
+- Point to an introduction or overview page
+- Ensure the target page exists before deploying
+- Use descriptive page names for better UX
+
+### Performance
+
+- Each system is loaded independently
+- More systems don't significantly impact performance
+- Content is statically generated at build time
+
+## Troubleshooting
+
+### "Collection not found" Error
+
+**Problem:** Astro can't find your content collection
+
+**Solution:** Ensure the `id` in `CONTENT` matches the directory name and is referenced correctly in `SIDEBAR_NAVIGATION`
+
+### Pages Not Appearing
+
+**Problem:** Pages exist but don't show up in navigation
+
+**Solution:** Check that:
+
+1. Files have proper frontmatter with `title` and `description`
+2. Sidebar navigation is configured for the system
+3. Files are in the correct directory specified in `dir`
+
+### Redirect Not Working
+
+**Problem:** Visiting the collection root doesn't redirect
+
+**Solution:** Verify:
+
+1. `defaultDocRedirect` path is correct
+2. The target page exists
+3. The path includes the route prefix
 
 ## Next Steps
 
-- 📌 Learn about [Site Metadata](/docs/3-configuration/site-metadata)
-- 🔗 Configure [Header Navigation](/docs/3-configuration/header-navigation)
-- 📑 Master [Sidebar Navigation](/docs/4-sidebar-navigation/sidebar-overview)
+Now that you understand content systems, explore:
+
+- **[Header Navigation](./header-navigation)** - Add links to your collections in the header
+- **[Sidebar Navigation](./sidebar-navigation)** - Configure navigation for each system
+- **[Multiple Collections](../features/multiple-collections)** - Learn more about multi-collection patterns
