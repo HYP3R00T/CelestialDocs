@@ -1,0 +1,57 @@
+---
+title: "Welcome to CelestialDocs"
+description: "Discover a powerful, flexible documentation system built with Astro that grows with your needs"
+---
+
+CelestialDocs is a modern documentation template built on [Astro](https://astro.build) that transforms how you structure and present documentation. It's designed for teams and individuals who need sophisticated navigation without complexity.
+
+## What Makes CelestialDocs Special?
+
+This documentation system is built on three core innovations:
+
+### 🎯 Hierarchical Navigation
+A three-tier system that scales from simple to enterprise-grade structures: **Entries** (individual pages) organize into **Groups** (collections), which can contain **Nested Groups** for deep hierarchies, and any Group can become a **Tab** for complete navigation context switching.
+
+### 🔄 Hybrid Generation
+Tired of choosing between convenience and control? Use auto-generation to discover files automatically, manual curation to pin important pages first, or hybrid mode to get both. Your documentation grows without constant configuration updates.
+
+### 📚 True Multi-Collection Support
+Run multiple independent documentation systems from one codebase. Each collection has its own folder, routes, navigation structure, and configuration. Perfect for documenting multiple products or separating user guides from API references.
+
+## This Documentation
+
+This new-docs collection is specifically designed to showcase CelestialDocs' capabilities through practical examples. Every feature mentioned here is demonstrated through the site's own navigation structure:
+
+- **Foundation**: Essential concepts explained clearly
+- **Getting Started**: Set up your first collection
+- **Navigation System**: Understand entries, groups, nested groups, and tabs
+- **Configuration**: Learn every configuration option
+- **Generation Strategies**: Master auto-generation, manual control, and hybrid approaches
+- **Content & Metadata**: Write with markdown, MDX, and rich frontmatter
+- **Advanced Topics**: Multiple collections, competitive advantages, and more
+
+## Key Features at a Glance
+
+- ✅ **Type-Safe Configuration** - Full TypeScript support with IDE autocomplete
+- ✅ **Auto-Discovery** - New files appear in navigation automatically
+- ✅ **Manual Control** - Pin important pages and customize everything
+- ✅ **Hybrid Mode** - Best of both: control + convenience
+- ✅ **Deep Nesting** - Organize content into groups within groups
+- ✅ **Tab Navigation** - Separate major sections into distinct contexts
+- ✅ **Multiple Collections** - Independent documentation systems
+- ✅ **Rich Metadata** - Frontmatter validation and overrides
+- ✅ **Markdown & MDX** - Write content your way
+- ✅ **Breadcrumbs** - Users never get lost
+- ✅ **Table of Contents** - Auto-generated from headings
+- ✅ **Dark Mode** - System-aware theme switching
+- ✅ **Fully Responsive** - Mobile-friendly by default
+
+## Ready to Explore?
+
+Start with [Getting Started](/new-docs/getting-started/setup) to set up your first collection, or jump into the [Navigation System](/new-docs/navigation-system/core-concepts/entries) to understand the fundamentals.
+
+---
+
+**Next Steps:**
+- Head to [Why CelestialDocs](/new-docs/why-celestialdocs) for a detailed comparison
+- Or dive into [Getting Started](/new-docs/getting-started/setup) to begin building

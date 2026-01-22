@@ -1,0 +1,214 @@
+---
+title: "Frontmatter Reference"
+description: "Complete reference for frontmatter fields and options"
+---
+
+Frontmatter is YAML metadata at the top of every page. It controls page display and navigation behavior.
+
+## Required Fields
+
+Every page must have these:
+
+### title
+Page title that appears in browser tab and sidebar.
+
+```yaml
+---
+title: "Getting Started"
+---
+```
+
+### description
+Short description for SEO and preview text.
+
+```yaml
+---
+description: "Learn how to get started with CelestialDocs in 5 minutes"
+---
+```
+
+## Optional Navigation Fields
+
+### navLabel
+Override the sidebar label (if different from title).
+
+```yaml
+---
+title: "Installation and Configuration"
+navLabel: "Install"  ← Sidebar shows this instead
+---
+```
+
+### navIcon
+Add an icon in the sidebar next to the entry.
+
+```yaml
+---
+navIcon: "⚡"  ← Emoji
+---
+```
+
+or
+
+```yaml
+---
+navIcon: "document"  ← SVG reference
+---
+```
+
+### navHidden
+Hide from navigation but keep accessible via URL.
+
+```yaml
+---
+navHidden: true
+---
+```
+
+Page won't appear in sidebar but users can still visit it directly.
+
+## Optional Metadata Fields
+
+### draft
+Exclude from production builds.
+
+```yaml
+---
+draft: true  ← Skipped in build
+---
+```
+
+Useful for work-in-progress pages.
+
+### authors
+List page authors.
+
+```yaml
+---
+authors: ["Alice", "Bob"]
+---
+```
+
+### tags
+Categorize pages (useful for custom features).
+
+```yaml
+---
+tags: ["tutorial", "beginner", "setup"]
+---
+```
+
+## Complete Example
+
+```yaml
+---
+title: "Advanced Configuration"
+description: "Learn how to configure CelestialDocs for enterprise deployments"
+navLabel: "Advanced Config"
+navIcon: "⚙️"
+navHidden: false
+draft: false
+authors: ["Alice", "Bob"]
+tags: ["configuration", "advanced", "enterprise"]
+---
+
+# Advanced Configuration
+
+Content goes here...
+```
+
+## Field Types
+
+| Field | Type | Default | Notes |
+|-------|------|---------|-------|
+| title | string | required | Page title |
+| description | string | required | SEO description |
+| navLabel | string | optional | Override sidebar text |
+| navIcon | string | optional | Emoji or SVG ref |
+| navHidden | boolean | false | Hide from nav? |
+| draft | boolean | false | Work in progress? |
+| authors | array | [] | Page authors |
+| tags | array | [] | Page tags |
+
+## Common Patterns
+
+### Tutorial Page
+```yaml
+---
+title: "Building Your First App"
+description: "Step-by-step guide to building your first application"
+navLabel: "First App"
+navIcon: "🚀"
+authors: ["Your Name"]
+tags: ["tutorial", "beginner"]
+---
+```
+
+### Reference Page
+```yaml
+---
+title: "API Endpoints Reference"
+description: "Complete reference for all REST API endpoints"
+navLabel: "Endpoints"
+navIcon: "📡"
+draft: false
+tags: ["api", "reference"]
+---
+```
+
+### Draft/WIP
+```yaml
+---
+title: "Upcoming Features"
+description: "Features we're working on"
+draft: true
+navHidden: true
+---
+```
+
+### Hidden But Accessible
+```yaml
+---
+title: "Internal Documentation"
+description: "Internal team documentation"
+navHidden: true
+---
+```
+
+## Tips
+
+1. **Keep titles short** (3-5 words)
+   ```yaml
+   title: "Getting Started"          ✅ Good
+   title: "How to Get Started with CelestialDocs" ❌ Too long
+   ```
+
+2. **Use navLabel for long titles**
+   ```yaml
+   title: "Frequently Asked Questions About Deployment"
+   navLabel: "Deployment FAQ"
+   ```
+
+3. **Use navHidden for drafts**
+   ```yaml
+   draft: true
+   navHidden: true
+   ```
+
+4. **Add authors for accountability**
+   ```yaml
+   authors: ["Alice", "Bob", "Charlie"]
+   ```
+
+5. **Use consistent icon style**
+   ```yaml
+   navIcon: "🚀"  # Emoji for visual variety
+   navIcon: "book" # Or SVG for consistency
+   ```
+
+## Next Steps
+
+Learn about:
+- [Optional Fields](/new-docs/content/frontmatter/optional-fields)
+- [Navigation Overrides](/new-docs/content/frontmatter/navigation-overrides)
+- [Markdown Basics](/new-docs/content/markdown/markdown-basics)

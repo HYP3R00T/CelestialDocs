@@ -1,0 +1,98 @@
+---
+title: "Setup Your Environment"
+description: "Get CelestialDocs running locally and understand the project structure"
+---
+
+Setting up CelestialDocs is straightforward. This guide walks you through the initial setup so you can start documenting.
+
+## Prerequisites
+
+Before you begin, ensure you have:
+- **Node.js 18+** installed ([download](https://nodejs.org))
+- **npm**, **pnpm**, or **yarn** as your package manager
+- A code editor like VS Code
+
+## Installation
+
+### 1. Clone or Download the Template
+
+```bash
+git clone https://github.com/HYP3R00T/CelestialDocs.git my-docs
+cd my-docs
+```
+
+### 2. Install Dependencies
+
+Using pnpm (recommended):
+```bash
+pnpm install
+```
+
+Or using npm:
+```bash
+npm install
+```
+
+### 3. Start Development Server
+
+```bash
+pnpm dev
+# or: npm run dev
+```
+
+Your documentation site will be available at `http://localhost:3000`
+
+## Project Structure
+
+```
+CelestialDocs/
+├── content/                    # Your documentation content
+│   ├── docs/                   # Main documentation collection
+│   ├── funnydocs/             # Secondary documentation example
+│   └── new-docs/              # The new documentation system
+├── src/
+│   ├── components/            # Reusable UI components
+│   ├── layouts/               # Page layouts
+│   ├── lib/                   # Utility functions and navigation logic
+│   ├── pages/                 # Astro page routes
+│   └── styles/                # Global styles
+├── data/
+│   └── config.ts              # 🔑 Central configuration file
+├── public/                    # Static assets
+└── astro.config.mjs           # Astro configuration
+```
+
+## Key File: `data/config.ts`
+
+This is your command center. All configuration lives here:
+
+```typescript
+// Content systems (collections)
+export const CONTENT: ContentConfig = {
+    systems: [
+        { id: "docs", dir: "content/docs", route: "/docs" },
+        { id: "new-docs", dir: "content/new-docs", route: "/new-docs" },
+    ],
+};
+
+// Navigation structure
+export const SIDEBAR_NAVIGATION: SidebarNavigation = {
+    docs: { /* ... */ },
+    "new-docs": { /* ... */ },
+};
+
+// Site metadata
+export const SITE: SiteConfig = {
+    title: "My Documentation",
+    website: "https://mydocs.com",
+    // ...
+};
+```
+
+## What's Next?
+
+You're all set! Next, learn how to:
+1. [Create your first collection](/new-docs/getting-started/first-collection)
+2. [Add your first page](/new-docs/getting-started/first-page)
+
+Or explore the fundamentals in [Core Concepts](/new-docs/navigation-system/core-concepts/entries).

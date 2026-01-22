@@ -1,0 +1,238 @@
+---
+title: "Multiple Collections Use Cases"
+description: "Real-world scenarios where multiple collections unlock unique documentation capabilities"
+---
+
+Multiple collections solve different organizational and business problems. Here are practical scenarios where they shine.
+
+## Use Case 1: Product + API Documentation
+
+**Problem:** Product docs and API docs have completely different audiences, structures, and update cycles.
+
+**Solution:** Separate collections with distinct configurations.
+
+```
+docs collection (/docs)
+├── Getting Started (simple, user-focused)
+├── How-To Guides (task-based)
+└── FAQ (friendly)
+
+api collection (/api)
+├── v1 Legacy (deprecated)
+├── v2 Current (production)
+└── v3 Beta (upcoming)
+```
+
+**Benefits:**
+- Product team owns `/docs`, updates when features ship
+- API team owns `/api`, maintains versions independently
+- Different navigation structures match different mental models
+- Users see what's relevant to them
+
+## Use Case 2: Multi-Product Platform
+
+**Problem:** Your company offers 3 products. One docs site per product, all under same domain.
+
+**Solution:** Three collections, three separate navigation systems.
+
+```
+/product-a/  →  Standalone docs site
+/product-b/  →  Standalone docs site
+/product-c/  →  Standalone docs site
+```
+
+Each product team:
+- Controls their own navigation
+- Updates their own documentation
+- Uses their own structure
+- No cross-contamination
+
+## Use Case 3: Audience-Specific Documentation
+
+**Problem:** Same product, different docs for different users.
+
+**Solution:** Collections organized by audience.
+
+```
+/beginners/
+  ├── Getting Started
+  ├── Basic Concepts
+  └── Common Tasks
+
+/advanced/
+  ├── Architecture
+  ├── Performance Tuning
+  └── Internals
+
+/api-reference/
+  ├── Endpoints
+  ├── Webhooks
+  └── SDK Guide
+```
+
+**Benefits:**
+- Each collection tailored to its audience
+- Beginners don't see advanced topics
+- API users find endpoints immediately
+- Clear mental separation
+
+## Use Case 4: Multi-Language Deployment
+
+**Problem:** Documentation in 5 languages, each needs own structure.
+
+**Solution:** Collections per language + region.
+
+```
+/en/    (English)
+/es/    (Spanish)
+/fr/    (French)
+/de/    (German)
+/ja/    (Japanese)
+```
+
+Each collection:
+- Uses language-appropriate navigation
+- Can have culture-specific groupings
+- Updates independently
+- No translation bottlenecks
+
+## Use Case 5: Enterprise Multi-Workspace
+
+**Problem:** Enterprise client with 10 internal teams, each needs documentation.
+
+**Solution:** Shared platform, independent collections.
+
+```
+/sales-team/     (Sales docs)
+/engineering/    (Tech docs)
+/operations/     (Ops playbooks)
+/compliance/     (Policy docs)
+/finance/        (Budget guides)
+```
+
+**Benefits:**
+- Centralized hosting
+- Decentralized ownership
+- Each team controls their structure
+- Shared infrastructure costs
+- No turf wars over navigation
+
+## Use Case 6: Documentation Versions
+
+**Problem:** Major version updates break docs. Need to support multiple versions.
+
+**Solution:** Collections per version.
+
+```
+/v3/ (Current)    Auto-generated, full features
+/v2/ (LTS)        Manual maintenance
+/v1/ (Legacy)     Frozen docs
+/experimental/    Beta features only
+```
+
+Each collection maintains independently:
+- Users access correct version
+- Old versions stay as-is
+- New features in experimental
+- Clear versioning strategy
+
+## Use Case 7: Monorepo Polyglot Packages
+
+**Problem:** Monorepo with 8 packages in different languages/frameworks. Each needs docs.
+
+**Solution:** Collection per package.
+
+```
+/react/           React components
+/vue/             Vue components
+/angular/         Angular components
+/svelte/          Svelte components
+/typescript/      TypeScript utils
+/cli/             CLI tools
+/devops/          DevOps guides
+/testing/         Testing utilities
+```
+
+**Benefits:**
+- Each package owns its docs
+- Different structures match different paradigms
+- Teams update their own package docs
+- Monorepo stays organized
+
+## Use Case 8: SaaS Feature Documentation + Knowledge Base
+
+**Problem:** "How to use the feature" docs ≠ "How we built it" knowledge base.
+
+**Solution:** Separate collections.
+
+```
+/docs/            (Feature documentation)
+├── Features
+├── How-To Guides
+├── Tutorials
+└── Troubleshooting
+
+/knowledge-base/  (Internal/public knowledge base)
+├── Architecture Decisions
+├── Performance Notes
+├── Security Considerations
+├── Maintenance Guides
+└── Research
+```
+
+Each serves different purposes, different audiences, maintained by different teams.
+
+## Implementation Pattern
+
+For any use case, the pattern is similar:
+
+### Step 1: Define Collections
+```typescript
+// data/config.ts
+export const CONTENT = {
+    systems: [
+        { id: "docs", dir: "content/docs", route: "/docs" },
+        { id: "api", dir: "content/api", route: "/api" },
+        { id: "guides", dir: "content/guides", route: "/guides" },
+    ],
+};
+```
+
+### Step 2: Configure Each Navigation
+```typescript
+export const SIDEBAR_NAVIGATION = {
+    docs: { /* docs-specific navigation */ },
+    api: { /* api-specific navigation */ },
+    guides: { /* guides-specific navigation */ },
+};
+```
+
+### Step 3: Create Content Folders
+```bash
+mkdir -p content/docs
+mkdir -p content/api
+mkdir -p content/guides
+```
+
+### Step 4: Add Content Files
+Each collection has its own folder, files, structure.
+
+## When NOT to Use Multiple Collections
+
+**Stick with one collection if:**
+- All documentation serves the same audience
+- Navigation structure is consistent
+- Content isn't maintained by separate teams
+- You're just starting out
+
+**Multiple collections shine when:**
+- Audiences are fundamentally different
+- Teams are independent
+- Update cycles are separate
+- Navigation structures don't align
+
+## Next Steps
+
+- [Setting Up Multiple Collections](/new-docs/advanced-topics/multiple-collections/setup)
+- [Independent Navigation Per Collection](/new-docs/advanced-topics/multiple-collections/independent-navigation)
+- [Configuration Overview](/new-docs/configuration/basics/overview)

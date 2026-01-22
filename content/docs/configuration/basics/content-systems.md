@@ -1,0 +1,263 @@
+---
+title: "Configuring Content Systems"
+description: "Learn how to set up independent documentation collections"
+---
+
+A **content system** is an independent documentation collection with its own folder, routes, and navigation. You can have multiple collections running on the same site.
+
+## What is a Content System?
+
+A content system defines:
+- A folder where your markdown files live
+- A URL route where the docs appear
+- A default page redirect
+
+```
+System 1: "docs"
+├── Folder: content/docs/
+├── Route: /docs/*
+└── Files: All markdown in content/docs/
+
+System 2: "api"
+├── Folder: content/api/
+├── Route: /api/*
+└── Files: All markdown in content/api/
+```
+
+## Configuration
+
+Content systems are defined in `data/config.ts`:
+
+```typescript
+export const CONTENT: ContentConfig = {
+    systems: [
+        {
+            id: "docs",                           // Unique ID
+            dir: "content/docs",                  // Folder path
+            defaultDocRedirect: "/docs/intro",    // Default page
+            route: "/docs",                       // URL prefix
+        },
+        {
+            id: "api",
+            dir: "content/api",
+            defaultDocRedirect: "/api/overview",
+            route: "/api",
+        },
+    ],
+};
+```
+
+### Required Properties
+
+**id**: Unique identifier
+- Used to reference this system in navigation config
+- Lowercase, alphanumeric, hyphens
+- Example: `"docs"`, `"api"`, `"user-guide"`
+
+**dir**: Content folder path
+- Relative to project root
+- Must start with `content/`
+- Example: `"content/docs"`, `"content/api"`
+
+**defaultDocRedirect**: Where to send users visiting the base route
+- When user visits `/docs/`, redirect to this page
+- Should match a real page slug
+- Example: `"/docs/getting-started/introduction"`
+
+**route**: URL prefix for this collection
+- Base path for all pages in this collection
+- Must start with `/`
+- Example: `"/docs"`, `"/api"`, `"/guides"`
+
+## Single System Example
+
+```typescript
+export const CONTENT: ContentConfig = {
+    systems: [
+        {
+            id: "docs",
+            dir: "content/docs",
+            defaultDocRedirect: "/docs/getting-started/introduction",
+            route: "/docs",
+        },
+    ],
+};
+```
+
+## Multiple Systems Example
+
+```typescript
+export const CONTENT: ContentConfig = {
+    systems: [
+        {
+            id: "docs",
+            dir: "content/docs",
+            defaultDocRedirect: "/docs/getting-started",
+            route: "/docs",
+        },
+        {
+            id: "api",
+            dir: "content/api",
+            defaultDocRedirect: "/api/v1/overview",
+            route: "/api",
+        },
+        {
+            id: "guides",
+            dir: "content/guides",
+            defaultDocRedirect: "/guides/tutorials/first-project",
+            route: "/guides",
+        },
+    ],
+};
+```
+
+## Navigation Configuration for Each System
+
+Each system needs navigation configuration:
+
+```typescript
+export const SIDEBAR_NAVIGATION: SidebarNavigation = {
+    docs: {
+        defaultTab: { label: "Documentation", icon: "📖" },
+        groups: [ /* docs navigation */ ],
+    },
+    api: {
+        defaultTab: { label: "API Reference", icon: "📡" },
+        groups: [ /* api navigation */ ],
+    },
+    guides: {
+        defaultTab: { label: "Tutorials", icon: "🎓" },
+        groups: [ /* guides navigation */ ],
+    },
+};
+```
+
+## File Structure for Multiple Systems
+
+```
+content/
+├── docs/                    ← System 1: "docs"
+│   ├── getting-started/
+│   ├── features/
+│   └── help/
+├── api/                     ← System 2: "api"
+│   ├── authentication/
+│   ├── endpoints/
+│   └── webhooks/
+└── guides/                  ← System 3: "guides"
+    ├── tutorials/
+    ├── patterns/
+    └── examples/
+```
+
+## URL Mapping
+
+With this configuration:
+
+```typescript
+systems: [
+    { id: "docs", dir: "content/docs", route: "/docs" },
+    { id: "api", dir: "content/api", route: "/api" },
+]
+```
+
+Files map to URLs:
+
+| File | Route | URL |
+|------|-------|-----|
+| content/docs/getting-started/intro.md | /docs | /docs/getting-started/intro |
+| content/docs/features/tabs.md | /docs | /docs/features/tabs |
+| content/api/endpoints/users.md | /api | /api/endpoints/users |
+| content/api/webhooks/events.md | /api | /api/webhooks/events |
+
+## Default Redirect
+
+When users visit just the base route, they're redirected:
+
+```
+User visits: https://mydocs.com/docs/
+Redirects to: https://mydocs.com/docs/getting-started/introduction
+```
+
+Choose a page that makes sense as a landing page.
+
+## Systems with Different Configurations
+
+Each system can have completely different navigation structures:
+
+```typescript
+export const SIDEBAR_NAVIGATION = {
+    // System 1: Simple auto-generated
+    docs: {
+        defaultTab: { label: "Learn" },
+        groups: [
+            { id: "guides", label: "Guides", autoGenerated: true }
+        ],
+    },
+    // System 2: Complex with tabs and nesting
+    api: {
+        defaultTab: { label: "v2" },
+        groups: [
+            { id: "v1", label: "v1", tab: true },
+            {
+                id: "v2",
+                label: "v2",
+                tab: true,
+                groups: [
+                    { id: "auth", label: "Auth", autoGenerated: true },
+                    { id: "endpoints", label: "Endpoints", autoGenerated: true },
+                ],
+            },
+        ],
+    },
+};
+```
+
+## Adding a New System
+
+### 1. Create the Folder
+```bash
+mkdir -p content/new-collection
+```
+
+### 2. Add Markdown Files
+```bash
+echo "---\ntitle: 'First Page'\n---\n# First Page" > content/new-collection/first.md
+```
+
+### 3. Register in CONTENT
+```typescript
+export const CONTENT: ContentConfig = {
+    systems: [
+        // existing systems...
+        {
+            id: "new-collection",
+            dir: "content/new-collection",
+            defaultDocRedirect: "/new-collection/first",
+            route: "/new-collection",
+        },
+    ],
+};
+```
+
+### 4. Configure Navigation
+```typescript
+export const SIDEBAR_NAVIGATION: SidebarNavigation = {
+    // existing configs...
+    "new-collection": {
+        defaultTab: { label: "New Collection", icon: "📚" },
+        groups: [
+            { id: "pages", label: "Pages", autoGenerated: true },
+        ],
+    },
+};
+```
+
+### 5. Visit the Site
+Navigate to `http://localhost:3000/new-collection/first` and it's live!
+
+## Next Steps
+
+Learn about:
+- [Sidebar Navigation Structure](/new-docs/configuration/basics/sidebar-structure)
+- [Multiple Collections in Production](/new-docs/advanced-topics/multiple-collections/setup)
