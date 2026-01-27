@@ -69,6 +69,9 @@ export const HEADER_SOCIAL_LINKS: SocialObjects[] = [
     },
 ];
 
+// ---------------------------------------------------------------------------
+// Header-specific configuration
+// ---------------------------------------------------------------------------
 export const FOOTER_SOCIAL_LINKS: SocialObjects[] = [
     {
         name: "github",
