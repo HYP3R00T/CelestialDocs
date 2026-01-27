@@ -80,6 +80,12 @@ export const FOOTER_SOCIAL_LINKS: SocialObjects[] = [
         active: true,
     },
     {
+        name: "linkedin",
+        href: "https://linkedin.com/in/rajesh-kumar-das",
+        linkTitle: `Follow me on LinkedIn`,
+        active: true,
+    },
+    {
         name: "youtube",
         href: "https://youtube.com/@HYP3R00T",
         linkTitle: `Watch on YouTube`,
