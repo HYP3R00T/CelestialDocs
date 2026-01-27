@@ -27,19 +27,22 @@ export const HEADER_FEATURES: HeaderFeatures = { ... };
 // 5. Header navigation
 export const HEADER_NAV_ITEMS: NavItem[] = [ ... ];
 
-// 6. Social links
+// 6. Social links (header)
 export const HEADER_SOCIAL_LINKS: SocialObjects[] = [ ... ];
 
-// 7. Sidebar navigation (most important for docs structure)
+// 7. Social links (footer)
+export const FOOTER_SOCIAL_LINKS: SocialObjects[] = [ ... ];
+
+// 8. Sidebar navigation (most important for docs structure)
 export const SIDEBAR_NAVIGATION: SidebarNavigation = { ... };
 
-// 8. Table of contents
+// 9. Table of contents
 export const TABLE_OF_CONTENTS: TableOfContentsConfig = { ... };
 ```
 
-## Five Essential Sections for Docs
+## Six Essential Sections for Docs
 
-For basic documentation setup, focus on these five sections:
+For basic documentation setup, focus on these core sections:
 
 ### 1. Content Systems
 
@@ -74,6 +77,7 @@ Basic site information:
 export const SITE: SiteConfig = {
     website: "https://mydocs.com",
     author: "Your Name",
+    authorUrl: "https://example.com", // optional; controls footer author link
     repo: "https://github.com/user/repo",
     title: "My Documentation",
     description: "Documentation for my project",
@@ -93,7 +97,28 @@ export const HEADER_NAV_ITEMS: NavItem[] = [
 ];
 ```
 
-### 4. Sidebar Navigation (Most Important!)
+### 4. Social Links (Header & Footer)
+
+Header and footer have independent social link arrays:
+
+```typescript
+export const HEADER_SOCIAL_LINKS: SocialObjects[] = [
+    { name: "github", href: "https://github.com/user", linkTitle: "GitHub", active: true },
+];
+
+export const FOOTER_SOCIAL_LINKS: SocialObjects[] = [
+    { name: "github", href: "https://github.com/user", active: true },
+    { name: "linkedin", href: "https://linkedin.com/in/you", active: true },
+    { name: "youtube", href: "https://youtube.com/@you", active: false },
+    { name: "mail", href: "mailto:hello@example.com", active: true },
+];
+```
+
+- `name` must match an icon filename in `src/assets/icons` (e.g., `github`, `linkedin`, `youtube`, `mail`). Add a new SVG there first if you introduce a new network.
+- Only links with `active: true` render.
+- The footer’s “Built with ♥ by …” line shows only when `SITE.authorUrl` is set; omit it to hide the line.
+
+### 5. Sidebar Navigation (Most Important!)
 
 Navigation structure for each collection:
 
@@ -117,7 +142,7 @@ export const SIDEBAR_NAVIGATION: SidebarNavigation = {
 
 This is where all navigation hierarchy is defined.
 
-### 5. Table of Contents
+### 6. Table of Contents
 
 Configuration for the right-side page outline:
 
