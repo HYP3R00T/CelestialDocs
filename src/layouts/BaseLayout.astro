@@ -6,48 +6,45 @@ import { LOCALE, HEADER_FEATURES } from "@data/config";
 import type { BaseLayoutProps } from "@/lib/docs/types";
 
 const {
-    title,
-    description,
-    image,
-    imageAlt,
-    contentType,
-    fullWidth = false,
+  title,
+  description,
+  image,
+  imageAlt,
+  contentType,
+  fullWidth = false,
 } = Astro.props as BaseLayoutProps;
 ---
 
 <html lang={LOCALE.lang ?? "en"}>
-    <head>
-        <HeadSEO
-            title={title}
-            description={description}
-            image={image}
-            imageAlt={imageAlt}
-            contentType={contentType}
-        />
-    </head>
+  <head>
+    <HeadSEO
+      title={title}
+      description={description}
+      image={image}
+      imageAlt={imageAlt}
+      contentType={contentType}
+    />
+  </head>
 
-    <body
-        class="min-h-screen bg-background text-foreground antialiased"
-        data-layout={HEADER_FEATURES.enableLayoutWidthToggle
-            ? undefined
-            : "comfort"}
-    >
-        <div class="relative isolate flex min-h-screen flex-col">
-            <Header />
-            <main class="relative z-10 flex flex-1 flex-col">
-                {
-                    fullWidth ? (
-                        <slot />
-                    ) : (
-                        <div
-                            id="main-content"
-                            class="mx-auto flex w-full flex-col gap-10 px-4 lg:gap-14 "
-                        >
-                            <slot />
-                        </div>
-                    )
-                }
-            </main>
-        </div>
-    </body>
+  <body
+    class="min-h-screen bg-background text-foreground antialiased"
+    data-layout={HEADER_FEATURES.enableLayoutWidthToggle
+      ? undefined
+      : "comfort"}
+  >
+    <div class="relative isolate flex min-h-screen flex-col">
+      <Header />
+      <main class="relative z-10 flex flex-1 flex-col">
+        {
+          fullWidth ? (
+            <slot />
+          ) : (
+            <div id="main-content" class="mx-auto flex w-full flex-col px-4">
+              <slot />
+            </div>
+          )
+        }
+      </main>
+    </div>
+  </body>
 </html>
