@@ -1,0 +1,92 @@
+---
+import { Icon } from "astro-icon/components";
+import { Button } from "@/components/ui/button";
+---
+
+<style is:global>
+  .code-wrapper {
+    position: relative;
+  }
+
+  .code-copy-button {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .code-wrapper:hover .code-copy-button {
+    opacity: 1;
+  }
+
+  .code-copy-button[data-copied="true"] .copy-icon {
+    display: none;
+  }
+
+  .code-copy-button[data-copied="true"] .check-icon {
+    display: block;
+  }
+
+  .code-copy-button[data-copied="false"] .copy-icon {
+    display: block;
+  }
+
+  .code-copy-button[data-copied="false"] .check-icon {
+    display: none;
+  }
+</style>
+
+<template id="copyButtonTemplate">
+  <Button
+    className="code-copy-button"
+    size="icon-sm"
+    variant="ghost"
+    data-copied="false"
+  >
+    <Icon name="copy" class="copy-icon size-4" />
+    <Icon name="check" class="check-icon size-4 text-green" />
+  </Button>
+</template>
+
+<script>
+  function initCodeCopyButtons() {
+    const template = document.getElementById(
+      "copyButtonTemplate",
+    ) as HTMLTemplateElement;
+    if (!template) return;
+
+    const copyButton = template.content.firstElementChild;
+    if (!copyButton) return;
+
+    document.querySelectorAll("pre").forEach((pre) => {
+      // Skip if already wrapped
+      if (pre.parentElement?.classList.contains("code-wrapper")) return;
+
+      const code = pre.querySelector("code");
+      if (!code || !navigator.clipboard) return;
+
+      // Wrap pre in a container
+      const wrapper = document.createElement("div");
+      wrapper.classList.add("code-wrapper");
+      pre.parentNode?.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+
+      // Add copy button
+      const button = copyButton.cloneNode(true) as HTMLButtonElement;
+      button.addEventListener("click", async () => {
+        await navigator.clipboard.writeText(code.innerText);
+        button.setAttribute("data-copied", "true");
+        setTimeout(() => {
+          button.setAttribute("data-copied", "false");
+        }, 2000);
+      });
+
+      wrapper.appendChild(button);
+    });
+  }
+
+  // Run on initial load and after navigation
+  document.addEventListener("astro:page-load", initCodeCopyButtons);
+</script>

@@ -4,6 +4,7 @@ import Sidebar from "@/components/docs/Sidebar.astro";
 import TableOfContents from "@/components/docs/TableOfContents.astro";
 import Breadcrumb from "@/components/docs/Breadcrumb.astro";
 import SourceButton from "@/components/docs/SourceButton.astro";
+import CodeCopyButton from "@/components/docs/CodeCopyButton.astro";
 import { buildNavigation, getActiveTab } from "@/lib/navigation";
 import { buildBreadcrumbItems } from "@/lib/docs/breadcrumb";
 import { SIDEBAR_NAVIGATION } from "@data/config";
@@ -22,49 +23,47 @@ const breadcrumbItems = buildBreadcrumbItems(frontmatter.id, collectionId);
 
 // Convert headings to TableOfContents format
 const tableOfContentsHeadings = headings
-    .map((h) => ({
-        depth: h.depth,
-        text: h.text,
-        id: h.slug,
-    }))
-    .filter((heading): heading is Heading => Boolean(heading.id));
+  .map((h) => ({
+    depth: h.depth,
+    text: h.text,
+    id: h.slug,
+  }))
+  .filter((heading): heading is Heading => Boolean(heading.id));
 ---
 
 <BaseLayout>
-    <div class="min-h-screen flex">
-        <!-- Sidebar with tabs inside  -->
-        <Sidebar
-            tabs={navResult.tabs}
-            showTabs={navResult.showTabs}
-            activeTab={activeTab}
-            currentSlug={frontmatter.id}
-            collectionId={collectionId}
-        />
+  <div class="min-h-screen flex">
+    <!-- Sidebar with tabs inside  -->
+    <Sidebar
+      tabs={navResult.tabs}
+      showTabs={navResult.showTabs}
+      activeTab={activeTab}
+      currentSlug={frontmatter.id}
+      collectionId={collectionId}
+    />
 
-        <!-- Main content  -->
-        <main class="flex-1 lg:px-8 lg:py-6 min-w-0">
-            <div class="flex items-center justify-between gap-4 mb-6">
-                <div class="hidden lg:flex justify-between w-full items-center">
-                    <div>
-                        {
-                            !frontmatter.data.hide_breadcrumbs && (
-                                <Breadcrumb items={breadcrumbItems} />
-                            )
-                        }
-                    </div>
-                    <SourceButton
-                        slug={frontmatter.id}
-                        collectionId={collectionId}
-                    />
-                </div>
-            </div>
-            <article class="prose prose-slate dark:prose-invert min-w-0">
-                <h1>{frontmatter.data.title}</h1>
-                <slot />
-            </article>
-        </main>
+    <!-- Main content  -->
+    <main class="flex-1 lg:px-8 lg:py-6 min-w-0">
+      <div class="flex items-center justify-between gap-4 mb-6">
+        <div class="hidden lg:flex justify-between w-full items-center">
+          <div>
+            {
+              !frontmatter.data.hide_breadcrumbs && (
+                <Breadcrumb items={breadcrumbItems} />
+              )
+            }
+          </div>
+          <SourceButton slug={frontmatter.id} collectionId={collectionId} />
+        </div>
+      </div>
+      <article class="prose prose-slate dark:prose-invert min-w-0">
+        <h1>{frontmatter.data.title}</h1>
+        <slot />
+      </article>
+    </main>
 
-        <!-- Table of Contents on the right  -->
-        <TableOfContents headings={tableOfContentsHeadings} />
-    </div>
+    <!-- Table of Contents on the right  -->
+    <TableOfContents headings={tableOfContentsHeadings} />
+  </div>
+  <CodeCopyButton />
 </BaseLayout>
