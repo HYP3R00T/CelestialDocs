@@ -262,6 +262,14 @@
     body[data-layout="wide"] #main-content {
         @apply max-w-full;
     }
+
+    body[data-layout="comfort"] .docs-main {
+        @apply lg:px-8;
+    }
+
+    body[data-layout="wide"] .docs-main {
+        @apply lg:px-20;
+    }
 }
 
 @layer base {
