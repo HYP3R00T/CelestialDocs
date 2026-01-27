@@ -30,8 +30,8 @@ export default defineConfig({
             // theme: "css-variables",
             // defaultColor: false,
             themes: {
-                light: 'github-light',
-                dark: 'github-dark',
+                light: 'one-light',
+                dark: 'one-dark-pro',
             },
         },
     },

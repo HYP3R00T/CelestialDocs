@@ -94,7 +94,7 @@
     --purple: hsl(270, 55%, 55%);
     --pink: hsl(330, 60%, 55%);
 
-    --astro-code-background: var(--secondary);
+    --astro-code-background: var(--popover);
     --astro-code-foreground: var(--foreground);
     --astro-code-token-constant: var(--pink);
     --astro-code-token-string: var(--green);
@@ -151,7 +151,7 @@
     --purple: hsl(270, 60%, 65%);
     --pink: hsl(330, 65%, 67%);
 
-    --astro-code-background: var(--secondary);
+    --astro-code-background: var(--popover);
     --astro-code-foreground: var(--foreground);
     --astro-code-token-constant: var(--pink);
     --astro-code-token-string: var(--green);
@@ -364,7 +364,7 @@
     }
 
     .astro-code {
-        @apply my-8 rounded-lg bg-secondary px-6 py-5 font-mono text-sm;
+        @apply my-8 rounded-lg bg-secondary px-6 py-5 font-mono text-sm border dark:border-0;
     }
 
     /* ======== Tables ======== */
