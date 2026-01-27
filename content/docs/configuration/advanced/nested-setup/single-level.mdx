@@ -76,22 +76,22 @@ export const SIDEBAR_NAVIGATION = {
 Your folder structure should mirror the navigation:
 
 ```
-content/new-docs/
+content/docs/
 ├── core-concepts/          ← Matches "core" group
 │   ├── entries/            ← Matches "entries" subgroup
-│   │   ├── what-are-entries.md
-│   │   └── folder-vs-manual.md
+│   │   ├── what-are-entries.mdx
+│   │   └── folder-vs-manual.mdx
 │   └── groups/             ← Matches "groups" subgroup
-│       ├── basic.md
-│       ├── nested.md
-│       └── advanced.md
+│       ├── basic.mdx
+│       ├── nested.mdx
+│       └── advanced.mdx
 └── advanced/               ← Matches "advanced" group
     ├── performance/        ← Matches "performance" subgroup
-    │   ├── optimization.md
-    │   └── benchmarking.md
+    │   ├── optimization.mdx
+    │   └── benchmarking.mdx
     └── security/           ← Matches "security" subgroup
-        ├── best-practices.md
-        └── vulnerabilities.md
+        ├── best-practices.mdx
+        └── vulnerabilities.mdx
 ```
 
 ## Breadcrumb Result
@@ -127,9 +127,9 @@ Clear hierarchy. Not too deep.
 }
 ```
 
-Files added to `content/new-docs/guides/getting-started/` appear automatically under "Getting Started" subgroup.
+Files added to `content/docs/guides/getting-started/` appear automatically under "Getting Started" subgroup.
 
-Files added to `content/new-docs/guides/advanced-tasks/` appear automatically under "Advanced Tasks" subgroup.
+Files added to `content/docs/guides/advanced-tasks/` appear automatically under "Advanced Tasks" subgroup.
 
 No config changes needed.
 
@@ -275,6 +275,6 @@ Single-level is the sweet spot for most documentation.
 
 ## Next Steps
 
-- [Multi-Level Nesting](/new-docs/configuration/advanced/nested-setup/multi-level)
-- [Nested Groups Best Practices](/new-docs/configuration/advanced/nested-setup/best-practices)
-- [Nested Groups Deep Dive](/new-docs/navigation-system/hierarchy/real-world-examples)
+- [Multi-Level Nesting](/docs/configuration/advanced/nested-setup/multi-level)
+- [Nested Groups Best Practices](/docs/configuration/advanced/nested-setup/best-practices)
+- [Nested Groups Deep Dive](/docs/navigation-system/hierarchy/real-world-examples)

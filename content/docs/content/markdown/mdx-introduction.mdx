@@ -1,0 +1,39 @@
+---
+title: "MDX Introduction"
+description: "Use Markdown with React components for richer docs"
+---
+
+MDX lets you mix Markdown and JSX. You keep the readability of Markdown while adding interactive components where they add value.
+
+## Why MDX
+- Embed callouts, tabs, or code playgrounds inline.
+- Reuse design-system components without leaving content files.
+- Keep authors productive with Markdown syntax, only sprinkling JSX when necessary.
+
+## Basic Example
+You can render components directly inside your Markdown.
+
+```mdx
+import { Button } from "@/components/ui/button";
+
+## Launch the product
+
+Our quickstart covers the basics. Ready to go?
+
+<Button size="lg">Launch</Button>
+```
+
+## Authoring Guidelines
+- Keep JSX minimal; default to Markdown for normal prose.
+- Prefer server-rendered components that do not require hydration.
+- When hydration is required, scope it to a small island component and import that.
+- Keep props small and explicit—avoid passing large objects through frontmatter.
+
+## Shortcuts That Help Authors
+- Extract reusable snippets into partial components so content stays clean.
+- Use `navHidden: true` on draft MDX pages to avoid broken nav while iterating.
+- Pair MDX with the hybrid navigation strategy so new pages appear automatically.
+
+## Next Steps
+- See concrete component patterns in [Components in MDX](/docs/content/markdown/components-in-mdx)
+- Review Markdown basics in [Markdown Basics](/docs/content/markdown/markdown-basics)

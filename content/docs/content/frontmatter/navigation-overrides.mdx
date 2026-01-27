@@ -1,0 +1,56 @@
+---
+title: "Navigation Overrides"
+description: "Control labels, icons, visibility, and breadcrumbs from frontmatter"
+---
+
+Use navigation overrides when the default title-based sidebar is not enough.
+
+## Override the Label
+Shorten long titles without changing the page heading.
+
+```yaml
+---
+title: "Implementing OAuth 2.0 Authorization Code Flow"
+navLabel: "OAuth 2.0"
+---
+```
+
+## Add or Remove Icons
+
+```yaml
+---
+navIcon: "🔒"   # Emoji
+# or
+navIcon: "lock" # Icon name from your icon set
+---
+```
+
+## Hide from Navigation
+Keep a page accessible but remove it from the sidebar.
+
+```yaml
+---
+navHidden: true
+---
+```
+
+Pair with `draft: true` for work-in-progress pages so they are skipped in production builds.
+
+## Hide Breadcrumbs
+For landing pages that should feel standalone.
+
+```yaml
+---
+hide_breadcrumbs: true
+---
+```
+
+## Guidelines
+- Use overrides sparingly—consistent labels aid recognition.
+- Avoid overloading icons; pick a small, consistent set.
+- Do not hide critical paths; use `navHidden` only when you have alternative entry points.
+- Keep overrides in sync with the navigation config so users do not see conflicting labels.
+
+## Next Steps
+- Review the base metadata in [Required Frontmatter Fields](/docs/content/frontmatter/required-fields)
+- See other optional metadata in [Optional Frontmatter Fields](/docs/content/frontmatter/optional-fields)

@@ -73,9 +73,36 @@ Ordered:
 
 ### Images
 
+**Recommended: Use relative paths from your content collection**
+
 ```markdown
-![Alt text](https://example.com/image.png)
+![Alt text](../assets/image-name.jpg)
+![Code example](../../assets/code-example.jpg)
 ```
+
+Example using an image from content/docs/assets:
+
+![Code Example](../../assets/code-example.jpg)
+
+**Alternative: Public folder (for shared assets)**
+
+```markdown
+![Alt text](/docs-hero.jpg)
+```
+
+**Best practices:**
+- **Store images alongside content** in `content/docs/assets/` for better organization
+- Always include descriptive alt text for accessibility
+- Use relative paths (`../assets/`) for collection-specific images
+- Use absolute paths (`/public-image.jpg`) for site-wide assets
+- Optimize images before uploading (WebP recommended, or compressed JPEGs)
+- Typical dimensions: 1200x630 for hero images, 800x400 for content images
+
+**Why use content collection assets?**
+- Images live with your documentation content
+- Easier to manage and version control
+- Better organization for multi-collection sites
+- Clearer ownership and scope
 
 ### Code Blocks
 
@@ -140,5 +167,6 @@ ___
 ## Next Steps
 
 Learn advanced features:
-- [MDX Introduction](/new-docs/content/markdown/mdx-introduction)
-- [Frontmatter Reference](/new-docs/content/frontmatter/overview)
+- [Working with Images](/docs/content/markdown/working-with-images)
+- [MDX Introduction](/docs/content/markdown/mdx-introduction)
+- [Frontmatter Reference](/docs/content/frontmatter/overview)

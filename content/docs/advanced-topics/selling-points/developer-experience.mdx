@@ -1,0 +1,30 @@
+---
+title: "Developer Experience"
+description: "Author-friendly workflows backed by predictable navigation and validation"
+---
+
+CelestialDocs focuses on speed and confidence for both authors and maintainers.
+
+## Fast Authoring
+- **Hot reload** via `astro dev` keeps feedback tight.
+- **Auto-generated nav** means new pages appear without config edits when you want them to.
+- **MDX support** lets teams reuse UI components without custom embeds.
+
+## Safe Changes
+- **Zod validation** blocks builds when required frontmatter is missing.
+- **Typed navigation config** prevents broken links from malformed slugs.
+- **Draft + navHidden** controls keep unfinished work out of production.
+
+## Maintainable UI
+- **Shared design system** components (buttons, navigation menu, breadcrumbs) ship with sensible defaults.
+- **Tailwind + Prettier** ensure consistent styling without hand-tuning class order.
+- **Icons and badges** stay centralized in `src/assets/icons` for predictable theming.
+
+## Team Practices
+- Keep navigation small and purposeful; split groups instead of overloading one tab.
+- Encourage authors to start with Markdown, adding MDX only for true interactivity.
+- Run `pnpm lint` and `pnpm build` in CI so validation protects main.
+
+## Next Steps
+- Learn why strict types matter in [Type Safety](/docs/advanced-topics/selling-points/type-safety)
+- Review hybrid navigation options in [Hybrid Approach Patterns](/docs/generation-strategies/hybrid-approach/real-world-patterns)

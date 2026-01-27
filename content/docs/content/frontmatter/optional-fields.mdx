@@ -1,0 +1,73 @@
+---
+title: "Optional Frontmatter Fields"
+description: "Metadata that improves navigation, governance, and visibility"
+---
+
+Optional fields refine how pages appear and behave. Use them when they add clarity—skip them when they do not.
+
+## navLabel
+Shorten or rename the sidebar label without changing the title.
+
+```yaml
+---
+title: "Frequently Asked Questions About Deployment"
+navLabel: "Deployment FAQ"
+---
+```
+
+## navIcon
+Add visual affordance in the sidebar.
+
+```yaml
+---
+navIcon: "🚀"   # Emoji
+# or
+navIcon: "book" # Icon name from your icon set
+---
+```
+
+## navHidden
+Hide the page from navigation while keeping the URL accessible (useful for drafts or landing pages).
+
+```yaml
+---
+navHidden: true
+---
+```
+
+## draft
+Exclude the page from production builds.
+
+```yaml
+---
+draft: true
+---
+```
+
+## authors
+Credit contributors or set ownership.
+
+```yaml
+---
+authors: ["Alice", "Bob"]
+---
+```
+
+## tags (custom)
+If you extend the schema, tags help grouping or search.
+
+```yaml
+---
+tags: ["api", "reference", "v2"]
+---
+```
+
+## When to Use Optional Fields
+- Use `navLabel` for long titles
+- Use `navIcon` sparingly so the sidebar stays consistent
+- Use `navHidden` + `draft` during in-flight work
+- Add `authors` for high-ownership pages (SLAs, runbooks)
+
+## Next Steps
+- Enforce labels and visibility in [Navigation Overrides](/docs/content/frontmatter/navigation-overrides)
+- Review mandatory fields in [Required Frontmatter Fields](/docs/content/frontmatter/required-fields)

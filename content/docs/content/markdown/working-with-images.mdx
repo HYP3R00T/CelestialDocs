@@ -1,0 +1,250 @@
+---
+title: "Working with Images"
+description: "Best practices for adding and managing images in your documentation"
+---
+
+Images enhance documentation by providing visual context, examples, and breaking up text-heavy content. Here's how to use them effectively in CelestialDocs.
+
+## Image Storage Locations
+
+### Content Collection Assets (Recommended)
+
+Store images alongside your documentation in `content/docs/assets/`:
+
+```
+content/
+└── docs/
+    ├── assets/
+    │   ├── getting-started.jpg
+    │   ├── configuration-overview.jpg
+    │   └── navigation-hierarchy.jpg
+    ├── getting-started/
+    │   └── setup.mdx
+    └── configuration/
+        └── basics/
+            └── overview.mdx
+```
+
+**Benefits:**
+- Images live with documentation content
+- Easy to version control together
+- Better organization for multiple collections
+- Clear scope and ownership
+
+### Public Folder (Site-wide Assets)
+
+Use `public/` for assets shared across all collections:
+
+```
+public/
+├── logo.svg
+├── favicon.ico
+└── shared-diagram.png
+```
+
+**Use cases:**
+- Logo and branding assets
+- Favicons and meta images
+- Shared diagrams used in multiple collections
+
+## Using Images in Markdown
+
+### Basic Syntax
+
+```markdown
+![Alt text description](../assets/image-name.jpg)
+```
+
+### Relative Paths from Content
+
+Images in the same collection use relative paths:
+
+```markdown
+<!-- From content/docs/getting-started/setup.mdx -->
+![Setup Guide](../assets/getting-started.jpg)
+
+<!-- From content/docs/configuration/basics/overview.mdx -->
+![Configuration](../../assets/configuration-overview.jpg)
+```
+
+### Example with Images
+
+![Configuration Overview Example](../../assets/configuration-overview.jpg)
+
+The image above demonstrates configuration concepts visually.
+
+## Image Best Practices
+
+### 1. Descriptive Alt Text
+
+Always provide meaningful alt text for accessibility:
+
+```markdown
+<!-- ❌ Bad -->
+![image](../assets/screenshot.jpg)
+
+<!-- ✅ Good -->
+![Dashboard showing navigation settings panel](../assets/screenshot.jpg)
+```
+
+### 2. Optimize File Sizes
+
+- **Hero images:** 1200x630px, ~100KB max
+- **Content images:** 800x400px, ~50KB max
+- **Screenshots:** Actual size, compressed
+- **Format:** WebP (best), JPEG (good), PNG (when transparency needed)
+
+### 3. Naming Conventions
+
+Use descriptive, kebab-case names:
+
+```
+✅ navigation-hierarchy-diagram.jpg
+✅ getting-started-hero.jpg
+✅ config-example-screenshot.png
+
+❌ img1.jpg
+❌ Screen Shot 2024-01-01.png
+❌ MyImage.JPG
+```
+
+### 4. Image Dimensions
+
+Consistent sizing creates better visual flow:
+
+```markdown
+<!-- Hero images at top of pages -->
+![Hero](../assets/hero-1200x630.jpg)
+
+<!-- Inline content images -->
+![Example](../assets/example-800x400.jpg)
+
+<!-- Small icons or badges -->
+![Icon](../assets/icon-64x64.png)
+```
+
+## Advanced Techniques
+
+### Captioned Images
+
+Add context with text below images:
+
+```markdown
+![Architecture diagram](../assets/architecture.jpg)
+
+*Figure 1: CelestialDocs navigation architecture showing the three-tier hierarchy*
+```
+
+Example:
+
+![Code Example](../../assets/code-example.jpg)
+
+*Figure: Modern development environment with proper tooling*
+
+### Linking Images
+
+Make images clickable:
+
+```markdown
+[![Dashboard Preview](../assets/dashboard.jpg)](/docs/configuration/basics/overview)
+```
+
+### Image in Lists
+
+```markdown
+1. **Setup your environment**
+
+   ![Environment setup](../assets/getting-started.jpg)
+
+   Install Node.js and clone the repository.
+
+2. **Configure settings**
+
+   ![Configuration](../assets/configuration-overview.jpg)
+
+   Update data/config.ts with your preferences.
+```
+
+## Organization Tips
+
+### Group by Section
+
+```
+content/docs/assets/
+├── getting-started/
+│   ├── installation-step-1.jpg
+│   └── installation-step-2.jpg
+├── configuration/
+│   ├── basic-setup.jpg
+│   └── advanced-options.jpg
+└── shared/
+    └── logo.svg
+```
+
+### Version Images with Docs
+
+When updating documentation, update related images in the same commit:
+
+```bash
+git add content/docs/getting-started/setup.mdx
+git add content/docs/assets/getting-started.jpg
+git commit -m "Update setup guide and screenshot"
+```
+
+### Use .gitattributes for LFS
+
+For large images, consider Git LFS:
+
+```gitattributes
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.webp filter=lfs diff=lfs merge=lfs -text
+```
+
+## Troubleshooting
+
+### Image Not Showing
+
+1. Check the relative path is correct
+2. Verify file exists in the assets folder
+3. Check file extension matches (case-sensitive)
+4. Ensure image is committed to repository
+
+### Path Examples by Location
+
+```markdown
+<!-- From: content/docs/introduction.mdx -->
+![Example](./assets/intro.jpg)
+
+<!-- From: content/docs/getting-started/setup.mdx -->
+![Example](../assets/getting-started.jpg)
+
+<!-- From: content/docs/configuration/basics/overview.mdx -->
+![Example](../../assets/configuration-overview.jpg)
+
+<!-- From: content/docs/navigation-system/core-concepts/entries.mdx -->
+![Example](../../../assets/navigation-hierarchy.jpg)
+```
+
+### Build Errors
+
+If images cause build errors:
+- Ensure filenames have no spaces
+- Use only alphanumeric, hyphens, and underscores
+- Check file permissions are correct
+- Verify image files aren't corrupted
+
+## Summary
+
+- ✅ Store images in `content/docs/assets/` for better organization
+- ✅ Use descriptive alt text for accessibility
+- ✅ Optimize images before adding (WebP or compressed JPEG)
+- ✅ Use relative paths from your markdown files
+- ✅ Follow consistent naming conventions
+- ✅ Keep image sizes appropriate (1200x630 for heroes, 800x400 for content)
+
+## Next Steps
+
+- Learn about [MDX components](/docs/content/markdown/components-in-mdx) for advanced image handling
+- Explore [Markdown basics](/docs/content/markdown/markdown-basics) for other syntax
+- Review [Frontmatter options](/docs/content/frontmatter/overview) for page configuration
