@@ -1,14 +1,25 @@
 ---
-
+import { Button } from "@/components/ui/button";
+import { Icon } from "astro-icon/components";
 ---
 
-<!-- <section
-    class="rounded-2xl bg-popover p-4 overflow-y-auto h-[calc((100vh-5.25rem)*0.33)]"
+<section
+  class="rounded-lg bg-linear-to-br from-blue-500 to-cyan-400 p-6 overflow-y-auto h-[calc((100vh-5.25rem)*0.33)] flex flex-col justify-center items-center text-center gap-4"
 >
-    <div class="text-sm leading-relaxed">
-        <p class="font-semibold text-foreground">Need a quick tip?</p>
-        <p class="text-muted-foreground/90">
-            Bookmark this guide, open a new issue, or drop a note in the
-        </p>
-    </div>
-</section> -->
+  <Icon name="github" class="size-8 text-background" />
+
+  <div class="space-y-2">
+    <p class="font-bold text-lg text-background">Love this project?</p>
+    <p class="text-sm font-medium text-background/90">
+      Support CelestialDocs and help me keep building.
+    </p>
+  </div>
+
+  <a
+    href="https://github.com/sponsors/HYP3R00T"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Button variant="secondary" size="lg">Sponsor</Button>
+  </a>
+</section>

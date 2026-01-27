@@ -300,5 +300,5 @@ export const SIDEBAR_NAVIGATION: SidebarNavigation = {
 // Right-side table of contents configuration
 // ---------------------------------------------------------------------------
 export const TABLE_OF_CONTENTS: TableOfContentsConfig = {
-    enableExtra: false,
+    enableExtra: true,
 };
