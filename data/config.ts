@@ -39,9 +39,9 @@ export const SITE: SiteConfig = {
     author: "Rajesh",
     repo: "https://github.com/HYP3R00T/CelestialDocs",
     title: "CelestialDocs",
-    description: "Documentation template using Astro and Shadcn",
+    description: "A modern, flexible documentation system built with Astro featuring hierarchical navigation, hybrid content generation, and multi-collection support",
     image: setupImage,
-    imageAlt: "Check out celestialdocs.hyperoot.dev",
+    imageAlt: "CelestialDocs - Modern documentation system with Astro",
     twitterHandle: "@HYP3R00T",
 };
 
@@ -205,6 +205,7 @@ export const SIDEBAR_NAVIGATION: SidebarNavigation = {
                         label: "Markdown & MDX",
                         entries: [
                             { slug: "content/markdown/markdown-basics" },
+                            { slug: "content/markdown/working-with-images" },
                             { slug: "content/markdown/mdx-introduction" },
                             { slug: "content/markdown/components-in-mdx" },
                         ],
