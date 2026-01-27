@@ -1,0 +1,53 @@
+---
+import { Icon } from "astro-icon/components";
+import { Button } from "@/components/ui/button";
+import { SITE, FOOTER_SOCIAL_LINKS } from "@data/config";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+const activeSocials = FOOTER_SOCIAL_LINKS.filter((social) => social.active);
+const authorHref = SITE.authorUrl;
+const showAuthorLine = Boolean(authorHref && SITE.author);
+---
+
+<footer class={`bg-popover/80 ${className}`}>
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
+  >
+    {
+      showAuthorLine && (
+        <p class="text-center leading-relaxed sm:text-left">
+          Built with <span aria-label="love">♥️</span> by
+          <a
+            href={authorHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-foreground hover:text-primary"
+          >
+            {SITE.author}
+          </a>
+        </p>
+      )
+    }
+
+    <div class="flex justify-center gap-3 sm:justify-end">
+      {
+        activeSocials.map(({ name, href, linkTitle }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={linkTitle ?? name}
+          >
+            <Button variant="ghost" size="icon">
+              <Icon name={name} class="size-5" />
+            </Button>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</footer>

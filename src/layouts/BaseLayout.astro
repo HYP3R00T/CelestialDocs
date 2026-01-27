@@ -1,6 +1,7 @@
 ---
 import HeadSEO from "@/components/core/HeadSEO.astro";
 import Header from "@/components/core/Header.astro";
+import Footer from "@/components/core/Footer.astro";
 
 import { LOCALE, HEADER_FEATURES } from "@data/config";
 import type { BaseLayoutProps } from "@/lib/docs/types";
@@ -45,6 +46,7 @@ const {
           )
         }
       </main>
+      <Footer />
     </div>
   </body>
 </html>

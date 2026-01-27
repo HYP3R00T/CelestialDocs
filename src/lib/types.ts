@@ -40,6 +40,7 @@ export interface SocialObjects {
 export interface SiteConfig {
     website: string;
     author: string;
+    authorUrl?: string;
     repo: string;
     branch?: string;
     title: string;

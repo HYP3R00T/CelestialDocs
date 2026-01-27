@@ -37,6 +37,7 @@ export const CONTENT: ContentConfig = {
 export const SITE: SiteConfig = {
     website: "https://celestialdocs.hyperoot.dev",
     author: "Rajesh",
+    authorUrl: "https://rajeshdas.dev",
     repo: "https://github.com/HYP3R00T/CelestialDocs",
     title: "CelestialDocs",
     description: "A modern, flexible documentation system built with Astro featuring hierarchical navigation, hybrid content generation, and multi-collection support",
@@ -64,6 +65,27 @@ export const HEADER_SOCIAL_LINKS: SocialObjects[] = [
         name: "github",
         href: "https://github.com/HYP3R00T/",
         linkTitle: `Checkout my GitHub profile`,
+        active: true,
+    },
+];
+
+export const FOOTER_SOCIAL_LINKS: SocialObjects[] = [
+    {
+        name: "github",
+        href: "https://github.com/HYP3R00T/",
+        linkTitle: `Checkout my GitHub profile`,
+        active: true,
+    },
+    {
+        name: "youtube",
+        href: "https://youtube.com/@HYP3R00T",
+        linkTitle: `Watch on YouTube`,
+        active: true,
+    },
+    {
+        name: "mail",
+        href: "mailto:rajesh@hyperoot.dev",
+        linkTitle: `Email the maintainers`,
         active: true,
     },
 ];
