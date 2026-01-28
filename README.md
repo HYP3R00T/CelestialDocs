@@ -8,8 +8,7 @@
 
 </div>
 
-<!-- Screenshot Placeholder: Hero/Demo Image -->
-<!-- ![CelestialDocs Hero](readme-assets/hero-demo.png) -->
+![CelestialDocs Hero](readme-assets/demo.png)
 
 ## 🔓 Unlock True Freedom
 
