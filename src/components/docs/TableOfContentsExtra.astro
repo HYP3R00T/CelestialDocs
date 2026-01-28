@@ -4,22 +4,20 @@ import { Icon } from "astro-icon/components";
 ---
 
 <section
-  class="rounded-lg bg-linear-to-br from-blue-500 to-cyan-400 p-6 overflow-y-auto h-[calc((100vh-5.25rem)*0.33)] flex flex-col justify-center items-center text-center gap-4"
+  class="rounded-lg bg-linear-to-br from-blue-500 to-cyan-400 p-6 overflow-y-hidden h-[calc((100vh-5.25rem)*0.33)]"
 >
-  <Icon name="github" class="size-8 text-background" />
-
-  <div class="space-y-2">
-    <p class="font-bold text-lg text-background">Love this project?</p>
-    <p class="text-sm font-medium text-background/90">
+  <div class="flex flex-col justify-evenly items-center gap-2 h-full">
+    <Icon name="github" class="size-8 text-background" />
+    <p class="m-0 font-bold text-lg text-background">Love this project?</p>
+    <p class="m-0 text-sm font-medium text-background/90 text-center">
       Support CelestialDocs and help me keep building.
     </p>
+    <a
+      href="https://github.com/sponsors/HYP3R00T"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Button variant="secondary" size="lg">Sponsor</Button>
+    </a>
   </div>
-
-  <a
-    href="https://github.com/sponsors/HYP3R00T"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <Button variant="secondary" size="lg">Sponsor</Button>
-  </a>
 </section>
