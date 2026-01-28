@@ -3,6 +3,8 @@ import { Icon } from "astro-icon/components";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/core/ThemeToggle.astro";
 import LayoutWidthToggle from "@/components/core/LayoutWidthToggle.astro";
+import SearchTrigger from "@/components/core/SearchTrigger.astro";
+import { CommandPalette } from "@/components/core/CommandPalette";
 import { Separator } from "@/components/ui/separator";
 import { HEADER_FEATURES } from "@data/config";
 import HeaderLogo from "@/components/core/HeaderLogo.astro";
@@ -19,52 +21,49 @@ const menuPanelId = "mobile-menu";
 ---
 
 <header class="sticky top-0 z-50 w-full bg-background">
-    <div id="header-inner" class="w-full flex items-center px-4 py-3 md:py-4">
-        <div class="flex items-center gap-6">
-            <HeaderLogo />
-            <HeaderNav />
-        </div>
-
-        <div class="ml-auto flex items-center gap-2 lg:h-4">
-            {
-                HEADER_FEATURES.enableGitHubButton && (
-                    <>
-                        <HeaderGithubButton />
-                        <Separator
-                            orientation="vertical"
-                            className="hidden lg:block"
-                        />
-                    </>
-                )
-            }
-            {
-                HEADER_FEATURES.enableLayoutWidthToggle && (
-                    <>
-                        <LayoutWidthToggle />
-                        <Separator
-                            orientation="vertical"
-                            className="hidden lg:block"
-                        />
-                    </>
-                )
-            }
-            <ThemeToggle />
-
-            <Button
-                id={menuButtonId}
-                className="md:hidden"
-                variant="ghost"
-                size="icon"
-                aria-expanded={"false"}
-                aria-controls={menuPanelId}
-                aria-label="Toggle navigation menu"
-                data-state="closed"
-            >
-                <Icon data-icon="menu" name="menu" class="size-5" />
-                <Icon data-icon="close" name="close" class="size-5 hidden" />
-            </Button>
-        </div>
+  <div id="header-inner" class="w-full flex items-center px-4 py-3 md:py-4">
+    <div class="flex items-center gap-6">
+      <HeaderLogo />
+      <HeaderNav />
     </div>
+
+    <div class="ml-auto flex items-center gap-2 lg:h-4">
+      <SearchTrigger />
+      <Separator orientation="vertical" className="hidden lg:block" />
+      {
+        HEADER_FEATURES.enableGitHubButton && (
+          <>
+            <HeaderGithubButton />
+            <Separator orientation="vertical" className="hidden lg:block" />
+          </>
+        )
+      }
+      {
+        HEADER_FEATURES.enableLayoutWidthToggle && (
+          <>
+            <LayoutWidthToggle />
+            <Separator orientation="vertical" className="hidden lg:block" />
+          </>
+        )
+      }
+      <ThemeToggle />
+
+      <Button
+        id={menuButtonId}
+        className="md:hidden"
+        variant="ghost"
+        size="icon"
+        aria-expanded={"false"}
+        aria-controls={menuPanelId}
+        aria-label="Toggle navigation menu"
+        data-state="closed"
+      >
+        <Icon data-icon="menu" name="menu" class="size-5" />
+        <Icon data-icon="close" name="close" class="size-5 hidden" />
+      </Button>
+    </div>
+  </div>
 </header>
 
+<CommandPalette client:load />
 <HeaderMobileMenu />

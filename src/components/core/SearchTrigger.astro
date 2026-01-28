@@ -1,0 +1,37 @@
+---
+import { Icon } from "astro-icon/components";
+import { Button } from "@/components/ui/button";
+import { Kbd, KbdGroup } from "@/components/ui/kbd";
+---
+
+<Button
+  id="search-trigger"
+  type="button"
+  variant="ghost"
+  size="default"
+  className="gap-2 text-muted-foreground"
+  aria-label="Search documentation"
+>
+  <Icon name="search" class="size-4" />
+  <span class="hidden text-sm md:inline">Search...</span>
+  <KbdGroup className="ml-auto hidden lg:inline-flex">
+    <Kbd>⌘</Kbd>
+    <Kbd>K</Kbd>
+  </KbdGroup>
+</Button>
+
+<script>
+  // Open command palette when search trigger is clicked
+  function setupSearchTrigger() {
+    const searchTrigger = document.getElementById("search-trigger");
+    if (searchTrigger) {
+      searchTrigger.addEventListener("click", () => {
+        // Dispatch custom event to open search
+        window.dispatchEvent(new Event("open-search"));
+      });
+    }
+  }
+
+  // Setup on initial load
+  document.addEventListener("astro:page-load", setupSearchTrigger);
+</script>
