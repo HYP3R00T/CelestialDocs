@@ -142,7 +142,7 @@ export function CommandPalette() {
             {/* Filter toggles */}
             <div className="flex items-center gap-2 border-b px-3 py-2">
                 <FilterIcon className="size-4 text-muted-foreground" />
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap gap-1 items-center">
                     <Toggle
                         size="sm"
                         pressed={filterDocs}
