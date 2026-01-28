@@ -27,11 +27,11 @@
 
 - Keep components **small, reusable, and single-purpose**.
 - Organize by function:
-  - `src/components/` → shared UI elements
-  - `src/layouts/` → page-level structure
-  - `src/pages/` → route entry points
-  - `src/lib/` → helpers/utilities
-  - `content/` → content collections
+  - `src/components/` -> shared UI elements
+  - `src/layouts/` -> page-level structure
+  - `src/pages/` -> route entry points
+  - `src/lib/` -> helpers/utilities
+  - `content/` -> content collections
 
 - Prefer server-rendered Astro components. Use hydrated islands (`client:*`) only where interactivity is necessary.
 - For hydration:

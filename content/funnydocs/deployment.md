@@ -340,8 +340,8 @@ Take a drink when:
 4. Change identity
 5. Start new life
 
-**Pros:** No one can blame you
-**Cons:** Everything else
+- **Pros:** No one can blame you
+- **Cons:** Everything else
 
 ### The "Deploy and Pray"
 
@@ -353,8 +353,8 @@ Take a drink when:
 6. It worked!
 7. Never touch it again
 
-**Pros:** Sometimes works
-**Cons:** Not a sustainable strategy
+- **Pros:** Sometimes works
+- **Cons:** Not a sustainable strategy
 
 ### The "Don't Deploy"
 
@@ -362,8 +362,8 @@ Take a drink when:
 2. That's it
 3. That's the whole strategy
 
-**Pros:** Nothing breaks
-**Cons:** Nothing ships
+- **Pros:** Nothing breaks
+- **Cons:** Nothing ships
 
 ## Conclusion
 

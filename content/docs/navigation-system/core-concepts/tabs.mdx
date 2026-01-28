@@ -10,7 +10,7 @@ description: "Learn how to create top-level navigation contexts that switch the 
 A tab is a promoted group that appears at the top of the sidebar:
 
 ```
-[Learn] [Getting Started] [API Reference] [Guides]  ← Tabs
+[Learn] [Getting Started] [API Reference] [Guides]  <- Tabs
 ├── Group 1
 ├── Group 2
 └── Group 3
@@ -36,7 +36,7 @@ To make a group a tab, add `tab: true`:
     id: "api",
     label: "API Reference",
     icon: "📖",
-    tab: true,  // ← Makes this a tab
+    tab: true,  // <- Makes this a tab
     groups: [
         {
             id: "endpoints",
@@ -57,7 +57,7 @@ To make a group a tab, add `tab: true`:
 
 **Sidebar renders as:**
 ```
-[Learn] [API Reference]  ← Now it's a tab!
+[Learn] [API Reference]  <- Now it's a tab!
 
 When "API Reference" tab is active:
 ├── Endpoints
@@ -97,7 +97,7 @@ export const SIDEBAR_NAVIGATION = {
 
 **Sidebar renders as:**
 ```
-[Learn] [API Reference]  ← Two tabs
+[Learn] [API Reference]  <- Two tabs
      ↓
 When "Learn" tab is active:
 ├── Getting Started
@@ -204,7 +204,7 @@ Navigation System (Tab)
 │   ├── Entries
 │   ├── Groups
 │   ├── Nested Groups
-│   └── Tabs          ← You're reading this!
+│   └── Tabs          <- You're reading this!
 ├── Hierarchy
 
 Configuration (Tab)
