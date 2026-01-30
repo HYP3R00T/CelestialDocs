@@ -3,9 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  pull_request:
-    types: [closed]
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -16,8 +13,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Only run on merged PRs or direct pushes to main
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v6
