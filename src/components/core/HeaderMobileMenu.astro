@@ -4,32 +4,43 @@ import { Button } from "@/components/ui/button";
 import {
   HEADER_SOCIAL_LINKS,
   HEADER_NAV_ITEMS,
+  CONTENT,
   SIDEBAR_NAVIGATION,
 } from "@data/config";
-import SidebarGroup from "@/components/docs/SidebarGroup.astro";
-import SidebarEntry from "@/components/docs/SidebarEntry.astro";
-import DocIcon from "@/components/docs/DocIcon.astro";
 import DocsTabs from "@/components/docs/DocsTabs.astro";
 import DocsContent from "@/components/docs/DocsContent.astro";
 import { buildNavigation, getActiveTab } from "@/lib/navigation";
-import type { SidebarGroupItem } from "@/lib/docs/types";
 
 const activeSocials = HEADER_SOCIAL_LINKS.filter((social) => social.active);
 const menuPanelId = "mobile-menu";
 
 // Extract current slug from URL
 const pathname = Astro.url.pathname;
-const isOnDocsPage = pathname.startsWith("/docs");
-const docsMatch = pathname.match(/^\/docs\/(.+?)(\/)?$/);
-const currentSlug = docsMatch ? docsMatch[1] : null;
+const normalizePath = (path: string): string =>
+  path !== "/" && path.endsWith("/") ? path.slice(0, -1) : path;
+const normalizedPath = normalizePath(pathname);
+const matchingSystem = (CONTENT.systems ?? []).find((system) => {
+  const route = normalizePath(system.route ?? `/${system.id}`);
+  return normalizedPath === route || normalizedPath.startsWith(`${route}/`);
+});
+const collectionId = matchingSystem?.id;
+const baseRoute = matchingSystem
+  ? normalizePath(matchingSystem.route ?? `/${matchingSystem.id}`)
+  : null;
+const currentSlug = baseRoute
+  ? normalizedPath.slice(baseRoute.length).replace(/^\/+/, "") || null
+  : null;
 
-// Build navigation for docs
-const navResult = await buildNavigation(SIDEBAR_NAVIGATION);
-const activeTab = currentSlug
-  ? getActiveTab(currentSlug, navResult.tabs)
-  : navResult.tabs[0] || null;
+const navResult = collectionId
+  ? await buildNavigation(SIDEBAR_NAVIGATION, collectionId)
+  : null;
+const activeTab = navResult
+  ? currentSlug
+    ? getActiveTab(currentSlug, navResult.tabs)
+    : navResult.tabs[0] || null
+  : null;
 
-const showDocs = isOnDocsPage;
+const showDocs = Boolean(collectionId && navResult && activeTab);
 ---
 
 <div
@@ -64,14 +75,16 @@ const showDocs = isOnDocsPage;
             <div class="docs-sidenav border-t border-border/40 pt-4 px-4">
               <div class="flex flex-col gap-3">
                 <DocsTabs
-                  tabs={navResult.tabs}
-                  showTabs={navResult.showTabs}
+                  tabs={navResult?.tabs ?? []}
+                  showTabs={navResult?.showTabs ?? false}
                   activeTab={activeTab}
+                  collectionId={collectionId}
                 />
                 <div class="space-y-2">
                   <DocsContent
                     activeTab={activeTab}
                     currentSlug={currentSlug}
+                    collectionId={collectionId}
                   />
                 </div>
               </div>
