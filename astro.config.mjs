@@ -6,23 +6,20 @@ import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+    site: "https://celestialdocs.hyperoot.dev",
     prefetch: true,
 
     vite: {
         plugins: [tailwindcss()],
         server: {
             watch: {
-                ignored: [
-                    '**/.pnpm/**',
-                    '**/.pnpm-store/**',
-                    '**/node_modules/**',
-                    '**/.git/**'
-                ]
-            }
-        }
+                ignored: ["**/.pnpm/**", "**/.pnpm-store/**", "**/node_modules/**", "**/.git/**"],
+            },
+        },
     },
 
     markdown: {
@@ -30,8 +27,8 @@ export default defineConfig({
             // theme: "css-variables",
             // defaultColor: false,
             themes: {
-                light: 'one-light',
-                dark: 'one-dark-pro',
+                light: "one-light",
+                dark: "one-dark-pro",
             },
         },
     },
@@ -52,5 +49,6 @@ export default defineConfig({
             },
         }),
         react(),
+        sitemap(),
     ],
 });
