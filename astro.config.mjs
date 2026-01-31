@@ -13,7 +13,6 @@ import { SITE } from "@data/config";
 export default defineConfig({
     site: SITE.website,
     prefetch: true,
-
     vite: {
         plugins: [tailwindcss()],
         server: {
@@ -22,18 +21,14 @@ export default defineConfig({
             },
         },
     },
-
     markdown: {
         shikiConfig: {
-            // theme: "css-variables",
-            // defaultColor: false,
             themes: {
                 light: "one-light",
                 dark: "one-dark-pro",
             },
         },
     },
-
     integrations: [
         mdx(),
         icon({
