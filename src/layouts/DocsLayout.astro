@@ -5,16 +5,25 @@ import TableOfContents from "@/components/docs/TableOfContents.astro";
 import Breadcrumb from "@/components/docs/Breadcrumb.astro";
 import SourceButton from "@/components/docs/SourceButton.astro";
 import CodeCopyButton from "@/components/docs/CodeCopyButton.astro";
-import { buildNavigation, getActiveTab } from "@/lib/navigation";
+import { getActiveTab } from "@/lib/navigation";
 import { buildBreadcrumbItems } from "@/lib/docs/breadcrumb";
-import { SIDEBAR_NAVIGATION } from "@data/config";
 import type { DocsLayoutProps, Heading } from "@/lib/docs/types";
+import type { NavigationResult } from "@/lib/navigation/types";
 
-const props = Astro.props as DocsLayoutProps;
-const { headings = [], frontmatter, collection } = props;
+interface Props extends DocsLayoutProps {
+    nav?: NavigationResult;
+}
+
+const props = Astro.props as Props;
+const { headings = [], frontmatter, collection, nav } = props;
 const collectionId = collection ?? "docs";
-const navResult = await buildNavigation(SIDEBAR_NAVIGATION, collectionId);
-const activeTab = getActiveTab(frontmatter.id, navResult.tabs);
+
+// Use prebuilt nav or handle missing nav gracefully
+if (!nav) {
+    throw new Error(`Navigation data missing for collection: ${collectionId}`);
+}
+
+const activeTab = getActiveTab(frontmatter.id, nav.tabs);
 
 // Build breadcrumb items
 const breadcrumbItems = buildBreadcrumbItems(frontmatter.id, collectionId);
@@ -33,8 +42,8 @@ const tableOfContentsHeadings = headings
     <div class="flex min-h-screen">
         <!-- Sidebar with tabs inside  -->
         <Sidebar
-            tabs={navResult.tabs}
-            showTabs={navResult.showTabs}
+            tabs={nav.tabs}
+            showTabs={nav.showTabs}
             activeTab={activeTab}
             currentSlug={frontmatter.id}
             collectionId={collectionId}
