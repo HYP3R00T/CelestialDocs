@@ -17,14 +17,15 @@ CelestialDocs isn't just another documentation tool - it's a **complete foundati
 ### 🚀 Why It's A Game Changer
 
 **You Own The Source Code**
-No hidden logic. No black-box NPM packages. You clone the repo, and it's yours. Modify the build, add custom integrations, or rewrite the core logic. You aren't "using" CelestialDocs; you're building *on top of it*.
+No hidden logic. No black-box NPM packages. You clone the repo, and it's yours. Modify the build, add custom integrations, or rewrite the core logic. You aren't "using" CelestialDocs; you're building _on top of it_.
 
 **One Umbrella, Infinite Possibilities**
 Why manage separate repos for your Docs, Blog, and Portfolio? With our multi-collection architecture, you can build everything in one place.
+
 - **Docs?** `/docs`
 - **Blog?** `/blog`
 - **Product?** `/product`
-*All sharing the same high-performance foundation.*
+  _All sharing the same high-performance foundation._
 
 **Framework Agnostic Power**
 Powered by **Astro**, you're never locked in. We use React for UI, but you can drop in **Vue, Svelte, Solid, or Vanilla JS** components anywhere. Use the right tool for the job, every time.
