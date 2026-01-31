@@ -55,7 +55,8 @@ export const SIDEBAR_NAVIGATION = {
             label: "Getting Started",
             icon: "🚀",
         },
-        tabGroups: [  // <- Group tabs
+        tabGroups: [
+            // <- Group tabs
             {
                 id: "user-paths",
                 label: "User Paths",
@@ -79,10 +80,7 @@ export const SIDEBAR_NAVIGATION = {
                         id: "faq",
                         label: "FAQ",
                         icon: "❓",
-                        entries: [
-                            { slug: "faq/common-issues" },
-                            { slug: "faq/troubleshooting" },
-                        ],
+                        entries: [{ slug: "faq/common-issues" }, { slug: "faq/troubleshooting" }],
                     },
                 ],
             },
@@ -140,6 +138,7 @@ export const SIDEBAR_NAVIGATION = {
 ```
 
 **Structure:**
+
 ```
 tabGroups
 ├─ "user-paths" (group)
@@ -175,6 +174,7 @@ tabGroups
 ### Tab Navigation
 
 User on "Getting Started" tab views:
+
 ```
 Sidebar showing:
 ├─ Setup
@@ -182,6 +182,7 @@ Sidebar showing:
 ```
 
 User clicks "API" tab (different group):
+
 ```
 Sidebar switches to:
 ├─ Authentication
@@ -189,6 +190,7 @@ Sidebar switches to:
 ```
 
 User clicks "Guides" tab (same group as Getting Started):
+
 ```
 Sidebar shows:
 ├─ [Auto-discovered guide files]
@@ -412,6 +414,7 @@ Same tabs, better organized.
 ## Performance Considerations
 
 Tab grouping is purely organizational:
+
 - No performance impact
 - All tabs still lazy-load on click
 - Grouping is visual only
@@ -421,12 +424,14 @@ Whether flat or grouped, same number of tabs = same performance.
 ## When to Use Tab Grouping
 
 **Use when:**
+
 - 5+ tabs total
 - Tabs serve different purposes
 - Clear grouping emerges
 - Want to improve navigation
 
 **Skip grouping when:**
+
 - < 5 tabs
 - Tabs already clearly organized
 - All tabs serve similar purpose

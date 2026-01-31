@@ -14,6 +14,7 @@ Used by: Getting started guides, onboarding docs
 ```
 
 **Configuration:**
+
 ```typescript
 groups: [
     { id: "step1", label: "Installation", tab: true, entries: [...] },
@@ -25,6 +26,7 @@ groups: [
 ```
 
 **Use when:**
+
 - Clear sequence users follow
 - Each tab builds on previous
 - Goal is to guide, not reference
@@ -43,6 +45,7 @@ Spoke 3: [Product C] [Features] [API]
 ```
 
 **Configuration:**
+
 ```typescript
 tabGroups: [
     {
@@ -75,6 +78,7 @@ tabGroups: [
 ```
 
 **Use when:**
+
 - Multiple products/services
 - Each has own documentation
 - Central entry point matters
@@ -101,6 +105,7 @@ Group 3: Advanced
 ```
 
 **Configuration:**
+
 ```typescript
 tabGroups: [
     {
@@ -134,6 +139,7 @@ tabGroups: [
 ```
 
 **Use when:**
+
 - Documentation spans skill levels
 - Clear progression: basic -> intermediate -> advanced
 - Audience skips sections based on expertise
@@ -160,6 +166,7 @@ Group 3: DevOps
 ```
 
 **Configuration:**
+
 ```typescript
 tabGroups: [
     {
@@ -193,6 +200,7 @@ tabGroups: [
 ```
 
 **Use when:**
+
 - Different docs for different roles
 - Clear audience boundaries
 - Audiences have different needs
@@ -218,6 +226,7 @@ Experimental:
 ```
 
 **Configuration:**
+
 ```typescript
 tabGroups: [
     {
@@ -254,6 +263,7 @@ tabGroups: [
 ```
 
 **Use when:**
+
 - Supporting multiple versions
 - Need clear version organization
 - Users choose their version immediately
@@ -280,6 +290,7 @@ Resources:
 ```
 
 **Configuration:**
+
 ```typescript
 tabGroups: [
     {
@@ -313,6 +324,7 @@ tabGroups: [
 ```
 
 **Use when:**
+
 - Mixed feature documentation and support
 - Clear separation of concerns
 - Multiple resource types
@@ -338,6 +350,7 @@ Reference:
 ```
 
 **Configuration:**
+
 ```typescript
 tabGroups: [
     {
@@ -370,6 +383,7 @@ tabGroups: [
 ```
 
 **Use when:**
+
 - Global deployment
 - Region-specific differences
 - Users need to select region early
@@ -403,6 +417,7 @@ Tools:
 ```
 
 **Configuration:**
+
 ```typescript
 tabGroups: [
     {
@@ -447,6 +462,7 @@ tabGroups: [
 ```
 
 **Use when:**
+
 - API documentation
 - Multiple SDKs/languages
 - Multiple versions
@@ -455,32 +471,35 @@ tabGroups: [
 ## Choosing Your Pattern
 
 **Ask yourself:**
+
 1. What are the main sections?
 2. Do they need grouping?
 3. How do users navigate?
 4. What's the natural flow?
 
-| Pattern | Use Case | Complexity | Tabs |
-|---------|----------|-----------|------|
-| Linear | Onboarding | Simple | 4-7 |
-| Hub & Spoke | Multi-product | Medium | 6-12 |
-| Layered | Technical docs | Medium | 9-15 |
-| Audience | Multi-role | Medium | 9-15 |
-| Versioned | Libraries | Medium | 5-10 |
-| Feature + Support | SaaS | Complex | 9-15 |
-| Geographic | Global | Complex | 6-10 |
-| API | APIs | Complex | 15+ |
+| Pattern           | Use Case       | Complexity | Tabs |
+| ----------------- | -------------- | ---------- | ---- |
+| Linear            | Onboarding     | Simple     | 4-7  |
+| Hub & Spoke       | Multi-product  | Medium     | 6-12 |
+| Layered           | Technical docs | Medium     | 9-15 |
+| Audience          | Multi-role     | Medium     | 9-15 |
+| Versioned         | Libraries      | Medium     | 5-10 |
+| Feature + Support | SaaS           | Complex    | 9-15 |
+| Geographic        | Global         | Complex    | 6-10 |
+| API               | APIs           | Complex    | 15+  |
 
 ## Responsive Tab Organization
 
 Patterns should work on mobile:
 
 **Desktop (7 tabs):**
+
 ```
 [Getting Started] [API] [CLI] [Config] [Examples] [Support] [Blog]
 ```
 
 **Mobile (same tabs, responsive):**
+
 ```
 Getting Started ▼
 (dropdown shows all tabs)

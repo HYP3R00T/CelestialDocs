@@ -8,15 +8,19 @@ CelestialDocs' three-tier hierarchy (Entries -> Groups -> Tabs) is specifically 
 ## The Hierarchy Advantage
 
 ### Tier 1: Entries (Pages)
+
 Individual files, clickable links
 
 ### Tier 2: Groups (Collections)
+
 Organize related entries into sidebar sections
 
 ### Tier 3: Tabs (Contexts)
+
 Switch between major documentation sections
 
 **Why three tiers?**
+
 - One tier (flat): Okay for 10 pages, chaos for 100
 - Two tiers: Good for 50-200 pages, gets convoluted
 - Three tiers: Perfect for 100-10,000 pages
@@ -25,6 +29,7 @@ Switch between major documentation sections
 ## Real-World Scaling
 
 ### Small Project (10-50 pages)
+
 ```
 [Learn]
 ├── Getting Started
@@ -38,6 +43,7 @@ Configuration: 3-4 groups, auto-generated
 Complexity: Trivial
 
 ### Medium Project (50-200 pages)
+
 ```
 [Learn] [API] [Patterns]
 ├── Getting Started
@@ -53,6 +59,7 @@ Configuration: Multiple groups, some nesting
 Complexity: Moderate
 
 ### Large Project (200-1000 pages)
+
 ```
 [Getting Started] [User Docs] [API Reference] [Patterns]
 ├── Learn
@@ -70,6 +77,7 @@ Configuration: Deep nesting, multiple tabs
 Complexity: Managed
 
 ### Enterprise (1000+ pages)
+
 ```
 [Docs] [API v1] [API v2] [API v3] [SDKs] [Community] [Help]
 ├── User Guide
@@ -91,23 +99,29 @@ Complexity: High but manageable
 ## Why This Scales
 
 ### 1. Logical Organization
+
 Content organized by meaning, not arbitrary depth
 
 ### 2. Flexible Nesting
+
 Can nest 2-3 levels for organization without UI clutter
 
 ### 3. Tab Separation
+
 Tabs act as "reset buttons" - switch contexts completely
 
 ### 4. Auto-Generation at Any Level
+
 Auto-discovery works at every nesting level
 
 ### 5. Type Safety
+
 All configuration is TypeScript - errors caught early
 
 ## Comparison: Other Systems
 
 ### MkDocs (File-based)
+
 ```
 docs/
 ├── index.md
@@ -124,19 +138,21 @@ docs/
 **Solution:** Manual YAML config that duplicates structure
 
 ### Docusaurus (Sidebar file)
+
 ```yaml
 sidebar:
-  - label: 'Getting Started'
-    items:
-      - id: 'getting-started/index'
-      - label: 'Installation'
-        id: 'getting-started/installation'
+    - label: "Getting Started"
+      items:
+          - id: "getting-started/index"
+          - label: "Installation"
+            id: "getting-started/installation"
 ```
 
 **Problem:** Manual config grows unwieldy (1000+ lines)
 **Solution:** None - config scales with documentation
 
 ### CelestialDocs (Smart hierarchy)
+
 ```typescript
 {
     id: "getting-started",
@@ -153,6 +169,7 @@ sidebar:
 ### For Documentation Maintainers
 
 ✅ **Clarity**
+
 ```
 Clear structure: Docs -> Guides -> Advanced Topics -> Troubleshooting
 vs.
@@ -160,12 +177,14 @@ vs.
 ```
 
 ✅ **Maintainability**
+
 ```
 One group grows? Fine, it auto-discovers
 New tab needed? Add one tab, not restructure everything
 ```
 
 ✅ **Flexibility**
+
 ```
 Can promote subgroup to tab without refactoring
 Can nest groups for organization without clutter
@@ -174,6 +193,7 @@ Can nest groups for organization without clutter
 ### For Documentation Readers
 
 ✅ **Intuitive Navigation**
+
 ```
 Users understand the structure at a glance
 Tabs separate concerns (guides vs. API)
@@ -181,12 +201,14 @@ Groups organize related content
 ```
 
 ✅ **Never Lost**
+
 ```
 Breadcrumbs show: Home > Guides > Advanced > Performance
 Users always know where they are
 ```
 
 ✅ **Discoverable**
+
 ```
 All content findable through navigation
 No "hidden" corners of documentation
@@ -195,6 +217,7 @@ No "hidden" corners of documentation
 ### For Teams
 
 ✅ **Grow Without Refactoring**
+
 ```
 Month 1: 5 groups
 Month 6: 5 groups (more entries in each)
@@ -202,12 +225,14 @@ Month 12: Add 2 tabs, still same structure
 ```
 
 ✅ **Coordinate Easier**
+
 ```
 Teams work on different tabs independently
 No merge conflicts from reordering
 ```
 
 ✅ **Onboard Faster**
+
 ```
 New team member: "Just add markdown files"
 No need to understand complex hierarchy
@@ -228,6 +253,7 @@ This site demonstrates the power:
 ```
 
 **Structure:**
+
 - 7 top-level tabs
 - Some with nested groups
 - Some auto-generated sections
@@ -257,5 +283,6 @@ This site demonstrates the power:
 ---
 
 **Next:** Learn other selling points:
+
 - [Hybrid Flexibility](/docs/advanced-topics/selling-points/hybrid-flexibility)
 - [Type Safety](/docs/advanced-topics/selling-points/type-safety)

@@ -24,6 +24,7 @@ api collection (/api)
 ```
 
 **Benefits:**
+
 - Product team owns `/docs`, updates when features ship
 - API team owns `/api`, maintains versions independently
 - Different navigation structures match different mental models
@@ -42,6 +43,7 @@ api collection (/api)
 ```
 
 Each product team:
+
 - Controls their own navigation
 - Updates their own documentation
 - Uses their own structure
@@ -71,6 +73,7 @@ Each product team:
 ```
 
 **Benefits:**
+
 - Each collection tailored to its audience
 - Beginners don't see advanced topics
 - API users find endpoints immediately
@@ -91,6 +94,7 @@ Each product team:
 ```
 
 Each collection:
+
 - Uses language-appropriate navigation
 - Can have culture-specific groupings
 - Updates independently
@@ -111,6 +115,7 @@ Each collection:
 ```
 
 **Benefits:**
+
 - Centralized hosting
 - Decentralized ownership
 - Each team controls their structure
@@ -131,6 +136,7 @@ Each collection:
 ```
 
 Each collection maintains independently:
+
 - Users access correct version
 - Old versions stay as-is
 - New features in experimental
@@ -154,6 +160,7 @@ Each collection maintains independently:
 ```
 
 **Benefits:**
+
 - Each package owns its docs
 - Different structures match different paradigms
 - Teams update their own package docs
@@ -187,6 +194,7 @@ Each serves different purposes, different audiences, maintained by different tea
 For any use case, the pattern is similar:
 
 ### Step 1: Define Collections
+
 ```typescript
 // data/config.ts
 export const CONTENT = {
@@ -199,15 +207,23 @@ export const CONTENT = {
 ```
 
 ### Step 2: Configure Each Navigation
+
 ```typescript
 export const SIDEBAR_NAVIGATION = {
-    docs: { /* docs-specific navigation */ },
-    api: { /* api-specific navigation */ },
-    guides: { /* guides-specific navigation */ },
+    docs: {
+        /* docs-specific navigation */
+    },
+    api: {
+        /* api-specific navigation */
+    },
+    guides: {
+        /* guides-specific navigation */
+    },
 };
 ```
 
 ### Step 3: Create Content Folders
+
 ```bash
 mkdir -p content/docs
 mkdir -p content/api
@@ -215,17 +231,20 @@ mkdir -p content/guides
 ```
 
 ### Step 4: Add Content Files
+
 Each collection has its own folder, files, structure.
 
 ## When NOT to Use Multiple Collections
 
 **Stick with one collection if:**
+
 - All documentation serves the same audience
 - Navigation structure is consistent
 - Content isn't maintained by separate teams
 - You're just starting out
 
 **Multiple collections shine when:**
+
 - Audiences are fundamentally different
 - Teams are independent
 - Update cycles are separate

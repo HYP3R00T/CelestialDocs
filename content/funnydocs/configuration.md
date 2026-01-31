@@ -21,7 +21,7 @@ Located at `data/config.ts`, this file controls:
 
 ## The Semicolon Saga
 
-TypeScript is very particular about semicolons. Like, *very* particular.
+TypeScript is very particular about semicolons. Like, _very_ particular.
 
 ```typescript
 // ❌ TypeScript has left the chat
@@ -46,14 +46,14 @@ const config = {
 ```typescript
 // ❌ Can you spot the typo?
 export const SITE = {
-  titel: "My Documentation",  // 😈
-  description: "Why isn't my title showing?",
+    titel: "My Documentation", // 😈
+    description: "Why isn't my title showing?",
 };
 
 // ✅ Fixed (after 2 hours of debugging)
 export const SITE = {
-  title: "My Documentation",
-  description: "Oh. Right.",
+    title: "My Documentation",
+    description: "Oh. Right.",
 };
 ```
 
@@ -61,13 +61,13 @@ export const SITE = {
 
 ```typescript
 // These are all different to the computer:
-title: "Hello"
-Title: "Hello"
-TITLE: "Hello"
-TiTlE: "Hello"  // Stop it
+title: "Hello";
+Title: "Hello";
+TITLE: "Hello";
+TiTlE: "Hello"; // Stop it
 
 // Only this one works:
-title: "Hello"
+title: "Hello";
 ```
 
 ### The Comma Catastrophe
@@ -75,9 +75,9 @@ title: "Hello"
 ```typescript
 // ❌ The trailing comma of doom
 export const HEADER_NAV_ITEMS = [
-  { label: "Docs", href: "/docs" },
-  { label: "API", href: "/api" },
-  ,  // <- This little guy will ruin your day
+    { label: "Docs", href: "/docs" },
+    { label: "API", href: "/api" }, // <- This little guy will ruin your day
+    ,
 ];
 ```
 
@@ -87,24 +87,24 @@ Configuring navigation is like playing 4D chess while blindfolded:
 
 ```typescript
 export const SIDEBAR_NAVIGATION = {
-  docs: {
-    defaultTab: {
-      label: "Documentation",
-      icon: "document",  // SVG reference
-    },
-    groups: [
-      {
-        id: "getting-started",  // Must match folder name
-        label: "Getting Started",  // Can be anything
-        icon: "🚀",  // Emoji works too
-        entries: [
-          { slug: "getting-started/intro" },  // No leading slash!
-          { slug: "/getting-started/intro" },  // ❌ This breaks
-          { slug: "getting-started/intro.md" },  // ❌ No extension!
+    docs: {
+        defaultTab: {
+            label: "Documentation",
+            icon: "document", // SVG reference
+        },
+        groups: [
+            {
+                id: "getting-started", // Must match folder name
+                label: "Getting Started", // Can be anything
+                icon: "🚀", // Emoji works too
+                entries: [
+                    { slug: "getting-started/intro" }, // No leading slash!
+                    { slug: "/getting-started/intro" }, // ❌ This breaks
+                    { slug: "getting-started/intro.md" }, // ❌ No extension!
+                ],
+            },
         ],
-      },
-    ],
-  },
+    },
 };
 ```
 
@@ -120,19 +120,19 @@ export const SIDEBAR_NAVIGATION = {
 
 ```typescript
 // ✅ Emoji icon
-icon: "🚀"
+icon: "🚀";
 
 // ✅ SVG icon (references src/assets/icons/document.svg)
-icon: "document"
+icon: "document";
 
 // ❌ This doesn't work
-icon: "🚀.svg"
+icon: "🚀.svg";
 
 // ❌ Neither does this
-icon: "document.emoji"
+icon: "document.emoji";
 
 // ❌ And definitely not this
-icon: "yes"
+icon: "yes";
 ```
 
 ## Auto-Generated vs Manual: The Eternal Struggle
@@ -222,7 +222,7 @@ const apiKey = process.env.API_KEY;
 const apiKey = import.meta.env.PUBLIC_API_KEY;
 
 // ❌ But this definitely won't
-const apiKey = import.meta.env.SECRET_API_KEY;  // Not public!
+const apiKey = import.meta.env.SECRET_API_KEY; // Not public!
 
 // The rules:
 // 1. Prefix with PUBLIC_ for client-side access
@@ -236,9 +236,9 @@ const apiKey = import.meta.env.SECRET_API_KEY;  // Not public!
 ```typescript
 // Works in dev:
 const config = {
-  title: "My Site",
-  // Oops, forgot the comma
-  description: "Description"
+    title: "My Site",
+    // Oops, forgot the comma
+    description: "Description",
 };
 
 // Breaks in production:
@@ -284,8 +284,8 @@ npm run dev
 
 ```typescript
 const config = {
-  title: config.description,  // ❌ Nope
-  description: config.title,   // ❌ Still nope
+    title: config.description, // ❌ Nope
+    description: config.title, // ❌ Still nope
 };
 ```
 
@@ -293,9 +293,9 @@ const config = {
 
 ```typescript
 function getConfig() {
-  return {
-    ...getConfig(),  // ❌ Stack overflow speedrun
-  };
+    return {
+        ...getConfig(), // ❌ Stack overflow speedrun
+    };
 }
 ```
 

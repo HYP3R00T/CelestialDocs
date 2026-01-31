@@ -11,12 +11,14 @@ Markdown is human-readable text with minimal formatting syntax:
 
 ```markdown
 # This is a heading
+
 This is regular text.
 
-**This is bold** and *this is italic*.
+**This is bold** and _this is italic_.
 ```
 
 Renders as:
+
 - Heading 1
 - Regular paragraph
 - Bold and italic text
@@ -27,10 +29,15 @@ Renders as:
 
 ```markdown
 # Heading 1 (h1)
+
 ## Heading 2 (h2)
+
 ### Heading 3 (h3)
+
 #### Heading 4 (h4)
+
 ##### Heading 5 (h5)
+
 ###### Heading 6 (h6)
 ```
 
@@ -39,9 +46,9 @@ Renders as:
 ### Text Formatting
 
 ```markdown
-**Bold text** or __bold__
-*Italic text* or _italic_
-***Bold and italic***
+**Bold text** or **bold**
+_Italic text_ or _italic_
+**_Bold and italic_**
 ~~Strikethrough~~
 `Inline code`
 ```
@@ -49,15 +56,17 @@ Renders as:
 ### Lists
 
 Unordered:
+
 ```markdown
 - Item 1
 - Item 2
-  - Nested item
-  - Another nested
+    - Nested item
+    - Another nested
 - Item 3
 ```
 
 Ordered:
+
 ```markdown
 1. First
 2. Second
@@ -91,6 +100,7 @@ Example using an image from content/docs/assets:
 ```
 
 **Best practices:**
+
 - **Store images alongside content** in `content/docs/assets/` for better organization
 - Always include descriptive alt text for accessibility
 - Use relative paths (`../assets/`) for collection-specific images
@@ -99,6 +109,7 @@ Example using an image from content/docs/assets:
 - Typical dimensions: 1200x630 for hero images, 800x400 for content images
 
 **Why use content collection assets?**
+
 - Images live with your documentation content
 - Easier to manage and version control
 - Better organization for multi-collection sites
@@ -107,15 +118,17 @@ Example using an image from content/docs/assets:
 ### Code Blocks
 
 Inline:
+
 ```markdown
 Use `npm install` to install packages
 ```
 
 Block:
+
 ````markdown
 ```javascript
 function hello() {
-  console.log("Hello world");
+    console.log("Hello world");
 }
 ```
 ````
@@ -132,7 +145,7 @@ function hello() {
 
 ```markdown
 | Column 1 | Column 2 |
-|----------|----------|
+| -------- | -------- |
 | Cell 1   | Cell 2   |
 | Cell 3   | Cell 4   |
 ```
@@ -154,19 +167,18 @@ This comes before any content.
 
 ```markdown
 ---
+or
+---
 
 or
 
-***
-
-or
-
-___
+---
 ```
 
 ## Next Steps
 
 Learn advanced features:
+
 - [Working with Images](/docs/content/markdown/working-with-images)
 - [MDX Introduction](/docs/content/markdown/mdx-introduction)
 - [Frontmatter Reference](/docs/content/frontmatter/overview)

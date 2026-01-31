@@ -6,6 +6,7 @@ description: "Scenarios where explicit navigation beats auto-generation"
 Manual configuration shines when order, wording, or visibility need deliberate control.
 
 ## Common Scenarios
+
 - **Narrative guides:** Tutorials, onboarding, and curricula that must be read in sequence.
 - **Compliance flows:** Policies, legal terms, and security checklists that should precede how-to guides.
 - **Launch playbooks:** Release plans or migration guides where steps must be executed in order.
@@ -13,12 +14,14 @@ Manual configuration shines when order, wording, or visibility need deliberate c
 - **Controlled experiments:** Temporarily feature A/B content without renaming files.
 
 ## What Manual Control Gives You
+
 - Precise ordering via the `entries` array
 - Custom labels/icons through frontmatter (`navLabel`, `navIcon`)
 - The ability to hide drafts with `navHidden: true`
 - Stable URLs even if display order changes
 
 ## Example Structure
+
 ```typescript
 {
     id: "rollout-guide",
@@ -33,10 +36,12 @@ Manual configuration shines when order, wording, or visibility need deliberate c
 ```
 
 ## Anti-Patterns
+
 - Using manual ordering for very large sections (hundreds of pages)
 - Duplicating the same slug in multiple groups
 - Relying on file name prefixes when the config already defines order
 
 ## Next Steps
+
 - Control ordering details in [Ordering Content Manually](/docs/generation-strategies/manual-creation/ordering-content)
 - Mix manual pins with discovery in [Hybrid: Pin and Expand](/docs/generation-strategies/hybrid-approach/pin-and-expand)

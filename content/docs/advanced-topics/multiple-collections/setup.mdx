@@ -8,6 +8,7 @@ Multiple collections allow you to run different documentation systems from one c
 ## Why Multiple Collections?
 
 You might need multiple collections for:
+
 - User documentation + API reference
 - Documentation for different products
 - Different versions of documentation
@@ -61,15 +62,21 @@ Each collection needs its own navigation in `SIDEBAR_NAVIGATION`:
 export const SIDEBAR_NAVIGATION = {
     docs: {
         defaultTab: { label: "Docs", icon: "📖" },
-        groups: [ /* docs navigation */ ],
+        groups: [
+            /* docs navigation */
+        ],
     },
     api: {
         defaultTab: { label: "API", icon: "📡" },
-        groups: [ /* api navigation */ ],
+        groups: [
+            /* api navigation */
+        ],
     },
     guides: {
         defaultTab: { label: "Guides", icon: "🎓" },
-        groups: [ /* guides navigation */ ],
+        groups: [
+            /* guides navigation */
+        ],
     },
 };
 ```
@@ -106,6 +113,7 @@ Each collection appears at its own route and has independent navigation.
 Each collection can have completely different structures:
 
 **Collection 1 (docs):** Simple auto-generated structure
+
 ```typescript
 docs: {
     defaultTab: { label: "Learn" },
@@ -116,6 +124,7 @@ docs: {
 ```
 
 **Collection 2 (api):** Complex with tabs and nesting
+
 ```typescript
 api: {
     defaultTab: { label: "v2" },
@@ -151,5 +160,6 @@ URL: /guides/tutorials/first-app
 ## Next Steps
 
 Learn about:
+
 - [Independent Navigation](/docs/advanced-topics/multiple-collections/independent-navigation)
 - [Multi-Collection Use Cases](/docs/advanced-topics/multiple-collections/use-cases)
