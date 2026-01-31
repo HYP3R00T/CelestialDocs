@@ -1,6 +1,7 @@
 import type { Entry, Group, GroupOrEntry } from "../docs/types";
-import { processGroup } from "./process";
+
 import { deriveLabel } from "./label.ts";
+import { processGroup } from "./process";
 import type { DocEntry, NavigationItem } from "./types";
 
 export function buildNavigationItems(

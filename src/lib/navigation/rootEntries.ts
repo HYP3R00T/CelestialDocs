@@ -1,5 +1,5 @@
-import type { DocEntry, ProcessedEntry } from "./types";
 import { deriveLabel } from "./label.ts";
+import type { DocEntry, ProcessedEntry } from "./types";
 
 export function buildRootEntries(
     filesystemStructure: Map<string, DocEntry[]>,

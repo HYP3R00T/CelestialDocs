@@ -1,9 +1,10 @@
 import type { Sidebar } from "../docs/types";
-import { getDocsFromFilesystem, getCollectionFromFilesystem } from "./loader";
+
 import { buildFilesystemStructure } from "./buildFilesystemStructure";
 import { buildNavigationItems } from "./buildNavigationItems";
 import { buildTabs } from "./buildTabs";
 import { buildDefaultChildren, createDefaultTab } from "./defaultChildren";
+import { getDocsFromFilesystem, getCollectionFromFilesystem } from "./loader";
 import { buildRootEntries } from "./rootEntries";
 import type { NavigationResult, NavigationItem, ProcessedGroup } from "./types";
 

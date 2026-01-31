@@ -1,9 +1,10 @@
 ---
-import { Icon } from "astro-icon/components";
-import { Button } from "@/components/ui/button";
 import { HEADER_SOCIAL_LINKS, HEADER_NAV_ITEMS, CONTENT, SIDEBAR_NAVIGATION } from "@data/config";
-import DocsTabs from "@/components/docs/DocsTabs.astro";
+import { Icon } from "astro-icon/components";
+
 import DocsContent from "@/components/docs/DocsContent.astro";
+import DocsTabs from "@/components/docs/DocsTabs.astro";
+import { Button } from "@/components/ui/button";
 import { getActiveTab, buildNavigation } from "@/lib/navigation";
 
 const activeSocials = HEADER_SOCIAL_LINKS.filter((social) => social.active);

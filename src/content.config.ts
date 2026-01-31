@@ -1,6 +1,6 @@
-import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
 import { CONTENT } from "@data/config";
+import { glob } from "astro/loaders";
+import { defineCollection, z } from "astro:content";
 
 // Reusable schema for all content systems
 const createSchema = () =>

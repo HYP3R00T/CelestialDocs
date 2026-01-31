@@ -2,6 +2,9 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
+/* eslint-disable no-undef */
+// console is available in Node.js environment
+
 /**
  * Astro integration that prebuilds navigation for all collections at build time.
  * Note: The actual prebuild happens in getStaticPaths() for each page.
@@ -32,7 +35,7 @@ export function prebuildNavigationIntegration() {
                             console.log(
                                 `[prebuild-navigation] ✓ Generated ${jsonFiles.length} navigation file(s): ${jsonFiles.join(", ")}`,
                             );
-                        } catch (readErr) {
+                        } catch {
                             console.warn(
                                 "[prebuild-navigation] Note: Nav directory not created (may be normal for dev builds)",
                             );

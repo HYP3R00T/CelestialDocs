@@ -40,7 +40,8 @@ export const SITE: SiteConfig = {
     authorUrl: "https://rajeshdas.dev",
     repo: "https://github.com/HYP3R00T/CelestialDocs",
     title: "CelestialDocs",
-    description: "A modern, flexible documentation system built with Astro featuring hierarchical navigation, hybrid content generation, and multi-collection support",
+    description:
+        "A modern, flexible documentation system built with Astro featuring hierarchical navigation, hybrid content generation, and multi-collection support",
     image: setupImage,
     imageAlt: "CelestialDocs - Modern documentation system with Astro",
     twitterHandle: "@HYP3R00T",
@@ -183,7 +184,9 @@ export const SIDEBAR_NAVIGATION: SidebarNavigation = {
                                 entries: [
                                     { slug: "configuration/advanced/tab-management/creating-tabs" },
                                     { slug: "configuration/advanced/tab-management/grouping-tabs" },
-                                    { slug: "configuration/advanced/tab-management/organization-patterns" },
+                                    {
+                                        slug: "configuration/advanced/tab-management/organization-patterns",
+                                    },
                                 ],
                             },
                         ],

@@ -55,6 +55,20 @@ Visit `http://localhost:4321` to see your new platform.
 
 We believe in open source. Fork the repo, make it better, and own your improvements.
 
+**Before submitting a PR**, please ensure code quality:
+
+```bash
+pnpm validate  # Runs lint, format check, and typecheck
+```
+
+Or run checks individually:
+
+```bash
+pnpm lint        # Check for ESLint errors
+pnpm format      # Auto-format with Prettier
+pnpm typecheck   # Validate TypeScript types
+```
+
 ## ❤️ Support
 
 If this project saves you time or helps you build something amazing, please consider supporting the work:

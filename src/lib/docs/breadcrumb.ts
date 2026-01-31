@@ -1,6 +1,8 @@
 import { SIDEBAR_NAVIGATION } from "@data/config";
-import type { Entry, Group, GroupOrEntry } from "./types";
+
 import { resolveSystem } from "../resolveSystem";
+
+import type { Entry, Group, GroupOrEntry } from "./types";
 
 /**
  * Find a group in the navigation tree by its path

@@ -1,5 +1,6 @@
-import type { HeadSEOProps } from "@/lib/types";
 import type { MarkdownHeading } from "astro";
+
+import type { HeadSEOProps } from "@/lib/types";
 
 // ============================================================================
 // FRONTMATTER TYPES

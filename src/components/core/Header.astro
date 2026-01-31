@@ -1,16 +1,17 @@
 ---
+import { HEADER_FEATURES } from "@data/config";
 import { Icon } from "astro-icon/components";
-import { Button } from "@/components/ui/button";
-import ThemeToggle from "@/components/core/ThemeToggle.astro";
+
+import { CommandPalette } from "@/components/core/CommandPalette";
+import HeaderGithubButton from "@/components/core/HeaderGithubButton.astro";
+import HeaderLogo from "@/components/core/HeaderLogo.astro";
+import HeaderMobileMenu from "@/components/core/HeaderMobileMenu.astro";
+import HeaderNav from "@/components/core/HeaderNav.astro";
 import LayoutWidthToggle from "@/components/core/LayoutWidthToggle.astro";
 import SearchTrigger from "@/components/core/SearchTrigger.astro";
-import { CommandPalette } from "@/components/core/CommandPalette";
+import ThemeToggle from "@/components/core/ThemeToggle.astro";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { HEADER_FEATURES } from "@data/config";
-import HeaderLogo from "@/components/core/HeaderLogo.astro";
-import HeaderNav from "@/components/core/HeaderNav.astro";
-import HeaderGithubButton from "@/components/core/HeaderGithubButton.astro";
-import HeaderMobileMenu from "@/components/core/HeaderMobileMenu.astro";
 import type { HeaderProps } from "@/lib/types";
 
 // Component accepts no props

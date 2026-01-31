@@ -12,7 +12,8 @@
         "lint:fix": "eslint . --fix",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "typecheck": "astro check"
+        "typecheck": "astro check",
+        "validate": "pnpm lint && pnpm format:check && pnpm typecheck"
     },
     "dependencies": {
         "@astrojs/check": "^0.9.6",
