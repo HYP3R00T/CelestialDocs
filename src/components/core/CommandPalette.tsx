@@ -1,8 +1,9 @@
 "use client";
 
-import * as React from "react";
 import Fuse from "fuse.js";
 import { FileTextIcon, HashIcon, FilterIcon } from "lucide-react";
+import * as React from "react";
+
 import {
     CommandDialog,
     CommandEmpty,
@@ -89,14 +90,14 @@ export function CommandPalette() {
             const hasCollectionFilter = filterDocs || filterFunnydocs;
             const collectionMatch = hasCollectionFilter
                 ? (filterDocs && item.collection === "docs") ||
-                (filterFunnydocs && item.collection === "funnydocs")
+                  (filterFunnydocs && item.collection === "funnydocs")
                 : true;
 
             // If no type filters are active, show all types
             const hasTypeFilter = filterPages || filterHeadings;
             const typeMatch = hasTypeFilter
                 ? (filterPages && item.type === "page") ||
-                (filterHeadings && item.type === "heading")
+                  (filterHeadings && item.type === "heading")
                 : true;
 
             return collectionMatch && typeMatch;

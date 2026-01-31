@@ -1,6 +1,7 @@
 ---
-import DocsTabs from "./DocsTabs.astro";
 import DocsContent from "./DocsContent.astro";
+import DocsTabs from "./DocsTabs.astro";
+
 import type { SidebarProps } from "@/lib/docs/types";
 
 const { tabs, showTabs, activeTab, currentSlug, collectionId } = Astro.props as SidebarProps & {

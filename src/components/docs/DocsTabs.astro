@@ -1,8 +1,9 @@
 ---
 import DocIcon from "./DocIcon.astro";
+
+import type { Tab } from "@/lib/docs/types";
 import { findFirstEntry } from "@/lib/docs/utils";
 import { getSystemRoute } from "@/lib/resolveSystem";
-import type { Tab } from "@/lib/docs/types";
 
 const { tabs, showTabs, activeTab, collectionId } = Astro.props as {
     tabs: Tab[];

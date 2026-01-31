@@ -1,6 +1,7 @@
-import type { APIRoute } from "astro";
-import { buildNavigation } from "@/lib/navigation";
 import { SIDEBAR_NAVIGATION, CONTENT } from "@data/config";
+import type { APIRoute } from "astro";
+
+import { buildNavigation } from "@/lib/navigation";
 
 export const GET: APIRoute = async () => {
     try {

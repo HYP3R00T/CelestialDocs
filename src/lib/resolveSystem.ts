@@ -1,5 +1,6 @@
-import type { ContentSystem } from "./types";
 import { CONTENT } from "@data/config";
+
+import type { ContentSystem } from "./types";
 
 /**
  * Resolve a content system by ID, with proper error handling.

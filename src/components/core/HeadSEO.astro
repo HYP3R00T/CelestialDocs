@@ -1,6 +1,7 @@
 ---
-import { ClientRouter } from "astro:transitions";
+import { SITE } from "@data/config";
 import { getImage } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
 
 import "@/styles/global.css";
 
@@ -8,7 +9,6 @@ import "@/styles/global.css";
 import "@fontsource-variable/fira-code";
 
 import type { HeadSEOProps } from "@/lib/types";
-import { SITE } from "@data/config";
 
 // Props with fallbacks from SITE config
 const {

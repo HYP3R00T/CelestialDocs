@@ -1,5 +1,6 @@
 import { getCollection } from "astro:content";
 import type { CollectionKey } from "astro:content";
+
 import type { DocEntry } from "./types";
 
 /**

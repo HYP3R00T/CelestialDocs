@@ -1,7 +1,7 @@
 ---
 import DocIcon from "./DocIcon.astro";
-import type { SidebarEntryProps } from "@/lib/docs/types";
 
+import type { SidebarEntryProps } from "@/lib/docs/types";
 import { getSystemRoute } from "@/lib/resolveSystem";
 const { entry, currentSlug, collectionId } = Astro.props as SidebarEntryProps & {
     collectionId?: string;

@@ -1,13 +1,14 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import Sidebar from "@/components/docs/Sidebar.astro";
-import TableOfContents from "@/components/docs/TableOfContents.astro";
+
 import Breadcrumb from "@/components/docs/Breadcrumb.astro";
-import SourceButton from "@/components/docs/SourceButton.astro";
 import CodeCopyButton from "@/components/docs/CodeCopyButton.astro";
-import { getActiveTab } from "@/lib/navigation";
+import Sidebar from "@/components/docs/Sidebar.astro";
+import SourceButton from "@/components/docs/SourceButton.astro";
+import TableOfContents from "@/components/docs/TableOfContents.astro";
 import { buildBreadcrumbItems } from "@/lib/docs/breadcrumb";
 import type { DocsLayoutProps, Heading } from "@/lib/docs/types";
+import { getActiveTab } from "@/lib/navigation";
 import type { NavigationResult } from "@/lib/navigation/types";
 
 interface Props extends DocsLayoutProps {

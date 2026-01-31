@@ -1,9 +1,11 @@
-import type { APIRoute } from "astro";
 import { readFile } from "fs/promises";
 import { join } from "path";
+
 import { CONTENT } from "@data/config";
-import type { ContentSystem } from "@/lib/types";
+import type { APIRoute } from "astro";
 import type { CollectionKey } from "astro:content";
+
+import type { ContentSystem } from "@/lib/types";
 
 export const getStaticPaths = async () => {
     const { getCollection } = await import("astro:content");

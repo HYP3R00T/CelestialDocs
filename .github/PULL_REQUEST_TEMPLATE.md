@@ -26,6 +26,15 @@ Describe how the changes were tested:
 
 ## Checklist
 
+### Code Quality
+
+- [ ] Ran `pnpm lint` and fixed all ESLint errors/warnings
+- [ ] Ran `pnpm format` to format code with Prettier
+- [ ] Ran `pnpm typecheck` and resolved all TypeScript errors
+- [ ] All CI checks pass (or `pnpm validate` runs successfully)
+
+### Standards & Testing
+
 - [ ] Followed project coding standards (Astro + Tailwind guidelines)
 - [ ] Added/updated component or API documentation if needed
 - [ ] Verified UI renders correctly across major browsers/devices

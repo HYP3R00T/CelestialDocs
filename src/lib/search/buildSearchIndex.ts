@@ -1,7 +1,8 @@
-import { getCollection } from "astro:content";
-import type { CollectionEntry, CollectionKey } from "astro:content";
-import { render } from "astro:content";
 import { CONTENT } from "@data/config";
+import type { CollectionEntry, CollectionKey } from "astro:content";
+import { getCollection } from "astro:content";
+import { render } from "astro:content";
+
 import type { SearchIndex, SearchItem } from "./types";
 
 /**

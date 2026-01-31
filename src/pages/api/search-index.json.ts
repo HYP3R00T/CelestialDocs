@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+
 import { buildSearchIndex } from "@/lib/search/buildSearchIndex";
 import type { SearchIndex } from "@/lib/search/types";
 
