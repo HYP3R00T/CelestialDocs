@@ -1,0 +1,67 @@
+name: PR Quality Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  quality:
+    name: Lint, Format & Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v6.0.2
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint with ESLint
+        run: pnpm lint
+        continue-on-error: false
+
+      - name: Check formatting with Prettier
+        run: pnpm format:check
+        continue-on-error: false
+
+      - name: Type check with Astro
+        run: pnpm typecheck
+        continue-on-error: false
+
+      - name: Comment on PR if successful
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ Quality checks passed! All code is properly linted, formatted, and type-checked.'
+            })
+
+      - name: Comment on PR if failed
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ Quality checks failed. Please run `pnpm validate` locally to fix issues:\n\n```bash\npnpm validate\n```\n\nOr fix individual issues:\n- `pnpm lint:fix` - Fix ESLint errors\n- `pnpm format` - Format with Prettier\n- `pnpm typecheck` - Check types'
+            })
