@@ -38,7 +38,11 @@ const CTA_SECONDARY = {
                     <a href={CTA_PRIMARY.href}>Get Started</a>
                 </Button>
                 <Button size="lg" variant="secondary">
-                    <a href={CTA_SECONDARY.href} class="flex flex-row items-center gap-3">
+                    <a
+                        href={CTA_SECONDARY.href}
+                        target="_blank"
+                        class="flex flex-row items-center gap-3"
+                    >
                         View on GitHub
                         <Icon name="github" />
                     </a>
@@ -50,7 +54,7 @@ const CTA_SECONDARY = {
     <!-- Features Section -->
     <section class="mx-auto max-w-6xl px-5 py-8 sm:py-12">
         <div class="mb-12 text-center">
-            <h2 class="text-foreground text-3xl font-bold sm:text-4xl">Everything you need</h2>
+            <h2 class="text-foreground pb-4 text-3xl font-bold sm:text-4xl">Everything you need</h2>
             <p class="text-muted-foreground mt-3 text-lg">
                 Built with best practices and developer experience in mind
             </p>
@@ -110,20 +114,25 @@ const CTA_SECONDARY = {
     <!-- CTA Section -->
     <section class="mx-auto w-full max-w-6xl px-5 py-8 sm:py-12">
         <div class="mb-4 text-center">
-            <h2 class="text-foreground text-3xl font-bold sm:text-4xl">Ready to get started?</h2>
+            <h2 class="text-foreground pb-4 text-3xl font-bold sm:text-4xl">
+                Ready to get started?
+            </h2>
             <p class="text-muted-foreground mt-3 text-lg">
                 Explore the documentation or try the live demo
             </p>
         </div>
         <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button size="lg" variant="secondary">
-                <a href="/docs/introduction">
+                <a href="/docs/introduction" class="flex flex-row items-center gap-3">
                     Read the Docs
-                    <span aria-hidden="true">→</span>
+                    <Icon name="right" />
                 </a>
             </Button>
             <Button size="lg" variant="secondary">
-                <a href="/funnydocs">View Demo</a>
+                <a href="/funnydocs" class="flex flex-row items-center gap-3">
+                    View Demo
+                    <Icon name="right" />
+                </a>
             </Button>
         </div>
     </section>
