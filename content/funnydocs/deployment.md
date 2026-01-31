@@ -6,7 +6,7 @@ navIcon: "🚀"
 order: 4
 ---
 
-*A Horror Story in Three Acts*
+_A Horror Story in Three Acts_
 
 ## Act I: The Decision
 
@@ -14,7 +14,7 @@ It's Friday. 4:45 PM. You've just finished a feature. The tests pass (locally). 
 
 > "What could possibly go wrong?"
 
-**Narrator:** *Everything. Everything could go wrong.*
+**Narrator:** _Everything. Everything could go wrong._
 
 ## The Classic Deployment Protocol
 
@@ -180,7 +180,7 @@ npm install
 
 **User:** "What's a cache?"
 
-**You:** *Internal screaming*
+**You:** _Internal screaming_
 
 **Solution:** Add cache-busting headers. Or just tell everyone to hard refresh. Forever.
 
@@ -379,4 +379,4 @@ Deploying on Friday is like playing Russian Roulette with your weekend. Sure, yo
 
 Stay safe out there. 🚀
 
-*P.S. - If you deployed on Friday and it worked, congratulations! You're either very lucky or very good. Probably lucky. Don't let it go to your head. The deployment gods are watching, and they remember.*
+_P.S. - If you deployed on Friday and it worked, congratulations! You're either very lucky or very good. Probably lucky. Don't let it go to your head. The deployment gods are watching, and they remember._

@@ -34,9 +34,9 @@ A component is a mystical piece of code that:
 // This component works. Don't ask how. Don't ask why.
 // If you touch it, it will break. You have been warned.
 const MysteryComponent = () => {
-  // TODO: Figure out what this does
-  return <div>It works! 🎉</div>
-}
+    // TODO: Figure out what this does
+    return <div>It works! 🎉</div>;
+};
 ```
 
 ## What is "MDX"?

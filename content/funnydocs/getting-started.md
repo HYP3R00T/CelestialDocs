@@ -15,7 +15,7 @@ The easiest way to break everything is to mess up your frontmatter. It's like pl
 ```yaml
 ---
 title: "This will definitely work"
-  description: "Just kidding, extra space = chaos"
+description: "Just kidding, extra space = chaos"
 ---
 ```
 
@@ -56,15 +56,15 @@ One character can bring down empires:
 ```typescript
 // ❌ This will haunt your dreams
 export const SIDEBAR_NAVIGATION = {
-  docs: {
-    groups: [
-      {
-        id: "guides",
-        lable: "Guides",  // Did you spot it? 😈
-      }
-    ]
-  }
-}
+    docs: {
+        groups: [
+            {
+                id: "guides",
+                lable: "Guides", // Did you spot it? 😈
+            },
+        ],
+    },
+};
 ```
 
 TypeScript will yell at you, but will you listen? Probably not until 3 AM when you're debugging.
@@ -75,10 +75,10 @@ Import A from B. Import B from A. Watch the build system have an existential cri
 
 ```typescript
 // file-a.ts
-import { thingFromB } from './file-b';
+import { thingFromB } from "./file-b";
 
 // file-b.ts
-import { thingFromA } from './file-a';
+import { thingFromA } from "./file-a";
 
 // Build system: "I quit."
 ```

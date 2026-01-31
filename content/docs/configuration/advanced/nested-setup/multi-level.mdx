@@ -21,7 +21,7 @@ Level 0 (Root)
 
 ```typescript
 export const SIDEBAR_NAVIGATION = {
-    "platform": {
+    platform: {
         defaultTab: { label: "Platform", icon: "🚀" },
         groups: [
             {
@@ -151,12 +151,14 @@ Users understand exactly where they are.
 ## When to Use Multi-Level Nesting
 
 **Good use cases:**
+
 - Enterprise software with many subsystems
 - Complex APIs with multiple service tiers
 - Large platforms with distinct areas
 - Organizations with clear hierarchical structure
 
 **Examples:**
+
 ```
 🏢 Enterprise Platform
 ├─ Account Management
@@ -239,6 +241,7 @@ Users expand sections to explore. Collapses keep sidebar clean.
 ```
 
 **Flexible mixing:**
+
 - Some levels auto-generated
 - Some levels manual
 - Choose per level what makes sense
@@ -253,6 +256,7 @@ Deep nesting affects:
 **User experience:** Too many clicks to reach content
 
 **Recommendations:**
+
 - Maximum 4-5 levels before getting cumbersome
 - Beyond 5 levels, consider redesign
 - Use tabs to split into 2-3 collections instead
@@ -266,6 +270,7 @@ Home > Platform Suite > Core Services > Authentication > OAuth > Getting Started
 ```
 
 Keep group labels short (2-3 words):
+
 - ✅ "OAuth 2.0" not "OAuth 2.0 Authentication Protocol"
 - ✅ "User Mgmt" not "User Management System"
 - ✅ "Payments" not "Payment Processing Integration"

@@ -22,6 +22,7 @@ Manually list every entry you want in navigation:
 ```
 
 **Key differences from auto-generation:**
+
 - No folder scanning
 - You control exact order
 - You control which files appear
@@ -44,11 +45,15 @@ Manually list every entry you want in navigation:
 ## Entry Customization
 
 ### Basic Entry
+
 ```typescript
-{ slug: "guides/installation" }
+{
+    slug: "guides/installation";
+}
 ```
 
 ### Override Label
+
 ```typescript
 {
     slug: "guides/very-long-file-name",
@@ -57,6 +62,7 @@ Manually list every entry you want in navigation:
 ```
 
 ### Add Icon
+
 ```typescript
 {
     slug: "guides/installation",
@@ -65,6 +71,7 @@ Manually list every entry you want in navigation:
 ```
 
 ### Full Customization
+
 ```typescript
 {
     slug: "guides/installation",
@@ -78,6 +85,7 @@ Manually list every entry you want in navigation:
 Tutorials need specific order. Auto-generation would fail (alphabetical order wouldn't match teaching progression).
 
 ### Setup
+
 ```typescript
 {
     id: "tutorials",
@@ -95,6 +103,7 @@ Tutorials need specific order. Auto-generation would fail (alphabetical order wo
 ```
 
 ### Result
+
 ```
 🎓 Tutorials
 ├── Introduction
@@ -113,6 +122,7 @@ Tutorials need specific order. Auto-generation would fail (alphabetical order wo
 Show only popular features, hide others:
 
 ### Files
+
 ```
 content/features/
 ├── authentication.md ✓
@@ -125,6 +135,7 @@ content/features/
 ```
 
 ### Setup
+
 ```typescript
 {
     id: "features",
@@ -140,6 +151,7 @@ content/features/
 ```
 
 ### Result
+
 ```
 ✨ Features
 ├── Authentication
@@ -155,6 +167,7 @@ content/features/
 Reorganize files into different structure than file system:
 
 ### Files
+
 ```
 content/docs/
 ├── installation.md
@@ -164,6 +177,7 @@ content/docs/
 ```
 
 ### Configuration (Different Order + Custom Labels)
+
 ```typescript
 {
     id: "getting-started",
@@ -184,6 +198,7 @@ content/docs/
 ```
 
 ### Result
+
 ```
 🚀 Getting Started
 ├── Install
@@ -230,6 +245,7 @@ Support multiple API versions manually:
 ```
 
 ### Result
+
 ```
 v1 (Deprecated)
 ├── Endpoints
@@ -251,6 +267,7 @@ v3 (Beta)
 ## When Manual is Better
 
 ✅ **Use manual when:**
+
 - Specific order is critical (tutorials, progressive learning)
 - Careful curation needed (hide some files)
 - Custom labels throughout
@@ -259,6 +276,7 @@ v3 (Beta)
 - Static content (doesn't grow frequently)
 
 ❌ **Not ideal when:**
+
 - Documentation grows rapidly
 - Many pages (becomes tedious)
 - Multiple contributors (merge conflicts)
@@ -302,6 +320,7 @@ See [Hybrid Approach](/docs/generation-strategies/hybrid-approach/best-of-both) 
 ## Next Steps
 
 Learn about:
+
 - [Hybrid Approach](/docs/generation-strategies/hybrid-approach/best-of-both)
 - [Configuration Examples](/docs/configuration/basics/sidebar-structure)
 - [Auto-Generation](/docs/generation-strategies/auto-generation/how-it-works)

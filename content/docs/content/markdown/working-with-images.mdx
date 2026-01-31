@@ -26,6 +26,7 @@ content/
 ```
 
 **Benefits:**
+
 - Images live with documentation content
 - Easy to version control together
 - Better organization for multiple collections
@@ -43,6 +44,7 @@ public/
 ```
 
 **Use cases:**
+
 - Logo and branding assets
 - Favicons and meta images
 - Shared diagrams used in multiple collections
@@ -61,9 +63,11 @@ Images in the same collection use relative paths:
 
 ```markdown
 <!-- From content/docs/getting-started/setup.mdx -->
+
 ![Setup Guide](../assets/getting-started.jpg)
 
 <!-- From content/docs/configuration/basics/overview.mdx -->
+
 ![Configuration](../../assets/configuration-overview.jpg)
 ```
 
@@ -81,9 +85,11 @@ Always provide meaningful alt text for accessibility:
 
 ```markdown
 <!-- ❌ Bad -->
+
 ![image](../assets/screenshot.jpg)
 
 <!-- ✅ Good -->
+
 ![Dashboard showing navigation settings panel](../assets/screenshot.jpg)
 ```
 
@@ -114,12 +120,15 @@ Consistent sizing creates better visual flow:
 
 ```markdown
 <!-- Hero images at top of pages -->
+
 ![Hero](../assets/hero-1200x630.jpg)
 
 <!-- Inline content images -->
+
 ![Example](../assets/example-800x400.jpg)
 
 <!-- Small icons or badges -->
+
 ![Icon](../assets/icon-64x64.png)
 ```
 
@@ -132,14 +141,14 @@ Add context with text below images:
 ```markdown
 ![Architecture diagram](../assets/architecture.jpg)
 
-*Figure 1: CelestialDocs navigation architecture showing the three-tier hierarchy*
+_Figure 1: CelestialDocs navigation architecture showing the three-tier hierarchy_
 ```
 
 Example:
 
 ![Code Example](../../assets/code-example.jpg)
 
-*Figure: Modern development environment with proper tooling*
+_Figure: Modern development environment with proper tooling_
 
 ### Linking Images
 
@@ -154,15 +163,15 @@ Make images clickable:
 ```markdown
 1. **Setup your environment**
 
-   ![Environment setup](../assets/getting-started.jpg)
+    ![Environment setup](../assets/getting-started.jpg)
 
-   Install Node.js and clone the repository.
+    Install Node.js and clone the repository.
 
 2. **Configure settings**
 
-   ![Configuration](../assets/configuration-overview.jpg)
+    ![Configuration](../assets/configuration-overview.jpg)
 
-   Update data/config.ts with your preferences.
+    Update data/config.ts with your preferences.
 ```
 
 ## Organization Tips
@@ -214,21 +223,26 @@ For large images, consider Git LFS:
 
 ```markdown
 <!-- From: content/docs/introduction.mdx -->
+
 ![Example](./assets/intro.jpg)
 
 <!-- From: content/docs/getting-started/setup.mdx -->
+
 ![Example](../assets/getting-started.jpg)
 
 <!-- From: content/docs/configuration/basics/overview.mdx -->
+
 ![Example](../../assets/configuration-overview.jpg)
 
 <!-- From: content/docs/navigation-system/core-concepts/entries.mdx -->
+
 ![Example](../../../assets/navigation-hierarchy.jpg)
 ```
 
 ### Build Errors
 
 If images cause build errors:
+
 - Ensure filenames have no spaces
 - Use only alphanumeric, hyphens, and underscores
 - Check file permissions are correct

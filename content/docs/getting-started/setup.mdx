@@ -10,6 +10,7 @@ Setting up CelestialDocs is straightforward. This guide walks you through the in
 ## Prerequisites
 
 Before you begin, ensure you have:
+
 - **Node.js 18+** installed ([download](https://nodejs.org))
 - **npm**, **pnpm**, or **yarn** as your package manager
 - A code editor like VS Code
@@ -26,11 +27,13 @@ cd my-docs
 ### 2. Install Dependencies
 
 Using pnpm (recommended):
+
 ```bash
 pnpm install
 ```
 
 Or using npm:
+
 ```bash
 npm install
 ```
@@ -79,8 +82,12 @@ export const CONTENT: ContentConfig = {
 
 // Navigation structure
 export const SIDEBAR_NAVIGATION: SidebarNavigation = {
-    docs: { /* ... */ },
-    "new-docs": { /* ... */ },
+    docs: {
+        /* ... */
+    },
+    "new-docs": {
+        /* ... */
+    },
 };
 
 // Site metadata
@@ -94,6 +101,7 @@ export const SITE: SiteConfig = {
 ## What's Next?
 
 You're all set! Next, learn how to:
+
 1. [Create your first collection](/docs/getting-started/first-collection)
 2. [Add your first page](/docs/getting-started/first-page)
 

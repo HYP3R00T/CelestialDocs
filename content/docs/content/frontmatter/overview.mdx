@@ -10,6 +10,7 @@ Frontmatter is YAML metadata at the top of every page. It controls page display 
 Every page must have these:
 
 ### title
+
 Page title that appears in browser tab and sidebar.
 
 ```yaml
@@ -19,6 +20,7 @@ title: "Getting Started"
 ```
 
 ### description
+
 Short description for SEO and preview text.
 
 ```yaml
@@ -30,6 +32,7 @@ description: "Learn how to get started with CelestialDocs in 5 minutes"
 ## Optional Navigation Fields
 
 ### navLabel
+
 Override the sidebar label (if different from title).
 
 ```yaml
@@ -40,6 +43,7 @@ navLabel: "Install"  <- Sidebar shows this instead
 ```
 
 ### navIcon
+
 Add an icon in the sidebar next to the entry.
 
 ```yaml
@@ -57,6 +61,7 @@ navIcon: "document"  <- SVG reference
 ```
 
 ### navHidden
+
 Hide from navigation but keep accessible via URL.
 
 ```yaml
@@ -70,6 +75,7 @@ Page won't appear in sidebar but users can still visit it directly.
 ## Optional Metadata Fields
 
 ### draft
+
 Exclude from production builds.
 
 ```yaml
@@ -81,6 +87,7 @@ draft: true  <- Skipped in build
 Useful for work-in-progress pages.
 
 ### authors
+
 List page authors.
 
 ```yaml
@@ -90,6 +97,7 @@ authors: ["Alice", "Bob"]
 ```
 
 ### tags
+
 Categorize pages (useful for custom features).
 
 ```yaml
@@ -111,7 +119,6 @@ draft: false
 authors: ["Alice", "Bob"]
 tags: ["configuration", "advanced", "enterprise"]
 ---
-
 # Advanced Configuration
 
 Content goes here...
@@ -119,20 +126,21 @@ Content goes here...
 
 ## Field Types
 
-| Field | Type | Default | Notes |
-|-------|------|---------|-------|
-| title | string | required | Page title |
-| description | string | required | SEO description |
-| navLabel | string | optional | Override sidebar text |
-| navIcon | string | optional | Emoji or SVG ref |
-| navHidden | boolean | false | Hide from nav? |
-| draft | boolean | false | Work in progress? |
-| authors | array | [] | Page authors |
-| tags | array | [] | Page tags |
+| Field       | Type    | Default  | Notes                 |
+| ----------- | ------- | -------- | --------------------- |
+| title       | string  | required | Page title            |
+| description | string  | required | SEO description       |
+| navLabel    | string  | optional | Override sidebar text |
+| navIcon     | string  | optional | Emoji or SVG ref      |
+| navHidden   | boolean | false    | Hide from nav?        |
+| draft       | boolean | false    | Work in progress?     |
+| authors     | array   | []       | Page authors          |
+| tags        | array   | []       | Page tags             |
 
 ## Common Patterns
 
 ### Tutorial Page
+
 ```yaml
 ---
 title: "Building Your First App"
@@ -145,6 +153,7 @@ tags: ["tutorial", "beginner"]
 ```
 
 ### Reference Page
+
 ```yaml
 ---
 title: "API Endpoints Reference"
@@ -157,6 +166,7 @@ tags: ["api", "reference"]
 ```
 
 ### Draft/WIP
+
 ```yaml
 ---
 title: "Upcoming Features"
@@ -167,6 +177,7 @@ navHidden: true
 ```
 
 ### Hidden But Accessible
+
 ```yaml
 ---
 title: "Internal Documentation"
@@ -178,37 +189,42 @@ navHidden: true
 ## Tips
 
 1. **Keep titles short** (3-5 words)
-   ```yaml
-   title: "Getting Started"          ✅ Good
-   title: "How to Get Started with CelestialDocs" ❌ Too long
-   ```
+
+    ```yaml
+    title: "Getting Started"          ✅ Good
+    title: "How to Get Started with CelestialDocs" ❌ Too long
+    ```
 
 2. **Use navLabel for long titles**
-   ```yaml
-   title: "Frequently Asked Questions About Deployment"
-   navLabel: "Deployment FAQ"
-   ```
+
+    ```yaml
+    title: "Frequently Asked Questions About Deployment"
+    navLabel: "Deployment FAQ"
+    ```
 
 3. **Use navHidden for drafts**
-   ```yaml
-   draft: true
-   navHidden: true
-   ```
+
+    ```yaml
+    draft: true
+    navHidden: true
+    ```
 
 4. **Add authors for accountability**
-   ```yaml
-   authors: ["Alice", "Bob", "Charlie"]
-   ```
+
+    ```yaml
+    authors: ["Alice", "Bob", "Charlie"]
+    ```
 
 5. **Use consistent icon style**
-   ```yaml
-   navIcon: "🚀"  # Emoji for visual variety
-   navIcon: "book" # Or SVG for consistency
-   ```
+    ```yaml
+    navIcon: "🚀"  # Emoji for visual variety
+    navIcon: "book" # Or SVG for consistency
+    ```
 
 ## Next Steps
 
 Learn about:
+
 - [Optional Fields](/docs/content/frontmatter/optional-fields)
 - [Navigation Overrides](/docs/content/frontmatter/navigation-overrides)
 - [Markdown Basics](/docs/content/markdown/markdown-basics)

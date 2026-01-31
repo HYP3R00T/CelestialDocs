@@ -6,35 +6,43 @@ description: "Embed UI components safely inside your Markdown"
 MDX supports JSX, so you can reuse the design system without creating separate pages.
 
 ## Import Once, Reuse Everywhere
+
 ```mdx
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 ## Call to action
+
 Write your content, then drop in components:
 
-<Button size="lg" variant="default">Get Started</Button>
+<Button size="lg" variant="default">
+    Get Started
+</Button>
 <Separator className="my-6" />
 Supporting text stays Markdown and remains easy to edit.
 ```
 
 ## Recommended Components
+
 - Buttons for primary calls-to-action
 - Separators and `kbd` elements for quick highlights
 - Navigation menus or breadcrumbs when explaining IA
 - Custom callouts or alerts for warnings
 
 ## Best Practices
+
 - Keep layout concerns in components, not in prose—avoid large custom `<div>` blocks.
 - Use semantic components that render native HTML under the hood for accessibility.
 - If a component needs hydration, keep it small and consider `client:visible`.
 - Avoid passing un-sanitized user input into components rendered via MDX.
 
 ## Troubleshooting
+
 - **Component not found?** Check the import path and file extension.
 - **Styles missing?** Ensure the component relies on the shared Tailwind layer, not ad-hoc CSS inside the MDX file.
 - **Unexpected spacing?** Wrap components in paragraphs or use utility classes to align with surrounding text.
 
 ## Next Steps
+
 - Learn when to author MDX vs Markdown in [MDX Introduction](/docs/content/markdown/mdx-introduction)
 - Configure navigation for new pages in [Manual Creation Use Cases](/docs/generation-strategies/manual-creation/use-cases)

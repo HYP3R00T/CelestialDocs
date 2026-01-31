@@ -8,6 +8,7 @@ The hybrid approach (manual entries + auto-generation) is one of CelestialDocs' 
 ## The Problem Other Systems Face
 
 ### Pure Auto-Generation Systems
+
 **Problem:** No control over order or which pages appear
 
 ```
@@ -17,6 +18,7 @@ Result: Appears alphabetically between "Accounting" and "Dashboard"
 ```
 
 ### Pure Manual Systems
+
 **Problem:** Tedious to maintain; new content is invisible until added to config
 
 ```
@@ -43,6 +45,7 @@ Result: Page exists but doesn't appear in sidebar
 ```
 
 **Result:**
+
 1. Overview (guaranteed position)
 2. Quick Start (guaranteed position)
 3. Advanced Setup (auto, alphabetical)
@@ -52,16 +55,19 @@ Result: Page exists but doesn't appear in sidebar
 ## Why This Matters
 
 ### For Documentation Authors
+
 ✅ **No maintenance burden** - Add files, they appear automatically
 ✅ **Control when needed** - Pin important pages
 ✅ **Scales naturally** - 10 pages or 1000, config stays same
 
 ### For Documentation Readers
+
 ✅ **Best pages first** - Important content highlighted
 ✅ **Complete discovery** - All content findable
 ✅ **Professional navigation** - Not buried in alphabetical order
 
 ### For Teams
+
 ✅ **No merge conflicts** - Don't fight over config file
 ✅ **Fast onboarding** - New contributors just add files
 ✅ **Growth-friendly** - Scales from small to enterprise
@@ -71,6 +77,7 @@ Result: Page exists but doesn't appear in sidebar
 ### Scenario 1: Growing Startup
 
 **Month 1:** 5 pages, manual config is fine
+
 ```typescript
 entries: [
     { slug: "docs/overview" },
@@ -82,6 +89,7 @@ entries: [
 ```
 
 **Month 3:** 15 pages, manual becomes tedious
+
 ```typescript
 entries: [
     { slug: "docs/overview" },
@@ -93,6 +101,7 @@ entries: [
 ```
 
 **Month 6:** With hybrid, just this:
+
 ```typescript
 entries: [
     { slug: "docs/overview" },    // Essential
@@ -114,13 +123,13 @@ With manual: Whoever commits last wins; others' docs forgotten
 
 ## Competitive Advantage
 
-| System | Auto-Gen | Manual | Hybrid |
-|--------|----------|--------|--------|
-| MkDocs | ❌ | ✅ | ❌ |
-| Docusaurus | ✅ | ✅ | ❌ |
-| GitBook | ✅ | ✅ | ❌ |
-| Notion | ❌ | ✅ | ❌ |
-| **CelestialDocs** | ✅ | ✅ | **✅** |
+| System            | Auto-Gen | Manual | Hybrid |
+| ----------------- | -------- | ------ | ------ |
+| MkDocs            | ❌       | ✅     | ❌     |
+| Docusaurus        | ✅       | ✅     | ❌     |
+| GitBook           | ✅       | ✅     | ❌     |
+| Notion            | ❌       | ✅     | ❌     |
+| **CelestialDocs** | ✅       | ✅     | **✅** |
 
 CelestialDocs is the **only system that natively supports hybrid** with elegance.
 
@@ -150,6 +159,7 @@ This site itself demonstrates hybrid approach:
 ```
 
 Result:
+
 1. Auto-Generation (manual)
 2. Manual Creation (manual)
 3. Hybrid Approach (auto-discovered - this site!)
@@ -158,5 +168,6 @@ Result:
 ---
 
 **Next:** Learn other selling points:
+
 - [Hierarchical Power](/docs/advanced-topics/selling-points/hierarchical-power)
 - [Type Safety](/docs/advanced-topics/selling-points/type-safety)

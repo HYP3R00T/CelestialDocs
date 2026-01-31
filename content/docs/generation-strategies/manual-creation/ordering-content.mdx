@@ -6,12 +6,14 @@ description: "Control the exact sidebar order when auto-generation is not enough
 Manual ordering keeps critical pages in the right sequence instead of relying on alphabetical auto-generation.
 
 ## When to Order Manually
+
 - Tutorials or onboarding checklists where steps must be followed
 - Compliance and policy docs that should surface before usage guides
 - Release announcements where the latest item should appear first
 - Any section where business priority matters more than file name sorting
 
 ## Define the Order in Config
+
 List slugs in the exact order you want. Anything not listed will not appear.
 
 ```typescript
@@ -27,11 +29,13 @@ List slugs in the exact order you want. Anything not listed will not appear.
 ```
 
 Tips:
+
 - Use clear file names; avoid numeric prefixes unless you want to encode order in the file system.
 - Keep the `entries` array short; split into groups when it grows past 5-6 items.
 - Prefer `navLabel` in frontmatter to keep labels short while files stay descriptive.
 
 ## Keeping Order Stable
+
 - Add new pages intentionally rather than relying on discovery.
 - If you need to insert in the middle, update only this array; file names stay unchanged.
 - Pair with `navHidden: true` in frontmatter for drafts so ordering does not shift.
@@ -39,12 +43,14 @@ Tips:
 ## Review Questions
 
 Before finalizing your manual ordering, consider:
+
 - Does the order match the story you want readers to follow?
 - Are high-priority items near the top?
 - Are drafts hidden to avoid gaps?
 - Do labels stay concise via `navLabel` when needed?
 
 ## Next Steps
+
 - Learn where manual ordering shines in [Manual Creation Use Cases](/docs/generation-strategies/manual-creation/use-cases)
 - See how to combine manual and discovery in [Pin and Expand](/docs/generation-strategies/hybrid-approach/pin-and-expand)
 - Review the config API in [Explicit Control](/docs/generation-strategies/manual-creation/explicit-control)
