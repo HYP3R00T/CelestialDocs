@@ -6,9 +6,9 @@
 - Use `PascalCase` for React/JSX components, Astro components, and classes.
 - Use `SCREAMING_SNAKE_CASE` for constants.
 - File and folder names:
-  - Components: `PascalCase.astro` / `PascalCase.tsx`
-  - Utilities: `camelCase.ts`
-  - Styles: `kebab-case.css`
+    - Components: `PascalCase.astro` / `PascalCase.tsx`
+    - Utilities: `camelCase.ts`
+    - Styles: `kebab-case.css`
 
 - Prefix unused or private variables with an underscore (`_`).
 
@@ -18,8 +18,8 @@
 - Prefer `unknown` over `any`. Avoid `any` unless unavoidable.
 - Use `T | null` or `T | undefined` explicitly for nullable types.
 - Narrow types aggressively:
-  - Use `enum`, `as const`, or `type Literal = 'x' | 'y'`.
-  - Use discriminated unions for variant handling.
+    - Use `enum`, `as const`, or `type Literal = 'x' | 'y'`.
+    - Use discriminated unions for variant handling.
 
 - Validate runtime data with **Zod schemas** or Astro Content Collections.
 
@@ -27,15 +27,15 @@
 
 - Keep components **small, reusable, and single-purpose**.
 - Organize by function:
-  - `src/components/` -> shared UI elements
-  - `src/layouts/` -> page-level structure
-  - `src/pages/` -> route entry points
-  - `src/lib/` -> helpers/utilities
-  - `content/` -> content collections
+    - `src/components/` -> shared UI elements
+    - `src/layouts/` -> page-level structure
+    - `src/pages/` -> route entry points
+    - `src/lib/` -> helpers/utilities
+    - `content/` -> content collections
 
 - Prefer server-rendered Astro components. Use hydrated islands (`client:*`) only where interactivity is necessary.
 - For hydration:
-  - Prefer `client:idle`, `client:visible`, or `client:media` over `client:load`.
+    - Prefer `client:idle`, `client:visible`, or `client:media` over `client:load`.
 
 ## Tailwind CSS Guidelines
 
@@ -57,9 +57,9 @@
 - Format code with **Prettier** (with Astro + Tailwind plugins).
 - Lint with **ESLint** (with `eslint-plugin-astro`, `@typescript-eslint`).
 - Organize imports:
-  1. Node.js built-ins
-  2. Third-party libraries
-  3. Project aliases (e.g., `@/components`)
+    1. Node.js built-ins
+    2. Third-party libraries
+    3. Project aliases (e.g., `@/components`)
 
 - Keep functions and components small and readable; avoid deep nesting.
 
