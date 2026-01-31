@@ -56,13 +56,13 @@ if (typeof image === "object" && "src" in image) {
 <meta name="generator" content={Astro.generator} />
 <meta charset="UTF-8" />
 <meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
-<meta
-    name="googlebot"
-    content={noIndex ? "noindex, nofollow" : "index, follow"}
-/>
+<meta name="googlebot" content={noIndex ? "noindex, nofollow" : "index, follow"} />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+
+<!-- Sitemap -->
+<link rel="sitemap" href="/sitemap-index.xml" />
 
 <!-- Favicon -->
 <link rel="apple-touch-icon" type="image/svg+xml" href="/favicon.svg" />

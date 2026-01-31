@@ -10,14 +10,14 @@ import { CONTENT } from "@data/config";
  * @throws Error if the system is not found
  */
 export function resolveSystem(collectionId?: string): ContentSystem {
-  const key = collectionId ?? "docs";
-  const system = CONTENT.systems.find((s) => s.id === key);
+    const key = collectionId ?? "docs";
+    const system = CONTENT.systems.find((s) => s.id === key);
 
-  if (!system) {
-    throw new Error(`Content system not found: ${key}`);
-  }
+    if (!system) {
+        throw new Error(`Content system not found: ${key}`);
+    }
 
-  return system;
+    return system;
 }
 
 /**
@@ -27,6 +27,6 @@ export function resolveSystem(collectionId?: string): ContentSystem {
  * @returns The base route for the system (e.g., "/docs", "/notes")
  */
 export function getSystemRoute(collectionId?: string): string {
-  const system = resolveSystem(collectionId);
-  return system.route ?? `/${system.id}`;
+    const system = resolveSystem(collectionId);
+    return system.route ?? `/${system.id}`;
 }

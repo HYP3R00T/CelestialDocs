@@ -13,13 +13,11 @@ const {
 
 // Determine if this group or any of its children contain the current page
 function containsSlug(g: SidebarGroupItem, slug: string): boolean {
-    if (g.entries?.some((e: any) => e.slug === slug)) {
+    if (g.entries?.some((entry) => entry.slug === slug)) {
         return true;
     }
     if (g.groups) {
-        return g.groups.some((subgroup: SidebarGroupItem) =>
-            containsSlug(subgroup, slug),
-        );
+        return g.groups.some((subgroup: SidebarGroupItem) => containsSlug(subgroup, slug));
     }
     return false;
 }
@@ -29,7 +27,7 @@ const isExpanded = containsSlug(group, currentSlug);
 
 <div class={`sidebar-group ${level > 0 ? "ml-4" : ""}`}>
     <button
-        class="flex w-full items-center justify-between gap-2 rounded-sm px-2 py-1 text-sm font-medium text-muted-foreground transition-colors hover:bg-popover/50 hover:text-popover-foreground"
+        class="text-muted-foreground hover:bg-popover/50 hover:text-popover-foreground flex w-full items-center justify-between gap-2 rounded-sm px-2 py-1 text-sm font-medium transition-colors"
         aria-expanded={isExpanded}
         data-group-toggle={group.id}
     >
@@ -82,9 +80,7 @@ const isExpanded = containsSlug(group, currentSlug);
 
 <script>
     function initGroupToggles() {
-        const toggleButtons = document.querySelectorAll<HTMLButtonElement>(
-            "[data-group-toggle]",
-        );
+        const toggleButtons = document.querySelectorAll<HTMLButtonElement>("[data-group-toggle]");
 
         toggleButtons.forEach((button) => {
             // Remove any existing listeners to prevent duplicates
@@ -95,18 +91,12 @@ const isExpanded = containsSlug(group, currentSlug);
                 const groupId = newButton.getAttribute("data-group-toggle");
 
                 // Prefer the content that belongs to the same `.sidebar-group` instance
-                const hostGroup =
-                    newButton.closest<HTMLDivElement>(".sidebar-group");
+                const hostGroup = newButton.closest<HTMLDivElement>(".sidebar-group");
                 const content =
-                    hostGroup?.querySelector<HTMLDivElement>(
-                        `[data-group-content="${groupId}"]`,
-                    ) ??
-                    document.querySelector<HTMLDivElement>(
-                        `[data-group-content="${groupId}"]`,
-                    );
+                    hostGroup?.querySelector<HTMLDivElement>(`[data-group-content="${groupId}"]`) ??
+                    document.querySelector<HTMLDivElement>(`[data-group-content="${groupId}"]`);
 
-                const chevron =
-                    newButton.querySelector<SVGSVGElement>("[data-chevron]");
+                const chevron = newButton.querySelector<SVGSVGElement>("[data-chevron]");
 
                 if (content && chevron) {
                     const isExpanded = !content.classList.contains("hidden");

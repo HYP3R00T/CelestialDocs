@@ -13,10 +13,7 @@ if (!name) {
 const emojiRegex = /\p{Emoji}/u;
 const isEmoji = emojiRegex.test(name);
 
-const emojiClass = [
-    "inline-flex items-center justify-center leading-none",
-    className,
-]
+const emojiClass = ["inline-flex items-center justify-center leading-none", className]
     .filter(Boolean)
     .join(" ");
 
@@ -29,7 +26,7 @@ if (!isEmoji) {
     try {
         const files = readdirSync(iconsPath);
         iconExists = files.includes(`${name}.svg`);
-    } catch (error) {
+    } catch {
         iconExists = false;
     }
 

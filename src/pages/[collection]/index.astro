@@ -1,32 +1,33 @@
 ---
 import { getCollection, render } from "astro:content";
-import { SITE, CONTENT } from "@data/config";
+import type { CollectionKey } from "astro:content";
+import { CONTENT } from "@data/config";
 import DocsLayout from "@/layouts/DocsLayout.astro";
 import MdxImage from "@/components/docs/markdown/MdxImage.astro";
 import MdxLink from "@/components/docs/markdown/MdxLink.astro";
 
 export async function getStaticPaths() {
-    const paths: any[] = [];
+    const paths: { params: { collection: CollectionKey }; props: { collection: CollectionKey } }[] =
+        [];
     for (const sys of CONTENT.systems) {
         paths.push({
-            params: { collection: sys.id },
-            props: { collection: sys.id },
+            params: { collection: sys.id as CollectionKey },
+            props: { collection: sys.id as CollectionKey },
         });
     }
     return paths;
 }
 
-const collection = Astro.params.collection as string;
+const collection = Astro.params.collection as CollectionKey;
 
-const entries = (await getCollection(collection as any)) as any[];
-const doc = entries.find((d) => d.id === "index");
-
-// Resolve redirect fallback from system or global default
-const sys = (CONTENT.systems ?? []).find((s: any) => s.id === collection);
-let redirectTo = sys?.defaultDocRedirect ?? "/";
+const entries = await getCollection(collection);
+const doc = entries.find((entry) => entry.id === "index");
 
 if (!doc) {
-    return Astro.redirect(redirectTo);
+    return Astro.redirect(
+        (CONTENT.systems ?? []).find((system) => system.id === collection)?.defaultDocRedirect ??
+            "/",
+    );
 }
 
 const { Content, headings } = await render(doc);

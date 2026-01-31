@@ -90,30 +90,22 @@ export interface HeadSEOProps {
 /**
  * Props for ThemeToggle component - no props required
  */
-export interface ThemeToggleProps {
-    // No props required
-}
+export type ThemeToggleProps = Record<string, never>;
 
 /**
  * Props for LayoutWidthToggle component - no props required
  */
-export interface LayoutWidthToggleProps {
-    // No props required
-}
+export type LayoutWidthToggleProps = Record<string, never>;
 
 /**
  * Props for HeaderGithubButton component - no props required
  */
-export interface HeaderGithubButtonProps {
-    // No props required
-}
+export type HeaderGithubButtonProps = Record<string, never>;
 
 /**
  * Props for HeaderLogo component - no props required
  */
-export interface HeaderLogoProps {
-    // No props required
-}
+export type HeaderLogoProps = Record<string, never>;
 
 /**
  * Props for HeaderNav component
@@ -125,9 +117,7 @@ export interface HeaderNavProps {
 /**
  * Props for Header component - no props required
  */
-export interface HeaderProps {
-    // No props required
-}
+export type HeaderProps = Record<string, never>;
 
 /**
  * Props for HeaderMobileMenu component

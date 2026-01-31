@@ -3,8 +3,9 @@ import DocIcon from "./DocIcon.astro";
 import type { SidebarEntryProps } from "@/lib/docs/types";
 
 import { getSystemRoute } from "@/lib/resolveSystem";
-const { entry, currentSlug, collectionId } =
-    Astro.props as SidebarEntryProps & { collectionId?: string };
+const { entry, currentSlug, collectionId } = Astro.props as SidebarEntryProps & {
+    collectionId?: string;
+};
 const isActive = currentSlug === entry.slug;
 
 const base = getSystemRoute(collectionId);
@@ -23,11 +24,7 @@ const base = getSystemRoute(collectionId);
     `}
         aria-current={isActive ? "page" : undefined}
     >
-        {
-            entry.icon && (
-                <DocIcon name={entry.icon} class="h-4 w-4" aria-hidden="true" />
-            )
-        }
+        {entry.icon && <DocIcon name={entry.icon} class="h-4 w-4" aria-hidden="true" />}
         <span>{entry.label}</span>
     </a>
 </li>

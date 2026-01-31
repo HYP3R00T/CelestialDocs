@@ -3,7 +3,7 @@ import { glob } from "astro/loaders";
 import { CONTENT } from "@data/config";
 
 // Reusable schema for all content systems
-const createSchema = ({ image }: { image?: any } = {}) =>
+const createSchema = () =>
     z.object({
         // ===== Basic Metadata =====
         title: z.string(),
@@ -20,13 +20,13 @@ const createSchema = ({ image }: { image?: any } = {}) =>
 
 // Build collection definitions dynamically from `CONTENT.systems`.
 // Each collection is completely separate to avoid ID conflicts
-const collectionsMap: Record<string, any> = {};
+const collectionsMap: Record<string, ReturnType<typeof defineCollection>> = {};
 
 for (const sys of CONTENT.systems) {
     collectionsMap[sys.id] = defineCollection({
         loader: glob({
             pattern: "**/*.{md,mdx}",
-            base: `./${sys.dir}`
+            base: `./${sys.dir}`,
         }),
         schema: createSchema,
     });

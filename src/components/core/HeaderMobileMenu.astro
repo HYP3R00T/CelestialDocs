@@ -1,12 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Button } from "@/components/ui/button";
-import {
-  HEADER_SOCIAL_LINKS,
-  HEADER_NAV_ITEMS,
-  CONTENT,
-  SIDEBAR_NAVIGATION,
-} from "@data/config";
+import { HEADER_SOCIAL_LINKS, HEADER_NAV_ITEMS, CONTENT, SIDEBAR_NAVIGATION } from "@data/config";
 import DocsTabs from "@/components/docs/DocsTabs.astro";
 import DocsContent from "@/components/docs/DocsContent.astro";
 import { buildNavigation, getActiveTab } from "@/lib/navigation";
@@ -17,106 +12,98 @@ const menuPanelId = "mobile-menu";
 // Extract current slug from URL
 const pathname = Astro.url.pathname;
 const normalizePath = (path: string): string =>
-  path !== "/" && path.endsWith("/") ? path.slice(0, -1) : path;
+    path !== "/" && path.endsWith("/") ? path.slice(0, -1) : path;
 const normalizedPath = normalizePath(pathname);
 const matchingSystem = (CONTENT.systems ?? []).find((system) => {
-  const route = normalizePath(system.route ?? `/${system.id}`);
-  return normalizedPath === route || normalizedPath.startsWith(`${route}/`);
+    const route = normalizePath(system.route ?? `/${system.id}`);
+    return normalizedPath === route || normalizedPath.startsWith(`${route}/`);
 });
 const collectionId = matchingSystem?.id;
 const baseRoute = matchingSystem
-  ? normalizePath(matchingSystem.route ?? `/${matchingSystem.id}`)
-  : null;
+    ? normalizePath(matchingSystem.route ?? `/${matchingSystem.id}`)
+    : null;
 const currentSlug = baseRoute
-  ? normalizedPath.slice(baseRoute.length).replace(/^\/+/, "") || null
-  : null;
+    ? normalizedPath.slice(baseRoute.length).replace(/^\/+/, "") || null
+    : null;
 
-const navResult = collectionId
-  ? await buildNavigation(SIDEBAR_NAVIGATION, collectionId)
-  : null;
+const navResult = collectionId ? await buildNavigation(SIDEBAR_NAVIGATION, collectionId) : null;
 const activeTab = navResult
-  ? currentSlug
-    ? getActiveTab(currentSlug, navResult.tabs)
-    : navResult.tabs[0] || null
-  : null;
+    ? currentSlug
+        ? getActiveTab(currentSlug, navResult.tabs)
+        : navResult.tabs[0] || null
+    : null;
 
 const showDocs = Boolean(collectionId && navResult && activeTab);
 ---
 
-<div
-  id={menuPanelId}
-  class="fixed inset-0 z-40 hidden md:hidden bg-background"
-  aria-hidden="true"
->
-  <div class="flex h-full w-full flex-col px-4 pb-4 pt-19 overflow-hidden">
-    <div
-      class="mx-auto w-full max-w-md rounded-lg border border-border/50 bg-linear-to-b from-background/85 via-background/95 to-background/98 shadow-xl max-h-[calc(100vh-5.5rem)] overflow-y-auto"
-    >
-      <div class="flex flex-col gap-6 py-6">
-        <!-- Main Navigation -->
-        <nav class="flex flex-col items-center gap-3 text-sm font-medium">
-          {
-            HEADER_NAV_ITEMS.map(({ href, label, special, blank }) => (
-              <a
-                href={href}
-                target={blank ? "_blank" : undefined}
-                rel={blank ? "noreferrer" : undefined}
-                class={`tracking-wide transition hover:text-primary ${special ? "text-primary" : "text-muted-foreground"}`}
-              >
-                {label}
-              </a>
-            ))
-          }
-        </nav>
-
-        <!-- Docs Sidenav Section -->
-        {
-          showDocs && activeTab && (
-            <div class="docs-sidenav border-t border-border/40 pt-4 px-4">
-              <div class="flex flex-col gap-3">
-                <DocsTabs
-                  tabs={navResult?.tabs ?? []}
-                  showTabs={navResult?.showTabs ?? false}
-                  activeTab={activeTab}
-                  collectionId={collectionId}
-                />
-                <div class="space-y-2">
-                  <DocsContent
-                    activeTab={activeTab}
-                    currentSlug={currentSlug}
-                    collectionId={collectionId}
-                  />
-                </div>
-              </div>
-            </div>
-          )
-        }
-
-        <!-- Social Links -->
+<div id={menuPanelId} class="bg-background fixed inset-0 z-40 hidden md:hidden" aria-hidden="true">
+    <div class="flex h-full w-full flex-col overflow-hidden px-4 pt-19 pb-4">
         <div
-          class="flex items-center justify-center gap-3 border-t border-border/40 pt-4"
+            class="border-border/50 from-background/85 via-background/95 to-background/98 mx-auto max-h-[calc(100vh-5.5rem)] w-full max-w-md overflow-y-auto rounded-lg border bg-linear-to-b shadow-xl"
         >
-          {
-            activeSocials.map(({ name, href, linkTitle }) => (
-              <Button key={name} variant="ghost" size="icon" asChild>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={linkTitle ?? name}
-                >
-                  <Icon name={name} class="size-5" />
-                </a>
-              </Button>
-            ))
-          }
+            <div class="flex flex-col gap-6 py-6">
+                <!-- Main Navigation -->
+                <nav class="flex flex-col items-center gap-3 text-sm font-medium">
+                    {
+                        HEADER_NAV_ITEMS.map(({ href, label, special, blank }) => (
+                            <a
+                                href={href}
+                                target={blank ? "_blank" : undefined}
+                                rel={blank ? "noreferrer" : undefined}
+                                class={`hover:text-primary tracking-wide transition ${special ? "text-primary" : "text-muted-foreground"}`}
+                            >
+                                {label}
+                            </a>
+                        ))
+                    }
+                </nav>
+
+                <!-- Docs Sidenav Section -->
+                {
+                    showDocs && activeTab && (
+                        <div class="docs-sidenav border-border/40 border-t px-4 pt-4">
+                            <div class="flex flex-col gap-3">
+                                <DocsTabs
+                                    tabs={navResult?.tabs ?? []}
+                                    showTabs={navResult?.showTabs ?? false}
+                                    activeTab={activeTab}
+                                    collectionId={collectionId}
+                                />
+                                <div class="space-y-2">
+                                    <DocsContent
+                                        activeTab={activeTab}
+                                        currentSlug={currentSlug}
+                                        collectionId={collectionId}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
+
+                <!-- Social Links -->
+                <div class="border-border/40 flex items-center justify-center gap-3 border-t pt-4">
+                    {
+                        activeSocials.map(({ name, href, linkTitle }) => (
+                            <Button key={name} variant="ghost" size="icon" asChild>
+                                <a
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={linkTitle ?? name}
+                                >
+                                    <Icon name={name} class="size-5" />
+                                </a>
+                            </Button>
+                        ))
+                    }
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <script>
-  import { initMobileMenu } from "@/lib/menu";
-  document.addEventListener("astro:page-load", initMobileMenu);
+    import { initMobileMenu } from "@/lib/menu";
+    document.addEventListener("astro:page-load", initMobileMenu);
 </script>

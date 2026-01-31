@@ -5,9 +5,7 @@ import type { TableOfContentsProps } from "@/lib/docs/types";
 
 const { headings = [] } = Astro.props as TableOfContentsProps;
 const extraEnabled = TABLE_OF_CONTENTS.enableExtra;
-const tocMaxHeight = extraEnabled
-    ? "calc((100vh - 5.25rem) * 0.66)"
-    : "calc(100vh - 5.25rem)";
+const tocMaxHeight = extraEnabled ? "calc((100vh - 5.25rem) * 0.66)" : "calc(100vh - 5.25rem)";
 
 // Filter to only include h2 and h3 headings for the TOC
 const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
@@ -15,25 +13,17 @@ const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 
 {
     filteredHeadings.length > 0 && (
-        <aside class="sticky top-17 hidden h-[calc(100vh-5.25rem)] xl:block min-w-2xs">
+        <aside class="sticky top-17 hidden h-[calc(100vh-5.25rem)] min-w-2xs xl:block">
             <div class="flex h-full flex-col gap-4">
-                <section
-                    class="rounded-lg bg-popover p-5"
-                    style={`max-height: ${tocMaxHeight}`}
-                >
-                    <nav
-                        aria-label="Table of contents"
-                        class="flex h-full flex-col"
-                    >
-                        <h3 class="mb-4 text-sm font-semibold text-foreground">
-                            On this page
-                        </h3>
+                <section class="bg-popover rounded-lg p-5" style={`max-height: ${tocMaxHeight}`}>
+                    <nav aria-label="Table of contents" class="flex h-full flex-col">
+                        <h3 class="text-foreground mb-4 text-sm font-semibold">On this page</h3>
                         <ul class="flex-1 space-y-2 overflow-y-auto text-sm">
                             {filteredHeadings.map((heading) => (
                                 <li class={heading.depth === 3 ? "ml-4" : ""}>
                                     <a
                                         href={`#${heading.id}`}
-                                        class="text-muted-foreground transition-colors hover:text-foreground"
+                                        class="text-muted-foreground hover:text-foreground transition-colors"
                                     >
                                         {heading.text}
                                     </a>

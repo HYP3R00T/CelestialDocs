@@ -27,8 +27,8 @@ export interface FrontmatterEntry {
     id: string;
     collection: string;
     data: Frontmatter;
-    body: string;
-    filePath: string;
+    body?: string;
+    filePath?: string;
 }
 
 // ============================================================================

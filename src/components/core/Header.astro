@@ -20,49 +20,49 @@ const menuButtonId = "mobile-menu-btn";
 const menuPanelId = "mobile-menu";
 ---
 
-<header class="sticky top-0 z-50 w-full bg-background">
-  <div id="header-inner" class="w-full flex items-center px-4 py-3 md:py-4">
-    <div class="flex items-center gap-6">
-      <HeaderLogo />
-      <HeaderNav />
-    </div>
+<header class="bg-background sticky top-0 z-50 w-full">
+    <div id="header-inner" class="flex w-full items-center px-4 py-3 md:py-4">
+        <div class="flex items-center gap-6">
+            <HeaderLogo />
+            <HeaderNav />
+        </div>
 
-    <div class="ml-auto flex items-center lg:gap-2 lg:h-4">
-      <SearchTrigger />
-      <Separator orientation="vertical" className="hidden lg:block" />
-      {
-        HEADER_FEATURES.enableGitHubButton && (
-          <>
-            <HeaderGithubButton />
+        <div class="ml-auto flex items-center lg:h-4 lg:gap-2">
+            <SearchTrigger />
             <Separator orientation="vertical" className="hidden lg:block" />
-          </>
-        )
-      }
-      {
-        HEADER_FEATURES.enableLayoutWidthToggle && (
-          <>
-            <LayoutWidthToggle />
-            <Separator orientation="vertical" className="hidden lg:block" />
-          </>
-        )
-      }
-      <ThemeToggle />
+            {
+                HEADER_FEATURES.enableGitHubButton && (
+                    <>
+                        <HeaderGithubButton />
+                        <Separator orientation="vertical" className="hidden lg:block" />
+                    </>
+                )
+            }
+            {
+                HEADER_FEATURES.enableLayoutWidthToggle && (
+                    <>
+                        <LayoutWidthToggle />
+                        <Separator orientation="vertical" className="hidden lg:block" />
+                    </>
+                )
+            }
+            <ThemeToggle />
 
-      <Button
-        id={menuButtonId}
-        className="md:hidden"
-        variant="ghost"
-        size="icon"
-        aria-expanded={"false"}
-        aria-controls={menuPanelId}
-        aria-label="Toggle navigation menu"
-        data-state="closed"
-      >
-        <Icon data-icon="menu" name="menu" class="size-5" />
-        <Icon data-icon="close" name="close" class="size-5 hidden" />
-      </Button>
+            <Button
+                id={menuButtonId}
+                className="md:hidden"
+                variant="ghost"
+                size="icon"
+                aria-expanded={"false"}
+                aria-controls={menuPanelId}
+                aria-label="Toggle navigation menu"
+                data-state="closed"
+            >
+                <Icon data-icon="menu" name="menu" class="size-5" />
+                <Icon data-icon="close" name="close" class="hidden size-5" />
+            </Button>
+        </div>
     </div>
-  </div>
 </header>
 
 <CommandPalette client:load />

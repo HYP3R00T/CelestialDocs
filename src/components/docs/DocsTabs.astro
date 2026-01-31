@@ -2,11 +2,12 @@
 import DocIcon from "./DocIcon.astro";
 import { findFirstEntry } from "@/lib/docs/utils";
 import { getSystemRoute } from "@/lib/resolveSystem";
+import type { Tab } from "@/lib/docs/types";
 
 const { tabs, showTabs, activeTab, collectionId } = Astro.props as {
-    tabs: any[];
+    tabs: Tab[];
     showTabs: boolean;
-    activeTab: any;
+    activeTab?: Tab;
     collectionId?: string;
 };
 
@@ -15,27 +16,22 @@ const { tabs, showTabs, activeTab, collectionId } = Astro.props as {
 
 {
     showTabs && (
-        <div class="border-border rounded-lg p-2 bg-popover">
+        <div class="border-border bg-popover rounded-lg p-2">
             <div class="space-y-1">
                 {tabs.map((tab) => {
                     const isActive = activeTab?.id === tab.id;
                     const firstEntry = findFirstEntry(tab.group);
                     const base = getSystemRoute(collectionId);
-                    const href = firstEntry
-                        ? `${base}/${firstEntry}`
-                        : `${base}`;
+                    const href = firstEntry ? `${base}/${firstEntry}` : `${base}`;
 
                     return (
                         <a
                             href={href}
-                            class={`
-              flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors
-              ${
-                  isActive
-                      ? "bg-secondary text-secondary-foreground"
-                      : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
-              }
-            `}
+                            class={`flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                                isActive
+                                    ? "bg-secondary text-secondary-foreground"
+                                    : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+                            } `}
                             aria-current={isActive ? "page" : undefined}
                         >
                             <DocIcon
