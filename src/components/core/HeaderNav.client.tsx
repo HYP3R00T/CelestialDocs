@@ -18,7 +18,7 @@ interface HeaderNavClientProps {
 
 export function HeaderNavClient({ navItems }: HeaderNavClientProps) {
     return (
-        <NavigationMenu viewport={false} className="hidden md:flex flex-none">
+        <NavigationMenu viewport={false} className="hidden flex-none md:flex">
             <NavigationMenuList>
                 {navItems.map(({ href, label, blank }) => (
                     <NavigationMenuItem key={href}>

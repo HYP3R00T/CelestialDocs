@@ -7,14 +7,14 @@ import type { DocEntry } from "./types";
  *  - "examples/grouping-and-ordering" -> "Grouping And Ordering"
  */
 export function formatSlugToLabel(slug: string): string {
-  const last = String(slug).split("/").pop() || slug;
-  // Replace dashes/underscores with spaces and normalize spacing
-  const spaced = last.replace(/[-_]+/g, " ").trim();
-  // Title-case each word
-  return spaced
-    .split(/\s+/)
-    .map((w) => (w.length === 0 ? w : w[0].toUpperCase() + w.slice(1)))
-    .join(" ");
+    const last = String(slug).split("/").pop() || slug;
+    // Replace dashes/underscores with spaces and normalize spacing
+    const spaced = last.replace(/[-_]+/g, " ").trim();
+    // Title-case each word
+    return spaced
+        .split(/\s+/)
+        .map((w) => (w.length === 0 ? w : w[0].toUpperCase() + w.slice(1)))
+        .join(" ");
 }
 
 /**
@@ -24,5 +24,5 @@ export function formatSlugToLabel(slug: string): string {
  * 3. file name (derived from slug)
  */
 export function deriveLabel(doc: DocEntry, configuredLabel?: string) {
-  return doc.data.navLabel || configuredLabel || formatSlugToLabel(doc.slug || doc.id);
+    return doc.data.navLabel || configuredLabel || formatSlugToLabel(doc.slug || doc.id);
 }

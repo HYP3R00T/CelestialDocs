@@ -12,7 +12,10 @@ import type { NavigationResult, NavigationItem, ProcessedGroup } from "./types";
  * Configuration must be a mapping of collectionId to Sidebar.
  * If a `collectionId` is provided, the filesystem discovery is scoped to that collection.
  */
-export async function buildNavigation(config: Record<string, Sidebar>, collectionId?: string): Promise<NavigationResult> {
+export async function buildNavigation(
+    config: Record<string, Sidebar>,
+    collectionId?: string,
+): Promise<NavigationResult> {
     const key = collectionId ?? "docs";
     const effectiveConfig = config[key];
 
@@ -20,10 +23,16 @@ export async function buildNavigation(config: Record<string, Sidebar>, collectio
         throw new Error(`Sidebar configuration not found for collection: ${key}`);
     }
 
-    const allDocs = collectionId ? await getCollectionFromFilesystem(collectionId) : await getDocsFromFilesystem();
+    const allDocs = collectionId
+        ? await getCollectionFromFilesystem(collectionId)
+        : await getDocsFromFilesystem();
     const filesystemStructure = buildFilesystemStructure(allDocs);
 
-    const navigationItems = buildNavigationItems(effectiveConfig.groups, filesystemStructure, allDocs);
+    const navigationItems = buildNavigationItems(
+        effectiveConfig.groups,
+        filesystemStructure,
+        allDocs,
+    );
     const tabs = buildTabs(navigationItems);
 
     const { children: defaultChildren, slugs } = buildDefaultChildren(navigationItems);
@@ -50,15 +59,16 @@ export async function buildNavigation(config: Record<string, Sidebar>, collectio
 
     const defaultTab = children.length
         ? createDefaultTab(
-            children,
-            effectiveConfig.defaultTab?.label ?? undefined,
-            effectiveConfig.defaultTab?.icon ?? undefined,
-        )
+              children,
+              effectiveConfig.defaultTab?.label ?? undefined,
+              effectiveConfig.defaultTab?.icon ?? undefined,
+          )
         : undefined;
 
     // Avoid duplicate tabs: if any computed tab has the same label as the default tab,
     // prefer the explicit tab and skip the default tab.
-    const dedupedDefaultTab = defaultTab && tabs.some((t) => t.label === defaultTab.label) ? undefined : defaultTab;
+    const dedupedDefaultTab =
+        defaultTab && tabs.some((t) => t.label === defaultTab.label) ? undefined : defaultTab;
 
     const visibleTabs = dedupedDefaultTab ? [dedupedDefaultTab, ...tabs] : tabs;
 

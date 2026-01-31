@@ -1,5 +1,3 @@
-import Fuse from "fuse.js";
-
 export const fuseOptions = {
     keys: [
         {

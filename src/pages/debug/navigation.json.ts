@@ -3,18 +3,18 @@ import { buildNavigation } from "@/lib/navigation";
 import { SIDEBAR_NAVIGATION } from "@data/config";
 
 export const GET: APIRoute = async () => {
-  try {
-    const nav = await buildNavigation(SIDEBAR_NAVIGATION as any);
-    return new Response(JSON.stringify(nav, null, 2), {
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
-    });
-  } catch (err) {
-    console.error("Error building navigation:", err);
-    return new Response(JSON.stringify({ error: String(err) }), {
-      status: 500,
-      headers: { "Content-Type": "application/json; charset=utf-8" },
-    });
-  }
+    try {
+        const nav = await buildNavigation(SIDEBAR_NAVIGATION);
+        return new Response(JSON.stringify(nav, null, 2), {
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+        });
+    } catch (err) {
+        console.error("Error building navigation:", err);
+        return new Response(JSON.stringify({ error: String(err) }), {
+            status: 500,
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+        });
+    }
 };

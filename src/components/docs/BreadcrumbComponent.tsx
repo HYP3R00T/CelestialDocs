@@ -24,9 +24,7 @@ export default function BreadcrumbComponent({ items }: Props) {
                     <div key={`breadcrumb-${index}`} className="flex items-center gap-1.5">
                         <BreadcrumbItem>
                             {item.href ? (
-                                <BreadcrumbLink href={item.href}>
-                                    {item.label}
-                                </BreadcrumbLink>
+                                <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
                             ) : (
                                 <BreadcrumbPage>{item.label}</BreadcrumbPage>
                             )}

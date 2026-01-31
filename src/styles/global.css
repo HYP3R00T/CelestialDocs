@@ -165,9 +165,8 @@
 }
 
 @theme {
-    --font-mono: 'Fira Code Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-mono: "Fira Code Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
-
 
 @layer base {
     * {
@@ -210,7 +209,7 @@
 
     /* width */
     ::-webkit-scrollbar {
-        @apply rounded-lg h-2 w-2;
+        @apply h-2 w-2 rounded-lg;
     }
 
     /* Track */
@@ -248,7 +247,7 @@
     /* ===== layout ===== */
 
     body[data-layout="comfort"] #header-inner {
-        @apply max-w-7xl mx-auto;
+        @apply mx-auto max-w-7xl;
     }
 
     body[data-layout="comfort"] #main-content {
@@ -276,13 +275,13 @@
     /* ======== Root prose container ======== */
 
     .prose {
-        @apply w-full max-w-none text-foreground;
+        @apply text-foreground w-full max-w-none;
     }
 
     /* ======== Links ======== */
 
     .prose a {
-        @apply relative font-medium text-primary underline underline-offset-4 decoration-primary/30 transition-colors;
+        @apply text-primary decoration-primary/30 relative font-medium underline underline-offset-4 transition-colors;
     }
 
     .prose a:hover {
@@ -292,15 +291,15 @@
     /* ======== Headings ======== */
 
     .prose h1 {
-        @apply mt-0 mb-6 text-5xl font-extrabold leading-tight tracking-tight;
+        @apply mt-0 mb-6 text-5xl leading-tight font-extrabold tracking-tight;
     }
 
     .prose h2 {
-        @apply mt-12 mb-4 text-4xl font-bold leading-snug tracking-tight border-none;
+        @apply mt-12 mb-4 border-none text-4xl leading-snug font-bold tracking-tight;
     }
 
     .prose h3 {
-        @apply mt-10 mb-3 text-2xl font-semibold leading-snug;
+        @apply mt-10 mb-3 text-2xl leading-snug font-semibold;
     }
 
     .prose h4 {
@@ -308,11 +307,11 @@
     }
 
     .prose h5 {
-        @apply mt-6 mb-1 text-base font-semibold uppercase tracking-wide text-muted-foreground;
+        @apply text-muted-foreground mt-6 mb-1 text-base font-semibold tracking-wide uppercase;
     }
 
     .prose h6 {
-        @apply mt-6 mb-1 text-sm font-semibold uppercase tracking-wide text-muted-foreground;
+        @apply text-muted-foreground mt-6 mb-1 text-sm font-semibold tracking-wide uppercase;
     }
 
     /* ======== Paragraphs ======== */
@@ -347,7 +346,7 @@
     /* ======== Blockquotes ======== */
 
     .prose blockquote {
-        @apply my-8 border-l-4 border-primary/40 bg-muted/40 px-6 py-4 italic text-muted-foreground;
+        @apply border-primary/40 bg-muted/40 text-muted-foreground my-8 border-l-4 px-6 py-4 italic;
     }
 
     .prose blockquote p {
@@ -357,7 +356,7 @@
     /* ======== Inline code ======== */
 
     .prose code {
-        @apply rounded bg-muted px-1.5 py-0.5 font-mono font-medium;
+        @apply bg-muted rounded px-1.5 py-0.5 font-mono font-medium;
     }
 
     /* Avoid double styling inside code blocks */
@@ -368,11 +367,11 @@
     /* ======== Code blocks ======== */
 
     .prose pre {
-        @apply my-8 overflow-x-auto rounded-lg bg-secondary px-6 py-5 leading-relaxed;
+        @apply bg-secondary my-8 overflow-x-auto rounded-lg px-6 py-5 leading-relaxed;
     }
 
     .astro-code {
-        @apply my-8 rounded-lg bg-secondary px-6 py-5 font-mono text-sm border dark:border-0;
+        @apply bg-secondary my-8 rounded-lg border px-6 py-5 font-mono text-sm dark:border-0;
     }
 
     /* ======== Tables ======== */
@@ -382,11 +381,11 @@
     }
 
     .prose th {
-        @apply border-b border-border px-4 py-3 text-left font-semibold;
+        @apply border-border border-b px-4 py-3 text-left font-semibold;
     }
 
     .prose td {
-        @apply border-b border-border px-4 py-3 align-top;
+        @apply border-border border-b px-4 py-3 align-top;
     }
 
     .prose tr:last-child td {
@@ -406,7 +405,7 @@
     /* ======== Horizontal rule ======== */
 
     .prose hr {
-        @apply my-12 border-border;
+        @apply border-border my-12;
     }
 }
 

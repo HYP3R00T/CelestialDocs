@@ -16,13 +16,7 @@ const isExternal = isExternalUrl(href);
 
 {
     isExternal ? (
-        <a
-            href={href}
-            class={className}
-            target="_blank"
-            rel="noopener noreferrer"
-            {...rest}
-        >
+        <a href={href} class={className} target="_blank" rel="noopener noreferrer" {...rest}>
             <slot />
         </a>
     ) : (

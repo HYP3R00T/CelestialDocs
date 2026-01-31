@@ -5,33 +5,33 @@ import { Kbd, KbdGroup } from "@/components/ui/kbd";
 ---
 
 <Button
-  id="search-trigger"
-  type="button"
-  variant="ghost"
-  size="default"
-  className="gap-2"
-  aria-label="Search documentation"
+    id="search-trigger"
+    type="button"
+    variant="ghost"
+    size="default"
+    className="gap-2"
+    aria-label="Search documentation"
 >
-  <Icon name="search" class="size-4" />
-  <span class="hidden text-sm md:inline pr-4">Search...</span>
-  <KbdGroup className="ml-auto hidden lg:inline-flex">
-    <Kbd>⌘</Kbd>
-    <Kbd>K</Kbd>
-  </KbdGroup>
+    <Icon name="search" class="size-4" />
+    <span class="hidden pr-4 text-sm md:inline">Search...</span>
+    <KbdGroup className="ml-auto hidden lg:inline-flex">
+        <Kbd>⌘</Kbd>
+        <Kbd>K</Kbd>
+    </KbdGroup>
 </Button>
 
 <script>
-  // Open command palette when search trigger is clicked
-  function setupSearchTrigger() {
-    const searchTrigger = document.getElementById("search-trigger");
-    if (searchTrigger) {
-      searchTrigger.addEventListener("click", () => {
-        // Dispatch custom event to open search
-        window.dispatchEvent(new Event("open-search"));
-      });
+    // Open command palette when search trigger is clicked
+    function setupSearchTrigger() {
+        const searchTrigger = document.getElementById("search-trigger");
+        if (searchTrigger) {
+            searchTrigger.addEventListener("click", () => {
+                // Dispatch custom event to open search
+                window.dispatchEvent(new Event("open-search"));
+            });
+        }
     }
-  }
 
-  // Setup on initial load
-  document.addEventListener("astro:page-load", setupSearchTrigger);
+    // Setup on initial load
+    document.addEventListener("astro:page-load", setupSearchTrigger);
 </script>

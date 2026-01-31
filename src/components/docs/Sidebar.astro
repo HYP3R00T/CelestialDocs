@@ -1,19 +1,14 @@
 ---
-import SidebarGroup from "./SidebarGroup.astro";
-import SidebarEntry from "./SidebarEntry.astro";
-import DocIcon from "./DocIcon.astro";
-import type { SidebarGroupItem, SidebarProps } from "@/lib/docs/types";
-
 import DocsTabs from "./DocsTabs.astro";
 import DocsContent from "./DocsContent.astro";
+import type { SidebarProps } from "@/lib/docs/types";
 
-const { tabs, showTabs, activeTab, currentSlug, collectionId } =
-    Astro.props as SidebarProps & { collectionId?: string };
+const { tabs, showTabs, activeTab, currentSlug, collectionId } = Astro.props as SidebarProps & {
+    collectionId?: string;
+};
 ---
 
-<aside
-    class="sticky top-17 h-[calc(100vh-4.25rem)] overflow-y-auto bg-background min-w-2xs"
->
+<aside class="bg-background sticky top-17 h-[calc(100vh-4.25rem)] min-w-2xs overflow-y-auto">
     <nav aria-label="Documentation navigation" class="flex h-full flex-col">
         <!-- Tabs section - pinned at top  -->
         <DocsTabs

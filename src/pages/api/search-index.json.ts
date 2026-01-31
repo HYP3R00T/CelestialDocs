@@ -1,9 +1,10 @@
 import type { APIRoute } from "astro";
 import { buildSearchIndex } from "@/lib/search/buildSearchIndex";
+import type { SearchIndex } from "@/lib/search/types";
 
 // Cache configuration
 const CACHE_DURATION = 30 * 1000; // 30 seconds
-let cachedIndex: any = null;
+let cachedIndex: SearchIndex | null = null;
 let cacheTimestamp = 0;
 
 export const GET: APIRoute = async () => {
@@ -38,14 +39,11 @@ export const GET: APIRoute = async () => {
         });
     } catch (err) {
         console.error("Failed to build search index:", err);
-        return new Response(
-            JSON.stringify({ error: "Failed to build search index" }),
-            {
-                status: 500,
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8",
-                },
+        return new Response(JSON.stringify({ error: "Failed to build search index" }), {
+            status: 500,
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
             },
-        );
+        });
     }
 };

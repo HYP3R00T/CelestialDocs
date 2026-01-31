@@ -18,9 +18,7 @@ import type { SearchIndex, SearchItem } from "@/lib/search/types";
 export function CommandPalette() {
     const [open, setOpen] = React.useState(false);
     const [searchIndex, setSearchIndex] = React.useState<SearchItem[]>([]);
-    const [filteredResults, setFilteredResults] = React.useState<SearchItem[]>(
-        [],
-    );
+    const [filteredResults, setFilteredResults] = React.useState<SearchItem[]>([]);
     const [searchQuery, setSearchQuery] = React.useState("");
     const fuseRef = React.useRef<Fuse<SearchItem> | null>(null);
 
@@ -105,26 +103,17 @@ export function CommandPalette() {
         });
 
         setFilteredResults(filtered.slice(0, 20));
-    }, [
-        searchQuery,
-        searchIndex,
-        filterDocs,
-        filterFunnydocs,
-        filterPages,
-        filterHeadings,
-    ]);
+    }, [searchQuery, searchIndex, filterDocs, filterFunnydocs, filterPages, filterHeadings]);
 
     // Handle item selection
     const handleSelect = (url: string) => {
         setOpen(false);
-        window.location.href = url;
+        window.location.assign(url);
     };
 
     // Group results by type
     const pageResults = filteredResults.filter((item) => item.type === "page");
-    const headingResults = filteredResults.filter(
-        (item) => item.type === "heading",
-    );
+    const headingResults = filteredResults.filter((item) => item.type === "heading");
 
     return (
         <CommandDialog
@@ -141,8 +130,8 @@ export function CommandPalette() {
 
             {/* Filter toggles */}
             <div className="flex items-center gap-2 border-b px-3 py-2">
-                <FilterIcon className="size-4 text-muted-foreground" />
-                <div className="flex flex-wrap gap-1 items-center">
+                <FilterIcon className="text-muted-foreground size-4" />
+                <div className="flex flex-wrap items-center gap-1">
                     <Toggle
                         size="sm"
                         pressed={filterDocs}
@@ -159,7 +148,7 @@ export function CommandPalette() {
                     >
                         Funnydocs
                     </Toggle>
-                    <div className="mx-1 h-6 w-px bg-border" />
+                    <div className="bg-border mx-1 h-6 w-px" />
                     <Toggle
                         size="sm"
                         pressed={filterPages}
@@ -194,11 +183,9 @@ export function CommandPalette() {
                                 >
                                     <FileTextIcon />
                                     <div className="flex flex-col gap-1">
-                                        <div className="font-medium">
-                                            {item.title}
-                                        </div>
+                                        <div className="font-medium">{item.title}</div>
                                         {item.description && (
-                                            <div className="text-muted-foreground text-xs line-clamp-1">
+                                            <div className="text-muted-foreground line-clamp-1 text-xs">
                                                 {item.description}
                                             </div>
                                         )}
@@ -224,9 +211,7 @@ export function CommandPalette() {
                                 >
                                     <HashIcon />
                                     <div className="flex flex-col gap-1">
-                                        <div className="font-medium">
-                                            {item.headingText}
-                                        </div>
+                                        <div className="font-medium">{item.headingText}</div>
                                         <div className="text-muted-foreground text-xs">
                                             {item.pageTitle}
                                         </div>

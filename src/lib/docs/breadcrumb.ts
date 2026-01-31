@@ -1,5 +1,4 @@
 import { SIDEBAR_NAVIGATION } from "@data/config";
-import type { ContentSystem } from "@/lib/types";
 import type { Entry, Group, GroupOrEntry } from "./types";
 import { resolveSystem } from "../resolveSystem";
 
@@ -22,7 +21,10 @@ function getGroupsForCollection(collectionId?: string): GroupOrEntry[] {
     return groups;
 }
 
-function findGroupByPath(path: string, groups: GroupOrEntry[] = getGroupsForCollection()): Group | undefined {
+function findGroupByPath(
+    path: string,
+    groups: GroupOrEntry[] = getGroupsForCollection(),
+): Group | undefined {
     for (const node of groups) {
         if (!isGroup(node)) {
             continue;
@@ -42,7 +44,10 @@ function findGroupByPath(path: string, groups: GroupOrEntry[] = getGroupsForColl
 /**
  * Find an entry in the navigation tree by its slug
  */
-function findEntryBySlug(slug: string, nodes: GroupOrEntry[] = getGroupsForCollection()): Entry | undefined {
+function findEntryBySlug(
+    slug: string,
+    nodes: GroupOrEntry[] = getGroupsForCollection(),
+): Entry | undefined {
     for (const node of nodes) {
         if (!isGroup(node)) {
             if (node.slug === slug) {
@@ -136,7 +141,10 @@ export function buildBreadcrumbItems(
     const system = resolveSystem(collectionId);
 
     const items: Array<{ label: string; href?: string }> = [
-        { label: system ? (system.id.charAt(0).toUpperCase() + system.id.slice(1)) : "Docs", href: system ? (system.route ?? `/${system.id}`) : "/docs" },
+        {
+            label: system ? system.id.charAt(0).toUpperCase() + system.id.slice(1) : "Docs",
+            href: system ? (system.route ?? `/${system.id}`) : "/docs",
+        },
     ];
 
     let currentPath = "";
@@ -155,7 +163,9 @@ export function buildBreadcrumbItems(
 
         items.push({
             label,
-            href: shouldBeClickable ? `${system?.route ?? `/${system?.id ?? 'docs'}/${currentPath}`}` : undefined,
+            href: shouldBeClickable
+                ? `${system?.route ?? `/${system?.id ?? "docs"}/${currentPath}`}`
+                : undefined,
         });
     }
 
