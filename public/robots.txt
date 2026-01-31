@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://celestialdocs.hyperoot.dev/sitemap-index.xml
