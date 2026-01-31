@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { HEADER_SOCIAL_LINKS, HEADER_NAV_ITEMS, CONTENT, SIDEBAR_NAVIGATION } from "@data/config";
 import DocsTabs from "@/components/docs/DocsTabs.astro";
 import DocsContent from "@/components/docs/DocsContent.astro";
-import { buildNavigation, getActiveTab } from "@/lib/navigation";
+import { getActiveTab, buildNavigation } from "@/lib/navigation";
 
 const activeSocials = HEADER_SOCIAL_LINKS.filter((social) => social.active);
 const menuPanelId = "mobile-menu";
@@ -26,7 +26,12 @@ const currentSlug = baseRoute
     ? normalizedPath.slice(baseRoute.length).replace(/^\/+/, "") || null
     : null;
 
-const navResult = collectionId ? await buildNavigation(SIDEBAR_NAVIGATION, collectionId) : null;
+// Build navigation for the current collection
+let navResult = null;
+if (collectionId) {
+    navResult = await buildNavigation(SIDEBAR_NAVIGATION, collectionId);
+}
+
 const activeTab = navResult
     ? currentSlug
         ? getActiveTab(currentSlug, navResult.tabs)

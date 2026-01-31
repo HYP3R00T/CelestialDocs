@@ -1,33 +1,65 @@
 ---
 import { getCollection, render } from "astro:content";
 import type { CollectionKey } from "astro:content";
-import { CONTENT } from "@data/config";
+import { CONTENT, SIDEBAR_NAVIGATION } from "@data/config";
 import DocsLayout from "@/layouts/DocsLayout.astro";
 import MdxImage from "@/components/docs/markdown/MdxImage.astro";
 import MdxLink from "@/components/docs/markdown/MdxLink.astro";
+import { buildNavigation } from "@/lib/navigation";
 
 export async function getStaticPaths() {
-    const paths: { params: { collection: CollectionKey }; props: { collection: CollectionKey } }[] =
-        [];
+    const paths: {
+        params: { collection: CollectionKey };
+        props: {
+            collection: CollectionKey;
+            nav: Awaited<ReturnType<typeof buildNavigation>>;
+            doc: Awaited<ReturnType<typeof getCollection>>[number] | undefined;
+        };
+    }[] = [];
+
     for (const sys of CONTENT.systems) {
+        const nav = await buildNavigation(SIDEBAR_NAVIGATION, sys.id);
+        const entries = await getCollection(sys.id as CollectionKey);
+
+        // Check if index doc exists, if not use the default redirect target
+        let indexDoc = entries.find((entry) => entry.id === "index");
+
+        if (!indexDoc) {
+            // Find the default doc to render instead
+            const defaultRedirect = sys.defaultDocRedirect;
+            if (defaultRedirect) {
+                // Extract slug from redirect path (e.g., "/docs/introduction" -> "introduction")
+                const baseRoute = sys.route ?? `/${sys.id}`;
+                const defaultSlug = defaultRedirect
+                    .replace(baseRoute + "/", "")
+                    .replace(/^\/+/, "");
+                indexDoc = entries.find((entry) => entry.id === defaultSlug);
+            }
+        }
+
         paths.push({
             params: { collection: sys.id as CollectionKey },
-            props: { collection: sys.id as CollectionKey },
+            props: {
+                collection: sys.id as CollectionKey,
+                nav,
+                doc: indexDoc,
+            },
         });
     }
+
     return paths;
 }
 
 const collection = Astro.params.collection as CollectionKey;
-
-const entries = await getCollection(collection);
-const doc = entries.find((entry) => entry.id === "index");
+const { nav, doc } = Astro.props as {
+    collection: CollectionKey;
+    nav: Awaited<ReturnType<typeof buildNavigation>>;
+    doc: Awaited<ReturnType<typeof getCollection>>[number] | undefined;
+};
 
 if (!doc) {
-    return Astro.redirect(
-        (CONTENT.systems ?? []).find((system) => system.id === collection)?.defaultDocRedirect ??
-            "/",
-    );
+    // Fallback to home if no doc found at all
+    return Astro.redirect("/");
 }
 
 const { Content, headings } = await render(doc);
@@ -38,6 +70,6 @@ const components = {
 };
 ---
 
-<DocsLayout frontmatter={doc} headings={headings} collection={collection}>
+<DocsLayout frontmatter={doc} headings={headings} collection={collection} nav={nav}>
     <Content components={components} />
 </DocsLayout>
