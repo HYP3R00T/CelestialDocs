@@ -1,5 +1,6 @@
-import { buildNavigation } from "./buildNavigation";
-import { getActiveTab } from "./getActiveTab";
-export type { Tab, NavigationResult } from "./types";
+import { buildNavigation } from './buildNavigation'
+import { getActiveTab } from './getActiveTab'
 
-export { buildNavigation, getActiveTab };
+export type { NavigationResult, Tab } from './types'
+
+export { buildNavigation, getActiveTab }

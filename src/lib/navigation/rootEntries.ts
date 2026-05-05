@@ -1,21 +1,26 @@
-import { deriveLabel } from "./label.ts";
-import type { DocEntry, ProcessedEntry } from "./types";
+import { deriveLabel } from './label.ts'
+import type { DocEntry, ProcessedEntry } from './types'
 
 export function buildRootEntries(
-    filesystemStructure: Map<string, DocEntry[]>,
-    slugs: Set<string>,
+  filesystemStructure: Map<string, DocEntry[]>,
+  slugs: Set<string>,
 ): ProcessedEntry[] {
-    const rootDocs = filesystemStructure.get("") ?? [];
+  const rootDocs = filesystemStructure.get('') ?? []
 
-    const rootEntries = rootDocs
-        .filter((doc) => !doc.data.navHidden && doc.slug !== "index" && !slugs.has(doc.slug))
-        .map((doc) => ({
-            slug: doc.slug,
-            label: deriveLabel(doc),
-            icon: doc.data.navIcon,
-        }))
-        .sort((a, b) => a.label.localeCompare(b.label));
+  const rootEntries = rootDocs
+    .filter(
+      (doc) =>
+        !doc.data.navHidden && doc.slug !== 'index' && !slugs.has(doc.slug),
+    )
+    .map((doc) => ({
+      slug: doc.slug,
+      label: deriveLabel(doc),
+      icon: doc.data.navIcon,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label))
 
-    rootEntries.forEach((entry) => slugs.add(entry.slug));
-    return rootEntries;
+  rootEntries.forEach((entry) => {
+    slugs.add(entry.slug)
+  })
+  return rootEntries
 }
