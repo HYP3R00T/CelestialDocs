@@ -6,50 +6,50 @@ import reactHooks from "eslint-plugin-react-hooks";
 import importPlugin from "eslint-plugin-import";
 
 export default [
-    {
-        ignores: ["dist/**", "node_modules/**", ".astro/**", ".pnpm-store/**", "public/**"],
+  {
+    ignores: ["dist/**", "node_modules/**", ".astro/**", ".pnpm-store/**", "public/**"],
+  },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  ...astro.configs.recommended,
+  {
+    files: ["**/*.{js,jsx,ts,tsx}", "**/*.astro"],
+    plugins: {
+      import: importPlugin,
     },
-    js.configs.recommended,
-    ...tseslint.configs.recommended,
-    ...astro.configs.recommended,
-    {
-        files: ["**/*.{js,jsx,ts,tsx}", "**/*.astro"],
-        plugins: {
-            import: importPlugin,
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
+      "import/order": [
+        "warn",
+        {
+          alphabetize: { order: "asc", caseInsensitive: true },
+          "newlines-between": "always",
+          groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
         },
-        rules: {
-            "@typescript-eslint/no-unused-vars": [
-                "error",
-                { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
-            ],
-            "import/order": [
-                "warn",
-                {
-                    alphabetize: { order: "asc", caseInsensitive: true },
-                    "newlines-between": "always",
-                    groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
-                },
-            ],
-        },
+      ],
     },
-    {
-        files: ["**/*.{jsx,tsx}"],
-        plugins: {
-            react,
-            "react-hooks": reactHooks,
-        },
-        settings: {
-            react: { version: "detect" },
-        },
-        rules: {
-            "react/react-in-jsx-scope": "off",
-            ...reactHooks.configs.recommended.rules,
-        },
+  },
+  {
+    files: ["**/*.{jsx,tsx}"],
+    plugins: {
+      react,
+      "react-hooks": reactHooks,
     },
-    {
-        files: ["**/*.astro"],
-        rules: {
-            "@typescript-eslint/no-unused-expressions": "off",
-        },
+    settings: {
+      react: { version: "detect" },
     },
+    rules: {
+      "react/react-in-jsx-scope": "off",
+      ...reactHooks.configs.recommended.rules,
+    },
+  },
+  {
+    files: ["**/*.astro"],
+    rules: {
+      "@typescript-eslint/no-unused-expressions": "off",
+    },
+  },
 ];
