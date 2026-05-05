@@ -20,7 +20,7 @@ List the key changes introduced in this PR:
 
 Describe how the changes were tested:
 
-- Environment (e.g., Node.js 20.11.1, pnpm 9.6.0, macOS 14, Chrome 126, Firefox 127)
+- Environment (e.g., Node.js 22.12.0, pnpm 9.6.0, macOS 14, Chrome 126, Firefox 127)
 - Manual tests performed (e.g., checked responsive layout, dark mode toggle)
 - Accessibility checks performed (e.g., keyboard navigation, `aria-*` attributes)
 
