@@ -1,24 +1,30 @@
 {
-    "name": "CelestialDocs",
-    "build": {
-        "context": ".",
-        "dockerfile": "Dockerfile"
-    },
-    "containerEnv": {
-        "MISE_GITHUB_TOKEN": "${localEnv:MISE_GITHUB_TOKEN}"
-    },
-    "postCreateCommand": "scripts/setup.sh",
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "tamasfe.even-better-toml",
-                "christian-kohler.path-intellisense",
-                "redhat.vscode-yaml",
-                "hverlin.mise-vscode",
-                "astro-build.astro-vscode",
-                "bradlc.vscode-tailwindcss"
-            ]
-        }
-    },
-    "forwardPorts": [4321]
+  "name": "CelestialDocs",
+  "build": {
+    "context": ".",
+    "dockerfile": "Dockerfile"
+  },
+  "containerEnv": {
+    "MISE_GITHUB_TOKEN": "${localEnv:MISE_GITHUB_TOKEN}"
+  },
+  "postCreateCommand": "scripts/setup.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "tamasfe.even-better-toml",
+        "christian-kohler.path-intellisense",
+        "redhat.vscode-yaml",
+        "hverlin.mise-vscode",
+        "astro-build.astro-vscode",
+        "bradlc.vscode-tailwindcss",
+        "biomejs.biome",
+        "github.vscode-github-actions",
+        "EditorConfig.EditorConfig",
+        "DavidAnson.vscode-markdownlint"
+      ]
+    }
+  },
+  "forwardPorts": [
+    4321
+  ]
 }
