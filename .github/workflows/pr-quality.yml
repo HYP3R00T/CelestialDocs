@@ -2,7 +2,7 @@ name: PR Quality Checks
 
 on:
     pull_request:
-        types: [ opened, synchronize, reopened ]
+        types: [opened, synchronize, reopened]
 
 permissions:
     contents: read
