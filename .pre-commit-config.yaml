@@ -1,12 +1,41 @@
 repos:
-    - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v6.0.0
-      hooks:
-          - id: check-yaml
-          - id: end-of-file-fixer
-          - id: trailing-whitespace
-    - repo: https://github.com/commitizen-tools/commitizen
-      rev: v4.10.0
-      hooks:
-          - id: commitizen
-            stages: [commit-msg]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-json
+        files: "\\.json$"
+        stages: [ pre-commit ]
+        exclude: "^\\.git/"
+      - id: check-toml
+        files: "\\.toml$"
+        stages: [ pre-commit ]
+        exclude: "^\\.git/"
+      - id: check-yaml
+        files: "\\.(yaml|yml)$"
+        stages: [ pre-commit ]
+        exclude: "^\\.git/"
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [ --fix=lf ]
+      - id: trailing-whitespace
+        args: [ --markdown-linebreak-ext=md ]
+      - id: check-shebang-scripts-are-executable
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: detect-private-key
+
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.15.0
+    hooks:
+      - id: commitizen
+        stages: [ commit-msg ]
+
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.4.14
+    hooks:
+      - id: biome-check
+        exclude: "\\.astro$"
+      - id: biome-format
+        exclude: "\\.astro$"
+      - id: biome-lint
+        exclude: "\\.astro$"
