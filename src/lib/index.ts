@@ -21,15 +21,15 @@
  *   import type { DocsLayoutProps, SidebarProps } from "@/lib/docs/types";
  */
 
-// Re-export commonly used types for convenience
-export type { HeadSEOProps, NavItem, SocialObjects, SiteConfig } from "./types";
 export type {
-    Entry,
-    Group,
-    Sidebar,
-    BaseLayoutProps,
-    DocsLayoutProps,
-    SidebarProps,
-    Tab,
-    Heading,
-} from "./docs/types";
+  BaseLayoutProps,
+  DocsLayoutProps,
+  Entry,
+  Group,
+  Heading,
+  Sidebar,
+  SidebarProps,
+  Tab,
+} from './docs/types'
+// Re-export commonly used types for convenience
+export type { HeadSEOProps, NavItem, SiteConfig, SocialObjects } from './types'
