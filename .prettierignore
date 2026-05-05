@@ -3,3 +3,4 @@ node_modules
 .astro
 .pnpm-store
 public
+pnpm-lock.yaml
