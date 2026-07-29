@@ -58,15 +58,15 @@ We believe in open source. Fork the repo, make it better, and own your improveme
 **Before submitting a PR**, please ensure code quality:
 
 ```bash
-pnpm validate  # Runs lint, format check, and typecheck
+pnpm validate  # Runs Biome checks and TypeScript validation
 ```
 
 Or run checks individually:
 
 ```bash
-pnpm lint        # Check for ESLint errors
-pnpm format      # Auto-format with Prettier
-pnpm typecheck   # Validate TypeScript types
+pnpm check       # Lint, format, and organize imports with Biome
+pnpm check:fix   # Apply Biome's safe fixes
+pnpm typecheck   # Validate with the TypeScript 7 compiler
 ```
 
 ## ❤️ Support
