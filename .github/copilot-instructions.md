@@ -9,7 +9,6 @@
     - Components: `PascalCase.astro` / `PascalCase.tsx`
     - Utilities: `camelCase.ts`
     - Styles: `kebab-case.css`
-
 - Prefix unused or private variables with an underscore (`_`).
 
 ## Type Safety
@@ -20,7 +19,6 @@
 - Narrow types aggressively:
     - Use `enum`, `as const`, or `type Literal = 'x' | 'y'`.
     - Use discriminated unions for variant handling.
-
 - Validate runtime data with **Zod schemas** or Astro Content Collections.
 
 ## Component & Project Structure
@@ -32,7 +30,6 @@
     - `src/pages/` -> route entry points
     - `src/lib/` -> helpers/utilities
     - `content/` -> content collections
-
 - Prefer server-rendered Astro components. Use hydrated islands (`client:*`) only where interactivity is necessary.
 - For hydration:
     - Prefer `client:idle`, `client:visible`, or `client:media` over `client:load`.
@@ -40,7 +37,7 @@
 ## Tailwind CSS Guidelines
 
 - Use Tailwind utility classes for most styling.
-- Class order should be **auto-sorted** by Prettier with `prettier-plugin-tailwindcss`.
+- Keep utility class lists readable and grouped consistently.
 - Use `@apply` only for **repeated patterns** in component-scoped CSS.
 - Use responsive prefixes (`sm:`, `md:`, `lg:`, etc.) and dark mode (`dark:`) consistently.
 - Prefer semantic class usage (`prose`, `btn`, `card`) when using plugin-based abstractions.
@@ -54,8 +51,8 @@
 
 ## Formatting and Style
 
-- Format code with **Prettier** (with Astro + Tailwind plugins).
-- Lint with **ESLint** (with `eslint-plugin-astro`, `@typescript-eslint`).
+- Format and lint supported source files with **Biome**.
+- Validate Markdown with **Rumdl** and run all hooks through **prek**.
 - Organize imports:
     1. Node.js built-ins
     2. Third-party libraries

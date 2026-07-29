@@ -7,12 +7,11 @@ The goal of code review is to ensure high-quality, maintainable, accessible, and
 ### Project Hygiene & Tooling
 
 - Uses **pnpm** consistently (`pnpm-lock.yaml` committed; PRs avoid lockfile churn).
-- Scripts exist and run cleanly: `pnpm dev`, `pnpm build`, `pnpm preview`, `pnpm typecheck`, `pnpm test`, `pnpm lint`, `pnpm format`.
+- Scripts exist and run cleanly: `pnpm dev`, `pnpm build`, `pnpm preview`, `pnpm validate`, `pnpm check:fix`.
 - Lint/format enforced:
-    - **ESLint** with `@typescript-eslint`, `eslint-plugin-astro`, and `eslint-plugin-import`.
-    - **Prettier** with `prettier-plugin-astro` and Tailwind class sorter (e.g. `prettier-plugin-tailwindcss`).
-    - Optional: `lint-staged` + `husky`/`lefthook` for pre-commit.
-
+    - **Biome** for Astro, CSS, JavaScript, TypeScript, and JSON.
+    - **Rumdl** for Markdown.
+    - **prek** for pre-commit and commit-message hooks.
 - TypeScript `strict` mode enabled; no `any` without justification; `unknown` preferred over `any`.
 - No unused deps; dev/prod deps correctly split; `pnpm up -L` and `pnpm audit` issues addressed or justified.
 
@@ -35,7 +34,7 @@ The goal of code review is to ensure high-quality, maintainable, accessible, and
 
 ### Data & Content Validation
 
-- **Content Collections** use schemas (Zod) in `src/content/config.ts` for Markdown/MDX.
+- **Content Collections** use schemas (Zod) in `src/content.config.ts` for Markdown/MDX.
 - Frontmatter fields validated; optional vs required clear; date/string/enum constraints enforced.
 - External data (fetches, webhooks) validated against runtime schemas before use.
 - Markdown rendering sanitizes HTML; avoid unsafe `set:html` unless sanitized.
@@ -45,14 +44,13 @@ The goal of code review is to ensure high-quality, maintainable, accessible, and
 - Prefer server-rendered components; hydrate only when interactivity is required.
 - Choose the lightest hydration directive:
     - `client:idle | client:visible | client:media` preferred over `client:load`.
-
 - Avoid large framework islands for trivial UI; use vanilla/`<script>` where appropriate.
 - No global side-effects in islands; cleanup event listeners/timeouts.
 
 ### Tailwind CSS
 
 - Tailwind configured (`tailwind.config.{js,ts}`, `postcss.config.cjs`) with project paths correct.
-- Class lists are readable and sorted (plugin or Prettier).
+- Class lists are readable and grouped consistently.
 - Prefer utility classes; use `@apply` sparingly in component CSS for repeating patterns.
 - Responsive, dark mode, and state variants used correctly (`sm:`, `md:`, `lg:`, `xl:`, `dark:`, `aria-*`, `data-*`).
 - No dead global CSS; avoid leaking styles from `.astro` `<style>` blocks (use `is:global` only when needed).

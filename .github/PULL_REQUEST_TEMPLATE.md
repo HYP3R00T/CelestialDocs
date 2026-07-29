@@ -20,7 +20,7 @@ List the key changes introduced in this PR:
 
 Describe how the changes were tested:
 
-- Environment (e.g., Node.js 22.12.0, pnpm 9.6.0, macOS 14, Chrome 126, Firefox 127)
+- Environment (e.g., Node.js 24, pnpm 11, macOS, Chrome, Firefox)
 - Manual tests performed (e.g., checked responsive layout, dark mode toggle)
 - Accessibility checks performed (e.g., keyboard navigation, `aria-*` attributes)
 
@@ -28,10 +28,10 @@ Describe how the changes were tested:
 
 ### Code Quality
 
-- [ ] Ran `pnpm lint` and fixed all ESLint errors/warnings
-- [ ] Ran `pnpm format` to format code with Prettier
-- [ ] Ran `pnpm typecheck` and resolved all TypeScript errors
-- [ ] All CI checks pass (or `pnpm validate` runs successfully)
+- [ ] Ran `pnpm check:fix` and reviewed Biome's changes
+- [ ] Ran `pnpm validate` and resolved all diagnostics
+- [ ] Ran `pnpm build` successfully
+- [ ] All CI checks pass
 
 ### Standards & Testing
 
