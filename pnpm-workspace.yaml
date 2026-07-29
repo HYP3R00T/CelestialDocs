@@ -1,0 +1,11 @@
+allowBuilds:
+  esbuild: true
+minimumReleaseAge: 0
+peerDependencyRules:
+  # Astro's optional WASI fallbacks currently bridge packages using Emscripten
+  # N-API v1 and v2. The native build path does not load these fallbacks.
+  allowedVersions:
+    "@napi-rs/wasm-runtime>@emnapi/core": "1"
+    "@napi-rs/wasm-runtime>@emnapi/runtime": "1"
+shamefullyHoist: true
+storeDir: .pnpm-store/v11
