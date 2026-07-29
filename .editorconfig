@@ -16,3 +16,9 @@ max_line_length = 120
 
 [*.md]
 indent_size = 4
+
+[*.{bat,cmd,ps1}]
+end_of_line = crlf
+
+[Dockerfile]
+indent_size = 4

@@ -1,0 +1,21 @@
+[global]
+flavor = "standard"
+disable = [
+  "MD007", # Expected 2 spaces for indent depth 1
+  "MD010", # No hard tabs
+  "MD013", # Line length
+  "MD033", # No inline HTML
+  "MD034", # No bare URLs
+  "MD036", # No emphasis as heading
+  "MD037", # Spaces around emphasis
+  "MD039", # No space in links
+  "MD041", # First line in file should be a level 1 heading
+  "MD044", # Proper names
+  "MD046", # Code block style
+  "MD049", # Emphasis style
+  "MD059", # Link text
+  "MD060", # Table format
+]
+
+# Exclude generated or temporary content
+exclude = ["node_modules/**"]
