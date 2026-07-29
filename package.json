@@ -17,7 +17,7 @@
     "lint:fix": "biome lint --write .",
     "format": "biome format --write .",
     "format:check": "biome format .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "astro sync && tsc --noEmit",
     "validate": "pnpm check && pnpm typecheck"
   },
   "dependencies": {
