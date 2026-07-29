@@ -1,72 +1,52 @@
 ---
+import type { SidebarEntryItem, SidebarGroupItem, Tab } from "@/lib/docs/types";
 import SidebarEntry from "./SidebarEntry.astro";
 import SidebarGroup from "./SidebarGroup.astro";
 
-import type { SidebarEntryItem, SidebarGroupItem, Tab } from "@/lib/docs/types";
-
 const { activeTab, currentSlug, collectionId } = Astro.props as {
-    activeTab?: Tab;
-    currentSlug: string | null;
-    collectionId?: string;
+  activeTab?: Tab;
+  currentSlug: string | null;
+  collectionId?: string;
 };
 
-const isEntryItem = (child: SidebarGroupItem | SidebarEntryItem): child is SidebarEntryItem =>
-    "slug" in child;
+const isEntryItem = (child: SidebarGroupItem | SidebarEntryItem): child is SidebarEntryItem => "slug" in child;
 ---
 
-{
-    activeTab && (
-        <>
-            {/* Ordered children (entries and groups) if present */}
-            {activeTab.group.children && activeTab.group.children.length > 0 ? (
-                <div class="space-y-2">
-                    {activeTab.group.children.map((child) =>
-                        isEntryItem(child) ? (
-                            <ul class="space-y-1">
-                                <SidebarEntry
-                                    entry={child}
-                                    currentSlug={currentSlug}
-                                    collectionId={collectionId}
-                                />
-                            </ul>
-                        ) : (
-                            <SidebarGroup
-                                group={child}
-                                currentSlug={currentSlug}
-                                collectionId={collectionId}
-                            />
-                        ),
-                    )}
-                </div>
+{activeTab && (
+    <>
+      {/* Ordered children (entries and groups) if present */}
+      {activeTab.group.children && activeTab.group.children.length > 0 ? (
+        <div class="space-y-2">
+          {activeTab.group.children.map((child) =>
+            isEntryItem(child) ? (
+              <ul class="space-y-1">
+                <SidebarEntry entry={child} currentSlug={currentSlug} collectionId={collectionId} />
+              </ul>
             ) : (
-                <>
-                    {/* Root-level entries (if any) */}
-                    {activeTab.group.entries && activeTab.group.entries.length > 0 && (
-                        <ul class="space-y-1">
-                            {activeTab.group.entries.map((entry) => (
-                                <SidebarEntry
-                                    entry={entry}
-                                    currentSlug={currentSlug}
-                                    collectionId={collectionId}
-                                />
-                            ))}
-                        </ul>
-                    )}
+              <SidebarGroup group={child} currentSlug={currentSlug} collectionId={collectionId} />
+            ),
+          )}
+        </div>
+      ) : (
+        <>
+          {/* Root-level entries (if any) */}
+          {activeTab.group.entries && activeTab.group.entries.length > 0 && (
+            <ul class="space-y-1">
+              {activeTab.group.entries.map((entry) => (
+                <SidebarEntry entry={entry} currentSlug={currentSlug} collectionId={collectionId} />
+              ))}
+            </ul>
+          )}
 
-                    {/* Root-level groups */}
-                    {activeTab.group.groups && activeTab.group.groups.length > 0 && (
-                        <div class="space-y-2">
-                            {activeTab.group.groups.map((group) => (
-                                <SidebarGroup
-                                    group={group}
-                                    currentSlug={currentSlug}
-                                    collectionId={collectionId}
-                                />
-                            ))}
-                        </div>
-                    )}
-                </>
-            )}
+          {/* Root-level groups */}
+          {activeTab.group.groups && activeTab.group.groups.length > 0 && (
+            <div class="space-y-2">
+              {activeTab.group.groups.map((group) => (
+                <SidebarGroup group={group} currentSlug={currentSlug} collectionId={collectionId} />
+              ))}
+            </div>
+          )}
         </>
-    )
-}
+      )}
+    </>
+  )}

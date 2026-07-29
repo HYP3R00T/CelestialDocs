@@ -1,6 +1,7 @@
-import { defineCollection, z } from 'astro:content'
-import { CONTENT } from '@data/config'
-import { glob } from 'astro/loaders'
+import { defineCollection } from "astro:content";
+import { CONTENT } from "@data/config";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 // Reusable schema for all content systems
 const createSchema = () =>
@@ -16,20 +17,20 @@ const createSchema = () =>
     navIcon: z.string().optional(),
     navHidden: z.boolean().optional().default(false),
     hide_breadcrumbs: z.boolean().optional().default(false),
-  })
+  });
 
 // Build collection definitions dynamically from `CONTENT.systems`.
 // Each collection is completely separate to avoid ID conflicts
-const collectionsMap: Record<string, ReturnType<typeof defineCollection>> = {}
+const collectionsMap: Record<string, ReturnType<typeof defineCollection>> = {};
 
 for (const sys of CONTENT.systems) {
   collectionsMap[sys.id] = defineCollection({
     loader: glob({
-      pattern: '**/*.{md,mdx}',
+      pattern: "**/*.{md,mdx}",
       base: `./${sys.dir}`,
     }),
     schema: createSchema,
-  })
+  });
 }
 
-export const collections = collectionsMap
+export const collections = collectionsMap;

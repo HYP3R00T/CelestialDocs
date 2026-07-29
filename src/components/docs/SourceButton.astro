@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { getSystemRoute } from "@/lib/resolveSystem";
 
 interface Props {
-    slug: string;
-    collectionId?: string;
+  slug: string;
+  collectionId?: string;
 }
 
 const { slug, collectionId } = Astro.props;
@@ -14,8 +14,8 @@ const base = getSystemRoute(collectionId);
 ---
 
 <a href={`${base}/${slug}.md`} target="_blank" rel="noopener noreferrer">
-    <Button variant="outline" size="sm" className="gap-2">
-        <Icon name="github" class="size-4" />
-        View as Markdown
-    </Button>
+  <Button variant="outline" size="sm" className="gap-2">
+    <Icon name="github" class="size-4" />
+    View as Markdown
+  </Button>
 </a>

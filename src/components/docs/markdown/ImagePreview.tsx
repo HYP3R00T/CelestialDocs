@@ -1,13 +1,13 @@
-import * as React from 'react'
-import { createPortal } from 'react-dom'
+import * as React from "react";
+import { createPortal } from "react-dom";
 
-import { Kbd } from '@/components/ui/kbd'
-import { cn } from '@/lib/utils'
+import { Kbd } from "@/components/ui/kbd";
+import { cn } from "@/lib/utils";
 
 interface ImagePreviewProps {
-  src: string
-  alt: string
-  className?: string
+  src: string;
+  alt: string;
+  className?: string;
 }
 
 /**
@@ -17,71 +17,71 @@ interface ImagePreviewProps {
  * - Click on backdrop or image to dismiss
  */
 export function ImagePreview({ src, alt, className }: ImagePreviewProps) {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const [isAnimating, setIsAnimating] = React.useState(false)
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [isAnimating, setIsAnimating] = React.useState(false);
 
   const handleOpen = () => {
-    setIsOpen(true)
-    setIsAnimating(true)
-  }
+    setIsOpen(true);
+    setIsAnimating(true);
+  };
 
-  const handleClose = () => {
-    setIsAnimating(false)
+  const handleClose = React.useCallback(() => {
+    setIsAnimating(false);
     // Wait for animation to complete before removing overlay
     setTimeout(() => {
-      setIsOpen(false)
-    }, 200)
-  }
+      setIsOpen(false);
+    }, 200);
+  }, []);
 
   // Handle escape key to close
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        handleClose()
+      if (e.key === "Escape" && isOpen) {
+        handleClose();
       }
-    }
+    };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown)
+      document.addEventListener("keydown", handleKeyDown);
       // Prevent body scroll when modal is open
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = ''
-    }
-  }, [isOpen])
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [handleClose, isOpen]);
 
   return (
     <>
       {/* Thumbnail - clickable image */}
-      <img
-        src={src}
-        alt={alt}
+      <button
+        type="button"
         onClick={handleOpen}
-        className={cn('cursor-zoom-in', className)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault()
-            handleOpen()
-          }
-        }}
         aria-label={`Click to preview: ${alt}`}
-      />
+        className="cursor-zoom-in border-0 bg-transparent p-0"
+      >
+        <img src={src} alt={alt} className={className} />
+      </button>
 
       {/* Full-screen overlay - rendered via portal to ensure it's above everything */}
       {isOpen &&
         createPortal(
           <div
             className={cn(
-              'fixed inset-0 z-100 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-opacity duration-200',
-              isAnimating ? 'opacity-100' : 'opacity-0',
+              "fixed inset-0 z-100 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-opacity duration-200",
+              isAnimating ? "opacity-100" : "opacity-0",
             )}
             onClick={handleClose}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                handleClose();
+              }
+            }}
             role="dialog"
+            tabIndex={-1}
             aria-modal="true"
             aria-label={`Image preview: ${alt}`}
           >
@@ -89,28 +89,26 @@ export function ImagePreview({ src, alt, className }: ImagePreviewProps) {
             <img
               src={src}
               alt={alt}
-              onClick={handleClose}
               className={cn(
-                'max-h-[90vh] max-w-[95vw] cursor-zoom-out object-contain transition-transform duration-200',
-                isAnimating ? 'scale-100' : 'scale-95',
+                "max-h-[90vh] max-w-[95vw] cursor-zoom-out object-contain transition-transform duration-200",
+                isAnimating ? "scale-100" : "scale-95",
               )}
             />
 
             {/* Close hint */}
             <div
               className={cn(
-                'absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-4 py-2 text-sm text-white/70 transition-opacity duration-300',
-                isAnimating ? 'opacity-100' : 'opacity-0',
+                "absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-4 py-2 text-sm text-white/70 transition-opacity duration-300",
+                isAnimating ? "opacity-100" : "opacity-0",
               )}
             >
-              Click anywhere or press{' '}
-              <Kbd className="bg-white/20 text-white/90">Esc</Kbd> to close
+              Click anywhere or press <Kbd className="bg-white/20 text-white/90">Esc</Kbd> to close
             </div>
           </div>,
           document.body,
         )}
     </>
-  )
+  );
 }
 
-export default ImagePreview
+export default ImagePreview;

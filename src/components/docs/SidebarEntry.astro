@@ -1,10 +1,10 @@
 ---
-import DocIcon from "./DocIcon.astro";
-
 import type { SidebarEntryProps } from "@/lib/docs/types";
 import { getSystemRoute } from "@/lib/resolveSystem";
+import DocIcon from "./DocIcon.astro";
+
 const { entry, currentSlug, collectionId } = Astro.props as SidebarEntryProps & {
-    collectionId?: string;
+  collectionId?: string;
 };
 const isActive = currentSlug === entry.slug;
 
@@ -12,19 +12,19 @@ const base = getSystemRoute(collectionId);
 ---
 
 <li>
-    <a
-        href={`${base}/${entry.slug}`}
-        class={`
+  <a
+    href={`${base}/${entry.slug}`}
+    class={`
       flex items-center gap-2 rounded-sm px-2 py-1 text-sm transition-colors
       ${
-          isActive
-              ? "bg-popover text-popover-foreground font-medium"
-              : "text-muted-foreground hover:bg-popover/50 hover:text-foreground"
+        isActive
+          ? "bg-popover text-popover-foreground font-medium"
+          : "text-muted-foreground hover:bg-popover/50 hover:text-foreground"
       }
     `}
-        aria-current={isActive ? "page" : undefined}
-    >
-        {entry.icon && <DocIcon name={entry.icon} class="h-4 w-4" aria-hidden="true" />}
-        <span>{entry.label}</span>
-    </a>
+    aria-current={isActive ? "page" : undefined}
+  >
+    {entry.icon && <DocIcon name={entry.icon} class="h-4 w-4" aria-hidden="true" />}
+    <span>{entry.label}</span>
+  </a>
 </li>

@@ -1,15 +1,15 @@
 export const fuseOptions = {
   keys: [
     {
-      name: 'title',
+      name: "title",
       weight: 0.5,
     },
     {
-      name: 'headingText',
+      name: "headingText",
       weight: 0.4,
     },
     {
-      name: 'description',
+      name: "description",
       weight: 0.1,
     },
   ],
@@ -18,4 +18,4 @@ export const fuseOptions = {
   includeMatches: true,
   minMatchCharLength: 2,
   ignoreLocation: true,
-}
+};

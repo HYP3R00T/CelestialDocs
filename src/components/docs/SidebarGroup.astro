@@ -1,122 +1,100 @@
 ---
 import { Icon } from "astro-icon/components";
-
+import type { SidebarGroupItem, SidebarGroupProps } from "@/lib/docs/types";
 import DocIcon from "./DocIcon.astro";
 import SidebarEntry from "./SidebarEntry.astro";
 
-import type { SidebarGroupProps, SidebarGroupItem } from "@/lib/docs/types";
-
-const {
-    group,
-    currentSlug,
-    level = 0,
-    collectionId,
-} = Astro.props as SidebarGroupProps & { collectionId?: string };
+const { group, currentSlug, level = 0, collectionId } = Astro.props as SidebarGroupProps & { collectionId?: string };
 
 // Determine if this group or any of its children contain the current page
 function containsSlug(g: SidebarGroupItem, slug: string): boolean {
-    if (g.entries?.some((entry) => entry.slug === slug)) {
-        return true;
-    }
-    if (g.groups) {
-        return g.groups.some((subgroup: SidebarGroupItem) => containsSlug(subgroup, slug));
-    }
-    return false;
+  if (g.entries?.some((entry) => entry.slug === slug)) {
+    return true;
+  }
+  if (g.groups) {
+    return g.groups.some((subgroup: SidebarGroupItem) => containsSlug(subgroup, slug));
+  }
+  return false;
 }
 
 const isExpanded = containsSlug(group, currentSlug);
 ---
 
 <div class={`sidebar-group ${level > 0 ? "ml-4" : ""}`}>
-    <button
-        class="text-muted-foreground hover:bg-popover/50 hover:text-popover-foreground flex w-full items-center justify-between gap-2 rounded-sm px-2 py-1 text-sm font-medium transition-colors"
-        aria-expanded={isExpanded}
-        data-group-toggle={group.id}
-    >
-        <span class="flex items-center gap-2">
-            <DocIcon name={group.icon} class="h-4 w-4" aria-hidden="true" />
-            <span>{group.label}</span>
-        </span>
-        <Icon
-            name="right"
-            class={`h-4 w-4 transition-transform ${isExpanded ? "rotate-90" : ""}`}
-            aria-hidden="true"
-            data-chevron
-        />
-    </button>
+  <button
+    type="button"
+    class="text-muted-foreground hover:bg-popover/50 hover:text-popover-foreground flex w-full items-center justify-between gap-2 rounded-sm px-2 py-1 text-sm font-medium transition-colors"
+    aria-expanded={isExpanded}
+    data-group-toggle={group.id}
+  >
+    <span class="flex items-center gap-2">
+      <DocIcon name={group.icon} class="h-4 w-4" aria-hidden="true" />
+      <span>{group.label}</span>
+    </span>
+    <Icon
+      name="right"
+      class={`h-4 w-4 transition-transform ${isExpanded ? "rotate-90" : ""}`}
+      aria-hidden="true"
+      data-chevron
+    />
+  </button>
 
-    <div
-        class={`sidebar-group-content mt-1 space-y-1 ${isExpanded ? "" : "hidden"}`}
-        data-group-content={group.id}
-    >
-        {
-            group.entries && group.entries.length > 0 && (
-                <ul class="space-y-1">
-                    {group.entries.map((entry) => (
-                        <SidebarEntry
-                            entry={entry}
-                            currentSlug={currentSlug}
-                            collectionId={collectionId}
-                        />
-                    ))}
-                </ul>
-            )
-        }
+  <div class={`sidebar-group-content mt-1 space-y-1 ${isExpanded ? "" : "hidden"}`} data-group-content={group.id}>
+    {group.entries && group.entries.length > 0 && (
+        <ul class="space-y-1">
+          {group.entries.map((entry) => (
+            <SidebarEntry entry={entry} currentSlug={currentSlug} collectionId={collectionId} />
+          ))}
+        </ul>
+      )}
 
-        {
-            group.groups && group.groups.length > 0 && (
-                <div class="space-y-1">
-                    {group.groups.map((subgroup) => (
-                        <Astro.self
-                            group={subgroup}
-                            currentSlug={currentSlug}
-                            level={level + 1}
-                            collectionId={collectionId}
-                        />
-                    ))}
-                </div>
-            )
-        }
-    </div>
+    {group.groups && group.groups.length > 0 && (
+        <div class="space-y-1">
+          {group.groups.map((subgroup) => (
+            <Astro.self group={subgroup} currentSlug={currentSlug} level={level + 1} collectionId={collectionId} />
+          ))}
+        </div>
+      )}
+  </div>
 </div>
 
 <script>
-    function initGroupToggles() {
-        const toggleButtons = document.querySelectorAll<HTMLButtonElement>("[data-group-toggle]");
+function initGroupToggles() {
+  const toggleButtons = document.querySelectorAll<HTMLButtonElement>("[data-group-toggle]");
 
-        toggleButtons.forEach((button) => {
-            // Remove any existing listeners to prevent duplicates
-            const newButton = button.cloneNode(true) as HTMLButtonElement;
-            button.parentNode?.replaceChild(newButton, button);
+  toggleButtons.forEach((button) => {
+    // Remove any existing listeners to prevent duplicates
+    const newButton = button.cloneNode(true) as HTMLButtonElement;
+    button.parentNode?.replaceChild(newButton, button);
 
-            newButton.addEventListener("click", () => {
-                const groupId = newButton.getAttribute("data-group-toggle");
+    newButton.addEventListener("click", () => {
+      const groupId = newButton.getAttribute("data-group-toggle");
 
-                // Prefer the content that belongs to the same `.sidebar-group` instance
-                const hostGroup = newButton.closest<HTMLDivElement>(".sidebar-group");
-                const content =
-                    hostGroup?.querySelector<HTMLDivElement>(`[data-group-content="${groupId}"]`) ??
-                    document.querySelector<HTMLDivElement>(`[data-group-content="${groupId}"]`);
+      // Prefer the content that belongs to the same `.sidebar-group` instance
+      const hostGroup = newButton.closest<HTMLDivElement>(".sidebar-group");
+      const content =
+        hostGroup?.querySelector<HTMLDivElement>(`[data-group-content="${groupId}"]`) ??
+        document.querySelector<HTMLDivElement>(`[data-group-content="${groupId}"]`);
 
-                const chevron = newButton.querySelector<SVGSVGElement>("[data-chevron]");
+      const chevron = newButton.querySelector<SVGSVGElement>("[data-chevron]");
 
-                if (content && chevron) {
-                    const isExpanded = !content.classList.contains("hidden");
+      if (content && chevron) {
+        const isExpanded = !content.classList.contains("hidden");
 
-                    if (isExpanded) {
-                        content.classList.add("hidden");
-                        chevron.classList.remove("rotate-90");
-                        newButton.setAttribute("aria-expanded", "false");
-                    } else {
-                        content.classList.remove("hidden");
-                        chevron.classList.add("rotate-90");
-                        newButton.setAttribute("aria-expanded", "true");
-                    }
-                }
-            });
-        });
-    }
+        if (isExpanded) {
+          content.classList.add("hidden");
+          chevron.classList.remove("rotate-90");
+          newButton.setAttribute("aria-expanded", "false");
+        } else {
+          content.classList.remove("hidden");
+          chevron.classList.add("rotate-90");
+          newButton.setAttribute("aria-expanded", "true");
+        }
+      }
+    });
+  });
+}
 
-    // Initialize on page load
-    document.addEventListener("astro:page-load", initGroupToggles);
+// Initialize on page load
+document.addEventListener("astro:page-load", initGroupToggles);
 </script>

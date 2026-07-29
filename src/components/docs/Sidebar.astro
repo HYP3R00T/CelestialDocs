@@ -1,71 +1,61 @@
 ---
+import type { SidebarProps } from "@/lib/docs/types";
 import DocsContent from "./DocsContent.astro";
 import DocsTabs from "./DocsTabs.astro";
 
-import type { SidebarProps } from "@/lib/docs/types";
-
 const { tabs, showTabs, activeTab, currentSlug, collectionId } = Astro.props as SidebarProps & {
-    collectionId?: string;
+  collectionId?: string;
 };
 ---
 
 <aside class="bg-background sticky top-17 h-[calc(100vh-4.25rem)] min-w-2xs overflow-y-auto">
-    <nav aria-label="Documentation navigation" class="flex h-full flex-col">
-        <!-- Tabs section - pinned at top  -->
-        <DocsTabs
-            tabs={tabs}
-            showTabs={showTabs}
-            activeTab={activeTab}
-            collectionId={collectionId}
-        />
+  <nav aria-label="Documentation navigation" class="flex h-full flex-col">
+    <!-- Tabs section - pinned at top  -->
+    <DocsTabs tabs={tabs} showTabs={showTabs} activeTab={activeTab} collectionId={collectionId} />
 
-        <!-- Groups and entries section - scrollable  -->
-        <div class="flex-1 overflow-y-auto px-4 py-4">
-            <div class="space-y-2">
-                <DocsContent
-                    activeTab={activeTab}
-                    currentSlug={currentSlug}
-                    collectionId={collectionId}
-                />
-            </div>
-        </div>
-    </nav>
+    <!-- Groups and entries section - scrollable  -->
+    <div class="flex-1 overflow-y-auto px-4 py-4">
+      <div class="space-y-2">
+        <DocsContent activeTab={activeTab} currentSlug={currentSlug} collectionId={collectionId} />
+      </div>
+    </div>
+  </nav>
 </aside>
 
 <style>
-    aside {
-        width: 280px;
-    }
+aside {
+  width: 280px;
+}
 
-    @media (max-width: 768px) {
-        aside {
-            position: fixed;
-            left: -100%;
-            transition: left 0.3s ease-in-out;
-            z-index: 40;
-            width: 280px;
-        }
+@media (max-width: 768px) {
+  aside {
+    position: fixed;
+    left: -100%;
+    transition: left 0.3s ease-in-out;
+    z-index: 40;
+    width: 280px;
+  }
 
-        aside.open {
-            left: 0;
-        }
-    }
+  aside.open {
+    left: 0;
+  }
+}
 
-    /* Custom scrollbar */
-    aside::-webkit-scrollbar {
-        width: 6px;
-    }
+/* Custom scrollbar */
+aside::-webkit-scrollbar {
+  width: 6px;
+}
 
-    aside::-webkit-scrollbar-track {
-        background: transparent;
-    }
+aside::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-    aside::-webkit-scrollbar-thumb {
-        background: hsl(var(--muted));
-        border-radius: var(--radius-lg);
-    }
+aside::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: var(--radius-lg);
+}
 
-    aside::-webkit-scrollbar-thumb:hover {
-        background: hsl(var(--muted-foreground) / 0.5);
-    }
+aside::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
 </style>

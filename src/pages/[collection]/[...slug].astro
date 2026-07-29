@@ -1,51 +1,52 @@
 ---
-import { CONTENT, SIDEBAR_NAVIGATION } from "@data/config";
-import { getCollection, render } from "astro:content";
 import type { CollectionKey } from "astro:content";
+import { getCollection, render } from "astro:content";
+import { CONTENT, SIDEBAR_NAVIGATION } from "@data/config";
 
 import MdxImage from "@/components/docs/markdown/MdxImage.astro";
 import MdxLink from "@/components/docs/markdown/MdxLink.astro";
 import DocsLayout from "@/layouts/DocsLayout.astro";
+import type { FrontmatterEntry } from "@/lib/docs/types";
 import { buildNavigation } from "@/lib/navigation";
 
 export async function getStaticPaths() {
-    const paths: {
-        params: { collection: CollectionKey; slug: string };
-        props: {
-            doc: Awaited<ReturnType<typeof getCollection>>[number];
-            collection: CollectionKey;
-            nav: Awaited<ReturnType<typeof buildNavigation>>;
-        };
-    }[] = [];
+  const paths: {
+    params: { collection: CollectionKey; slug: string };
+    props: {
+      doc: FrontmatterEntry;
+      collection: CollectionKey;
+      nav: Awaited<ReturnType<typeof buildNavigation>>;
+    };
+  }[] = [];
 
-    for (const sys of CONTENT.systems) {
-        const nav = await buildNavigation(SIDEBAR_NAVIGATION, sys.id);
+  for (const sys of CONTENT.systems) {
+    const nav = await buildNavigation(SIDEBAR_NAVIGATION, sys.id);
 
-        const entries = await getCollection(sys.id as CollectionKey);
-        for (const doc of entries) {
-            paths.push({
-                params: { collection: sys.id as CollectionKey, slug: doc.id },
-                props: { doc, collection: sys.id as CollectionKey, nav },
-            });
-        }
+    const entries = (await getCollection(sys.id as CollectionKey)) as FrontmatterEntry[];
+    for (const doc of entries) {
+      paths.push({
+        params: { collection: sys.id as CollectionKey, slug: doc.id },
+        props: { doc, collection: sys.id as CollectionKey, nav },
+      });
     }
+  }
 
-    return paths;
+  return paths;
 }
 
 const { doc, collection, nav } = Astro.props as {
-    doc: Awaited<ReturnType<typeof getCollection>>[number];
-    collection: CollectionKey;
-    nav: Awaited<ReturnType<typeof buildNavigation>>;
+  doc: FrontmatterEntry;
+  collection: CollectionKey;
+  nav: Awaited<ReturnType<typeof buildNavigation>>;
 };
 const { Content, headings } = await render(doc);
 
 const components = {
-    img: MdxImage,
-    a: MdxLink,
+  img: MdxImage,
+  a: MdxLink,
 };
 ---
 
 <DocsLayout frontmatter={doc} headings={headings} collection={collection} nav={nav}>
-    <Content components={components} />
+  <Content components={components} />
 </DocsLayout>

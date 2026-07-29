@@ -1,5 +1,5 @@
 ---
-import { SITE, HEADER_FEATURES } from "@data/config";
+import { HEADER_FEATURES, SITE } from "@data/config";
 import { Icon } from "astro-icon/components";
 
 import { Button } from "@/components/ui/button";
@@ -10,24 +10,22 @@ Astro.props as HeaderGithubButtonProps;
 ---
 
 <Button variant="ghost">
-    <a
-        id="github-star-button"
-        href={SITE.repo}
-        target="_blank"
-        rel="noopener noreferrer"
-        data-repo={SITE.repo}
-        data-threshold={HEADER_FEATURES.starCountThreshold}
-        class="flex items-center gap-2"
-    >
-        <Icon name="github" class="size-5" />
-        <span
-            id="github-star-count"
-            class="text-muted-foreground hidden text-xs font-medium"
-            aria-live="polite"></span>
-    </a>
+  <a
+    id="github-star-button"
+    href={SITE.repo}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-repo={SITE.repo}
+    data-threshold={HEADER_FEATURES.starCountThreshold}
+    class="flex items-center gap-2"
+  >
+    <Icon name="github" class="size-5" />
+    <span id="github-star-count" class="text-muted-foreground hidden text-xs font-medium" aria-live="polite"></span>
+  </a>
 </Button>
 
 <script>
-    import { initGitHubStars } from "@/lib/github";
-    document.addEventListener("astro:page-load", initGitHubStars);
+import { initGitHubStars } from "@/lib/github";
+
+document.addEventListener("astro:page-load", initGitHubStars);
 </script>

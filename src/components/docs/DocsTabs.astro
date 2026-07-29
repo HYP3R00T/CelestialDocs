@@ -1,50 +1,43 @@
 ---
-import DocIcon from "./DocIcon.astro";
-
 import type { Tab } from "@/lib/docs/types";
 import { findFirstEntry } from "@/lib/docs/utils";
 import { getSystemRoute } from "@/lib/resolveSystem";
+import DocIcon from "./DocIcon.astro";
 
 const { tabs, showTabs, activeTab, collectionId } = Astro.props as {
-    tabs: Tab[];
-    showTabs: boolean;
-    activeTab?: Tab;
-    collectionId?: string;
+  tabs: Tab[];
+  showTabs: boolean;
+  activeTab?: Tab;
+  collectionId?: string;
 };
 
 // No further changes
 ---
 
-{
-    showTabs && (
-        <div class="border-border bg-popover rounded-lg p-2">
-            <div class="space-y-1">
-                {tabs.map((tab) => {
-                    const isActive = activeTab?.id === tab.id;
-                    const firstEntry = findFirstEntry(tab.group);
-                    const base = getSystemRoute(collectionId);
-                    const href = firstEntry ? `${base}/${firstEntry}` : `${base}`;
+{showTabs && (
+    <div class="border-border bg-popover rounded-lg p-2">
+      <div class="space-y-1">
+        {tabs.map((tab) => {
+          const isActive = activeTab?.id === tab.id;
+          const firstEntry = findFirstEntry(tab.group);
+          const base = getSystemRoute(collectionId);
+          const href = firstEntry ? `${base}/${firstEntry}` : `${base}`;
 
-                    return (
-                        <a
-                            href={href}
-                            class={`flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                                isActive
-                                    ? "bg-secondary text-secondary-foreground"
-                                    : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
-                            } `}
-                            aria-current={isActive ? "page" : undefined}
-                        >
-                            <DocIcon
-                                name={tab.icon || "document"}
-                                class="h-4 w-4"
-                                aria-hidden="true"
-                            />
-                            <span>{tab.label}</span>
-                        </a>
-                    );
-                })}
-            </div>
-        </div>
-    )
-}
+          return (
+            <a
+              href={href}
+              class={`flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                isActive
+                  ? "bg-secondary text-secondary-foreground"
+                  : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+              } `}
+              aria-current={isActive ? "page" : undefined}
+            >
+              <DocIcon name={tab.icon || "document"} class="h-4 w-4" aria-hidden="true" />
+              <span>{tab.label}</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  )}

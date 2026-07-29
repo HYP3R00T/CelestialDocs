@@ -5,15 +5,15 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
+} from "@/components/ui/breadcrumb";
 
-interface BreadcrumbItem {
-  label: string
-  href?: string
+interface BreadcrumbItemData {
+  label: string;
+  href?: string;
 }
 
 interface Props {
-  items: BreadcrumbItem[]
+  items: BreadcrumbItemData[];
 }
 
 export default function BreadcrumbComponent({ items }: Props) {
@@ -21,10 +21,7 @@ export default function BreadcrumbComponent({ items }: Props) {
     <Breadcrumb>
       <BreadcrumbList>
         {items.map((item, index) => (
-          <div
-            key={`breadcrumb-${index}`}
-            className="flex items-center gap-1.5"
-          >
+          <div key={item.href ?? item.label} className="flex items-center gap-1.5">
             <BreadcrumbItem>
               {item.href ? (
                 <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
@@ -37,5 +34,5 @@ export default function BreadcrumbComponent({ items }: Props) {
         ))}
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  );
 }

@@ -6,135 +6,115 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const HERO_TITLE = "CelestialDocs";
 const HERO_SUBTITLE =
-    "A modern, type-safe documentation system with hierarchical navigation, hybrid generation, and multi-collection support.";
+  "A modern, type-safe documentation system with hierarchical navigation, hybrid generation, and multi-collection support.";
 const CTA_PRIMARY = { href: "/docs/introduction", label: "View Documentation" };
 const CTA_SECONDARY = {
-    href: "https://github.com/HYP3R00T/CelestialDocs",
-    label: "View on GitHub",
+  href: "https://github.com/HYP3R00T/CelestialDocs",
+  label: "View on GitHub",
 };
 ---
 
 <BaseLayout
-    title={`${HERO_TITLE} - Modern documentation template`}
-    description={HERO_SUBTITLE}
-    image="/docs-hero.jpg"
-    imageAlt="CelestialDocs documentation template hero"
+  title={`${HERO_TITLE} - Modern documentation template`}
+  description={HERO_SUBTITLE}
+  image="/docs-hero.jpg"
+  imageAlt="CelestialDocs documentation template hero"
 >
-    <!-- Hero Section -->
-    <section class="mx-auto max-w-6xl px-5 py-8 sm:py-12">
-        <div class="space-y-8">
-            <div class="space-y-4">
-                <h1
-                    class="text-foreground text-5xl leading-tight font-bold tracking-tight sm:text-6xl lg:text-7xl"
-                >
-                    {HERO_TITLE}
-                </h1>
-                <p class="text-muted-foreground mx-auto max-w-2xl text-xl">
-                    Modern documentation that scales with your project
-                </p>
-            </div>
+  <!-- Hero Section -->
+  <section class="mx-auto max-w-6xl px-5 py-8 sm:py-12">
+    <div class="space-y-8">
+      <div class="space-y-4">
+        <h1 class="text-foreground text-5xl leading-tight font-bold tracking-tight sm:text-6xl lg:text-7xl">
+          {HERO_TITLE}
+        </h1>
+        <p class="text-muted-foreground mx-auto max-w-2xl text-xl">
+          Modern documentation that scales with your project
+        </p>
+      </div>
 
-            <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <Button size="lg">
-                    <a href={CTA_PRIMARY.href}>Get Started</a>
-                </Button>
-                <Button size="lg" variant="secondary">
-                    <a
-                        href={CTA_SECONDARY.href}
-                        target="_blank"
-                        class="flex flex-row items-center gap-3"
-                    >
-                        View on GitHub
-                        <Icon name="github" />
-                    </a>
-                </Button>
-            </div>
-        </div>
-    </section>
+      <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <Button size="lg">
+          <a href={CTA_PRIMARY.href}>Get Started</a>
+        </Button>
+        <Button size="lg" variant="secondary">
+          <a href={CTA_SECONDARY.href} target="_blank" class="flex flex-row items-center gap-3">
+            View on GitHub
+            <Icon name="github" />
+          </a>
+        </Button>
+      </div>
+    </div>
+  </section>
 
-    <!-- Features Section -->
-    <section class="mx-auto max-w-6xl px-5 py-8 sm:py-12">
-        <div class="mb-12 text-center">
-            <h2 class="text-foreground pb-4 text-3xl font-bold sm:text-4xl">Everything you need</h2>
-            <p class="text-muted-foreground mt-3 text-lg">
-                Built with best practices and developer experience in mind
-            </p>
-        </div>
+  <!-- Features Section -->
+  <section class="mx-auto max-w-6xl px-5 py-8 sm:py-12">
+    <div class="mb-12 text-center">
+      <h2 class="text-foreground pb-4 text-3xl font-bold sm:text-4xl">Everything you need</h2>
+      <p class="text-muted-foreground mt-3 text-lg">Built with best practices and developer experience in mind</p>
+    </div>
 
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <div class="bg-popover space-y-3 rounded-lg p-6">
-                <div class="text-3xl">🧭</div>
-                <h3 class="text-foreground text-lg font-semibold">Smart Navigation</h3>
-                <p class="text-muted-foreground text-sm">
-                    Hierarchical structure with tabs, groups, and breadcrumbs keeps users oriented
-                </p>
-            </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="bg-popover space-y-3 rounded-lg p-6">
+        <div class="text-3xl">🧭</div>
+        <h3 class="text-foreground text-lg font-semibold">Smart Navigation</h3>
+        <p class="text-muted-foreground text-sm">
+          Hierarchical structure with tabs, groups, and breadcrumbs keeps users oriented
+        </p>
+      </div>
 
-            <div class="bg-popover space-y-3 rounded-lg p-6">
-                <div class="text-3xl">⚡</div>
-                <h3 class="text-foreground text-lg font-semibold">Fast Setup</h3>
-                <p class="text-muted-foreground text-sm">
-                    Auto-generate or configure manually, your choice
-                </p>
-            </div>
+      <div class="bg-popover space-y-3 rounded-lg p-6">
+        <div class="text-3xl">⚡</div>
+        <h3 class="text-foreground text-lg font-semibold">Fast Setup</h3>
+        <p class="text-muted-foreground text-sm">Auto-generate or configure manually, your choice</p>
+      </div>
 
-            <div class="bg-popover space-y-3 rounded-lg p-6">
-                <div class="text-3xl">🔒</div>
-                <h3 class="text-foreground text-lg font-semibold">Type Safe</h3>
-                <p class="text-muted-foreground text-sm">
-                    Strict TypeScript and Zod validation catch errors before deployment
-                </p>
-            </div>
+      <div class="bg-popover space-y-3 rounded-lg p-6">
+        <div class="text-3xl">🔒</div>
+        <h3 class="text-foreground text-lg font-semibold">Type Safe</h3>
+        <p class="text-muted-foreground text-sm">Strict TypeScript and Zod validation catch errors before deployment</p>
+      </div>
 
-            <div class="bg-popover space-y-3 rounded-lg p-6">
-                <div class="text-3xl">🗂️</div>
-                <h3 class="text-foreground text-lg font-semibold">Multi-Collection</h3>
-                <p class="text-muted-foreground text-sm">
-                    Separate docs, guides, and API references with independent navigation
-                </p>
-            </div>
+      <div class="bg-popover space-y-3 rounded-lg p-6">
+        <div class="text-3xl">🗂️</div>
+        <h3 class="text-foreground text-lg font-semibold">Multi-Collection</h3>
+        <p class="text-muted-foreground text-sm">
+          Separate docs, guides, and API references with independent navigation
+        </p>
+      </div>
 
-            <div class="bg-popover space-y-3 rounded-lg p-6">
-                <div class="text-3xl">📝</div>
-                <h3 class="text-foreground text-lg font-semibold">MDX Support</h3>
-                <p class="text-muted-foreground text-sm">
-                    Write in Markdown with the power of React components
-                </p>
-            </div>
+      <div class="bg-popover space-y-3 rounded-lg p-6">
+        <div class="text-3xl">📝</div>
+        <h3 class="text-foreground text-lg font-semibold">MDX Support</h3>
+        <p class="text-muted-foreground text-sm">Write in Markdown with the power of React components</p>
+      </div>
 
-            <div class="bg-popover space-y-3 rounded-lg p-6">
-                <div class="text-3xl">🎨</div>
-                <h3 class="text-foreground text-lg font-semibold">Beautiful UI</h3>
-                <p class="text-muted-foreground text-sm">
-                    Dark mode, responsive design, and accessible by default
-                </p>
-            </div>
-        </div>
-    </section>
+      <div class="bg-popover space-y-3 rounded-lg p-6">
+        <div class="text-3xl">🎨</div>
+        <h3 class="text-foreground text-lg font-semibold">Beautiful UI</h3>
+        <p class="text-muted-foreground text-sm">Dark mode, responsive design, and accessible by default</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- CTA Section -->
-    <section class="mx-auto w-full max-w-6xl px-5 py-8 sm:py-12">
-        <div class="mb-4 text-center">
-            <h2 class="text-foreground pb-4 text-3xl font-bold sm:text-4xl">
-                Ready to get started?
-            </h2>
-            <p class="text-muted-foreground mt-3 text-lg">
-                Explore the documentation or try the live demo
-            </p>
-        </div>
-        <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button size="lg" variant="secondary">
-                <a href="/docs/introduction" class="flex flex-row items-center gap-3">
-                    Read the Docs
-                    <Icon name="right" />
-                </a>
-            </Button>
-            <Button size="lg" variant="secondary">
-                <a href="/funnydocs" class="flex flex-row items-center gap-3">
-                    View Demo
-                    <Icon name="right" />
-                </a>
-            </Button>
-        </div>
-    </section>
+  <!-- CTA Section -->
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 sm:py-12">
+    <div class="mb-4 text-center">
+      <h2 class="text-foreground pb-4 text-3xl font-bold sm:text-4xl">Ready to get started?</h2>
+      <p class="text-muted-foreground mt-3 text-lg">Explore the documentation or try the live demo</p>
+    </div>
+    <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <Button size="lg" variant="secondary">
+        <a href="/docs/introduction" class="flex flex-row items-center gap-3">
+          Read the Docs
+          <Icon name="right" />
+        </a>
+      </Button>
+      <Button size="lg" variant="secondary">
+        <a href="/funnydocs" class="flex flex-row items-center gap-3">
+          View Demo
+          <Icon name="right" />
+        </a>
+      </Button>
+    </div>
+  </section>
 </BaseLayout>

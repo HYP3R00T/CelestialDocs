@@ -3,17 +3,17 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from '@/components/ui/navigation-menu'
+} from "@/components/ui/navigation-menu";
 
 interface NavItem {
-  href: string
-  label: string
-  special?: boolean
-  blank?: boolean
+  href: string;
+  label: string;
+  special?: boolean;
+  blank?: boolean;
 }
 
 interface HeaderNavClientProps {
-  navItems: NavItem[]
+  navItems: NavItem[];
 }
 
 export function HeaderNavClient({ navItems }: HeaderNavClientProps) {
@@ -23,11 +23,7 @@ export function HeaderNavClient({ navItems }: HeaderNavClientProps) {
         {navItems.map(({ href, label, blank }) => (
           <NavigationMenuItem key={href}>
             <NavigationMenuLink href={href} asChild>
-              <a
-                href={href}
-                target={blank ? '_blank' : undefined}
-                rel={blank ? 'noreferrer' : undefined}
-              >
+              <a href={href} target={blank ? "_blank" : undefined} rel={blank ? "noreferrer" : undefined}>
                 {label}
               </a>
             </NavigationMenuLink>
@@ -35,5 +31,5 @@ export function HeaderNavClient({ navItems }: HeaderNavClientProps) {
         ))}
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  );
 }

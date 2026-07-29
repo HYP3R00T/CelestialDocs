@@ -1,51 +1,49 @@
-import type { Entry, Group, GroupOrEntry } from '../docs/types'
+import type { Entry, Group, GroupOrEntry } from "../docs/types";
 
-import { deriveLabel } from './label.ts'
-import { processGroup } from './process'
-import type { DocEntry, NavigationItem } from './types'
+import { deriveLabel } from "./label.ts";
+import { processGroup } from "./process";
+import type { DocEntry, NavigationItem } from "./types";
 
 export function buildNavigationItems(
   items: GroupOrEntry[],
   filesystemStructure: Map<string, DocEntry[]>,
   allDocs: DocEntry[],
 ): NavigationItem[] {
-  const navigationItems: NavigationItem[] = []
+  const navigationItems: NavigationItem[] = [];
 
   for (const item of items) {
     if (isEntryConfig(item)) {
-      const doc = allDocs.find((d) => d.slug === item.slug)
+      const doc = allDocs.find((d) => d.slug === item.slug);
       if (!doc) {
-        console.warn(
-          `Top-level entry ${item.slug} not found in docs collection`,
-        )
-        continue
+        console.warn(`Top-level entry ${item.slug} not found in docs collection`);
+        continue;
       }
 
       if (item.hidden || doc.data.navHidden) {
-        continue
+        continue;
       }
 
       navigationItems.push({
-        type: 'entry',
+        type: "entry",
         entry: {
           slug: item.slug,
           label: deriveLabel(doc, item.label),
           icon: item.icon || doc.data.navIcon,
           hidden: false,
         },
-      })
-      continue
+      });
+      continue;
     }
 
     navigationItems.push({
-      type: 'group',
+      type: "group",
       group: processGroup(item as Group, filesystemStructure, allDocs),
-    })
+    });
   }
 
-  return navigationItems
+  return navigationItems;
 }
 
 function isEntryConfig(item: GroupOrEntry): item is Entry {
-  return 'slug' in item && typeof item.slug === 'string'
+  return "slug" in item && typeof item.slug === "string";
 }

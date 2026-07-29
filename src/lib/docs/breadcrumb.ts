@@ -1,76 +1,70 @@
-import { SIDEBAR_NAVIGATION } from '@data/config'
+import { SIDEBAR_NAVIGATION } from "@data/config";
 
-import { resolveSystem } from '../resolveSystem'
+import { resolveSystem } from "../resolveSystem";
 
-import type { Entry, Group, GroupOrEntry } from './types'
+import type { Entry, Group, GroupOrEntry } from "./types";
 
 /**
  * Find a group in the navigation tree by its path
  */
 function isGroup(item: GroupOrEntry): item is Group {
-  return 'id' in item && typeof item.id === 'string'
+  return "id" in item && typeof item.id === "string";
 }
 
 function getGroupsForCollection(collectionId?: string): GroupOrEntry[] {
-  const map = SIDEBAR_NAVIGATION as Record<string, { groups: GroupOrEntry[] }>
-  const key = collectionId ?? 'docs'
-  const groups = map[key]?.groups
+  const map = SIDEBAR_NAVIGATION as Record<string, { groups: GroupOrEntry[] }>;
+  const key = collectionId ?? "docs";
+  const groups = map[key]?.groups;
 
   if (!groups) {
-    throw new Error(`Sidebar configuration not found for collection: ${key}`)
+    throw new Error(`Sidebar configuration not found for collection: ${key}`);
   }
 
-  return groups
+  return groups;
 }
 
-function findGroupByPath(
-  path: string,
-  groups: GroupOrEntry[] = getGroupsForCollection(),
-): Group | undefined {
+function findGroupByPath(path: string, groups: GroupOrEntry[] = getGroupsForCollection()): Group | undefined {
   for (const node of groups) {
     if (!isGroup(node)) {
-      continue
+      continue;
     }
 
     if (node.path === path || node.id === path) {
-      return node
+      return node;
     }
     if (node.groups) {
-      const found = findGroupByPath(path, node.groups)
-      if (found) return found
+      const found = findGroupByPath(path, node.groups);
+      if (found) return found;
     }
   }
-  return undefined
+  return undefined;
 }
 
 /**
  * Find an entry in the navigation tree by its slug
  */
-function findEntryBySlug(
-  slug: string,
-  nodes: GroupOrEntry[] = getGroupsForCollection(),
-): Entry | undefined {
+function findEntryBySlug(slug: string, nodes: GroupOrEntry[] = getGroupsForCollection()): Entry | undefined {
   for (const node of nodes) {
     if (!isGroup(node)) {
       if (node.slug === slug) {
-        return node
+        return node;
       }
-      continue
+      continue;
     }
 
     if (node.entries) {
       for (const entry of node.entries) {
         if (entry.slug === slug) {
-          return entry
+          return entry;
         }
       }
     }
     if (node.groups) {
-      const found = findEntryBySlug(slug, node.groups)
-      if (found) return found
+      const found = findEntryBySlug(slug, node.groups);
+      if (found) return found;
     }
   }
-  return undefined
+  return undefined;
 }
 
 /**
@@ -79,23 +73,23 @@ function findEntryBySlug(
  */
 function getBreadcrumbLabel(currentPath: string): string | null {
   // Check if it's a group
-  const group = findGroupByPath(currentPath)
+  const group = findGroupByPath(currentPath);
   if (group) {
-    return group.label
+    return group.label;
   }
 
   // Check if it's an entry
-  const entry = findEntryBySlug(currentPath)
+  const entry = findEntryBySlug(currentPath);
   if (entry?.label) {
-    return entry.label
+    return entry.label;
   }
 
   // Fallback: convert slug to label
-  const lastPart = currentPath.split('/').pop() || ''
+  const lastPart = currentPath.split("/").pop() || "";
   return lastPart
-    .split('-')
+    .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
+    .join(" ");
 }
 
 /**
@@ -106,26 +100,26 @@ function isPageEntry(slug: string, collectionId?: string): boolean {
     for (const node of nodes) {
       if (!isGroup(node)) {
         if (node.slug === slug) {
-          return true
+          return true;
         }
-        continue
+        continue;
       }
 
       if (node.entries) {
         for (const entry of node.entries) {
           if (entry.slug === slug) {
-            return true
+            return true;
           }
         }
       }
       if (node.groups && checkNodes(node.groups)) {
-        return true
+        return true;
       }
     }
-    return false
+    return false;
   }
 
-  return checkNodes(getGroupsForCollection(collectionId))
+  return checkNodes(getGroupsForCollection(collectionId));
 }
 
 /**
@@ -135,43 +129,36 @@ function isPageEntry(slug: string, collectionId?: string): boolean {
  * "getting-started/introduction" -> [{ label: "Docs", href: "/docs" }, { label: "Getting Started" }, { label: "Introduction" }]
  * "guides/advanced/patterns" -> [{ label: "Docs", href: "/docs" }, { label: "Guides", href: "/docs/guides" }, { label: "Advanced Topics" }, { label: "Design Patterns" }]
  */
-export function buildBreadcrumbItems(
-  slug: string,
-  collectionId?: string,
-): Array<{ label: string; href?: string }> {
-  const parts = slug.split('/')
-  const system = resolveSystem(collectionId)
+export function buildBreadcrumbItems(slug: string, collectionId?: string): Array<{ label: string; href?: string }> {
+  const parts = slug.split("/");
+  const system = resolveSystem(collectionId);
 
   const items: Array<{ label: string; href?: string }> = [
     {
-      label: system
-        ? system.id.charAt(0).toUpperCase() + system.id.slice(1)
-        : 'Docs',
-      href: system ? (system.route ?? `/${system.id}`) : '/docs',
+      label: system ? system.id.charAt(0).toUpperCase() + system.id.slice(1) : "Docs",
+      href: system ? (system.route ?? `/${system.id}`) : "/docs",
     },
-  ]
+  ];
 
-  let currentPath = ''
+  let currentPath = "";
   for (let i = 0; i < parts.length; i++) {
-    const part = parts[i]
-    const isLast = i === parts.length - 1
+    const part = parts[i];
+    const isLast = i === parts.length - 1;
 
-    currentPath += (currentPath ? '/' : '') + part
+    currentPath += (currentPath ? "/" : "") + part;
 
     // Get the proper label for this segment
-    const label = getBreadcrumbLabel(currentPath) || part
+    const label = getBreadcrumbLabel(currentPath) || part;
 
     // Only make it clickable if it's an actual page entry and not the last item
-    const isPagePath = isPageEntry(currentPath, collectionId)
-    const shouldBeClickable = isPagePath && !isLast
+    const isPagePath = isPageEntry(currentPath, collectionId);
+    const shouldBeClickable = isPagePath && !isLast;
 
     items.push({
       label,
-      href: shouldBeClickable
-        ? `${system?.route ?? `/${system?.id ?? 'docs'}/${currentPath}`}`
-        : undefined,
-    })
+      href: shouldBeClickable ? `${system?.route ?? `/${system?.id ?? "docs"}/${currentPath}`}` : undefined,
+    });
   }
 
-  return items
+  return items;
 }

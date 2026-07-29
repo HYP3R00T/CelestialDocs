@@ -8,21 +8,14 @@ import type { ThemeToggleProps } from "@/lib/types";
 Astro.props as ThemeToggleProps;
 ---
 
-<Button
-    id="theme-toggle"
-    type="button"
-    variant="ghost"
-    size="icon"
-    className="relative"
-    aria-label="Toggle theme"
->
-    <Icon name="theme" class="size-5 transition-transform duration-200 dark:rotate-180" />
-    <span class="sr-only">Toggle theme</span>
+<Button id="theme-toggle" type="button" variant="ghost" size="icon" className="relative" aria-label="Toggle theme">
+  <Icon name="theme" class="size-5 transition-transform duration-200 dark:rotate-180" />
+  <span class="sr-only">Toggle theme</span>
 </Button>
 
 <script>
-    import { initTheme } from "@/lib/theme";
+import { initTheme } from "@/lib/theme";
 
-    initTheme();
-    document.addEventListener("astro:after-swap", initTheme);
+initTheme();
+document.addEventListener("astro:after-swap", initTheme);
 </script>
