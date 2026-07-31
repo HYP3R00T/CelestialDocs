@@ -137,5 +137,8 @@ vite.config.ts.timestamp-*
 # pnpm
 .pnpm-store
 
+# rumdl
+.rumdl_cache/
+
 # astro
 .astro
