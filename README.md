@@ -53,20 +53,22 @@ Visit `http://localhost:4321` to see your new platform.
 
 ## 🤝 Contributing
 
-We believe in open source. Fork the repo, make it better, and own your improvements.
+We believe in open source. Before starting, read the [contribution guide](CONTRIBUTING.md) and search existing issues and pull requests. Report security vulnerabilities privately according to the [security policy](SECURITY.md).
 
-**Before submitting a PR**, please ensure code quality:
+Before submitting a pull request, run the complete local gate:
 
 ```bash
-pnpm validate  # Runs Biome checks and TypeScript validation
+pnpm validate
+pnpm build
+prek run --all-files
 ```
 
-Or run checks individually:
+For individual checks:
 
 ```bash
 pnpm check       # Lint, format, and organize imports with Biome
 pnpm check:fix   # Apply Biome's safe fixes
-pnpm typecheck   # Validate with the TypeScript 7 compiler
+pnpm typecheck   # Validate with the TypeScript compiler
 ```
 
 ## ❤️ Support

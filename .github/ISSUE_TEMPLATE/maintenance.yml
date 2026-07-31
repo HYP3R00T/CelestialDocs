@@ -1,0 +1,75 @@
+name: 🔧 Maintenance task
+description: Propose focused engineering, tooling, dependency, documentation infrastructure, or workflow work.
+title: "[Maintenance]: "
+labels: [maintenance]
+
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Describe one focused maintenance outcome. Avoid combining independently deliverable work.
+
+    - type: textarea
+      id: outcome
+      attributes:
+          label: Outcome
+          description: What useful result should exist when this issue is complete?
+          placeholder: Describe one observable outcome.
+      validations:
+          required: true
+
+    - type: textarea
+      id: context
+      attributes:
+          label: Context
+          description: What current limitation, recurring cost, risk, or evidence motivates this work?
+      validations:
+          required: true
+
+    - type: textarea
+      id: constraints
+      attributes:
+          label: Constraints
+          description: Which interfaces, compatibility rules, security boundaries, or behaviors must remain unchanged?
+          placeholder: List constraints or write "None".
+      validations:
+          required: true
+
+    - type: textarea
+      id: acceptance
+      attributes:
+          label: Acceptance criteria
+          description: List observable or contract-level conditions that prove the outcome.
+          placeholder: |
+              - [ ] First completion condition
+              - [ ] Second completion condition
+      validations:
+          required: true
+
+    - type: textarea
+      id: verification
+      attributes:
+          label: Verification
+          description: List exact automated checks, browser exercises, or other evidence required.
+          placeholder: |
+              - `pnpm validate`
+              - `pnpm build`
+              - Describe affected browser-visible checks.
+      validations:
+          required: true
+
+    - type: textarea
+      id: dependencies
+      attributes:
+          label: Dependencies
+          description: Link work that blocks this outcome and explain why. Write "None" when unblocked.
+      validations:
+          required: true
+
+    - type: textarea
+      id: out-of-scope
+      attributes:
+          label: Out of scope
+          description: Identify related work this issue must not absorb.
+      validations:
+          required: true
